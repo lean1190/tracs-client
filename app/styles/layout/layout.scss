@@ -1,0 +1,40 @@
+
+
+/*  =========================
+    ======== SPINNER ========
+    =========================
+*/
+
+.spinner-wrapper {
+    width: 70px;
+    margin: 0px auto;
+    text-align: center;
+    position: relative;
+    top: 40%;
+}
+
+.spinner-wrapper svg {
+    width: 65px;
+    height: 65px;
+}
+
+/*  ====================================
+    ======== TABLE as .col .row ========
+    ====================================
+*/
+
+.col {
+    border: solid 1px #ddd;
+    border-bottom-style: none;
+    border-right-style: none;
+    text-align: center;
+}
+
+.col:first-child,
+.row:first-child {
+    border-left: none;
+}
+
+.row:first-child .col {
+    border-top: none;
+}

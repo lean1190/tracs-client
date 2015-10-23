@@ -1,0 +1,20 @@
+/************************************
+ *
+ *  Main Styles to compile. Here only @imports!
+ *
+ ************************************/
+
+@import "_variables";
+@import "_fonts";
+
+/**
+ * LAYOUT
+ */
+
+@import "layout/layout";
+
+/**
+ * VIEWS
+ */
+
+@import "user/main";
