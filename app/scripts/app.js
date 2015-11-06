@@ -54,8 +54,17 @@
         .state("app", {
             url: "/app",
             abstract: true,
-            templateUrl: "templates/layout/menu.html",
-            controller: "AppCtrl"
+            templateUrl: "templates/layout/menu.html"
+        })
+
+        .state("app.mierda", {
+            url:"/mierda",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/login/login.html",
+                    controller: "UserFindAllController as vm"
+                }
+            }
         })
 
         .state("app.users", {
@@ -79,7 +88,7 @@
         });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise("/app/users");
+        $urlRouterProvider.otherwise("/app/mierda");
     }
 }());
 

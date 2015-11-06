@@ -9,16 +9,18 @@
         .module("TracsClient.controllers")
         .controller("UserFindAllController", UserFindAllController);
 
-    UserFindAllController.$inject = ["UserFactory", "spinnerService"];
+    UserFindAllController.$inject = ["UserFactory"];
 
-    function UserFindAllController(UserFactory, spinnerService) {
+
+
+    function UserFindAllController(UserFactory) {
         var vm = this;
         vm.users = [];
         vm.loading = true;
         setTimeout(function () {
             activate();
         }, 3000);
-
+console.log("sadasdsa");
         function activate() {
             return findAllUsers().then(function () {
                 console.log("--> Activate findAllUsers");
