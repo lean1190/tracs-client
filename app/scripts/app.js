@@ -57,15 +57,26 @@
             templateUrl: "templates/layout/menu.html"
         })
 
-        .state("app.mierda", {
-            url:"/mierda",
+        .state("app.login", {
+            url:"/login",
             views: {
                 "menuContent": {
                     templateUrl: "templates/login/login.html",
-                    controller: "UserFindAllController as vm"
+                    controller: ""
                 }
             }
         })
+
+        .state("app.treatmentCreate", {
+            url:"/treatmentCreate",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/treatment/treatmentCreate.html",
+                    controller: ""/*"TreatmentCreateController as vm"*/
+                }
+            }
+        })
+
 
         .state("app.users", {
             url: "/users",
@@ -88,7 +99,7 @@
         });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise("/app/mierda");
+        $urlRouterProvider.otherwise("/app/users");
     }
 }());
 
