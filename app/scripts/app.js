@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc overview
  * @name TracsClient
@@ -11,6 +9,8 @@
 
 
 (function() {
+    "use strict";
+
     angular
         .module("TracsClient", [
                 "ionic",
@@ -29,8 +29,6 @@
     angular.module("TracsClient.factories", []);
 
     function run($ionicPlatform) {
-        "use strict";
-
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -47,8 +45,6 @@
     }
 
     function config($stateProvider, $urlRouterProvider) {
-        "use strict";
-
         $stateProvider
 
         .state("app", {
@@ -62,7 +58,7 @@
             views: {
                 "menuContent": {
                     templateUrl: "templates/login/login.html",
-                    controller: ""
+                    controller: "LoginController as vm"
                 }
             }
         })
@@ -99,7 +95,7 @@
         });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise("/app/users");
+        $urlRouterProvider.otherwise("/app/login");
     }
 }());
 
