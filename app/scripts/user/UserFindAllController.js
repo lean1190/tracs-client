@@ -11,8 +11,6 @@
 
     UserFindAllController.$inject = ["UserFactory"];
 
-
-
     function UserFindAllController(UserFactory) {
         var vm = this;
         vm.users = [];
@@ -20,7 +18,8 @@
         setTimeout(function () {
             activate();
         }, 3000);
-console.log("sadasdsa");
+        console.log("sadasdsa");
+
         function activate() {
             return findAllUsers().then(function () {
                 console.log("--> Activate findAllUsers");

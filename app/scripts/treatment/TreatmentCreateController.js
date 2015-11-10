@@ -9,20 +9,20 @@
         .module("TracsClient.controllers")
         .controller("TreatmentCreateController", TreatmentCreateController);
 
-    TreatmentCreateController.$inject = [/*TreatmentFactory*/, "$stateParams"];
+    TreatmentCreateController.$inject = [ /*TreatmentFactory,*/ "$stateParams"];
 
-    function TreatmentCreteController(/*TreatmentFactory*/, $stateParams) {
+    function TreatmentCreateController( /*TreatmentFactory,*/ $stateParams) {
         var vm = this;
         vm.treatment = {};
 
 
-        }
+    }
 
-        function createTreatment() {
-            /*return UserFactory.findUserById(userId).then(function (user) {
-                vm.user = user;
-            }, function (err) {
-                console.log(err);
-            });*/
-        }
+    function createTreatment() {
+        /*return UserFactory.findUserById(userId).then(function (user) {
+            vm.user = user;
+        }, function (err) {
+            console.log(err);
+        });*/
+    }
 })();
