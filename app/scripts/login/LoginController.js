@@ -11,18 +11,17 @@
 
     LoginController.$inject = ["$cordovaOauth"];
 
-    function LoginController($scope, $cordovaOauth) {
+    function LoginController($cordovaOauth) {
         var vm = this;
-        vm.googleLogin = googleLogin;
 
         activate();
 
         function activate() {
         }
 
-        function googleLogin() {
+        vm.googleLogin = function() {
             $cordovaOauth.google(
-                "1017723616061-0j8b19bv9tgau6cku7mpq6cb4hh7j9ah.apps.googleusercontent.com",
+                "1017723616061-btjadg1pe5tug819i8b3sffek1klev6m.apps.googleusercontent.com",
                 ["https://www.googleapis.com/auth/urlshortener", "https://www.googleapis.com/auth/userinfo.email"]
             ).then(function (result) {
                 console.log(JSON.stringify(result));
