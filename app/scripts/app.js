@@ -73,6 +73,16 @@
             }
         })
 
+          .state("app.treatmentHome", {
+            url:"/treatmentHome",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/treatment/treatmentHome.html",
+                    controller: "LoginController as vm"/*"TreatmentHomeController as vm"*/
+                }
+            }
+        })
+
 
         .state("app.users", {
             url: "/users",
