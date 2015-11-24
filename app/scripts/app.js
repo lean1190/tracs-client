@@ -73,6 +73,16 @@
             }
         })
 
+         .state("app.treatmentCreatePatient", {
+            url:"/treatmentCreatePatient",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/treatment/treatmentCreatePatient.html",
+                    controller: ""/*"TreatmentCreatePatientController as vm"*/
+                }
+            }
+        })
+
           .state("app.treatmentHome", {
             url:"/treatmentHome",
             views: {
