@@ -1,8 +1,8 @@
-/************************************
+/**********************************************
  *
  *  Main Styles to compile. Here only @imports!
  *
- ************************************/
+ **********************************************/
 
 @import "_variables";
 @import "_fonts";
@@ -12,9 +12,11 @@
  */
 
 @import "layout/layout";
+@import "layout/commons";
 
 /**
  * VIEWS
  */
 
 @import "user/main";
+@import "login/main";

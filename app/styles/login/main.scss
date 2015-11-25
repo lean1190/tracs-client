@@ -1,0 +1,53 @@
+/*  ======================================
+    ======== GOOGLE+ LOGIN BUTTON ========
+    ======================================
+*/
+
+.login-wrapper {
+    text-align: center;
+}
+
+.google-login-button-wrapper {
+
+    height: 40px;
+    width: 200px;
+    background-color: #dc4e41;
+    border: none;
+    color: #fff;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .25);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: background-color .218s, border-color .218s, box-shadow .218s;
+    transition: background-color .218s, border-color .218s, box-shadow .218s;
+    -webkit-user-select: none;
+    -webkit-appearance: none;
+    background-image: none;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    .google-login-button-logo {
+        padding: 10px;
+        display: inline-block;
+    }
+
+    .google-login-button-text {
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 0.21px;
+        font-family: Roboto, arial, sans-serif;
+        color: #fff;
+        margin-left: 5px;
+        bottom: 7px;
+        position: relative;
+    }
+}
+
+.iam-pacient-link-wrapper {
+    margin-top: 15px;
+}
