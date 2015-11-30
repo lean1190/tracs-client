@@ -16,7 +16,6 @@
                 "ionic",
                 "ngResource",
                 "ngCordova",
-                "angularSpinners",
                 "TracsClient.controllers",
                 "TracsClient.factories",
                 "TracsClient.directives"

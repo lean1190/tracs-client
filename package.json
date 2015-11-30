@@ -47,7 +47,9 @@
   "scripts": {
     "gulp": "./node_modules/.bin/gulp"
   },
-  "cordovaPlugins": [],
+  "cordovaPlugins": [
+    "cordova-plugin-inappbrowser"
+  ],
   "cordovaPlatforms": [
     "android"
   ]
