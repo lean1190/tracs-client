@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc constant
@@ -10,13 +10,13 @@
  */
 
 
-angular.module('TracsClient')
+angular.module("TracsClient")
 
 // development
-.constant('API_ENDPOINT', {
-    host: 'http://localhost',
+.constant("API_ENDPOINT", {
+    host: "http://localhost",
     port: 3000,
-    path: '',
+    path: "",
     needsAuth: false,
     fullPath: function() {
         return this.host + this.port;
@@ -26,11 +26,11 @@ angular.module('TracsClient')
 
 // live example with HTTP Basic Auth
 /*
-.constant('API_ENDPOINT', {
-  host: 'http://yourserver.com',
-  path: '/api/v2',
+.constant("API_ENDPOINT", {
+  host: "http://yourserver.com",
+  path: "/api/v2",
   needsAuth: true,
-  username: 'whatever',
-  password: 'foobar'
+  username: "whatever",
+  password: "foobar"
 });
 */

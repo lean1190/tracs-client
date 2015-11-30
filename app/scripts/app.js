@@ -8,7 +8,7 @@
  */
 
 
-(function() {
+(function () {
     "use strict";
 
     angular
@@ -18,7 +18,8 @@
                 "ngCordova",
                 "angularSpinners",
                 "TracsClient.controllers",
-                "TracsClient.factories"
+                "TracsClient.factories",
+                "TracsClient.directives"
         ])
         .run(run)
         .config(config);
@@ -27,6 +28,8 @@
     angular.module("TracsClient.controllers", []);
     // Declares the factories module
     angular.module("TracsClient.factories", []);
+    // Declares the directives module
+    angular.module("TracsClient.directives", []);
 
     function run($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -47,14 +50,14 @@
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider
 
-        .state("app", {
+            .state("app", {
             url: "/app",
             abstract: true,
             templateUrl: "templates/layout/menu.html"
         })
 
         .state("app.login", {
-            url:"/login",
+            url: "/login",
             views: {
                 "menuContent": {
                     templateUrl: "templates/login/login.html",
@@ -64,31 +67,31 @@
         })
 
         .state("app.treatmentCreate", {
-            url:"/treatmentCreate",
+            url: "/treatmentCreate",
             views: {
                 "menuContent": {
                     templateUrl: "templates/treatment/treatmentCreate.html",
-                    controller: ""/*"TreatmentCreateController as vm"*/
+                    controller: "" /*"TreatmentCreateController as vm"*/
                 }
             }
         })
 
-         .state("app.treatmentCreatePatient", {
-            url:"/treatmentCreatePatient",
+        .state("app.treatmentCreatePatient", {
+            url: "/treatmentCreatePatient",
             views: {
                 "menuContent": {
                     templateUrl: "templates/treatment/treatmentCreatePatient.html",
-                    controller: ""/*"TreatmentCreatePatientController as vm"*/
+                    controller: "" /*"TreatmentCreatePatientController as vm"*/
                 }
             }
         })
 
-          .state("app.treatmentHome", {
-            url:"/treatmentHome",
+        .state("app.treatmentHome", {
+            url: "/treatmentHome",
             views: {
                 "menuContent": {
                     templateUrl: "templates/treatment/treatmentHome.html",
-                    controller: "LoginController as vm"/*"TreatmentHomeController as vm"*/
+                    controller: "LoginController as vm" /*"TreatmentHomeController as vm"*/
                 }
             }
         })
@@ -118,5 +121,3 @@
         $urlRouterProvider.otherwise("/app/login");
     }
 }());
-
-
