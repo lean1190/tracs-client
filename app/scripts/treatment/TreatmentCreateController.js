@@ -9,20 +9,40 @@
         .module("TracsClient.controllers")
         .controller("TreatmentCreateController", TreatmentCreateController);
 
-    TreatmentCreateController.$inject = [ /*TreatmentFactory,*/ "$stateParams"];
+    TreatmentCreateController.$inject = ["TreatmentFactory", "$stateParams"];
 
-    function TreatmentCreateController( /*TreatmentFactory,*/ $stateParams) {
+    function TreatmentCreateController(TreatmentFactory, $stateParams) {
+
         var vm = this;
-        vm.treatment = {};
+
+//Estoy hay que modificarlo con el ._ID del que se loguea
+
+        var creatorId ="1";
+        vm.treatment = TreatmentFactory.newTreatment(creatorId);
 
 
-    }
+        //console.log(vm.treatment);
 
-    function createTreatment() {
-        /*return UserFactory.findUserById(userId).then(function (user) {
-            vm.user = user;
-        }, function (err) {
-            console.log(err);
-        });*/
+        /*      $http.get('/treatment/treatmentCreate').success(function(response){
+            console.log("volvio");
+            vm.treatment = response;
+            console.log(vm.treatment.description);
+        })*/
+
+        vm.showPatientInput  =function() {
+
+            vm.treatmentInfoEntered = !((vm.treatment.treatmentDescription == "") || (vm.treatment.treatmentName == ""));
+            console.log(vm.treatmentInfoEntered);
+
+        };
+
+         vm.createTreatment = function() {
+            console.log("Se creo el tratamiento" + TreatmentFactory.createTreatment(vm.treatment));
+        /*        console.log("Se creo tratamiento"+vm.treatment.treatmentName);
+            }, function (err) {
+                console.log(err);
+            });
+             console.log(vm.treatment);*/
+        }
     }
 })();

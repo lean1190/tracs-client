@@ -70,17 +70,7 @@
             views: {
                 "menuContent": {
                     templateUrl: "templates/treatment/treatmentCreate.html",
-                    controller: "" /*"TreatmentCreateController as vm"*/
-                }
-            }
-        })
-
-        .state("app.treatmentCreatePatient", {
-            url: "/treatmentCreatePatient",
-            views: {
-                "menuContent": {
-                    templateUrl: "templates/treatment/treatmentCreatePatient.html",
-                    controller: "" /*"TreatmentCreatePatientController as vm"*/
+                    controller: "TreatmentCreateController as vm"
                 }
             }
         })

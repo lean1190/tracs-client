@@ -41,6 +41,7 @@
         }
 
         function findUserById(userId) {
+            console.log("entre");
             return getUsersResource().get({id: userId}).$promise;
         }
 

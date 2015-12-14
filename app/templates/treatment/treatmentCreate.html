@@ -1,11 +1,41 @@
 <ion-view view-title="Nuevo Tratamiento">
     <ion-content>
-        <div class="list">
+        <div class="list" ng-show="!vm.treatmentInfoEntered">
+           <h3 class="title">Informacion del Tratamiento</h3>
+           <label class="item item-input item-floating-label">
+                <span class="input-label">Nombre del tratamiento</span>
+                <input type="text" ng-model="vm.treatment.treatmentName" placeholder="Nombre del Tratamiento">                             </input>
+            </label>
             <label class="item item-input item-floating-label">
                 <span class="input-label">Descripción del Tratamiento</span>
-                <textarea type="text" placeholder="Descripción  del Tratamiento"></textarea>
+                <textarea type="text" ng-model="vm.treatment.treatmentDescription" placeholder="Descripción del Tratamiento">                   </textarea>
             </label>
         </div>
-        <a href="#/app/treatmentCreatePatient"><button class="button button-block button-positive">Crear Paciente</button></a>
+        <div class="list" ng-show="vm.treatmentInfoEntered">
+            <h3 class="title">Informacion del Paciente</h3>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Nombre</span>
+                <input type="text" ng-model="vm.treatment.patientName" placeholder="Nombre">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Fecha Nacimiento</span>
+                <input type="text" ng-model="vm.treatment.patientDateOfBirth" placeholder="Fecha de nacimiento">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Como es?</span>
+                <textarea type="text" ng-model="vm.treatment.patientDescription" placeholder="Como es?"></textarea>
+            </label>
+        </div>
+
+        <button class="button button-block button-positive" ng-show="!vm.treatmentInfoEntered" ng-click="vm.showPatientInput()">
+            Crear Paciente
+        </button>
+        <button class="button button-block button-calm" ng-show="vm.treatmentInfoEntered" ng-click = "vm.treatmentInfoEntered =             false">
+            Modificar Info Tratamiento
+        </button>
+        <a href="#/app/treatmentHome">
+            <button ng-show="vm.treatmentInfoEntered" class="button button-block button-positive" ng-click =                                      "vm.createTreatment()">Finalizar Tratamiento
+            </button>
+        </a>
     </ion-content>
 </ion-view>
