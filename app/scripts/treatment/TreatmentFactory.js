@@ -12,7 +12,7 @@
         //var urlBase = "https://warm-ocean-7615.herokuapp.com",
 
         console.log(API_ENDPOINT);
-        var urlBase = "http://localhost:9000/#/app",
+        var urlBase = "http://localhost:9000/#",
             treatmentCreateEndpoint = urlBase + "/treatmentCreate";
             /*schedulesEndpoint = urlBase + "/users/:id/schedule";*/
 
@@ -41,11 +41,11 @@
 
         function createTreatment (newTreatment){
 
-            return newTreatment.treatmentName;
-            /*return $http.get(urlBase + "/treatmentCreate",newTreatment).then(function(result) {
+            //return newTreatment.treatmentName;
+            return $http.put("/treatmentCreate",newTreatment).then(function(result) {
                 return result.data;
-            });*/
-        }
+            })
+        };
 
     }
 

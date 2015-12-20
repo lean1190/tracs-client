@@ -37,12 +37,9 @@
         };
 
          vm.createTreatment = function() {
-            console.log("Se creo el tratamiento" + TreatmentFactory.createTreatment(vm.treatment));
-        /*        console.log("Se creo tratamiento"+vm.treatment.treatmentName);
-            }, function (err) {
-                console.log(err);
-            });
-             console.log(vm.treatment);*/
+
+            TreatmentFactory.createTreatment(vm.treatment);
+
         }
     }
 })();

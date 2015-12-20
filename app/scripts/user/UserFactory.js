@@ -46,9 +46,11 @@
         }
 
         function findAllUsersSchedule() {
-            return $http.get(urlBase + "/users/schedule/all").then(function(result) {
+
+
+            /*return $http.get(urlBase + "/users/schedule/all").then(function(result) {
                 return result.data;
-            });
+            });*/
         }
     }
 
