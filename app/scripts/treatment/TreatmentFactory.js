@@ -40,9 +40,9 @@
         }
 
         function createTreatment (newTreatment){
-
+            console.log("llegue al createTreatment");
             //return newTreatment.treatmentName;
-            return $http.put("/treatmentCreate",newTreatment).then(function(result) {
+            return $http.post(treatmentCreateEndpoint, newTreatment).then(function(result) {
                 return result.data;
             })
         };
