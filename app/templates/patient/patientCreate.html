@@ -1,0 +1,28 @@
+<ion-view view-title="Nuevo Paciente">
+    <ion-content>
+        <div class="list">
+            <h3 class="title">Informacion del Paciente</h3>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Nombre</span>
+                <input type="text" ng-model="vm.patient.name" placeholder="Nombre">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Fecha Nacimiento</span>
+                <input type="text" ng-model="vm.patient.dateOfBirth" placeholder="Fecha de nacimiento">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Número de Teléfono</span>
+                <input type="text" ng-model="vm.patient.phoneNr" placeholder="Número de Teléfono">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Descripción General</span>
+                <textarea type="text" ng-model="vm.patient.description" placeholder="Como es?"></textarea>
+            </label>
+        </div>
+
+        <a href="#/app/patientHome">
+            <button class="button button-block button-positive "ng-click="vm.createPatient()">Finalizar Paciente</button>
+            <button class="button button-block button-assertive"> Cancelar </button>
+        </a>
+    </ion-content>
+</ion-view>

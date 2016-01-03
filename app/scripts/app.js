@@ -65,7 +65,28 @@
             }
         })
 
-        .state("app.treatmentCreate", {
+        .state("app.patientCreate", {
+            url: "/patientCreate",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/patientCreate.html",
+                    controller: "PatientCreateController as vm"
+                }
+            }
+        })
+
+        .state("app.patientHome", {
+            url: "/patientHome",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/patientHome.html",
+                    controller: ""//"PatientHomeController as vm"
+                }
+            }
+        })
+
+
+        /*.state("app.treatmentCreate", {
             url: "/treatmentCreate",
             views: {
                 "menuContent": {
@@ -73,17 +94,17 @@
                     controller: "TreatmentCreateController as vm"
                 }
             }
-        })
-
+        })*/
+/*
         .state("app.treatmentHome", {
             url: "/treatmentHome",
             views: {
                 "menuContent": {
                     templateUrl: "templates/treatment/treatmentHome.html",
-                    controller: "LoginController as vm" /*"TreatmentHomeController as vm"*/
+                    controller: "LoginController as vm" "TreatmentHomeController as vm"
                 }
             }
-        })
+        })*/
 
 
         .state("app.users", {
