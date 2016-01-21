@@ -17,7 +17,11 @@
 
         vm.createPatient = function() {
 
-            PatientFactory.createPatient(vm.patient, creatorId);
+            PatientFactory.createPatient(vm.patient, creatorId).then(function(result) {
+                console.log("$$$ result", result);
+            }, function(err) {
+                console.log("$$$ rompiose", err);
+            });
 
         }
     }

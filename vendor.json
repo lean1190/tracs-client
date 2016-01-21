@@ -3,5 +3,6 @@
     "bower_components/angular-resource/angular-resource.js",
     "bower_components/lodash/lodash.js",
     "bower_components/ngCordova/dist/ng-cordova.js",
-    "bower_components/angular-spinners/dist/angular-spinners.js"
+    "bower_components/angular-spinners/dist/angular-spinners.js",
+    "bower_components/angular-local-storage/dist/angular-local-storage.min.js"
 ]

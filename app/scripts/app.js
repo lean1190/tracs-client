@@ -2,9 +2,8 @@
  * @ngdoc overview
  * @name TracsClient
  * @description
- * # Initializes main application and routing
- *
- * Main module of the application.
+ * Módulo principal de la aplicación, donde se inicializan los componentes
+ * y se configuran las rutas de las vistas y controladores
  */
 
 
@@ -16,6 +15,7 @@
                 "ionic",
                 "ngResource",
                 "ngCordova",
+                "LocalStorageModule",
                 "TracsClient.controllers",
                 "TracsClient.factories",
                 "TracsClient.directives"
@@ -46,7 +46,9 @@
         });
     }
 
-    function config($stateProvider, $urlRouterProvider) {
+    function config($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
+        localStorageServiceProvider.setPrefix("tracs");
+
         $stateProvider
 
             .state("app", {
