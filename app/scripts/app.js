@@ -1,3 +1,7 @@
+/* jshint bitwise: false, camelcase: true, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: double, undef: true, unused: true, strict: true, latedef: nofunc */
+
+/* globals angular */
+
 /**
  * @ngdoc overview
  * @name TracsClient
@@ -5,7 +9,6 @@
  * Módulo principal de la aplicación, donde se inicializan los componentes
  * y se configuran las rutas de las vistas y controladores
  */
-
 
 (function () {
     "use strict";
@@ -21,7 +24,8 @@
                 "TracsClient.directives"
         ])
         .run(run)
-        .config(config);
+        .config(config)
+        .constant("ServerUrl", "http://localhost:3000");
 
     // Declares the controllers module
     angular.module("TracsClient.controllers", []);
