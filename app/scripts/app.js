@@ -25,7 +25,8 @@
         ])
         .run(run)
         .config(config)
-        .constant("ServerUrl", "http://localhost:3000");
+        // Acomodar según la url correspondiente
+        .constant("ServerUrl", "http://192.168.0.17:3000");
 
     // Declares the controllers module
     angular.module("TracsClient.controllers", []);
@@ -55,7 +56,7 @@
 
         $stateProvider
 
-            .state("app", {
+        .state("app", {
             url: "/app",
             abstract: true,
             templateUrl: "templates/layout/menu.html"
@@ -86,7 +87,7 @@
             views: {
                 "menuContent": {
                     templateUrl: "templates/patient/patientHome.html",
-                    controller: ""//"PatientHomeController as vm"
+                    controller: "" //"PatientHomeController as vm"
                 }
             }
         })
@@ -101,16 +102,16 @@
                 }
             }
         })*/
-/*
-        .state("app.treatmentHome", {
-            url: "/treatmentHome",
-            views: {
-                "menuContent": {
-                    templateUrl: "templates/treatment/treatmentHome.html",
-                    controller: "LoginController as vm" "TreatmentHomeController as vm"
-                }
-            }
-        })*/
+        /*
+                .state("app.treatmentHome", {
+                    url: "/treatmentHome",
+                    views: {
+                        "menuContent": {
+                            templateUrl: "templates/treatment/treatmentHome.html",
+                            controller: "LoginController as vm" "TreatmentHomeController as vm"
+                        }
+                    }
+                })*/
 
 
         .state("app.users", {

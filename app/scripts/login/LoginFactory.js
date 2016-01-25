@@ -22,22 +22,20 @@
 
     function LoginFactory($http, $q, localStorageService, ServerUrl) {
 
-        // La variable donde se guardan los datos de usuario
-        // y que será almacenada en el localStorage
-        var user = {};
-
         var service = {
             authorize: authorize
         };
 
         return service;
 
-        function getUser(googleId) {
-            return $http({
-                url: ServerUrl + "/session/login",
-                method: "GET",
-                params: {
-                    googleId: googleId
+        function getFulfilledUser(googleProfile, tokens) {
+            return $http.get(ServerUrl + "/session/login", { params: {
+                    accessToken: tokens.access_token,
+                    refreshToken: tokens.refresh_token,
+                    googleId: googleProfile.sub,
+                    picture: googleProfile.picture,
+                    name: googleProfile.name,
+                    email: googleProfile.email
                 }
             }).then(function (user) {
                 return user;
@@ -107,26 +105,16 @@
                         var authorizationCode = responseCode[1];
 
                         return tradeCodeForTokens(authorizationCode, googleOauthOptions).then(function (tokens) {
-                            user.accessToken = tokens.access_token;
-                            user.refreshToken = tokens.refresh_token;
+                            return getGoogleUserProfile(tokens.access_token).then(function (googleProfile) {
+                                return getFulfilledUser(googleProfile, tokens).then(function (fulfilledUser) {
+                                    console.log("Vuelta del server", fulfilledUser);
+                                    // Guarda el usuario en el localStorage
+                                    localStorageService.set("user", fulfilledUser);
 
-                            return getGoogleUserProfile(user.accessToken).then(function (googleProfile) {
-                                user.googleId = googleProfile.sub;
-                                user.picture = googleProfile.picture;
-                                user.name = googleProfile.name;
-                                user.email = googleProfile.email;
-
-                                console.log("User constructed", user);
-
-                                getUser(user.googleId).then(function(result) {
-                                    console.log("Vuelta del server", result);
+                                    return fulfilledUser;
                                 });
-                                // Guarda el usuario en el localStorage
-                                localStorageService.set("user", user);
-
-                                return user;
                             }, function (error) {
-                                console.log("Google profile error", error);
+                                console.log("Error al recuperar el perfil de Google", error);
                             });
                         });
                     } else if (responseError) {
