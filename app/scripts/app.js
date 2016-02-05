@@ -83,11 +83,11 @@
         })
 
         .state("app.patientHome", {
-            url: "/patientHome",
+            url: "/patient/home",
             views: {
                 "menuContent": {
-                    templateUrl: "templates/patient/patientHome.html",
-                    controller: "" //"PatientHomeController as vm"
+                    templateUrl: "templates/patient/home.html",
+                    controller: "PatientHomeController as vm"
                 }
             }
         })
