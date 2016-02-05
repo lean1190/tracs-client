@@ -28,11 +28,11 @@
         // Acomodar según la url correspondiente
         .constant("ServerUrl", "http://192.168.0.17:3000");
 
-    // Declares the controllers module
+    // Declaración del módulo de controllers
     angular.module("TracsClient.controllers", []);
-    // Declares the factories module
+    // Declaración del módulo de factories
     angular.module("TracsClient.factories", []);
-    // Declares the directives module
+    // Declaración del módulo de directivas
     angular.module("TracsClient.directives", []);
 
     function run($ionicPlatform) {
@@ -134,7 +134,7 @@
             }
         });
 
-        // if none of the above states are matched, use this as the fallback
+        // Si ninguno de lo states anteriores matchea, usa esta ruta como contingencia
         $urlRouterProvider.otherwise("/app/login");
     }
 }());

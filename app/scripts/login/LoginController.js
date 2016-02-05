@@ -16,18 +16,19 @@
         .module("TracsClient.controllers")
         .controller("LoginController", LoginController);
 
-    LoginController.$inject = ["$cordovaOauth", "$http", "LoginFactory"];
+    LoginController.$inject = ["$http", "LoginFactory"];
 
-    function LoginController($cordovaOauth, $http, LoginFactory) {
+    function LoginController($http, LoginFactory) {
 
         var vm = this;
 
-        activate();
-
-        function activate() {}
-
+        /**
+         * Dispara la autenticación con Google en la aplicación,
+         * pidiendo permisos de acceso y validando los datos con
+         * el servidor
+         */
         vm.login = function () {
-            LoginFactory.authorize({
+            LoginFactory.login({
                 clientId: "1017723616061-btjadg1pe5tug819i8b3sffek1klev6m.apps.googleusercontent.com",
                 clientSecret: "McJIjSQt4aRNL_lLO8xSUBOe",
                 redirectUri: "http://localhost",

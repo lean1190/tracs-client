@@ -23,11 +23,17 @@
     function LoginFactory($http, $q, localStorageService, ServerUrl) {
 
         var service = {
-            authorize: authorize
+            login: login
         };
 
         return service;
 
+        /**
+         * Llama al servidor para recuperar un usuario completo a partir de los datos del perfil de G+
+         * @param   {object}   googleProfile el perfil del usuario en G+
+         * @param   {object}   tokens        un objeto con los tokens access y refresh
+         * @returns {promise}  una promesa con el usuario completo
+         */
         function getFulfilledUser(googleProfile, tokens) {
             return $http.get(ServerUrl + "/session/login", { params: {
                     accessToken: tokens.access_token,
@@ -42,6 +48,11 @@
             });
         }
 
+        /**
+         * Realiza una invocación a la API de G+ para recuperar el perfil del usuario
+         * @param   {string}  accessToken el token de acceso para llamar a la API
+         * @returns {promise} una promesa con el perfil del usuario en G+
+         */
         function getGoogleUserProfile(accessToken) {
             return $http({
                 url: "https://www.googleapis.com/oauth2/v3/userinfo",
@@ -54,6 +65,12 @@
             });
         }
 
+        /**
+         * Utiliza la API OAuth de Google para obtener 1 access token y 1 refresh token a cambio de un código de autorización
+         * @param   {string} authorizationCode  el código de autorización obtenido cuando el usuario aceptó el acceso
+         * @param   {object} googleOauthOptions el objeto con los parámetros de acceso a OAuth
+         * @returns {promise} una promesa con los tokens
+         */
         function tradeCodeForTokens(authorizationCode, googleOauthOptions) {
             return $http({
                 url: "https://www.googleapis.com/oauth2/v3/token",
@@ -74,7 +91,12 @@
             });
         }
 
-        function authorize(googleOauthOptions) {
+        /**
+         * Loguea un usuario en la aplicación, utilizando la API OAuth de Google y el servidor
+         * @param   {object}  googleOauthOptions el objeto con los parámetros de acceso a OAuth
+         * @returns {promise} una promesa con todos los datos del usuario logueado
+         */
+        function login(googleOauthOptions) {
 
             return $q(function (resolve, reject) {
                 var authUrl = "https://accounts.google.com/o/oauth2/auth?" +
@@ -102,14 +124,22 @@
 
                     // Si se pudo recuperar el código de autorización correctamente
                     if (responseCode) {
+                        // Obtiene un código de acceso a través de la API OAuth de Google
                         var authorizationCode = responseCode[1];
 
+                        // Cambia el código de autorización por 1 access y 1 refresh token
                         return tradeCodeForTokens(authorizationCode, googleOauthOptions).then(function (tokens) {
+
+                            // Recupera la información del perfil del usuario
                             return getGoogleUserProfile(tokens.access_token).then(function (googleProfile) {
+
+                                // Con los datos de Google busca en el servidor el usuario completo, con sus perfiles etc
                                 return getFulfilledUser(googleProfile, tokens).then(function (fulfilledUser) {
                                     console.log("Vuelta del server", fulfilledUser);
                                     // Guarda el usuario en el localStorage
                                     localStorageService.set("user", fulfilledUser);
+
+                                    console.log("$$$ Usuario del local storage", localStorageService.get("user"));
 
                                     return fulfilledUser;
                                 });
