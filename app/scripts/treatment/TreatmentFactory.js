@@ -44,8 +44,8 @@
             //return newTreatment.treatmentName;
             return $http.post(treatmentCreateEndpoint, newTreatment).then(function(result) {
                 return result.data;
-            })
-        };
+            });
+        }
 
     }
 

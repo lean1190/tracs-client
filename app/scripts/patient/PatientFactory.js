@@ -29,8 +29,8 @@
             //return newPatient.patientName;
             return $http.post(patientCreateEndpoint+"/", newPatient).then(function(result) {
                 return result.data;
-            })
-        };
+            });
+        }
 
     }
 

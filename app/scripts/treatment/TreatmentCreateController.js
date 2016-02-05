@@ -15,9 +15,9 @@
 
         var vm = this;
 
-//Estoy hay que modificarlo con el ._ID del que se loguea
+        //Estoy hay que modificarlo con el ._ID del que se loguea
 
-        var creatorId ="1";
+        var creatorId = "1";
         vm.treatment = TreatmentFactory.newTreatment(creatorId);
 
 
@@ -29,17 +29,17 @@
             console.log(vm.treatment.description);
         })*/
 
-        vm.showPatientInput  =function() {
+        vm.showPatientInput = function () {
 
-            vm.treatmentInfoEntered = !((vm.treatment.treatmentDescription == "") || (vm.treatment.treatmentName == ""));
+            vm.treatmentInfoEntered = !((vm.treatment.treatmentDescription === "") || (vm.treatment.treatmentName === ""));
             console.log(vm.treatmentInfoEntered);
 
         };
 
-         vm.createTreatment = function() {
+        vm.createTreatment = function () {
 
             TreatmentFactory.createTreatment(vm.treatment);
 
-        }
+        };
     }
 })();
