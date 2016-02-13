@@ -26,7 +26,7 @@
         .run(run)
         .config(config)
         // Acomodar según la url correspondiente
-        .constant("ServerUrl", "http://192.168.0.17:3000");
+        .constant("ServerUrl", "http://192.168.0.130:3000");
 
     // Declaración del módulo de controllers
     angular.module("TracsClient.controllers", []);
@@ -73,10 +73,10 @@
         })
 
         .state("app.patientCreate", {
-            url: "/patientCreate",
+            url: "/patient/create",
             views: {
                 "menuContent": {
-                    templateUrl: "templates/patient/patientCreate.html",
+                    templateUrl: "templates/patient/create.html",
                     controller: "PatientCreateController as vm"
                 }
             }
