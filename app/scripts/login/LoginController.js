@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("LoginController", LoginController);
 
-    LoginController.$inject = ["$http", "LoginFactory"];
+    LoginController.$inject = ["$http", "$location", "LoginFactory"];
 
-    function LoginController($http, LoginFactory) {
+    function LoginController($http, $location, LoginFactory) {
 
         var vm = this;
 
@@ -33,11 +33,11 @@
                 clientSecret: "McJIjSQt4aRNL_lLO8xSUBOe",
                 redirectUri: "http://localhost",
                 scopes: "https://www.googleapis.com/auth/plus.login+https://www.googleapis.com/auth/plus.me+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile"
-            }).then(function(user) {
-                console.log("Que llega al controller??", user);
-                vm.user = user;
+            }).then(function() {
+                console.log("$$$ Login exitoso!");
+                $location.path("/patient/home");
             }, function(error) {
-                console.log("Error en el login con Google", error);
+                console.error(error.message, error.raw);
             });
         };
     }

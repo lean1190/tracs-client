@@ -29,13 +29,31 @@
         return service;
 
         /**
+         * Arma la url para iniciar la autenticación con Google
+         * @param   {object} googleOauthOptions el objeto con los parámetros de acceso a OAuth
+         * @returns {string} la url armada para pedir los permisos de la aplicación
+         */
+        function getAuthUrl(googleOauthOptions) {
+            var authUrl = "https://accounts.google.com/o/oauth2/auth?" +
+                    "redirect_uri=" + googleOauthOptions.redirectUri +
+                    "&response_type=code" +
+                    "&client_id=" + googleOauthOptions.clientId +
+                    "&scope=" + googleOauthOptions.scopes +
+                    "&approval_prompt=force" +
+                    "&access_type=offline";
+
+            return authUrl;
+        }
+
+        /**
          * Llama al servidor para recuperar un usuario completo a partir de los datos del perfil de G+
          * @param   {object}   googleProfile el perfil del usuario en G+
          * @param   {object}   tokens        un objeto con los tokens access y refresh
          * @returns {promise}  una promesa con el usuario completo
          */
         function getFulfilledUser(googleProfile, tokens) {
-            return $http.get(ServerUrl + "/session/login", { params: {
+            return $http.get(ServerUrl + "/session/login", {
+                params: {
                     accessToken: tokens.access_token,
                     refreshToken: tokens.refresh_token,
                     googleId: googleProfile.sub,
@@ -99,16 +117,9 @@
         function login(googleOauthOptions) {
 
             return $q(function (resolve, reject) {
-                var authUrl = "https://accounts.google.com/o/oauth2/auth?" +
-                    "redirect_uri=" + googleOauthOptions.redirectUri +
-                    "&response_type=code" +
-                    "&client_id=" + googleOauthOptions.clientId +
-                    "&scope=" + googleOauthOptions.scopes +
-                    "&approval_prompt=force" +
-                    "&access_type=offline";
 
                 // Abre la ventana de autorización
-                var authWindow = window.open(authUrl, "_blank", "location=no,toolbar=no");
+                var authWindow = window.open(getAuthUrl(googleOauthOptions), "_blank", "location=no,toolbar=no");
 
                 // Agrega un evento para escuchar cada vez que cambia la página
                 // y capturar el código de autorización cuando hace el callback
@@ -128,29 +139,40 @@
                         var authorizationCode = responseCode[1];
 
                         // Cambia el código de autorización por 1 access y 1 refresh token
-                        return tradeCodeForTokens(authorizationCode, googleOauthOptions).then(function (tokens) {
+                        tradeCodeForTokens(authorizationCode, googleOauthOptions).then(function (tokens) {
 
                             // Recupera la información del perfil del usuario
-                            return getGoogleUserProfile(tokens.access_token).then(function (googleProfile) {
+                            getGoogleUserProfile(tokens.access_token).then(function (googleProfile) {
 
                                 // Con los datos de Google busca en el servidor el usuario completo, con sus perfiles etc
-                                return getFulfilledUser(googleProfile, tokens).then(function (fulfilledUser) {
-                                    console.log("Vuelta del server", fulfilledUser);
+                                getFulfilledUser(googleProfile, tokens).then(function (fulfilledUser) {
                                     // Guarda el usuario en el localStorage
-                                    localStorageService.set("user", fulfilledUser);
+                                    localStorageService.set("user", fulfilledUser.data);
 
-                                    console.log("$$$ Usuario del local storage", localStorageService.get("user"));
-
-                                    return fulfilledUser;
+                                    resolve(fulfilledUser.data);
+                                }, function (error) {
+                                    reject({
+                                        message: "Error al recuperar los datos desde el servidor",
+                                        raw: error
+                                    });
                                 });
                             }, function (error) {
-                                console.log("Error al recuperar el perfil de Google", error);
+                                reject({
+                                    message: "Error al recuperar el perfil de Google",
+                                    raw: error
+                                });
+                            });
+                        }, function (error) {
+                            reject({
+                                message: "Error al recuperar el perfil de Google",
+                                raw: error
                             });
                         });
                     } else if (responseError) {
                         // El usuario denegó el acceso a la app
                         reject({
-                            error: responseError[1]
+                            message: "El usuario denegó el acceso a la app",
+                            raw: responseError[1]
                         });
                     }
                 });
