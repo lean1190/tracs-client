@@ -16,36 +16,55 @@
         .module("TracsClient.controllers")
         .controller("PatientHomeController", PatientHomeController);
 
-    PatientHomeController.$inject = [];
+    PatientHomeController.$inject = ["localStorageService"];
 
-    function PatientHomeController() {
+    function PatientHomeController(localStorageService) {
 
         var vm = this;
         vm.patients = [];
 
         activate();
 
+        function mockUserData() {
+            var mockUser = {
+                _id: 917598713604317,
+                googleId: 8888,
+                name: "Mock User",
+                email: "mock@tracs.com.ar",
+                picture: "http://healthyceleb.com/wp-content/uploads/2014/05/Usher.jpg",
+                about: "Just a simple user for testing",
+                phoneNumber: "1523582791",
+                accessToken: "1Ai951j2klsdjf9107207hkjfasf",
+                refreshToken: "998sd9fhjagwe31098sd_vsdjiwskga.comasfiw.awriuhus",
+                patients : [
+                    {
+                        _id: "1",
+                        name: "Juancito",
+                        picture: "https://i1.sndcdn.com/artworks-000121970424-p9oirz-t500x500.jpg",
+                        diagnosis: {
+                            description: "Le gusta el arrrrrte"
+                        }
+                    },
+                    {
+                        _id: "2",
+                        name: "Zulma",
+                        picture: "https://t2.kn3.net/taringa/1/9/3/4/9/9/Taringa_Power/9E5.jpg",
+                        diagnosis: {
+                            description: "Hasta tinelli y el maipo no para"
+                        }
+                    }
+                ]
+            };
+
+            localStorageService.set("user", mockUser);
+        }
+
         function activate() {
             // Mock data
-            vm.patients = [
-                {
-                    _id: "1",
-                    name: "Juancito",
-                    picture: "https://i1.sndcdn.com/artworks-000121970424-p9oirz-t500x500.jpg",
-                    diagnosis: {
-                        description: "Le gusta el arrrrrte"
-                    }
-                },
-                {
-                    _id: "2",
-                    name: "Zulma",
-                    picture: "http://www.sitiosargentina.com.ar/imagenes-2009/zulma-lobarto-5.jpg",
-                    diagnosis: {
-                        description: "Hasta tinelli y el maipo no para"
-                    }
-                }
-            ];
+            mockUserData();
 
+            var sessionUser = localStorageService.get("user");
+            vm.patients = sessionUser.patients;
         }
     }
 
