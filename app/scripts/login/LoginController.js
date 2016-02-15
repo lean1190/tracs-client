@@ -6,7 +6,7 @@
  * @ngdoc function
  * @name TracsClient.controllers:LoginController
  * @description
- * Controlador que maneja el login y logout de un usuario
+ * Controlador que maneja el login de un usuario
  */
 
 (function () {
@@ -16,11 +16,27 @@
         .module("TracsClient.controllers")
         .controller("LoginController", LoginController);
 
-    LoginController.$inject = ["$http", "$location", "LoginFactory"];
+    LoginController.$inject = ["$scope", "$http", "$state", "$ionicSideMenuDelegate", "LoginFactory"];
 
-    function LoginController($http, $location, LoginFactory) {
+    function LoginController($scope, $http, $state, $ionicSideMenuDelegate, LoginFactory) {
 
         var vm = this;
+
+        /**
+         * Cuando entra a la vista deshabilita la posibilidad de hacer drag
+         * Sirve para prevenir que se despliegue el side menu
+         */
+        $scope.$on("$ionicView.enter", function () {
+            $ionicSideMenuDelegate.canDragContent(false);
+        });
+
+        /**
+         * Cuando sale de la vista habilita nuevamente el dragging.
+         * Sirve para que las próximas vistas tengan disponible el side menu
+         */
+        $scope.$on("$ionicView.leave", function () {
+            $ionicSideMenuDelegate.canDragContent(true);
+        });
 
         /**
          * Dispara la autenticación con Google en la aplicación,
@@ -33,10 +49,9 @@
                 clientSecret: "McJIjSQt4aRNL_lLO8xSUBOe",
                 redirectUri: "http://localhost",
                 scopes: "https://www.googleapis.com/auth/plus.login+https://www.googleapis.com/auth/plus.me+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile"
-            }).then(function() {
-                console.log("$$$ Login exitoso!");
-                $location.path("/patient/home");
-            }, function(error) {
+            }).then(function () {
+                $state.go("app.patientHome");
+            }, function (error) {
                 console.error(error.message, error.raw);
             });
         };
