@@ -59,7 +59,8 @@
         .state("app", {
             url: "/app",
             abstract: true,
-            templateUrl: "templates/layout/menu.html"
+            templateUrl: "templates/layout/menu.html",
+            controller: "MenuController as vm"
         })
 
         .state("app.login", {
@@ -68,6 +69,15 @@
                 "menuContent": {
                     templateUrl: "templates/login/login.html",
                     controller: "LoginController as vm"
+                }
+            }
+        })
+
+        .state("app.logout", {
+            url: "/logout",
+            views: {
+                "menuContent": {
+                    controller: "LogoutController as vm"
                 }
             }
         })
