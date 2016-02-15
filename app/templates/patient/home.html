@@ -2,7 +2,7 @@
     <ion-content>
         <ion-list>
             <ion-item ng-repeat="patient in vm.patients" href="#/app/patient/{{::patient._id}}" class="item-avatar">
-                <img src="{{::patient.picture}}" alt="{{::patient.name}}">
+                <img ng-src="{{::patient.picture}}" alt="{{::patient.name}}">
                 <h2>{{::patient.name}}</h2>
                 <p>{{::patient.diagnosis.description}}</p>
             </ion-item>

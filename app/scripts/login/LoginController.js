@@ -16,16 +16,19 @@
         .module("TracsClient.controllers")
         .controller("LoginController", LoginController);
 
-    LoginController.$inject = ["$scope", "$http", "$state", "$ionicSideMenuDelegate", "$ionicHistory", "localStorageService",  "LoginFactory"];
+    LoginController.$inject = ["$rootScope", "$scope", "$http", "$state", "$log", "$ionicSideMenuDelegate", "$ionicHistory", "localStorageService", "LoginFactory"];
 
-    function LoginController($scope, $http, $state, $ionicSideMenuDelegate, $ionicHistory, localStorageService, LoginFactory) {
+    function LoginController($rootScope, $scope, $http, $state, $log, $ionicSideMenuDelegate, $ionicHistory, localStorageService, LoginFactory) {
 
         var vm = this;
 
         activate();
 
         function activate() {
-            console.log("Que hay en el session storage??", localStorageService.get("user"));
+            // Si el usuario ya se logueó en la aplicación, lo redirije al menú principal
+            if (isUserLoggedIn()) {
+                forwardToPatientHome();
+            }
         }
 
         /**
@@ -45,6 +48,44 @@
         });
 
         /**
+         * Verifica que haya un usuario logueado
+         * @returns {boolean} true si se encontró un usuario
+         */
+        function isUserLoggedIn() {
+            var logedInUser = localStorageService.get("user");
+
+            return logedInUser !== null && logedInUser._id !== false;
+        }
+
+        /**
+         * Redirige al menú principal
+         */
+        function changeStateToPatientHome() {
+            $state.go("app.patientHome");
+        }
+
+        /**
+         * Setea la próxima vista para que sea la raíz del stack de navegación,
+         * de manera que no se muestre el back button y no se pueda volver al login
+         */
+        function setNextViewAsHistoryRoot() {
+            $ionicHistory.nextViewOptions({
+                historyRoot: true
+            });
+        }
+
+        /**
+         * Setea el history root en la próxima vista y redirecciona
+         */
+        function forwardToPatientHome() {
+            // Emite un evento indicando que el usuario en la sesión cambió
+            $rootScope.$emit("user.changed");
+
+            setNextViewAsHistoryRoot();
+            changeStateToPatientHome();
+        }
+
+        /**
          * Dispara la autenticación con Google en la aplicación,
          * pidiendo permisos de acceso y validando los datos con
          * el servidor
@@ -56,17 +97,9 @@
                 redirectUri: "http://localhost",
                 scopes: "https://www.googleapis.com/auth/plus.login+https://www.googleapis.com/auth/plus.me+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile"
             }).then(function () {
-
-                // Setea la próxima vista para que sea la raíz del stack de navegación,
-                // de manera que no se muestre el back button y no se pueda volver al login
-                $ionicHistory.nextViewOptions({
-                    historyRoot: true
-                });
-
-                // Redirige al menú principal
-                $state.go("app.patientHome");
+                forwardToPatientHome();
             }, function (error) {
-                console.error(error.message, error.raw);
+                $log.error(error.message, error.raw);
             });
         };
     }

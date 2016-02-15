@@ -31,7 +31,7 @@
                 googleId: 8888,
                 name: "Mock User",
                 email: "mock@tracs.com.ar",
-                picture: "http://healthyceleb.com/wp-content/uploads/2014/05/Usher.jpg",
+                picture: "http://sporkmarketing.com/wp-content/uploads/2015/12/user-experience.jpg",
                 about: "Just a simple user for testing",
                 phoneNumber: "1523582791",
                 accessToken: "1Ai951j2klsdjf9107207hkjfasf",
