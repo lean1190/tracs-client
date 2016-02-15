@@ -16,11 +16,17 @@
         .module("TracsClient.controllers")
         .controller("LoginController", LoginController);
 
-    LoginController.$inject = ["$scope", "$http", "$state", "$ionicSideMenuDelegate", "LoginFactory"];
+    LoginController.$inject = ["$scope", "$http", "$state", "$ionicSideMenuDelegate", "$ionicHistory", "localStorageService",  "LoginFactory"];
 
-    function LoginController($scope, $http, $state, $ionicSideMenuDelegate, LoginFactory) {
+    function LoginController($scope, $http, $state, $ionicSideMenuDelegate, $ionicHistory, localStorageService, LoginFactory) {
 
         var vm = this;
+
+        activate();
+
+        function activate() {
+            console.log("Que hay en el session storage??", localStorageService.get("user"));
+        }
 
         /**
          * Cuando entra a la vista deshabilita la posibilidad de hacer drag
@@ -50,6 +56,14 @@
                 redirectUri: "http://localhost",
                 scopes: "https://www.googleapis.com/auth/plus.login+https://www.googleapis.com/auth/plus.me+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile"
             }).then(function () {
+
+                // Setea la próxima vista para que sea la raíz del stack de navegación,
+                // de manera que no se muestre el back button y no se pueda volver al login
+                $ionicHistory.nextViewOptions({
+                    historyRoot: true
+                });
+
+                // Redirige al menú principal
                 $state.go("app.patientHome");
             }, function (error) {
                 console.error(error.message, error.raw);
