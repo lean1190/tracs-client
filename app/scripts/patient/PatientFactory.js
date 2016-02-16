@@ -27,6 +27,7 @@
             console.log("llegue al createPatient");
             newPatient.admin = creatorId;
             //return newPatient.patientName;
+            console.log(newPatient);
             return $http.post(patientCreateEndpoint+"/", newPatient).then(function(result) {
                 return result.data;
             });

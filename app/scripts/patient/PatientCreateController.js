@@ -13,7 +13,7 @@
 
 //Estoy hay que modificarlo con el ._ID del que se loguea
 
-        var creatorId = "111";
+        var creatorId = "56986b129a1971d812b0050a";
 
         vm.createPatient = function() {
 
