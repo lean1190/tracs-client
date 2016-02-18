@@ -11,6 +11,10 @@
                 <input type="text" ng-model="vm.patient.dni" placeholder="DNI">
             </label>
 
+            <ionic-datepicker input-obj="vm.datepickerObject">
+                <button ng-model="vm.datepickerObject" class="button button-block button-positive">                                                 {{vm.datepickerObject.inputDate | date:vm.datepickerObject.dateFormat}}
+                </button>
+            </ionic-datepicker>
             <label class="item item-input item-floating-label">
                 <span class="input-label">Fecha Nacimiento</span>
                 <input type="date" ng-model="vm.patient.dateOfBirth" placeholder="Fecha de nacimiento">

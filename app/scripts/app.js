@@ -22,6 +22,7 @@
                 "TracsClient.controllers",
                 "TracsClient.factories",
                 "TracsClient.directives"
+                //,"ionic-datepicker"
         ])
         .run(run)
         .config(config)
