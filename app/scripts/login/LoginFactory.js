@@ -18,9 +18,9 @@
         .module("TracsClient.factories")
         .factory("LoginFactory", LoginFactory);
 
-    LoginFactory.$inject = ["$http", "$q", "localStorageService", "ServerUrl"];
+    LoginFactory.$inject = ["$http", "$q", "localStorageService", "EnvironmentConfig"];
 
-    function LoginFactory($http, $q, localStorageService, ServerUrl) {
+    function LoginFactory($http, $q, localStorageService, EnvironmentConfig) {
 
         var service = {
             login: login
@@ -52,7 +52,7 @@
          * @returns {promise}  una promesa con el usuario completo
          */
         function getFulfilledUser(googleProfile, tokens) {
-            return $http.get(ServerUrl + "/session/login", {
+            return $http.get(EnvironmentConfig.api + "/session/login", {
                 params: {
                     accessToken: tokens.access_token,
                     refreshToken: tokens.refresh_token,

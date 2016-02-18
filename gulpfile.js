@@ -3,6 +3,7 @@
 var appName = 'TracsClient';
 
 var gulp = require('gulp');
+var gulpNgConfig = require('gulp-ng-config');
 var plugins = require('gulp-load-plugins')();
 var del = require('del');
 var beep = require('beepbeep');
@@ -15,6 +16,7 @@ var streamqueue = require('streamqueue');
 var runSequence = require('run-sequence');
 var merge = require('merge-stream');
 var ripple = require('ripple-emulator');
+var fs = require('fs');
 
 /**
  * Parse arguments
@@ -60,6 +62,19 @@ var errorHandler = function (error) {
 // clean target dir
 gulp.task('clean', function (done) {
     del([targetDir], done);
+});
+
+// create an injectable config constants module based on the config.json
+gulp.task('config', function () {
+    // Get the environment from the command line
+    var env = args.env || 'development';
+
+    gulp.src('app/config.json')
+    .pipe(gulpNgConfig('TracsClient.environment', {
+        environment: env
+    }))
+    .pipe(gulp.dest('app/scripts/utils'))
+    .on('error', errorHandler);
 });
 
 // precompile .scss and concat with ionic.css
@@ -340,7 +355,9 @@ gulp.task('noop', function () {});
 gulp.task('default', function (done) {
     runSequence(
         'clean',
-        'iconfont', [
+        'config',
+        'iconfont',
+        [
           'fonts',
           'templates',
           'styles',

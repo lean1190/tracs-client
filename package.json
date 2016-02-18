@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "author": "Martin Trejo y Leandro Vilas <trejomartin90@gmail.com, leandro.vilas90@gmail.com>",
   "description": "",
-  "dependencies": {},
   "devDependencies": {
     "beepbeep": "^1.2.0",
     "connect-livereload": "^0.5.2",
@@ -25,6 +24,7 @@
     "gulp-load-plugins": "^0.8.0",
     "gulp-ng-annotate": "^0.5.0",
     "gulp-remember": "^0.3.0",
+    "gulp-ng-config": "^1.2.1",
     "gulp-rev": "^3.0.0",
     "gulp-sass": "^2.0.1",
     "gulp-shell": "^0.2.11",

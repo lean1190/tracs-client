@@ -23,7 +23,7 @@
             restrict: "E",
             replace: false,
             templateUrl: "templates/login/googleLoginButton.html",
-            link: function (scope, elem, attrs) {
+            link: function (scope, elem) {
                 elem.bind("click", function () {
                     scope.vm.login();
                 });

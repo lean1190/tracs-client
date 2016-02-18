@@ -21,12 +21,11 @@
                 "LocalStorageModule",
                 "TracsClient.controllers",
                 "TracsClient.factories",
-                "TracsClient.directives"
+                "TracsClient.directives",
+                "TracsClient.environment"
         ])
         .run(run)
-        .config(config)
-        // Acomodar según la url correspondiente
-        .constant("ServerUrl", "http://192.168.0.130:3000");
+        .config(config);
 
     // Declaración del módulo de controllers
     angular.module("TracsClient.controllers", []);
@@ -34,6 +33,8 @@
     angular.module("TracsClient.factories", []);
     // Declaración del módulo de directivas
     angular.module("TracsClient.directives", []);
+    // Declaración del módulos de constantes de environment
+    angular.module("TracsClient.environment", []);
 
     function run($ionicPlatform) {
         $ionicPlatform.ready(function () {
