@@ -5,15 +5,11 @@
         .module("TracsClient.factories")
         .factory("PatientFactory", PatientFactory);
 
-    PatientFactory.$inject = ["$resource", "$http", "API_ENDPOINT"];
+    PatientFactory.$inject = ["$resource", "$http", "EnvironmentConfig"];
 
-    function PatientFactory($resource, $http, API_ENDPOINT) {
-        // --> PRODUCTION
-        //var urlBase = "https://warm-ocean-7615.herokuapp.com",
+    function PatientFactory($resource, $http, EnvironmentConfig) {
 
-        console.log(API_ENDPOINT);
-        var urlBase = "http://localhost:3000",
-            patientCreateEndpoint = urlBase + "/patient";
+        var patientCreateEndpoint = EnvironmentConfig.api + "/patient";
 
         var service = {
 
