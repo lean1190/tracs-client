@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("LoginController", LoginController);
 
-    LoginController.$inject = ["$rootScope", "$scope", "$http", "$state", "$log", "$ionicSideMenuDelegate", "$ionicHistory", "localStorageService", "LoginFactory"];
+    LoginController.$inject = ["$rootScope", "$scope", "$http", "$state", "$log", "$ionicSideMenuDelegate", "$ionicHistory", "localStorageService", "LoginFactory", "EnvironmentConfig"];
 
-    function LoginController($rootScope, $scope, $http, $state, $log, $ionicSideMenuDelegate, $ionicHistory, localStorageService, LoginFactory) {
+    function LoginController($rootScope, $scope, $http, $state, $log, $ionicSideMenuDelegate, $ionicHistory, localStorageService, LoginFactory, EnvironmentConfig) {
 
         var vm = this;
 
@@ -91,10 +91,12 @@
          * el servidor
          */
         vm.login = function () {
+            // Por simplicidad los parámetros de la API de Google se pasan en el cliente.
+            // Por seguridad, lo óptimo sería recuperar estos datos desde el servidor
             LoginFactory.login({
-                clientId: "1017723616061-btjadg1pe5tug819i8b3sffek1klev6m.apps.googleusercontent.com",
-                clientSecret: "McJIjSQt4aRNL_lLO8xSUBOe",
-                redirectUri: "http://localhost",
+                clientId: EnvironmentConfig.googleClientId,
+                clientSecret: EnvironmentConfig.googleClientSecret,
+                redirectUri: EnvironmentConfig.googleRedirectUri,
                 scopes: "https://www.googleapis.com/auth/plus.login+https://www.googleapis.com/auth/plus.me+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile"
             }).then(function () {
                 forwardToPatientHome();
