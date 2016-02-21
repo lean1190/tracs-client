@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("PatientHomeController", PatientHomeController);
 
-    PatientHomeController.$inject = ["localStorageService"];
+    PatientHomeController.$inject = ["PatientFactory","localStorageService"];
 
-    function PatientHomeController(localStorageService) {
+    function PatientHomeController(PatientFactory,localStorageService) {
 
         var vm = this;
         vm.patients = [];
@@ -27,7 +27,7 @@
 
         function mockUserData() {
             var mockUser = {
-                _id: 917598713604317,
+                _id: "56986b129a1971d812b0050a",
                 googleId: 8888,
                 name: "Mock User",
                 email: "mock@tracs.com.ar",
@@ -36,7 +36,8 @@
                 phoneNumber: "1523582791",
                 accessToken: "1Ai951j2klsdjf9107207hkjfasf",
                 refreshToken: "998sd9fhjagwe31098sd_vsdjiwskga.comasfiw.awriuhus",
-                patients : [
+                profiles:[]
+                /*patients : [
                     {
                         _id: "1",
                         name: "Juancito",
@@ -53,18 +54,28 @@
                             description: "Hasta tinelli y el maipo no para"
                         }
                     }
-                ]
+                ]*/
             };
 
             localStorageService.set("user", mockUser);
         }
 
         function activate() {
+
             // Mock data
             mockUserData();
+            //console.log(localStorageService.get("user"));
 
-            var sessionUser = localStorageService.get("user");
-            vm.patients = sessionUser.patients;
+/*            var sessionUser = localStorageService.get("user");
+                vm.patients = sessionUser.patients;*/
+
+            var userId = localStorageService.get("user")._id;
+            PatientFactory.getPatients(userId).then(function(result) {
+                console.log("$$$ result", result);
+            }, function(err) {
+                console.log("$$$ rompiose", err);
+            });
+
         }
     }
 
