@@ -72,6 +72,8 @@
             var userId = localStorageService.get("user")._id;
             PatientFactory.getPatients(userId).then(function(result) {
                 console.log("$$$ result", result);
+                console.log(result[0].patient[0].name);
+                vm.patients = result;
             }, function(err) {
                 console.log("$$$ rompiose", err);
             });

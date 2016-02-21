@@ -34,9 +34,9 @@
         function getPatients (userId){
             console.log("llegue al getPatients");
             console.log(userId);
-            return $http.get(patientGetEndpoint+"/",userId).then(function(result){
+            return $http.get(patientGetEndpoint,userId).then(function(result){
                 console.log(result.data);
-                //return result.data;
+                return result.data;
             })
         }
 
