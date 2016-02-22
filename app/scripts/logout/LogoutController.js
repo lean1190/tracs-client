@@ -24,8 +24,10 @@
 
         function activate() {
             // Borra los datos del localStorage
+            localStorageService.set("user", null);
             localStorageService.clearAll();
             // Redirige al login
+            console.log("### antes de redirigir al login!");
             $state.go("app.login");
         }
     }
