@@ -103,28 +103,6 @@
             }
         })
 
-
-        /*.state("app.treatmentCreate", {
-            url: "/treatmentCreate",
-            views: {
-                "menuContent": {
-                    templateUrl: "templates/treatment/treatmentCreate.html",
-                    controller: "TreatmentCreateController as vm"
-                }
-            }
-        })*/
-        /*
-                .state("app.treatmentHome", {
-                    url: "/treatmentHome",
-                    views: {
-                        "menuContent": {
-                            templateUrl: "templates/treatment/treatmentHome.html",
-                            controller: "LoginController as vm" "TreatmentHomeController as vm"
-                        }
-                    }
-                })*/
-
-
         .state("app.users", {
             url: "/users",
             views: {
