@@ -12,4 +12,3 @@ www/
 *.DS_Store
 *.log
 app/scripts/utils/config.js
-app/config.json
