@@ -2,30 +2,30 @@
     <ion-content>
         <div class="list">
             <h3 class="title">Informacion del Paciente</h3>
+
             <label class="item item-input item-floating-label">
                 <span class="input-label">Nombre</span>
                 <input type="text" ng-model="vm.patient.name" placeholder="Nombre">
             </label>
+
             <label class="item item-input item-floating-label">
                 <span class="input-label">DNI</span>
                 <input type="text" ng-model="vm.patient.dni" placeholder="DNI">
             </label>
 
-            <ionic-datepicker input-obj="vm.datepickerObject">
-                <button ng-model="vm.datepickerObject" class="button button-block button-positive">                                                 {{vm.datepickerObject.inputDate | date:vm.datepickerObject.dateFormat}}
-                </button>
-            </ionic-datepicker>
             <label class="item item-input item-floating-label">
-                <span class="input-label">Fecha Nacimiento</span>
+                <span class="input-label">Fecha de nacimiento</span>
                 <input type="date" ng-model="vm.patient.dateOfBirth" placeholder="Fecha de nacimiento">
             </label>
+
             <label class="item item-input item-floating-label">
                 <span class="input-label">Número de Teléfono</span>
                 <input type="text" ng-model="vm.patient.phoneNr" placeholder="Número de Teléfono">
             </label>
+
             <label class="item item-input item-floating-label">
-                <span class="input-label">Descripción General</span>
-                <textarea type="text" ng-model="vm.patient.description" placeholder="Como es?"></textarea>
+                <span class="input-label">Como es {{vm.patient.name}} ?</span>
+                <textarea type="text" ng-model="vm.patient.description" placeholder="Como es {{vm.patient.name}}?"></textarea>
             </label>
         </div>
 

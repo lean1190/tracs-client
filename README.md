@@ -1,5 +1,13 @@
 # GENERATOR URL: https://www.npmjs.com/package/generator-ionic-gulp
 
+# Para bajar las dependencias
+npm install
+bower install
+ionic state restore
+
+# Comando para no subir la configuracion de environment
+git update-index --assume-unchanged app/config.json
+
 # Para correr la aplicacion en el navegador como si fuera "ionic serve"
 gulp
 
