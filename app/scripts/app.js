@@ -94,6 +94,7 @@
         })
 
         .state("app.patientHome", {
+            cache: false,
             url: "/patient/home",
             views: {
                 "menuContent": {

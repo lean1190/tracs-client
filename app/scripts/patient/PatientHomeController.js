@@ -37,24 +37,7 @@
                 accessToken: "1Ai951j2klsdjf9107207hkjfasf",
                 refreshToken: "998sd9fhjagwe31098sd_vsdjiwskga.comasfiw.awriuhus",
                 profiles:[]
-                /*patients : [
-                    {
-                        _id: "1",
-                        name: "Juancito",
-                        picture: "https://i1.sndcdn.com/artworks-000121970424-p9oirz-t500x500.jpg",
-                        diagnosis: {
-                            description: "Le gusta el arrrrrte"
-                        }
-                    },
-                    {
-                        _id: "2",
-                        name: "Zulma",
-                        picture: "https://t2.kn3.net/taringa/1/9/3/4/9/9/Taringa_Power/9E5.jpg",
-                        diagnosis: {
-                            description: "Hasta tinelli y el maipo no para"
-                        }
-                    }
-                ]*/
+
             };
 
             localStorageService.set("user", mockUser);
@@ -69,11 +52,19 @@
 /*            var sessionUser = localStorageService.get("user");
                 vm.patients = sessionUser.patients;*/
 
+
+
+
             var userId = localStorageService.get("user")._id;
             PatientFactory.getPatients(userId).then(function(result) {
                 console.log("$$$ result", result);
-                console.log(result[0].patient[0].name);
-                vm.patients = result;
+                vm.profiles = result;
+
+                if (vm.profiles.length == 0)
+                    vm.message = "Aun no tienes pacientes. Comienza agregando uno!!";
+                else
+                    vm.message = "";
+
             }, function(err) {
                 console.log("$$$ rompiose", err);
             });

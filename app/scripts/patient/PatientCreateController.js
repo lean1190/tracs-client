@@ -12,6 +12,7 @@
         var vm = this;
 
         vm.createPatient = function () {
+
             var creatorId = localStorageService.get("user")._id;
 
             PatientFactory.createPatient(vm.patient, creatorId).then(function (result) {
