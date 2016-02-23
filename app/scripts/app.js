@@ -75,6 +75,7 @@
         })
 
         .state("app.logout", {
+            cache: false,
             url: "/logout",
             views: {
                 "menuContent": {

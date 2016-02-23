@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("PatientHomeController", PatientHomeController);
 
-    PatientHomeController.$inject = ["PatientFactory","localStorageService"];
+    PatientHomeController.$inject = ["$log", "PatientFactory", "localStorageService"];
 
-    function PatientHomeController(PatientFactory,localStorageService) {
+    function PatientHomeController($log, PatientFactory, localStorageService) {
 
         var vm = this;
         vm.patients = [];
@@ -37,7 +37,6 @@
                 accessToken: "1Ai951j2klsdjf9107207hkjfasf",
                 refreshToken: "998sd9fhjagwe31098sd_vsdjiwskga.comasfiw.awriuhus",
                 profiles:[]
-
             };
 
             localStorageService.set("user", mockUser);
@@ -45,28 +44,23 @@
 
         function activate() {
 
-            // Mock data
-            mockUserData();
-            //console.log(localStorageService.get("user"));
-
-/*            var sessionUser = localStorageService.get("user");
-                vm.patients = sessionUser.patients;*/
-
-
-
+            // Mock data, cambiar a true para mockear
+            // Pongo esto por si no anda el login posta, pero estaria bueno
+            // ya probar con los usuarios posta
+            var bypass = false;
+            if(bypass) {mockUserData();}
 
             var userId = localStorageService.get("user")._id;
             PatientFactory.getPatients(userId).then(function(result) {
-                console.log("$$$ result", result);
+                console.log("### Pacientes del usuario " + userId, result);
                 vm.profiles = result;
+                vm.message = "";
 
-                if (vm.profiles.length == 0)
+                if (vm.profiles.length === 0) {
                     vm.message = "Aun no tienes pacientes. Comienza agregando uno!!";
-                else
-                    vm.message = "";
-
+                }
             }, function(err) {
-                console.log("$$$ rompiose", err);
+                $log.error("Ocurrió un error al intentar recuperar la lista de pacientes del usuario con id " + userId, err);
             });
 
         }

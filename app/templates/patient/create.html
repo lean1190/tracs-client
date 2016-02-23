@@ -5,17 +5,17 @@
 
             <label class="item item-input item-floating-label">
                 <span class="input-label">Nombre</span>
-                <input type="text" ng-model="vm.patient.name" placeholder="Nombre">
+                <input type="text" ng-model="vm.patient.name" placeholder="Nombre" required>
             </label>
 
             <label class="item item-input item-floating-label">
                 <span class="input-label">DNI</span>
-                <input type="text" ng-model="vm.patient.dni" placeholder="DNI">
+                <input type="text" ng-model="vm.patient.dni" placeholder="DNI" required>
             </label>
 
             <label class="item item-input item-floating-label">
                 <span class="input-label">Fecha de nacimiento</span>
-                <input type="date" ng-model="vm.patient.dateOfBirth" placeholder="Fecha de nacimiento">
+                <input type="date" ng-model="vm.patient.dateOfBirth" placeholder="Fecha de nacimiento" required>
             </label>
 
             <label class="item item-input item-floating-label">
@@ -24,14 +24,13 @@
             </label>
 
             <label class="item item-input item-floating-label">
-                <span class="input-label">Como es {{vm.patient.name}} ?</span>
-                <textarea type="text" ng-model="vm.patient.description" placeholder="Como es {{vm.patient.name}}?"></textarea>
+                <span class="input-label">Diagnóstico general</span>
+                <textarea type="text" ng-model="vm.patient.description" placeholder="Diagnóstico general"></textarea>
             </label>
         </div>
 
-        <a ui-sref="app.patientHome">
-            <button class="button button-block button-positive "ng-click="vm.createPatient()">Finalizar Paciente</button>
-            <button class="button button-block button-assertive"> Cancelar </button>
-        </a>
+        <button class="button button-block button-positive" ng-click="vm.createPatient()">Listo</button>
+
+        <a ui-sref="app.patientHome" class="button button-block button-assertive">Cancelar</a>
     </ion-content>
 </ion-view>
