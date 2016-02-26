@@ -15,8 +15,7 @@
 
             var creatorId = localStorageService.get("user")._id;
 
-            PatientFactory.createPatient(vm.patient, creatorId).then(function (result) {
-                console.log("### Paciente creado", result);
+            PatientFactory.createPatient(vm.patient, creatorId).then(function () {
                 $cordovaToast.showLongBottom("Paciente creado").then(function () {
                    $state.go("app.patientHome");
                 });

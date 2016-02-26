@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("PatientHomeController", PatientHomeController);
 
-    PatientHomeController.$inject = ["$log", "PatientFactory", "localStorageService"];
+    PatientHomeController.$inject = ["$log", "$cordovaToast", "PatientFactory", "localStorageService"];
 
-    function PatientHomeController($log, PatientFactory, localStorageService) {
+    function PatientHomeController($log, $cordovaToast, PatientFactory, localStorageService) {
 
         var vm = this;
         vm.patients = [];
@@ -45,14 +45,13 @@
         function activate() {
 
             // Mock data, cambiar a true para mockear
-            // Pongo esto por si no anda el login posta, pero estaria bueno
-            // ya probar con los usuarios posta
+            // Pongo esto por si no anda el login posta o para el browser,
+            // pero estaria bueno ya probar con los usuarios de verdad
             var bypass = false;
             if(bypass) {mockUserData();}
 
             var userId = localStorageService.get("user")._id;
             PatientFactory.getPatients(userId).then(function(result) {
-                console.log("### Pacientes del usuario " + userId, result);
                 vm.profiles = result;
                 vm.message = "";
 
@@ -61,6 +60,7 @@
                 }
             }, function(err) {
                 $log.error("Ocurrió un error al intentar recuperar la lista de pacientes del usuario con id " + userId, err);
+                $cordovaToast.showLongBottom("Ocurrió un error al recuperar la lista de pacientes, intentalo de nuevo");
             });
 
         }

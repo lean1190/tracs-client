@@ -61,7 +61,6 @@
          * Redirige al menú principal
          */
         function changeStateToPatientHome() {
-            console.log("### Forwardeando el usuario...", localStorageService.get("user"));
             $state.go("app.patientHome");
         }
 
