@@ -21,8 +21,7 @@
 
     function PatientFactory($resource, $http, $log, EnvironmentConfig) {
 
-        var patientCreateEndpoint = EnvironmentConfig.api + "/patient";
-        var patientGetEndpoint = EnvironmentConfig.api + "/patient";
+        var patientEndpoint = EnvironmentConfig.api + "/patient";
 
         var service = {
 
@@ -41,9 +40,8 @@
          */
         function createPatient(newPatient, creatorId) {
             newPatient.admin = creatorId;
-            console.log(newPatient);
 
-            return $http.post(patientCreateEndpoint + "/", newPatient).then(function (result) {
+            return $http.post(patientEndpoint, newPatient).then(function (result) {
                 return result.data;
             }, function(error) {
                 $log.error("Ocurrió un error al crear el paciente", error);
@@ -56,8 +54,7 @@
          * @returns {promise} una promesa con todos los pacientes del usuario
          */
         function getPatients(userId) {
-            return $http.get(patientGetEndpoint + "/" + userId).then(function (result) {
-                console.log("### Datos PatientFactory:getPatients ", result.data);
+            return $http.get(patientEndpoint + "/user/" + userId).then(function (result) {
                 return result.data;
             }, function(error) {
                 $log.error("Ocurrió un error al recuperar los pacientes del usuario con id " + userId, error);
