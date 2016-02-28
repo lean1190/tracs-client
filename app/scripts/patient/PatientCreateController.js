@@ -1,3 +1,14 @@
+/* jshint bitwise: false, camelcase: false, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: double, undef: true, unused: true, strict: true, latedef: nofunc */
+
+/* globals angular */
+
+/**
+ * @ngdoc function
+ * @name TracsClient.controllers:PatientCreateController
+ * @description
+ * Controlador que maneja la validación y creación de un nuevo paciente
+ */
+
 (function () {
     "use strict";
 
@@ -16,13 +27,11 @@
             var creatorId = localStorageService.get("user")._id;
 
             PatientFactory.createPatient(vm.patient, creatorId).then(function () {
-                $cordovaToast.showLongBottom("Paciente creado").then(function () {
+                $cordovaToast.showLongBottom("Paciente creado!").then(function () {
                    $state.go("app.patientHome");
                 });
             }, function () {
-                $cordovaToast.showLongBottom("Ocurrió un error al guardar el paciente, intentalo de nuevo").then(function () {
-                   $state.go("app.patientHome");
-                });
+                $cordovaToast.showLongBottom("Ocurrió un error al guardar el paciente, intentalo de nuevo");
             });
 
         };

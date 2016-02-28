@@ -123,6 +123,28 @@
                     controller: "UserFindByIdController as vm"
                 }
             }
+        })
+
+        // ========== Im a patient states
+
+        .state("app.imAPatientLink", {
+            url: "/imAPatient/link",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/imAPatient/link.html",
+                    controller: "ImAPatientLinkController as vm"
+                }
+            }
+        })
+
+        .state("app.imAPatientHome", {
+            url: "/imAPatient/home",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/imAPatient/home.html",
+                    controller: "ImAPatientHomeController as vm"
+                }
+            }
         });
 
         // Si ninguno de lo states anteriores matchea, usa esta ruta como contingencia

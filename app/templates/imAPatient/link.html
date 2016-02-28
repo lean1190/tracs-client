@@ -1,0 +1,16 @@
+<ion-view view-title="Soy paciente">
+    <ion-content>
+        <div class="list">
+            <h3 class="title">Por favor ingresá tu DNI para entrar!</h3>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">DNI</span>
+                <input type="text" ng-model="vm.dni" placeholder="DNI" required>
+            </label>
+
+        </div>
+
+        <button class="button button-block button-positive" ng-click="vm.linkPatient()">Listo</button>
+
+    </ion-content>
+</ion-view>
