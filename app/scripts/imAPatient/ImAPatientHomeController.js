@@ -17,21 +17,12 @@
         .module("TracsClient.controllers")
         .controller("ImAPatientHomeController", ImAPatientHomeController);
 
-    ImAPatientHomeController.$inject = ["$state", "$cordovaToast", "ImAPatientFactory"];
+    ImAPatientHomeController.$inject = ["$state", "$cordovaToast", "localStorageService", "ImAPatientFactory"];
 
-    function ImAPatientHomeController($state, $cordovaToast, ImAPatientFactory) {
+    function ImAPatientHomeController($state, $cordovaToast, localStorageService, ImAPatientFactory) {
 
         var vm = this;
 
-        vm.linkPatient = function () {
-            ImAPatientFactory.linkPatient(vm.dni).then(function (patientInfo) {
-                console.log("### Volvio del Factory", patientInfo);
-                $state
-            }, function (error) {
-                console.log("### Rompio y volvio del Factory", error);
-                $cordovaToast.showLongBottom("No encontramos al paciente con dni " + vm.dni);
-            });
-            /*$*/
-        };
+        vm.patient = localStorageService.get("patientUser");
     }
 })();

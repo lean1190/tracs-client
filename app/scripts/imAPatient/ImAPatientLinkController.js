@@ -17,21 +17,36 @@
         .module("TracsClient.controllers")
         .controller("ImAPatientLinkController", ImAPatientLinkController);
 
-    ImAPatientLinkController.$inject = ["$state", "$cordovaToast", "ImAPatientFactory"];
+    ImAPatientLinkController.$inject = ["$scope", "$state", "$ionicSideMenuDelegate", "$cordovaToast", "ImAPatientFactory"];
 
-    function ImAPatientLinkController($state, $cordovaToast, ImAPatientFactory) {
+    function ImAPatientLinkController($scope, $state, $ionicSideMenuDelegate, $cordovaToast, ImAPatientFactory) {
 
         var vm = this;
 
+        /**
+         * Cuando entra a la vista deshabilita la posibilidad de hacer drag
+         * Sirve para prevenir que se despliegue el side menu
+         */
+        $scope.$on("$ionicView.enter", function () {
+            $ionicSideMenuDelegate.canDragContent(false);
+        });
+
+        /**
+         * Cuando sale de la vista habilita nuevamente el dragging.
+         * Sirve para que las próximas vistas tengan disponible el side menu
+         */
+        $scope.$on("$ionicView.leave", function () {
+            $ionicSideMenuDelegate.canDragContent(true);
+        });
+
         vm.linkPatient = function () {
             ImAPatientFactory.linkPatient(vm.dni).then(function (patientInfo) {
-                console.log("### Volvio del Factory", patientInfo);
-                $state.go("app.imAPatientHome");
+                $cordovaToast.showLongBottom("Paciente encontrado!").then(function() {
+                    $state.go("app.imAPatientHome");
+                });
             }, function (error) {
-                console.log("### Rompio y volvio del Factory", error);
                 $cordovaToast.showLongBottom("No encontramos al paciente con dni " + vm.dni);
             });
-            /*$*/
         };
     }
 })();

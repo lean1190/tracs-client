@@ -35,30 +35,21 @@
          */
         function linkPatient(patientDni) {
             return $http.get(imAPatientEndpoint + "/" + patientDni).then(function (result) {
-                console.log("### Volvio del linkPatient", result.data);
-                var patientUser = {
+                var resultPatient = result.data,
+                    patientUser = {
+                        _id: resultPatient._id,
+                        name: resultPatient.name,
+                        birthDate: resultPatient.birthDate,
+                        DNI: resultPatient.DNI,
+                        picture: resultPatient.picture
+                    };
 
-                };
-
-                localStorageService.set("patientUser", result.data);
+                localStorageService.set("patientUser", patientUser);
                 return result.data;
             }, function(error) {
                 $log.error("No se encontró el paciente con DNI " + patientDni, error);
             });
         }
-
-        /**
-         * Recupera todos los pacientes de un usuario
-         * @param   {number}  userId el id del usuario
-         * @returns {promise} una promesa con todos los pacientes del usuario
-         */
-        /*function getPatients(userId) {
-            return $http.get(patientEndpoint + "/user/" + userId).then(function (result) {
-                return result.data;
-            }, function(error) {
-                $log.error("Ocurrió un error al recuperar los pacientes del usuario con id " + userId, error);
-            });
-        }*/
 
     }
 
