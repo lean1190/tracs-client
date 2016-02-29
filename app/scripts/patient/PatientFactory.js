@@ -17,9 +17,9 @@
         .module("TracsClient.factories")
         .factory("PatientFactory", PatientFactory);
 
-    PatientFactory.$inject = ["$resource", "$http", "$log", "EnvironmentConfig"];
+    PatientFactory.$inject = ["$http", "$log", "EnvironmentConfig"];
 
-    function PatientFactory($resource, $http, $log, EnvironmentConfig) {
+    function PatientFactory($http, $log, EnvironmentConfig) {
 
         var patientEndpoint = EnvironmentConfig.api + "/patient";
 

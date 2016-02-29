@@ -59,7 +59,6 @@
                     vm.message = "Aun no tienes pacientes. Comienza agregando uno!!";
                 }
             }, function(err) {
-                $log.error("Ocurrió un error al intentar recuperar la lista de pacientes del usuario con id " + userId, err);
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la lista de pacientes, intentalo de nuevo");
             });
 

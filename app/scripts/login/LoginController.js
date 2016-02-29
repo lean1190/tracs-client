@@ -25,9 +25,13 @@
         activate();
 
         function activate() {
-            // Si el usuario ya se logueó en la aplicación, lo redirije al menú principal
+            // Si el usuario ya se logueó en la aplicación, lo redirige al listado de pacientes asignados
             if (isUserLoggedIn()) {
-                forwardToPatientHome();
+                forwardToLoggedInHome();
+            // Si el usuario es un paciente y ya registró su DNI, lo redirige a la vista de paciente
+            } else if (isPatientLoggedIn()) {
+                console.log("### ES PACIENTE! ;)");
+                forwardToPatientView();
             }
         }
 
@@ -58,10 +62,27 @@
         }
 
         /**
+         * Verifica si el usuario se logueó como paciente
+         * @returns {boolean} true si el usuario se logueó como paciente
+         */
+        function isPatientLoggedIn() {
+            var logedInPatient = localStorageService.get("patientUser");
+
+            return logedInPatient !== null && logedInPatient._id !== false;
+        }
+
+        /**
          * Redirige al menú principal
          */
-        function changeStateToPatientHome() {
+        function changeStateToLoggedInHome() {
             $state.go("app.patientHome");
+        }
+
+        /**
+         * Redirige a la vista de paciente
+         */
+        function changeStateToPatientView() {
+            $state.go("app.imAPatientHome");
         }
 
         /**
@@ -77,12 +98,20 @@
         /**
          * Setea el history root en la próxima vista y redirecciona
          */
-        function forwardToPatientHome() {
+        function forwardToLoggedInHome() {
             // Emite un evento indicando que el usuario en la sesión cambió
             $rootScope.$emit("user.changed");
 
             setNextViewAsHistoryRoot();
-            changeStateToPatientHome();
+            changeStateToLoggedInHome();
+        }
+
+        /**
+         * Setea el history root en la próxima vista y redirecciona
+         */
+        function forwardToPatientView() {
+            setNextViewAsHistoryRoot();
+            changeStateToPatientView();
         }
 
         /**
@@ -99,7 +128,7 @@
                 redirectUri: EnvironmentConfig.googleRedirectUri,
                 scopes: "https://www.googleapis.com/auth/plus.login+https://www.googleapis.com/auth/plus.me+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile"
             }).then(function () {
-                forwardToPatientHome();
+                forwardToLoggedInHome();
             }, function (error) {
                 $log.error(error.message, error.raw);
             });
