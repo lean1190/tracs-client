@@ -1,0 +1,17 @@
+<ion-view cache-view="false" view-title="Mis Pacientes">
+    <ion-content>
+
+
+        <div class="contentInfo">
+            <h2>{{vm.patient.name}}</h2>
+            <p>{{vm.patient.generalDescription}}</p>
+            <div class="contentImage">
+            <img ng-src="{{vm.patient.picture}}" alt="{{vm.patient.name}}">
+        </div>
+        </div>
+
+        <a ui-sref="app.patientCreate">
+            <button class="button button-positive">Asignar nuevo perfil</button>
+        </a>
+    </ion-content>
+</ion-view>

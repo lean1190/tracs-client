@@ -145,6 +145,16 @@
                     controller: "ImAPatientHomeController as vm"
                 }
             }
+        })
+
+        .state("app.patientDetail", {
+            url: "/patient/:id",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/detail.html",
+                    controller: "PatientDetailController as vm"
+                }
+            }
         });
 
         // Si ninguno de lo states anteriores matchea, usa esta ruta como contingencia
