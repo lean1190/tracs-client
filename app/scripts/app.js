@@ -23,6 +23,7 @@
                 "TracsClient.factories",
                 "TracsClient.directives",
                 "TracsClient.environment"
+                //"xeditable"
         ])
         .run(run)
         .config(config);
@@ -50,6 +51,12 @@
                 StatusBar.styleDefault();
             }
         });
+
+/*        (function(editableOptions) {
+        editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+    });*/
+
+
     }
 
     function config($stateProvider, $urlRouterProvider, localStorageServiceProvider) {

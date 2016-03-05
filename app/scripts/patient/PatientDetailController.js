@@ -20,7 +20,7 @@
 
         function activate() {
 
-            PatientFactory.getPatient(patientId).then(function(result) {
+            PatientFactory.getPatientDetail(patientId).then(function(result) {
                 vm.patient = result;
                 console.log(vm.patient);
 

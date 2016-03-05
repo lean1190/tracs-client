@@ -47,7 +47,7 @@
             // Mock data, cambiar a true para mockear
             // Pongo esto por si no anda el login posta o para el browser,
             // pero estaria bueno ya probar con los usuarios de verdad
-            var bypass = false;
+            var bypass = true;
             if(bypass) {mockUserData();}
 
             var userId = localStorageService.get("user")._id;

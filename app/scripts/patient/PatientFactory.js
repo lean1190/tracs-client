@@ -27,7 +27,7 @@
 
             createPatient: createPatient,
             getPatients: getPatients,
-            getPatient: getPatient
+            getPatientDetail: getPatientDetail
 
         };
 
@@ -63,12 +63,12 @@
             });
         }
 
-       function getPatient(patientId) {
+       function getPatientDetail(patientId) {
 
-            return $http.get(patientEndpoint + "/patient/" + patientId).then(function (result) {
+            return $http.get(patientEndpoint +"/detail/"  + patientId).then(function (result) {
                 return result.data;
             }, function(error) {
-                $log.error("Ocurrió un error al recuperar los pacientes del usuario con id " + userId, error);
+                $log.error("Ocurrió un error al recuperar los pacientes del usuario con id " + patientId, error);
             });
         }
 
