@@ -26,7 +26,8 @@
         var service = {
 
             createPatient: createPatient,
-            getPatients: getPatients
+            getPatients: getPatients,
+            getPatientDetail: getPatientDetail
 
         };
 
@@ -54,11 +55,21 @@
          * @returns {promise} una promesa con todos los pacientes del usuario
          */
         function getPatients(userId) {
+
             return $http.get(patientEndpoint + "/user/" + userId).then(function (result) {
                 return result.data;
             }, function(error) {
                 $log.error("Ocurrió un error al recuperar los pacientes del usuario con id " + userId, error);
                 return error;
+            });
+        }
+
+       function getPatientDetail(patientId) {
+
+            return $http.get(patientEndpoint +"/detail/"  + patientId).then(function (result) {
+                return result.data;
+            }, function(error) {
+                $log.error("Ocurrió un error al recuperar los pacientes del usuario con id " + patientId, error);
             });
         }
 

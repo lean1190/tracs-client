@@ -23,6 +23,7 @@
                 "TracsClient.factories",
                 "TracsClient.directives",
                 "TracsClient.environment"
+                //"xeditable"
         ])
         .run(run)
         .config(config);
@@ -50,6 +51,12 @@
                 StatusBar.styleDefault();
             }
         });
+
+/*        (function(editableOptions) {
+        editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+    });*/
+
+
     }
 
     function config($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
@@ -143,6 +150,16 @@
                 "menuContent": {
                     templateUrl: "templates/imAPatient/home.html",
                     controller: "ImAPatientHomeController as vm"
+                }
+            }
+        })
+
+        .state("app.patientDetail", {
+            url: "/patient/:id",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/detail.html",
+                    controller: "PatientDetailController as vm"
                 }
             }
         });
