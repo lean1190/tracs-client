@@ -58,7 +58,7 @@
                 if (vm.profiles.length === 0) {
                     vm.message = "Aun no tienes pacientes. Comienza agregando uno!!";
                 }
-            }, function(err) {
+            }, function() {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la lista de pacientes, intentalo de nuevo");
             });
 

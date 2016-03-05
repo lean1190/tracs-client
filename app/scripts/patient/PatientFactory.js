@@ -58,6 +58,7 @@
                 return result.data;
             }, function(error) {
                 $log.error("Ocurrió un error al recuperar los pacientes del usuario con id " + userId, error);
+                return error;
             });
         }
 
