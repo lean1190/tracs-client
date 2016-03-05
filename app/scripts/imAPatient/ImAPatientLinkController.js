@@ -17,9 +17,9 @@
         .module("TracsClient.controllers")
         .controller("ImAPatientLinkController", ImAPatientLinkController);
 
-    ImAPatientLinkController.$inject = ["$scope", "$state", "$ionicSideMenuDelegate", "$cordovaToast", "ImAPatientFactory"];
+    ImAPatientLinkController.$inject = ["$scope", "$state", "$ionicSideMenuDelegate", "$cordovaToast", "utils", "ImAPatientFactory"];
 
-    function ImAPatientLinkController($scope, $state, $ionicSideMenuDelegate, $cordovaToast, ImAPatientFactory) {
+    function ImAPatientLinkController($scope, $state, $ionicSideMenuDelegate, $cordovaToast, utils, ImAPatientFactory) {
 
         var vm = this;
 
@@ -41,10 +41,16 @@
 
         vm.linkPatient = function () {
             ImAPatientFactory.linkPatient(vm.dni).then(function (patientInfo) {
-                $cordovaToast.showLongBottom("Paciente encontrado!").then(function() {
-                    $state.go("app.imAPatientHome");
-                });
-            }, function (error) {
+                // Si el paciente no vino vacío
+                if (utils.isEmpty(patientInfo)) {
+                    $cordovaToast.showLongBottom("Paciente encontrado!").then(function () {
+                        $state.go("app.imAPatientHome");
+                    });
+                } else {
+                    $cordovaToast.showLongBottom("No encontramos al paciente con dni " + vm.dni);
+                }
+
+            }, function () {
                 $cordovaToast.showLongBottom("No encontramos al paciente con dni " + vm.dni);
             });
         };

@@ -22,7 +22,8 @@
                 "TracsClient.controllers",
                 "TracsClient.factories",
                 "TracsClient.directives",
-                "TracsClient.environment"
+                "TracsClient.environment",
+                "TracsClient.utils"
                 //"xeditable"
         ])
         .run(run)
@@ -36,6 +37,8 @@
     angular.module("TracsClient.directives", []);
     // Declaración del módulos de constantes de environment
     angular.module("TracsClient.environment", []);
+    // Declaración del módulos de utils
+    angular.module("TracsClient.utils", []);
 
     function run($ionicPlatform) {
         $ionicPlatform.ready(function () {

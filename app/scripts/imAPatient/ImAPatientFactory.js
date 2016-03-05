@@ -45,7 +45,7 @@
                     };
 
                 localStorageService.set("patientUser", patientUser);
-                return result.data;
+                return patientUser;
             }, function(error) {
                 $log.error("No se encontró el paciente con DNI " + patientDni, error);
             });
