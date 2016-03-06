@@ -16,17 +16,18 @@
         var vm = this;
         var patientId = $stateParams.id;
         console.log(patientId);
-        activate()
+
+        activate();
 
         function activate() {
-
             PatientFactory.getPatientDetail(patientId).then(function(result) {
                 vm.patient = result;
                 console.log(vm.patient);
 
-            }, function(err) {
+            }, function() {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la información del paciente, intentalo de nuevo");
             });
+
         }
 
         vm.updatePatient = function(){
