@@ -30,7 +30,6 @@
                 forwardToLoggedInHome();
             // Si el usuario es un paciente y ya registró su DNI, lo redirige a la vista de paciente
             } else if (isPatientLoggedIn()) {
-                console.log("### ES PACIENTE! ;)");
                 forwardToPatientView();
             }
         }

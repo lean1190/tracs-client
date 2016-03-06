@@ -16,9 +16,9 @@
         .module("TracsClient.factories")
         .factory("ImAPatientFactory", ImAPatientFactory);
 
-    ImAPatientFactory.$inject = ["$http", "$log", "localStorageService", "EnvironmentConfig"];
+    ImAPatientFactory.$inject = ["$http", "$log", "localStorageService", "utils", "EnvironmentConfig"];
 
-    function ImAPatientFactory($http, $log, localStorageService, EnvironmentConfig) {
+    function ImAPatientFactory($http, $log, localStorageService, utils, EnvironmentConfig) {
 
         var imAPatientEndpoint = EnvironmentConfig.api + "/imAPatient";
 
@@ -36,6 +36,10 @@
         function linkPatient(patientDni) {
             return $http.get(imAPatientEndpoint + "/" + patientDni).then(function (result) {
                 var resultPatient = result.data,
+                    patientUser = {};
+
+                // Si se encontró un paciente crea el DTO y lo guarda en el localStorage
+                if(!utils.isEmpty(resultPatient)) {
                     patientUser = {
                         _id: resultPatient._id,
                         name: resultPatient.name,
@@ -44,10 +48,15 @@
                         picture: resultPatient.picture
                     };
 
-                localStorageService.set("patientUser", patientUser);
+                    localStorageService.set("patientUser", patientUser);
+                } else {
+                    $log.info("No se encontró el paciente con DNI " + patientDni);
+                }
+
                 return patientUser;
             }, function(error) {
-                $log.error("No se encontró el paciente con DNI " + patientDni, error);
+                $log.error("Ocurrió un error al recuperar el paciente con DNI " + patientDni, error);
+                return error;
             });
         }
 

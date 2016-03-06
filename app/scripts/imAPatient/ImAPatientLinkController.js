@@ -17,9 +17,9 @@
         .module("TracsClient.controllers")
         .controller("ImAPatientLinkController", ImAPatientLinkController);
 
-    ImAPatientLinkController.$inject = ["$scope", "$state", "$ionicSideMenuDelegate", "$cordovaToast", "utils", "ImAPatientFactory"];
+    ImAPatientLinkController.$inject = ["$scope", "$state", "$ionicHistory", "$ionicSideMenuDelegate", "$cordovaToast", "utils", "ImAPatientFactory"];
 
-    function ImAPatientLinkController($scope, $state, $ionicSideMenuDelegate, $cordovaToast, utils, ImAPatientFactory) {
+    function ImAPatientLinkController($scope, $state, $ionicHistory, $ionicSideMenuDelegate, $cordovaToast, utils, ImAPatientFactory) {
 
         var vm = this;
 
@@ -41,9 +41,13 @@
 
         vm.linkPatient = function () {
             ImAPatientFactory.linkPatient(vm.dni).then(function (patientInfo) {
-                // Si el paciente no vino vacío
-                if (utils.isEmpty(patientInfo)) {
+                if (!utils.isEmpty(patientInfo)) {
                     $cordovaToast.showLongBottom("Paciente encontrado!").then(function () {
+                        // Setea la próxima vista como root del history de navegación
+                        $ionicHistory.nextViewOptions({
+                            historyRoot: true
+                        });
+                        // Redirige a la vista de paciente
                         $state.go("app.imAPatientHome");
                     });
                 } else {
