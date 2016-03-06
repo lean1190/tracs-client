@@ -27,9 +27,19 @@
             }, function(err) {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la información del paciente, intentalo de nuevo");
             });
+        }
 
+        vm.updatePatient = function(){
+
+            console.log(vm.patient);
+            var updatedPatient = vm.patient;
+
+            PatientFactory.updatePatientDetail(updatedPatient).then(function(result){
+                $state.go("app.patientHome");
+             }, function(err) {
+                    console.log("exploto");//$cordovaToast.showLongBottom("Ocurrió un error al editar al paciente, intentalo de nuevo");
+            })
 
         }
     }
-
 })();

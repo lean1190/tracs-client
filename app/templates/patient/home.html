@@ -4,7 +4,6 @@
             <ion-item ng-repeat="profile in vm.profiles" href="#/app/patient/{{::profile.patient._id}}" class="item-avatar">
                 <img ng-src="{{::profile.patient.picture}}" alt="{{::profile.patient.name}}">
                 <h2>{{::profile.patient.name}}</h2>
-                <h2>{{::profile.patient._id}}</h2>
                 <p>{{::profile.patient.generalDescription}}</p>
             </ion-item>
         </ion-list>

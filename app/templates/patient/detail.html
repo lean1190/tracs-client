@@ -1,20 +1,27 @@
-<ion-view cache-view="false" view-title="Mis Pacientes">
+<ion-view cache-view="false" view-title="Perfil de {{vm.patient.name}}">
     <ion-content>
 
 
         <div class="contentInfo">
-            <a href="#" editable-text="vm.patient.name">{{ vm.patient.name || "empty" }}</a>
-            <h2>{{vm.patient.name}}</h2>
-            <h3>{{vm.patient.DNI}}</h3>
-            <h3>{{vm.patient.phoneNumber}}</h3>
-            <p>{{vm.patient.generalDescription}}</p>
+
+            <h2><a editable-text="vm.patient.name">{{ vm.patient.name || "Sin información..." }}</a></h2>
+            <h3><a editable-text="vm.patient.DNI">{{ vm.patient.DNI || "Sin información..." }}</a></h3>
+            <h3><a editable-text="vm.patient.phoneNumber">{{ vm.patient.phoneNumber || "Sin información..." }}</a></h3>
+            <h3><a editable-text="vm.patient.birthDate">{{ vm.patient.birthDate || "Sin información..." |date:"dd/MM/yyyy"}}</a></h3>
+            <p><a editable-text="vm.patient.generalDescription">{{ vm.patient.generalDescription || "Sin información..." }}</a></p>
+
             <div class="contentImage">
-            <img ng-src="{{vm.patient.picture}}" alt="{{vm.patient.name}}">
-        </div>
+                <img ng-src="{{vm.patient.picture}}" alt="{{vm.patient.name}}">
+            </div>
+
         </div>
 
-        <a ui-sref="app.patientCreate">
+        <a ui-sref="#">
             <button class="button button-positive">Asignar nuevo perfil</button>
+
         </a>
+
+            <button class="button button-energized" ng-click="vm.updatePatient()">Guardar cambios</button>
+
     </ion-content>
 </ion-view>

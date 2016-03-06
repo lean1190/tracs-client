@@ -23,8 +23,8 @@
                 "TracsClient.factories",
                 "TracsClient.directives",
                 "TracsClient.environment",
-                "TracsClient.utils"
-                //"xeditable"
+                "TracsClient.utils",
+                "xeditable"
         ])
         .run(run)
         .config(config);
@@ -40,7 +40,7 @@
     // Declaración del módulos de utils
     angular.module("TracsClient.utils", []);
 
-    function run($ionicPlatform) {
+    function run($ionicPlatform, editableOptions) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -55,10 +55,7 @@
             }
         });
 
-/*        (function(editableOptions) {
         editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-    });*/
-
 
     }
 
