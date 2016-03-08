@@ -5,6 +5,9 @@
  * @name TracsClient:sim
  * @description
  * Expone el plugin cordova-plugin-sim como un factory inyectable
+ * Este plugin permite recuperar información del teléfono donde se
+ * ejecuta la aplicación, como el número de teléfono, el carrier,
+ * el código de país, etc.
  */
 
 (function () {
