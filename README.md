@@ -5,6 +5,13 @@ npm install
 bower install
 ionic state restore
 
+## Plugins de cordova (se deberian instalar con el ionic state restore)
+cordova plugin add cordova-plugin-inappbrowser
+cordova plugin add cordova-plugin-x-toast
+cordova plugin add cordova-plugin-sim
+
+--- 
+
 # Comando para no subir la configuracion de environment
 git update-index --assume-unchanged app/config.json
 
@@ -25,7 +32,7 @@ Si no le pasamos el parámetro, toma por defecto "development"
 
 ---
 
-# Para testeo en celu (LEAN):
+# Para testeo en celu (Linux):
 1. sudo apt-get -y install android-tools-adb android-tools-fastboot
 
 2. sudo gedit /etc/udev/rules.d/51-android.rules

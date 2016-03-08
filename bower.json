@@ -9,7 +9,8 @@
     "ngCordova": "~0.1.24-alpha",
     "angular-resource": "~1.4.3",
     "lodash": "~3.10.0",
-    "angular-local-storage": "~0.2.3"
+    "angular-local-storage": "~0.2.3",
+    "angular-xeditable": "^0.1.10"
   },
   "resolutions": {
     "angular": "1.4.3"
