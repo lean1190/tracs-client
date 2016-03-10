@@ -40,6 +40,18 @@
     // Declaración del módulos de utils
     angular.module("TracsClient.utils", []);
 
+    // Maneja el evento 'deviceready' para saber cuando se cargaron
+    // todos los componentes de cordova y el dispositivo está listo.
+    // Una vez que está todo cargado, se inicia el proceso de bootstrap
+    // de la aplicación, donde se levantan los controllers, factories,
+    // templates, etc.
+    // La idea de manejar este evento es evitar problemas a la hora de
+    // cargar plugins de cordova u otras cosas que levantan de manera asincronica,
+    // y que pueden ser requeridas por algún componente de Angular!
+    document.addEventListener("deviceready", function () {
+        angular.bootstrap(document, ["TracsClient"]);
+    }, false);
+
     function run($ionicPlatform, editableOptions) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -55,16 +67,19 @@
             }
         });
 
-        editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-
+        // Estilo para xeditable
+        editableOptions.theme = "bs3"; // bootstrap3 theme. Can be also 'bs2', 'default'
     }
 
     function config($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
+
+        // Configuración del prefijo para el localStorage
         localStorageServiceProvider.setPrefix("tracs");
 
+        // Configuración de estados y rutas
         $stateProvider
 
-        .state("app", {
+            .state("app", {
             url: "/app",
             abstract: true,
             templateUrl: "templates/layout/menu.html",
