@@ -1,24 +1,22 @@
-<ion-view cache-view="false" view-title="Perfil de {{vm.patient.name}}">
+<ion-view cache-view="false" view-title="Perfil de {{vm.currentPatient.name}}">
     <ion-content>
 
 
         <div class="contentInfo">
 
-            <h2><a editable-text="vm.patient.name">{{ vm.patient.name || "Sin información..." }}</a></h2>
-            <h3><a editable-text="vm.patient.DNI">{{ vm.patient.DNI || "Sin información..." }}</a></h3>
-            <h3><a editable-text="vm.patient.phoneNumber">{{ vm.patient.phoneNumber || "Sin información..." }}</a></h3>
-            <h3><a editable-text="vm.patient.birthDate">{{ vm.patient.birthDate || "Sin información..." |date:"dd/MM/yyyy"}}</a></h3>
-            <p><a editable-text="vm.patient.generalDescription">{{ vm.patient.generalDescription || "Sin información..." }}</a></p>
+            <h2>Nombre:<a editable-text="vm.patient.name">{{ vm.patient.name || "Sin información..." }}</a></h2>
+            <h3>Número Documento:<a editable-text="vm.patient.DNI">{{ vm.patient.DNI || "Sin información..." }}</a></h3>
+            <h3>Número de Teléfono:<a editable-text="vm.patient.phoneNumber">{{ vm.patient.phoneNumber || "Sin información..." }}</a>                 </h3>
+            <h3>Fecha de Nacimiento:<a editable-text="vm.patient.birthDate">{{ vm.patient.birthDate || "Sin información..."                           |date:"dd/MM/yyyy"}}</a></h3>
+            <p>Descripción General<a editable-text="vm.patient.generalDescription">{{ vm.patient.generalDescription || "Sin                         información..." }}</a></p>
 
             <div class="contentImage">
                 <img ng-src="{{vm.patient.picture}}" alt="{{vm.patient.name}}">
             </div>
-
         </div>
 
         <a ui-sref="#">
             <button class="button button-positive">Asignar nuevo perfil</button>
-
         </a>
 
             <button class="button button-energized" ng-click="vm.updatePatient()">Guardar cambios</button>

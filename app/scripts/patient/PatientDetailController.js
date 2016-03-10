@@ -15,14 +15,14 @@
 
         var vm = this;
         var patientId = $stateParams.id;
-        console.log(patientId);
+        vm.patient = {};
 
         activate();
 
         function activate() {
             PatientFactory.getPatientDetail(patientId).then(function(result) {
                 vm.patient = result;
-                console.log(vm.patient);
+
 
             }, function() {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la información del paciente, intentalo de nuevo");
@@ -30,9 +30,8 @@
 
         }
 
-        vm.updatePatient = function(){
+       vm.updatePatient = function(){
 
-            console.log(vm.patient);
             var updatedPatient = vm.patient;
 
             PatientFactory.updatePatientDetail(updatedPatient).then(function(result){
