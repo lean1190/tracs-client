@@ -24,5 +24,7 @@
         var vm = this;
 
         vm.patient = localStorageService.get("patientUser");
+
+        console.log("### ImAPatientHome", vm.patient);
     }
 })();

@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("PatientHomeController", PatientHomeController);
 
-    PatientHomeController.$inject = ["$log", "$cordovaToast", "PatientFactory", "localStorageService"];
+    PatientHomeController.$inject = ["$log", "$cordovaToast", "PatientFactory", "localStorageService", "sim"];
 
-    function PatientHomeController($log, $cordovaToast, PatientFactory, localStorageService) {
+    function PatientHomeController($log, $cordovaToast, PatientFactory, localStorageService, sim) {
 
         var vm = this;
         vm.patients = [];

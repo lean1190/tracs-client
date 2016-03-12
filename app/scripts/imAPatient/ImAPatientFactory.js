@@ -45,7 +45,8 @@
                         name: resultPatient.name,
                         birthDate: resultPatient.birthDate,
                         DNI: resultPatient.DNI,
-                        picture: resultPatient.picture
+                        picture: resultPatient.picture,
+                        closestPeople: resultPatient.closestPeople
                     };
 
                     localStorageService.set("patientUser", patientUser);

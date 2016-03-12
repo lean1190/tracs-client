@@ -79,7 +79,7 @@
         // Configuración de estados y rutas
         $stateProvider
 
-            .state("app", {
+        .state("app", {
             url: "/app",
             abstract: true,
             templateUrl: "templates/layout/menu.html",

@@ -20,26 +20,37 @@
         activate();
 
         function activate() {
-            PatientFactory.getPatientDetail(patientId).then(function(result) {
+            PatientFactory.getPatientDetail(patientId).then(function (result) {
                 vm.patient = result;
+<<<<<<< HEAD
+                console.log("### GetPatientDetail", vm.patient);
+=======
 
+>>>>>>> origin/development
 
-            }, function() {
+            }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la información del paciente, intentalo de nuevo");
             });
 
         }
 
+<<<<<<< HEAD
+        vm.updatePatient = function () {
+=======
        vm.updatePatient = function(){
+>>>>>>> origin/development
 
             var updatedPatient = vm.patient;
 
-            PatientFactory.updatePatientDetail(updatedPatient).then(function(result){
-                $state.go("app.patientHome");
-             }, function(err) {
-                    console.log("exploto");//$cordovaToast.showLongBottom("Ocurrió un error al editar al paciente, intentalo de nuevo");
-            })
+            PatientFactory.updatePatientDetail(updatedPatient).then(function (result) {
+                $cordovaToast.showLongBottom("Paciente actualizado correctamente!").then(function() {
+                    $state.go("app.patientHome");
+                });
+            }, function (err) {
+                console.log("exploto", err);
+                $cordovaToast.showLongBottom("Ocurrió un error al editar al paciente, intentalo de nuevo");
+            });
 
-        }
+        };
     }
 })();
