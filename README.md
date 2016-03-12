@@ -6,6 +6,7 @@ bower install
 ionic state restore
 
 ## Plugins de cordova (se deberian instalar con el ionic state restore)
+cordova plugin add cordova-plugin-whitelist
 cordova plugin add cordova-plugin-inappbrowser
 cordova plugin add cordova-plugin-x-toast
 cordova plugin add cordova-plugin-sim
