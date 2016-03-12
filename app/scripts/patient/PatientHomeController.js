@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("PatientHomeController", PatientHomeController);
 
-    PatientHomeController.$inject = ["$log", "$cordovaToast", "PatientFactory", "localStorageService"];
+    PatientHomeController.$inject = ["$log", "$cordovaToast", "PatientFactory", "localStorageService", "sim"];
 
-    function PatientHomeController($log, $cordovaToast, PatientFactory, localStorageService) {
+    function PatientHomeController($log, $cordovaToast, PatientFactory, localStorageService, sim) {
 
         var vm = this;
         vm.patients = [];
@@ -47,7 +47,7 @@
             // Mock data, cambiar a true para mockear
             // Pongo esto por si no anda el login posta o para el browser,
             // pero estaria bueno ya probar con los usuarios de verdad
-            var bypass = true;
+            var bypass = false;
             if(bypass) {mockUserData();}
 
             var userId = localStorageService.get("user")._id;
