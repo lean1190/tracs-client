@@ -22,7 +22,6 @@
         function activate() {
             PatientFactory.getPatientDetail(patientId).then(function (result) {
                 vm.patient = result;
-                console.log("### GetPatientDetail", vm.patient);
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la información del paciente, intentalo de nuevo");
             });

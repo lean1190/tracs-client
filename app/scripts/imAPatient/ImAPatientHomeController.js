@@ -6,8 +6,9 @@
  * @ngdoc function
  * @name TracsClient.controllers:ImAPatientHomeController
  * @description
- * Controlador que maneja el linkeo de un DNI con un paciente
- * Finalmente decide el acceso a la vista de paciente
+ * Controlador que maneja la vista de paciente, esto incluye
+ * el número telefónico de las personas cercanas y la posibilidad
+ * de enviar un alerta georreferenciada
  */
 
 (function () {
