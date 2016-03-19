@@ -17,9 +17,9 @@
         .module("TracsClient.factories")
         .factory("PatientFactory", PatientFactory);
 
-    PatientFactory.$inject = ["$http", "$log", "EnvironmentConfig"];
+    PatientFactory.$inject = ["$http", "$log","localStorageService", "EnvironmentConfig"];
 
-    function PatientFactory($http, $log, EnvironmentConfig) {
+    function PatientFactory($http, $log,localStorageService, EnvironmentConfig) {
 
         var patientEndpoint = EnvironmentConfig.api + "/patient";
 
@@ -28,7 +28,8 @@
             createPatient: createPatient,
             getPatients: getPatients,
             getPatientDetail: getPatientDetail,
-            updatePatientDetail: updatePatientDetail
+            updatePatientDetail: updatePatientDetail,
+            assignProfile: assignProfile
 
         };
 
@@ -68,6 +69,7 @@
        function getPatientDetail(patientId) {
 
             return $http.get(patientEndpoint +"/detail/" + patientId).then(function (result) {
+                localStorageService.set("lastVisitedPatient", result.data);
                 return result.data;
             }, function(error) {
                 $log.error("Ocurrió un error al recuperar los pacientes del usuario con id " + patientId, error);
@@ -83,8 +85,13 @@
             });
         }
 
+        function assignProfile(newProfile){
 
-
+            return $http.put(patientEndpoint + "/addProfileToPatient/"+ newProfile.patient, newProfile).then(function (result) {
+                return result.data;
+            }, function(error) {
+                $log.error("Ocurrió un error al agregar un participante al tratamiento del paciente con id " + newProfile.patient, error);
+            });
+        };
     }
-
 })();
