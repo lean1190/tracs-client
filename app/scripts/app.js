@@ -177,6 +177,16 @@
                     controller: "PatientDetailController as vm"
                 }
             }
+        })
+
+        .state("app.patientAssignProfile", {
+            url: "/patient/assignProfile",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/assignProfile.html",
+                    controller: "PatientAssignProfileController as vm"
+                }
+            }
         });
 
         // Si ninguno de lo states anteriores matchea, usa esta ruta como contingencia
