@@ -9,49 +9,53 @@
         .module("TracsClient.factories")
         .factory("UserFactory", UserFactory);
 
-    UserFactory.$inject = ["$resource", "$http", "API_ENDPOINT"];
+    UserFactory.$inject = ["$http", "$log", "EnvironmentConfig"];
 
-    function UserFactory($resource, $http, API_ENDPOINT) {
+    function UserFactory($http, $log, EnvironmentConfig) {
         // --> PRODUCTION
         //var urlBase = "https://warm-ocean-7615.herokuapp.com",
-        console.log(API_ENDPOINT);
-        var urlBase = "https://warm-ocean-7615.herokuapp.com",
-            usersEndpoint = urlBase + "/users/:id",
-            schedulesEndpoint = urlBase + "/users/:id/schedule";
+
+
+        var userEndpoint = EnvironmentConfig.api + "/user";
 
         var service = {
-            getUsersResource: getUsersResource,
-            findAllUsers: findAllUsers,
-            findUserById: findUserById,
-            findAllUsersSchedule: findAllUsersSchedule
+            //getUsersResource: getUsersResource,
+            getAllUsers: getAllUsers
+            //findUserById: findUserById,
+
         };
 
         return service;
 
-        function getUsersResource() {
-            return $resource(usersEndpoint, {id: "@_id"});
-        }
-
+       /* function getUsersResource() {
+            return $resource(userEndpoint, {id: "@_id"});
+        }*/
+/*
         function getSchedulesResource() {
-            return $resource(schedulesEndpoint, {id: "@_id"});
+            return $resource(userEndpoint, {id: "@_id"});
+        }*/
+
+        /**
+         * Recupera todos los usuarios existentes menos el que se encuentra logueado
+         * @param   {}
+         * @returns {promise} una promesa con todos los usuarios
+         */
+
+        function getAllUsers() {
+
+            return $http.get(userEndpoint).then(function (result) {
+                return result.data;
+            }, function(error) {
+                $log.error("Ocurrió un error al recuperar los usuarios registrados en el sistema", error);
+                return error;
+            });
         }
 
-        function findAllUsers() {
-            return getUsersResource().query().$promise;
-        }
-
-        function findUserById(userId) {
+        /*function findUserById(userId) {
             console.log("entre");
             return getUsersResource().get({id: userId}).$promise;
-        }
+        }*/
 
-        function findAllUsersSchedule() {
-
-
-            /*return $http.get(urlBase + "/users/schedule/all").then(function(result) {
-                return result.data;
-            });*/
-        }
     }
 
 })();
