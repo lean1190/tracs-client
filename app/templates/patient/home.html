@@ -1,7 +1,7 @@
 <ion-view cache-view="false" view-title="Mis Pacientes">
     <ion-content>
         <ion-list>
-            <ion-item ng-repeat="profile in vm.profiles" href="#/app/patient/{{::profile.patient._id}}" class="item-avatar">
+            <ion-item ng-repeat="profile in vm.profiles" ui-sref="app.patientDetail({ id:'{{::profile.patient._id}}' })" class="item-avatar">
                 <img ng-src="{{::profile.patient.picture}}" alt="{{::profile.patient.name}}">
                 <h2>{{::profile.patient.name}}</h2>
                 <p>{{::profile.patient.generalDescription}}</p>
