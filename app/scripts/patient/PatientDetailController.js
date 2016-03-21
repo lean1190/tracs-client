@@ -1,4 +1,4 @@
-/* jshint bitwise: false, camelcase: false, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: double, undef: true, unused: true, strict: true, latedef: nofunc */
+/* jshint bitwise: false, camelcase: false, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: true, undef: true, unused: true, strict: true, latedef: nofunc */
 
 /* globals angular */
 
@@ -13,8 +13,9 @@
 
     function PatientDetailController($stateParams, $state, $cordovaToast, localStorageService, PatientFactory) {
 
-        var vm = this;
-        var patientId = $stateParams.id;
+        var vm = this,
+            patientId = $stateParams.id;
+
         vm.patient = {};
 
         activate();
@@ -25,7 +26,6 @@
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la información del paciente, intentalo de nuevo");
             });
-
         }
 
         vm.updatePatient = function () {

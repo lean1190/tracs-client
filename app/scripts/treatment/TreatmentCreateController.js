@@ -1,4 +1,4 @@
-/* jshint bitwise: false, camelcase: true, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: double, undef: true, unused: true, strict: true, latedef: nofunc */
+/* jshint bitwise: false, camelcase: true, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: true, undef: true, unused: true, strict: true, latedef: nofunc */
 
 /* globals angular, console */
 
@@ -9,9 +9,9 @@
         .module("TracsClient.controllers")
         .controller("TreatmentCreateController", TreatmentCreateController);
 
-    TreatmentCreateController.$inject = ["TreatmentFactory", "$stateParams"];
+    TreatmentCreateController.$inject = ["TreatmentFactory"];
 
-    function TreatmentCreateController(TreatmentFactory, $stateParams) {
+    function TreatmentCreateController(TreatmentFactory) {
 
         var vm = this;
 

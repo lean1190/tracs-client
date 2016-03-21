@@ -1,4 +1,4 @@
-/* jshint bitwise: false, camelcase: false, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: double, undef: true, unused: true, strict: true, latedef: nofunc */
+/* jshint bitwise: false, camelcase: false, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: true, undef: true, unused: true, strict: true, latedef: nofunc */
 
 /* globals angular */
 
@@ -92,6 +92,6 @@
             }, function(error) {
                 $log.error("Ocurrió un error al agregar un participante al tratamiento del paciente con id " + newProfile.patient, error);
             });
-        };
+        }
     }
 })();
