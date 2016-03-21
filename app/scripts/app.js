@@ -1,4 +1,4 @@
-/* jshint bitwise: false, camelcase: true, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: double, undef: true, unused: true, strict: true, latedef: nofunc */
+/* jshint bitwise: false, camelcase: true, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: true, undef: true, unused: true, strict: true, latedef: nofunc */
 
 /* globals angular */
 
@@ -127,6 +127,16 @@
             }
         })
 
+        .state("app.patientDetail", {
+            url: "/patient/:id",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/detail.html",
+                    controller: "PatientDetailController as vm"
+                }
+            }
+        })
+
         .state("app.users", {
             url: "/users",
             views: {
@@ -165,16 +175,6 @@
                 "menuContent": {
                     templateUrl: "templates/imAPatient/home.html",
                     controller: "ImAPatientHomeController as vm"
-                }
-            }
-        })
-
-        .state("app.patientDetail", {
-            url: "/patient/:id",
-            views: {
-                "menuContent": {
-                    templateUrl: "templates/patient/detail.html",
-                    controller: "PatientDetailController as vm"
                 }
             }
         })

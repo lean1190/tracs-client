@@ -4,12 +4,14 @@
 npm install
 bower install
 ionic state restore
+cordova platform update android@5.0.0
 
 ## Plugins de cordova (se deberian instalar con el ionic state restore)
 cordova plugin add cordova-plugin-whitelist
 cordova plugin add cordova-plugin-inappbrowser
 cordova plugin add cordova-plugin-x-toast
 cordova plugin add cordova-plugin-sim
+cordova plugin add https://github.com/Rohfosho/CordovaCallNumberPlugin.git
 
 --- 
 

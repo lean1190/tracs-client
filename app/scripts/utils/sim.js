@@ -3,6 +3,7 @@
 /**
  * @ngdoc function
  * @name TracsClient:sim
+ * @external https://github.com/pbakondy/cordova-plugin-sim
  * @description
  * Expone el plugin cordova-plugin-sim como un factory inyectable
  * Este plugin permite recuperar información del teléfono donde se

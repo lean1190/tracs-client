@@ -51,7 +51,8 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-inappbrowser",
     "cordova-plugin-x-toast",
-    "cordova-plugin-sim"
+    "cordova-plugin-sim",
+    "mx.ferreyra.callnumber"
   ],
   "cordovaPlatforms": [
     "android"
