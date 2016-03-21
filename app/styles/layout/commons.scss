@@ -7,3 +7,11 @@
 .margin-autocenter {
     margin: 0 auto;
 }
+
+input.popup-input {
+    padding: 5px;
+
+    &:focus {
+        border: 1px solid #eee;
+    }
+}

@@ -1,14 +1,11 @@
 <ion-view cache-view="false" view-title="Hola {{vm.patient.name}}!">
     <ion-content>
-        <div class="contact-card" ng-repeat="closePerson in vm.patient.closestPeople | orderBy:['priority','name']">
+        <div class="contact-card" ng-repeat="closePerson in vm.patient.closestPeople | orderBy:['priority','name']" ng-click="vm.callPhoneNumber({{::closePerson.phone}})">
             <div class="contact-img">
                 <img ng-src="{{::closePerson.picture}}" alt="{{::closePerson.name}}">
             </div>
             <div class="contact-info">
-                <a href="tel:542214151515">
-                    <i class="icon ion-android-call"></i>
-                    Llamar a {{::closePerson.name}}
-                </a>
+                <i class="icon ion-android-call"></i> Llamar a {{::closePerson.name}}
             </div>
         </div>
     </ion-content>

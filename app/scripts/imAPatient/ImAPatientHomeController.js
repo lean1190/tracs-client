@@ -1,4 +1,4 @@
-/* jshint bitwise: false, camelcase: false, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: double, undef: true, unused: true, strict: true, latedef: nofunc */
+/* jshint bitwise: false, camelcase: false, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: true, undef: true, unused: true, strict: true, latedef: nofunc */
 
 /* globals angular */
 
@@ -18,14 +18,19 @@
         .module("TracsClient.controllers")
         .controller("ImAPatientHomeController", ImAPatientHomeController);
 
-    ImAPatientHomeController.$inject = ["$state", "$cordovaToast", "localStorageService", "ImAPatientFactory"];
+    ImAPatientHomeController.$inject = ["$log", "$state", "$cordovaToast", "localStorageService", "dialer"];
 
-    function ImAPatientHomeController($state, $cordovaToast, localStorageService, ImAPatientFactory) {
+    function ImAPatientHomeController($log, $state, $cordovaToast, localStorageService, dialer) {
 
         var vm = this;
 
         vm.patient = localStorageService.get("patientUser");
 
-        console.log("### ImAPatientHome", vm.patient);
+        vm.callPhoneNumber = function(phoneNumber) {
+            dialer.callNumber(function() {}, function(error) {
+                $log.error("No se pudo realizar la llamada al número " + phoneNumber, error);
+                $cordovaToast.showLongBottom("No se pudo realizar la llamada! Hay señal?");
+            }, phoneNumber, false);
+        };
     }
 })();
