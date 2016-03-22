@@ -1,4 +1,4 @@
-<ion-view view-title="Asignar nuevo profesional a" {{vm.patient.name}}>
+<ion-view view-title="Asignar nuevo profesional a {{vm.patient.name}}">
     <ion-content>
         <h4 class="title">Asigne un nuevo profesional al tratamiento de {{vm.patient.name}}</h4>
 
@@ -9,18 +9,20 @@
                     Participante:
                 </div>
 
-                <select ng-model="vm.profile.user" ng-options="user._id as user.name for user in vm.users"/>
+                <select ng-model="vm.profile.user" ng-options="user._id as user.name for user in vm.users">
+                </select>
 
-            </label>
-
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Descripción del perfil</span>
-                <textarea type="text" ng-model="vm.profile.description" placeholder="Descripcion del perfil"></textarea>
             </label>
         </div>
+
+        <label class="item item-input item-floating-label">
+                <span class="input-label">Descripción del perfil</span>
+                <textarea type="text" ng-model="vm.profile.description" placeholder="Descripcion del perfil"></textarea>
+        </label>
 
         <button class="button button-block button-positive" ng-click="vm.assignProfile()">Listo</button>
 
         <a ui-sref="app.patientHome" class="button button-block button-assertive">Cancelar</a>
+
     </ion-content>
 </ion-view>
