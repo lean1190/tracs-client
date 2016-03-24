@@ -179,6 +179,17 @@
             }
         })
 
+        .state("app.patientCurrentProfiles", {
+            url: "/patient/currentProfiles",
+            cache: false,
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/currentProfiles.html",
+                    controller: "PatientCurrentProfilesController as vm"
+                }
+            }
+        })
+
         .state("app.patientAssignProfile", {
             url: "/patient/assignProfile",
             views: {

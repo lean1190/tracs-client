@@ -38,6 +38,7 @@
             console.log(vm.profile);
             PatientFactory.assignProfile(vm.profile).then(function(result){
                 console.log(result);
+                $state.go("app.patientCurrentProfiles");
             },function(){
                 $cordovaToast.showLongBottom("Ocurrió un error al asignar un participante al paciente, intentalo de nuevo");
             });
