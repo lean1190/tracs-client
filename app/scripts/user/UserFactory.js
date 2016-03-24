@@ -15,24 +15,11 @@
         var userEndpoint = EnvironmentConfig.api + "/user";
 
         var service = {
-            getAllUsers: getAllUsers
         };
 
         return service;
 
-        /**
-         * Recupera todos los usuarios existentes menos el que se encuentra logueado
-         * @returns {promise} una promesa con todos los usuarios
-         */
-        function getAllUsers() {
 
-            return $http.get(userEndpoint).then(function (result) {
-                return result.data;
-            }, function (error) {
-                $log.error("Ocurrió un error al recuperar los usuarios registrados en el sistema", error);
-                return error;
-            });
-        }
 
     }
 

@@ -29,6 +29,7 @@
             getPatients: getPatients,
             getPatientDetail: getPatientDetail,
             getPatientProfiles: getPatientProfiles,
+            getSelectableUsers: getSelectableUsers,
             createPatient: createPatient,
             updatePatientDetail: updatePatientDetail,
             assignProfile: assignProfile
@@ -80,6 +81,17 @@
                 return result.data;
             }, function(error) {
                 $log.error("Ocurrió un error al obtener los participantes del paciente", error);
+            });
+
+        }
+
+
+         function getSelectableUsers(patientId){
+
+            return $http.get(patientEndpoint + "/selectableUsers/" + patientId).then(function (result) {
+                return result.data;
+            }, function(error) {
+                $log.error("Ocurrió un error al obtener los participantes disponibles a seleccionar", error);
             });
 
         }
