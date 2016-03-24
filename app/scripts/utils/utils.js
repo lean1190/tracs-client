@@ -24,7 +24,7 @@ angular.module("TracsClient.utils").factory("utils", function () {
      * @returns {boolean}  true if the object is empty
      */
     helper.isEmpty = function (variable) {
-        return (!variable || variable === null || typeof variable === "undefined" || variable === "" || variable === {} || this.isEmptyObject(variable));
+      return (!variable || variable === null || typeof variable === "undefined" || variable === "" || variable === {} || this.isEmptyObject(variable));
     };
 
     return helper;

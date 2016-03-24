@@ -9,9 +9,9 @@
         .module("TracsClient.controllers")
         .controller("PatientAssignProfileController", PatientAssignProfileController);
 
-    PatientAssignProfileController.$inject = ["$stateParams", "$state", "$cordovaToast", "localStorageService", "PatientFactory"];
+    PatientAssignProfileController.$inject = ["$stateParams", "$state", "$cordovaToast", "localStorageService", "PatientFactory","utils"];
 
-    function PatientAssignProfileController($stateParams, $state, $cordovaToast, localStorageService, PatientFactory) {
+    function PatientAssignProfileController($stateParams, $state, $cordovaToast, localStorageService, PatientFactory, utils) {
 
         var vm = this;
 
@@ -20,7 +20,6 @@
 
         vm.patient = localStorageService.get("lastVisitedPatient");
         vm.profile = {};
-        vm.profile.user="Selecciones un Participante";
         vm.profile.patient = vm.patient._id;
 
         activate();
@@ -35,13 +34,16 @@
         }
 
         vm.assignProfile = function(){
-            console.log(vm.profile);
-            PatientFactory.assignProfile(vm.profile).then(function(result){
-                console.log(result);
-                $state.go("app.patientCurrentProfiles");
-            },function(){
-                $cordovaToast.showLongBottom("Ocurrió un error al asignar un participante al paciente, intentalo de nuevo");
-            });
-        };
+
+            if (!(utils.isEmpty(vm.profile.user))){
+                PatientFactory.assignProfile(vm.profile).then(function(result){
+                    $state.go("app.patientCurrentProfiles");
+                },function(){
+                    $cordovaToast.showLongBottom("Ocurrió un error al asignar un participante al paciente, intentalo de nuevo");
+                });
+            }else{
+                $cordovaToast.showLongBottom("Por favor, elija un participante valido");
+            };
+        }
     }
 })();
