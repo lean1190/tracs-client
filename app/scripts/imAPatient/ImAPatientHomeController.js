@@ -18,9 +18,9 @@
         .module("TracsClient.controllers")
         .controller("ImAPatientHomeController", ImAPatientHomeController);
 
-    ImAPatientHomeController.$inject = ["$log", "$state", "$cordovaToast", "localStorageService", "dialer"];
+    ImAPatientHomeController.$inject = ["$log", "$state", "$cordovaToast", "localStorageService", "dialer", "$cordovaGeolocation"];
 
-    function ImAPatientHomeController($log, $state, $cordovaToast, localStorageService, dialer) {
+    function ImAPatientHomeController($log, $state, $cordovaToast, localStorageService, dialer, $cordovaGeolocation) {
 
         var vm = this;
 
@@ -32,5 +32,39 @@
                 $cordovaToast.showLongBottom("No se pudo realizar la llamada! Hay señal?");
             }, phoneNumber, false);
         };
+
+
+        //Importante: Prender el GPS del emulador
+        vm.myPosition = function(){
+
+            console.log("EN myPosition");
+            var options = { timeout: 80000, enableHighAccuracy: true, maximumAge: 10000 };
+            navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+        };
+
+        //onSuccess del navigator.geolocation.getCurrentPosition
+        var onSuccess = function(position) {
+
+            vm.patientPosition ={};
+
+            //Armo el paquete con la info de la posicion del paciente. Seguramente necesitemos solo latitud, longitud y timestamp, pero despues termino de verlo.
+            vm.patientPosition.latitude =  position.coords.latitude;
+            vm.patientPosition.longitude = position.coords.longitude;
+            vm.patientPosition.altitude = position.coords.altitude;
+            vm.patientPosition.accuracy = position.coords.accuracy;
+            vm.patientPosition.altitudeAccuracy = position.coords.altitudeAccuracy;
+            vm.patientPosition.heading = position.coords.heading;
+            vm.patientPosition.speed = position.coords.speed;
+            vm.patientPosition.timestamp = position.timestamp;
+
+            console.log(vm.patientPosition);
+        }
+
+        // onError del navigator.geolocation.getCurrentPosition
+        var onError = function (error) {
+          alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+        }
+
     }
 })();

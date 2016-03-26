@@ -1,5 +1,10 @@
 <ion-view cache-view="false" view-title="Hola {{vm.patient.name}}!">
     <ion-content>
+
+        <button class="button button-assertive" ng-click="vm.myPosition()">
+            AYUDA
+        </button>
+
         <div class="contact-card" ng-repeat="closePerson in vm.patient.closestPeople | orderBy:['priority','name']" ng-click="vm.callPhoneNumber({{::closePerson.phone}})">
             <div class="contact-img">
                 <img ng-src="{{::closePerson.picture}}" alt="{{::closePerson.name}}">

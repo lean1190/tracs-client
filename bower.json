@@ -10,7 +10,8 @@
     "angular-resource": "~1.4.3",
     "lodash": "~3.10.0",
     "angular-local-storage": "~0.2.3",
-    "angular-xeditable": "^0.1.10"
+    "angular-xeditable": "^0.1.10",
+    "angular-google-maps": "^2.3.2"
   },
   "resolutions": {
     "angular": "1.4.3"

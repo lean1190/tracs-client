@@ -1,4 +1,4 @@
-<ion-view cache-view="false" view-title="Participantes del tratamiento de"{{vm.patient.name}}>
+<ion-view cache-view="false" view-title="Participantes del tratamiento de {{vm.patient.name}}">
     <ion-content>
         <ion-list>
             <ion-item ng-repeat="profile in vm.profiles" class="item-avatar">
@@ -7,8 +7,6 @@
                 <p>{{::profile.description}}</p>
             </ion-item>
         </ion-list>
-
-
         <a ui-sref="app.patientAssignProfile">
             <button class="button button-balanced">Asignar nuevo participante</button>
         </a>
