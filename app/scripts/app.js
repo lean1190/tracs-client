@@ -19,12 +19,11 @@
                 "ngResource",
                 "ngCordova",
                 "LocalStorageModule",
+                "xeditable",
                 "TracsClient.controllers",
                 "TracsClient.factories",
                 "TracsClient.directives",
-                "TracsClient.environment",
-                "TracsClient.utils",
-                "xeditable"
+                "TracsClient.environment"
         ])
         .run(run)
         .config(config);
@@ -37,8 +36,6 @@
     angular.module("TracsClient.directives", []);
     // Declaración del módulos de constantes de environment
     angular.module("TracsClient.environment", []);
-    // Declaración del módulos de utils
-    angular.module("TracsClient.utils", []);
 
     // Maneja el evento 'deviceready' para saber cuando se cargaron
     // todos los componentes de cordova y el dispositivo está listo.

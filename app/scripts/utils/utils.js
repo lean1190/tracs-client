@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("TracsClient.utils").factory("utils", function () {
+angular.module("TracsClient").factory("utils", function () {
     var helper = helper || {};
 
     /**
