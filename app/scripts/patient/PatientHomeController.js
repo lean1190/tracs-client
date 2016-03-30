@@ -32,7 +32,13 @@
         function updateUserPhoneNumber(newPhoneNumber) {
             loggedInUser.phoneNumber = newPhoneNumber;
             localStorageService.set("user", loggedInUser);
-            // TODO disparar la actualizacion en el server
+
+            var updatedUser = {
+                _id: loggedInUser._id,
+                phoneNumber: newPhoneNumber
+            };
+
+            UserFactory.updateUserProfile(updatedUser);
         }
 
         /**
