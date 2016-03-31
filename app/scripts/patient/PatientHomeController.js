@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("PatientHomeController", PatientHomeController);
 
-    PatientHomeController.$inject = ["$scope", "$log", "$q", "$cordovaToast", "$ionicPopup", "localStorageService", "utils", "sim", "PatientFactory", "UserFactory"];
+    PatientHomeController.$inject = ["$scope", "$log", "$q", "$cordovaToast", "$ionicPopup", "$ionicHistory", "localStorageService", "utils", "sim", "PatientFactory", "UserFactory"];
 
-    function PatientHomeController($scope, $log, $q, $cordovaToast, $ionicPopup, localStorageService, utils, sim, PatientFactory, UserFactory) {
+    function PatientHomeController($scope, $log, $q, $cordovaToast, $ionicPopup, $ionicHistory, localStorageService, utils, sim, PatientFactory, UserFactory) {
 
         var vm = this,
             loggedInUser = localStorageService.get("user");
@@ -95,10 +95,16 @@
         }
 
         function activate() {
+
+            // Para evitar navegación rara de la aplicación,
+            // borra el historial cada vez que entra a esta pantalla
+            $ionicHistory.clearHistory();
+
             // Verifica que el usuario logueado tenga el número de teléfono cargado
             checkUserPhoneNumber();
 
             var userId = loggedInUser._id;
+            // Recupera todos los pacientes asociados al usuario
             PatientFactory.getPatients(userId).then(function (result) {
                 vm.profiles = result;
                 vm.message = "";
