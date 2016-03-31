@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("PatientHomeController", PatientHomeController);
 
-    PatientHomeController.$inject = ["$scope", "$log", "$q", "$cordovaToast", "$ionicPopup", "$ionicHistory", "localStorageService", "utils", "sim", "PatientFactory", "UserFactory"];
+    PatientHomeController.$inject = ["$scope", "$log", "$state", "$q", "$cordovaToast", "$ionicPopup", "$ionicHistory", "localStorageService", "utils", "sim", "PatientFactory", "UserFactory"];
 
-    function PatientHomeController($scope, $log, $q, $cordovaToast, $ionicPopup, $ionicHistory, localStorageService, utils, sim, PatientFactory, UserFactory) {
+    function PatientHomeController($scope, $log, $state, $q, $cordovaToast, $ionicPopup, $ionicHistory, localStorageService, utils, sim, PatientFactory, UserFactory) {
 
         var vm = this,
             loggedInUser = localStorageService.get("user");
@@ -93,6 +93,25 @@
                 });
             }
         }
+
+        /**
+         * Setea la próxima vista para que sea la raíz del stack de navegación,
+         * de manera que no se muestre el back button y no se pueda volver al login
+         */
+        function setNextViewAsHistoryRoot() {
+            $ionicHistory.nextViewOptions({
+                historyRoot: true
+            });
+        }
+
+        /**
+         * Redirige al muro de un paciente pasado por parámetro
+         * @param {number} patientId el id del paciente
+         */
+        vm.changeStateToPatientWall = function(patientId) {
+            setNextViewAsHistoryRoot();
+            $state.go("app.patientWall", { id: patientId });
+        };
 
         function activate() {
 
