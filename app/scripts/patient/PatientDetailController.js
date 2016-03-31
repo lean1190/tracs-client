@@ -13,21 +13,14 @@
 
     function PatientDetailController($stateParams, $state, $cordovaToast, $ionicHistory, localStorageService, PatientFactory) {
 
-        var vm = this,
-            patientId = $stateParams.id;
+        var vm = this;
 
         vm.patient = {};
 
         activate();
 
         function activate() {
-
-            // Recupera todos los datos del paciente
-            PatientFactory.getPatientDetail(patientId).then(function (resultPatient) {
-                vm.patient = resultPatient;
-            }, function () {
-                $cordovaToast.showLongBottom("Ocurrió un error al recuperar la información del paciente, intentalo de nuevo");
-            });
+            vm.patient = localStorageService.get("lastVisitedPatient");
         }
 
         vm.updatePatient = function () {
