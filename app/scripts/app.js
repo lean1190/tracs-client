@@ -124,6 +124,16 @@
             }
         })
 
+        .state("app.patientWall", {
+            url: "/patient/wall/:id",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/wall.html",
+                    controller: "PatientWallController as vm"
+                }
+            }
+        })
+
         .state("app.patientDetail", {
             url: "/patient/:id",
             views: {
