@@ -55,7 +55,7 @@
 
 
         /**
-         * Recupera la toda la información del paciente indicado
+         * Recupera la toda la información del paciente indicado y lo guarda en el localStorage
          * @param   {number} patientId ID del paciente
          * @returns {promise} una promesa con los detalles del paciente
          */

@@ -111,6 +111,7 @@
 
         /**
          * Loguea un usuario en la aplicación, utilizando la API OAuth de Google y el servidor
+         * Ademas guarda el usuario en el localStorage
          * @param   {object}  googleOauthOptions el objeto con los parámetros de acceso a OAuth
          * @returns {promise} una promesa con todos los datos del usuario logueado
          */
