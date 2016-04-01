@@ -1,0 +1,43 @@
+.patient-wall-card {
+
+    .item {
+
+        .image-wrapper {
+            width: 65px;
+            height: 65px;
+
+            img {
+                @include img-contained-with-radius(100%);
+            }
+        }
+
+        .content-wrapper {
+            margin-left: 10px;
+
+            .name {
+                font-size: 19px;
+                margin-bottom: 5px;
+            }
+
+            .description {
+                font-size: 13px;
+                color: $lower-text-color;
+            }
+        }
+    }
+}
+
+.patient-profiles {
+    margin: $default-margin;
+
+    .image-wrapper {
+        width: 45px;
+        height: 45px;
+        display: inline-block;
+        margin-right: 5px;
+
+        img {
+            @include img-contained-with-radius(100%);
+        }
+    }
+}

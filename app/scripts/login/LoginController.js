@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("LoginController", LoginController);
 
-    LoginController.$inject = ["$rootScope", "$scope", "$http", "$state", "$log", "$ionicSideMenuDelegate", "$ionicHistory", "localStorageService", "LoginFactory", "EnvironmentConfig"];
+    LoginController.$inject = ["$rootScope", "$scope", "$http", "$state", "$log", "$cordovaToast", "$ionicSideMenuDelegate", "$ionicHistory", "localStorageService", "LoginFactory", "EnvironmentConfig"];
 
-    function LoginController($rootScope, $scope, $http, $state, $log, $ionicSideMenuDelegate, $ionicHistory, localStorageService, LoginFactory, EnvironmentConfig) {
+    function LoginController($rootScope, $scope, $http, $state, $log, $cordovaToast, $ionicSideMenuDelegate, $ionicHistory, localStorageService, LoginFactory, EnvironmentConfig) {
 
         var vm = this;
 
@@ -130,6 +130,7 @@
                 forwardToLoggedInHome();
             }, function (error) {
                 $log.error(error.message, error.raw);
+                $cordovaToast.showLongBottom("No pudimos loguearte! Por favor intentalo de nuevo");
             });
         };
     }

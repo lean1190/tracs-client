@@ -9,34 +9,28 @@
         .module("TracsClient.controllers")
         .controller("PatientDetailController", PatientDetailController);
 
-    PatientDetailController.$inject = ["$stateParams", "$state", "$cordovaToast", "localStorageService", "PatientFactory"];
+    PatientDetailController.$inject = ["$stateParams", "$state", "$cordovaToast", "$ionicHistory", "localStorageService", "PatientFactory"];
 
-    function PatientDetailController($stateParams, $state, $cordovaToast, localStorageService, PatientFactory) {
+    function PatientDetailController($stateParams, $state, $cordovaToast, $ionicHistory, localStorageService, PatientFactory) {
 
-        var vm = this,
-            patientId = $stateParams.id;
+        var vm = this;
 
         vm.patient = {};
 
         activate();
 
         function activate() {
-            PatientFactory.getPatientDetail(patientId).then(function (result) {
-                vm.patient = result;
-            }, function () {
-                $cordovaToast.showLongBottom("Ocurrió un error al recuperar la información del paciente, intentalo de nuevo");
-            });
+            vm.patient = localStorageService.get("lastVisitedPatient");
         }
 
         vm.updatePatient = function () {
             var updatedPatient = vm.patient;
 
-            PatientFactory.updatePatientDetail(updatedPatient).then(function (result) {
+            PatientFactory.updatePatientDetail(updatedPatient).then(function () {
                 $cordovaToast.showLongBottom("Paciente actualizado correctamente!").then(function () {
                     $state.go("app.patientHome");
                 });
-            }, function (err) {
-                console.log("exploto", err);
+            }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al editar al paciente, intentalo de nuevo");
             });
 

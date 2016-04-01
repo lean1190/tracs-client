@@ -1,0 +1,25 @@
+<!-- FIXME Por alguna razon no se muestra el titulo :S -->
+<ion-view cache-view="false" view-title="{{vm.patient.name}}">
+    <ion-content>
+
+        <div class="card patient-wall-card" ui-sref="app.patientDetail({ id:'{{::vm.patient._id}}' })">
+            <div class="item">
+                <div class="image-wrapper pull-left">
+                    <img ng-src="{{::vm.patient.picture}}" alt="{{::vm.patient.name }}">
+                </div>
+                <div class="content-wrapper pull-left">
+                    <div class="name">{{::vm.patient.name}}</div>
+                    <div class="description">{{::vm.patient.generalDescription}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="patient-profiles">
+            <h4>Participantes</h4>
+            <div ng-repeat="profile in vm.patient.profiles" class="image-wrapper">
+                <img ng-src="{{::profile.user.picture}}" alt="{{::profile.user.name}}">
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

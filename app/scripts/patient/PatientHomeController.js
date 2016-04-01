@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("PatientHomeController", PatientHomeController);
 
-    PatientHomeController.$inject = ["$scope", "$log", "$q", "$cordovaToast", "$ionicPopup", "localStorageService", "utils", "sim", "PatientFactory", "UserFactory"];
+    PatientHomeController.$inject = ["$scope", "$log", "$state", "$q", "$cordovaToast", "$ionicPopup", "$ionicHistory", "localStorageService", "utils", "sim", "PatientFactory", "UserFactory"];
 
-    function PatientHomeController($scope, $log, $q, $cordovaToast, $ionicPopup, localStorageService, utils, sim, PatientFactory, UserFactory) {
+    function PatientHomeController($scope, $log, $state, $q, $cordovaToast, $ionicPopup, $ionicHistory, localStorageService, utils, sim, PatientFactory, UserFactory) {
 
         var vm = this,
             loggedInUser = localStorageService.get("user");
@@ -32,7 +32,13 @@
         function updateUserPhoneNumber(newPhoneNumber) {
             loggedInUser.phoneNumber = newPhoneNumber;
             localStorageService.set("user", loggedInUser);
-            // TODO disparar la actualizacion en el server
+
+            var updatedUser = {
+                _id: loggedInUser._id,
+                phoneNumber: newPhoneNumber
+            };
+
+            UserFactory.updateUserProfile(updatedUser);
         }
 
         /**
@@ -88,11 +94,36 @@
             }
         }
 
+        /**
+         * Setea la próxima vista para que sea la raíz del stack de navegación,
+         * de manera que no se muestre el back button y no se pueda volver al login
+         */
+        function setNextViewAsHistoryRoot() {
+            $ionicHistory.nextViewOptions({
+                historyRoot: true
+            });
+        }
+
+        /**
+         * Redirige al muro de un paciente pasado por parámetro
+         * @param {number} patientId el id del paciente
+         */
+        vm.changeStateToPatientWall = function(patientId) {
+            setNextViewAsHistoryRoot();
+            $state.go("app.patientWall", { id: patientId });
+        };
+
         function activate() {
+
+            // Para evitar navegación rara de la aplicación,
+            // borra el historial cada vez que entra a esta pantalla
+            $ionicHistory.clearHistory();
+
             // Verifica que el usuario logueado tenga el número de teléfono cargado
             checkUserPhoneNumber();
 
             var userId = loggedInUser._id;
+            // Recupera todos los pacientes asociados al usuario
             PatientFactory.getPatients(userId).then(function (result) {
                 vm.profiles = result;
                 vm.message = "";

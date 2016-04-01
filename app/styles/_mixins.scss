@@ -1,0 +1,10 @@
+@mixin img-radius-and-width($radius, $width) {
+    border-radius: $radius;
+    width: $width;
+}
+
+@mixin img-contained-with-radius($radius) {
+    border-radius: $radius;
+    height: 100%;
+    width: 100%;
+}

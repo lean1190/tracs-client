@@ -17,14 +17,13 @@
         .module("TracsClient.factories")
         .factory("PatientFactory", PatientFactory);
 
-    PatientFactory.$inject = ["$http", "$log","localStorageService", "EnvironmentConfig"];
+    PatientFactory.$inject = ["$http", "$log", "localStorageService", "EnvironmentConfig"];
 
-    function PatientFactory($http, $log,localStorageService, EnvironmentConfig) {
+    function PatientFactory($http, $log, localStorageService, EnvironmentConfig) {
 
         var patientEndpoint = EnvironmentConfig.api + "/patient";
 
         var service = {
-
 
             getPatients: getPatients,
             getPatientDetail: getPatientDetail,
@@ -49,7 +48,7 @@
 
             return $http.get(patientEndpoint + "/user/" + userId).then(function (result) {
                 return result.data;
-            }, function(error) {
+            }, function (error) {
                 $log.error("Ocurrió un error al recuperar los pacientes del usuario con id " + userId, error);
                 return error;
             });
@@ -57,47 +56,52 @@
 
 
         /**
-         * Recupera la toda la información del paciente indicado
+         * Recupera la toda la información del paciente indicado y lo guarda en el localStorage
          * @param   {number} patientId ID del paciente
          * @returns {promise} una promesa con los detalles del paciente
          */
         function getPatientDetail(patientId) {
 
-            return $http.get(patientEndpoint +"/detail/" + patientId).then(function (result) {
+            return $http.get(patientEndpoint + "/detail/" + patientId).then(function (result) {
                 localStorageService.set("lastVisitedPatient", result.data);
                 return result.data;
-            }, function(error) {
+            }, function (error) {
                 $log.error("Ocurrió un error al recuperar los pacientes del usuario con id " + patientId, error);
             });
         }
 
         /**
          * Recupera los participantes asignados a un paciente
-         * @param {number} patientId el ID de un paciente
+         * @param   {number}  patientId el ID de un paciente
          * @returns {promise} una promesa con todos los participantes asociados al paciente
          */
-        function getPatientProfiles(patientId){
+        function getPatientProfiles(patientId) {
 
             return $http.get(patientEndpoint + "/profiles/" + patientId).then(function (result) {
                 return result.data;
-            }, function(error) {
+            }, function (error) {
                 $log.error("Ocurrió un error al obtener los participantes del paciente", error);
             });
 
         }
 
-
-         function getSelectableUsers(patientId){
+        /**
+         * Recuperar un arreglo con los usuarios que pueden ser asignados
+         * como participantes del tratamiento
+         * @param   {number}  patientId el id del paciente
+         * @returns {promise} una promesa con los usuarios recuperados
+         */
+        function getSelectableUsers(patientId) {
 
             return $http.get(patientEndpoint + "/selectableUsers/" + patientId).then(function (result) {
                 return result.data;
-            }, function(error) {
+            }, function (error) {
                 $log.error("Ocurrió un error al obtener los participantes disponibles a seleccionar", error);
             });
 
         }
 
-       /**
+        /**
          * Crea un paciente nuevo para un usuario
          * @param   {object}  newPatient un objeto con los datos del nuevo paciente
          * @param   {number}  creatorId  el id del usuario creador
@@ -108,22 +112,22 @@
 
             return $http.post(patientEndpoint, newPatient).then(function (result) {
                 return result.data;
-            }, function(error) {
+            }, function (error) {
                 $log.error("Ocurrió un error al crear el paciente", error);
             });
         }
 
         /**
-         * Modiica los detalles del paciente
+         * Modifica los detalles del paciente
          * @param   {object}   updatedPatient el paciente con los datos a actualizados
          * @returns {promise} una promesa con el paciente modificado
          */
 
-        function updatePatientDetail(updatedPatient){
+        function updatePatientDetail(updatedPatient) {
 
-            return $http.put(patientEndpoint + "/"+ updatedPatient._id, updatedPatient).then(function (result) {
+            return $http.put(patientEndpoint + "/" + updatedPatient._id, updatedPatient).then(function (result) {
                 return result.data;
-            }, function(error) {
+            }, function (error) {
                 $log.error("Ocurrió un error al modificar los pacientes del usuario con id " + updatedPatient.id, error);
             });
         }
@@ -149,11 +153,11 @@
          * @param   {object}   newProfile nuevo perfil a asignar
          * @returns {promise} una promsea con el paciente modificado
          */
-        function assignProfile(newProfile){
+        function assignProfile(newProfile) {
 
-            return $http.put(patientEndpoint + "/addProfileToPatient/"+ newProfile.patient, newProfile).then(function (result) {
+            return $http.put(patientEndpoint + "/addProfileToPatient/" + newProfile.patient, newProfile).then(function (result) {
                 return result.data;
-            }, function(error) {
+            }, function (error) {
                 $log.error("Ocurrió un error al agregar un participante al tratamiento del paciente con id " + newProfile.patient, error);
             });
         }
