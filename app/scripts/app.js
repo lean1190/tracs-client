@@ -179,6 +179,17 @@
             }
         })
 
+          .state("app.patientEditClosestPeople", {
+            url: "/patient/editClosestPeople",
+            cache: false,
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/editClosestPeople.html",
+                    controller: "PatientEditClosestPeopleController as vm"
+                }
+            }
+        })
+
         .state("app.patientCurrentProfiles", {
             url: "/patient/currentProfiles",
             cache: false,

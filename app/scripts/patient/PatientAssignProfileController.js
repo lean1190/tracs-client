@@ -15,9 +15,6 @@
 
         var vm = this;
 
-        //pensado para sacar al usuario actual de la lista de profesionales. Despues tengo que hacer algun metodo para discriminar tambien los que ya tiene asignados el paciente.
-        var currentUser = localStorageService.get("user");
-
         vm.patient = localStorageService.get("lastVisitedPatient");
         vm.profile = {};
         vm.profile.patient = vm.patient._id;

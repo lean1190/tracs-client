@@ -32,6 +32,7 @@
             getSelectableUsers: getSelectableUsers,
             createPatient: createPatient,
             updatePatientDetail: updatePatientDetail,
+            updateClosestPeople: updateClosestPeople,
             assignProfile: assignProfile
 
         };
@@ -126,6 +127,22 @@
                 $log.error("Ocurrió un error al modificar los pacientes del usuario con id " + updatedPatient.id, error);
             });
         }
+
+        /**
+         * MOdifica las personas mas cercanas de un paciente
+         * @param {array} closestPeople conjunto de usuarios a ser asignados como personas cercanas
+         * @returns {promise} una promesa con el paciente modificado
+         */
+
+        function updateClosestPeople(closestPeople, patientId){
+             return $http.put(patientEndpoint + "/updatePatientClosestPeople/"+ patientId, closestPeople).then(function (result) {
+                return result.data;
+            }, function(error) {
+                $log.error("Ocurrió un error al modificar las personas cercanas del paciente con id " + patientId, error);
+            });
+        }
+
+
 
         /**
          * Asigna un nuevo perfil al paciente
