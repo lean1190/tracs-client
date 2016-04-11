@@ -58,13 +58,13 @@
             vm.patientPosition.timestamp = position.timestamp;
 
             console.log(vm.patientPosition);
-        }
+        };
 
         // onError del navigator.geolocation.getCurrentPosition
         var onError = function (error) {
           alert('code: '    + error.code    + '\n' +
           'message: ' + error.message + '\n');
-        }
+        };
 
     }
 })();

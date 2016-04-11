@@ -9,7 +9,7 @@
         .module("TracsClient.controllers")
         .controller("PatientAssignProfileController", PatientAssignProfileController);
 
-    PatientAssignProfileController.$inject = ["$stateParams", "$state", "$cordovaToast", "localStorageService", "PatientFactory","utils"];
+    PatientAssignProfileController.$inject = ["$stateParams", "$state", "$cordovaToast", "localStorageService", "PatientFactory", "utils"];
 
     function PatientAssignProfileController($stateParams, $state, $cordovaToast, localStorageService, PatientFactory, utils) {
 
@@ -22,25 +22,25 @@
         activate();
 
         function activate() {
-            PatientFactory.getSelectableUsers(vm.patient._id).then(function(result) {
+            PatientFactory.getSelectableUsers(vm.patient._id).then(function (result) {
                 vm.users = result;
                 console.log(vm.users);
-            }, function() {
+            }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la lista de usuarios, intentalo de nuevo");
             });
         }
 
-        vm.assignProfile = function(){
+        vm.assignProfile = function () {
 
-            if (!(utils.isEmpty(vm.profile.user))){
-                PatientFactory.assignProfile(vm.profile).then(function(result){
+            if (!(utils.isEmpty(vm.profile.user))) {
+                PatientFactory.assignProfile(vm.profile).then(function (result) {
                     $state.go("app.patientCurrentProfiles");
-                },function(){
+                }, function () {
                     $cordovaToast.showLongBottom("Ocurrió un error al asignar un participante al paciente, intentalo de nuevo");
                 });
-            }else{
+            } else {
                 $cordovaToast.showLongBottom("Por favor, elija un participante valido");
-            };
-        }
+            }
+        };
     }
 })();
