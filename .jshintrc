@@ -21,6 +21,7 @@
     "globals": {
         "angular": false,
         "cordova": false,
+        "Ionic": false,
         "StatusBar": false
     }
 }

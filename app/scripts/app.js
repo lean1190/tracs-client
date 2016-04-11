@@ -1,6 +1,6 @@
 /* jshint bitwise: false, camelcase: true, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: true, undef: true, unused: true, strict: true, latedef: nofunc */
 
-/* globals angular */
+/* globals angular, Ionic */
 
 /**
  * @ngdoc overview
@@ -16,6 +16,8 @@
     angular
         .module("TracsClient", [
                 "ionic",
+                "ionic.service.core",
+                "ionic.service.push",
                 "ngResource",
                 "ngCordova",
                 "LocalStorageModule",
@@ -49,7 +51,7 @@
         angular.bootstrap(document, ["TracsClient"]);
     }, false);
 
-    function run($ionicPlatform, editableOptions) {
+    function run($ionicPlatform, $ionicPush, editableOptions) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -62,6 +64,40 @@
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+
+            // Push configuration
+            // Ionic.io();
+
+            /*var push = new Ionic.Push({
+                "debug": true,
+                "onNotification": function (notification) {
+                    var payload = notification.payload;
+                    console.log(notification, payload);
+                },
+                "onRegister": function (data) {
+                    console.log(data.token);
+                }
+            });
+
+            var callback = function (token) {
+                console.log('Registered token:', token.token);
+                push.saveToken(token);
+            }
+
+            push.register(callback);*/
+
+            /*$ionicPush.init({
+                "debug": true,
+                "onNotification": function (notification) {
+                    var payload = notification.payload;
+                    console.log(notification, payload);
+                },
+                "onRegister": function (data) {
+                    console.log(data.token);
+                }
+            });
+
+            $ionicPush.register();*/
         });
 
         // Estilo para xeditable
@@ -186,7 +222,7 @@
             }
         })
 
-          .state("app.patientEditClosestPeople", {
+        .state("app.patientEditClosestPeople", {
             url: "/patient/editClosestPeople",
             cache: false,
             views: {
