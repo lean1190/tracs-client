@@ -16,15 +16,15 @@
         .module("TracsClient.controllers")
         .controller("LogoutController", LogoutController);
 
-    LogoutController.$inject = ["$state", "localStorageService"];
+    LogoutController.$inject = ["$state", "localStorageService", "storage"];
 
-    function LogoutController($state, localStorageService) {
+    function LogoutController($state, localStorageService, storage) {
 
         activate();
 
         function activate() {
             // Borra los datos del localStorage
-            localStorageService.set("user", null);
+            storage.setUser(null);
             localStorageService.clearAll();
             // Redirige al login
             $state.go("app.login");

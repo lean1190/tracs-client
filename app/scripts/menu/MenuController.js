@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("MenuController", MenuController);
 
-    MenuController.$inject = ["$scope", "$rootScope", "localStorageService"];
+    MenuController.$inject = ["$scope", "$rootScope", "storage"];
 
-    function MenuController($scope, $rootScope, localStorageService) {
+    function MenuController($scope, $rootScope, storage) {
 
         var vm = this;
 
@@ -28,7 +28,7 @@
          */
         var userChangedEvent = $rootScope.$on("user.changed", function () {
             // Asigna el usuario logueado
-            vm.user = localStorageService.get("user");
+            vm.user = storage.getUser();
         });
 
         /**

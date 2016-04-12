@@ -9,9 +9,9 @@
         .module("TracsClient.controllers")
         .controller("PatientDetailController", PatientDetailController);
 
-    PatientDetailController.$inject = ["$stateParams", "$state", "$cordovaToast", "$ionicHistory", "localStorageService", "PatientFactory"];
+    PatientDetailController.$inject = ["$stateParams", "$state", "$cordovaToast", "$ionicHistory", "storage", "PatientFactory"];
 
-    function PatientDetailController($stateParams, $state, $cordovaToast, $ionicHistory, localStorageService, PatientFactory) {
+    function PatientDetailController($stateParams, $state, $cordovaToast, $ionicHistory, storage, PatientFactory) {
 
         var vm = this;
 
@@ -20,7 +20,7 @@
         activate();
 
         function activate() {
-            vm.patient = localStorageService.get("lastVisitedPatient");
+            vm.patient = storage.getLastVisitedPatient();
         }
 
         vm.updatePatient = function () {

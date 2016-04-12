@@ -17,9 +17,9 @@
         .module("TracsClient.factories")
         .factory("PatientFactory", PatientFactory);
 
-    PatientFactory.$inject = ["$http", "$log", "localStorageService", "EnvironmentConfig"];
+    PatientFactory.$inject = ["$http", "$log", "storage", "EnvironmentConfig"];
 
-    function PatientFactory($http, $log, localStorageService, EnvironmentConfig) {
+    function PatientFactory($http, $log, storage, EnvironmentConfig) {
 
         var patientEndpoint = EnvironmentConfig.api + "/patient";
 
@@ -63,7 +63,7 @@
         function getPatientDetail(patientId) {
 
             return $http.get(patientEndpoint + "/detail/" + patientId).then(function (result) {
-                localStorageService.set("lastVisitedPatient", result.data);
+                storage.setLastVisitedPatient(result.data);
                 return result.data;
             }, function (error) {
                 $log.error("Ocurrió un error al recuperar los pacientes del usuario con id " + patientId, error);

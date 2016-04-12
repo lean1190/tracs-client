@@ -5,13 +5,13 @@
         .module("TracsClient.controllers")
         .controller("PatientEditClosestPeopleController", PatientEditClosestPeopleController);
 
-    PatientEditClosestPeopleController.$inject = ["$stateParams", "$state", "$cordovaToast", "localStorageService", "PatientFactory"];
+    PatientEditClosestPeopleController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory"];
 
-    function PatientEditClosestPeopleController($stateParams, $state, $cordovaToast, localStorageService, PatientFactory) {
+    function PatientEditClosestPeopleController($stateParams, $state, $cordovaToast, storage, PatientFactory) {
 
         var vm = this;
 
-        vm.patient = localStorageService.get("lastVisitedPatient");
+        vm.patient = storage.getLastVisitedPatient();
 
         vm.contactP1Id = "";
         vm.contactP2Id = "";

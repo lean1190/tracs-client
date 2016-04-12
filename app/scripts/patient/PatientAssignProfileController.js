@@ -9,13 +9,13 @@
         .module("TracsClient.controllers")
         .controller("PatientAssignProfileController", PatientAssignProfileController);
 
-    PatientAssignProfileController.$inject = ["$stateParams", "$state", "$cordovaToast", "localStorageService", "PatientFactory", "utils"];
+    PatientAssignProfileController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory", "utils"];
 
-    function PatientAssignProfileController($stateParams, $state, $cordovaToast, localStorageService, PatientFactory, utils) {
+    function PatientAssignProfileController($stateParams, $state, $cordovaToast, storage, PatientFactory, utils) {
 
         var vm = this;
 
-        vm.patient = localStorageService.get("lastVisitedPatient");
+        vm.patient = storage.getLastVisitedPatient();
         vm.profile = {};
         vm.profile.patient = vm.patient._id;
 
