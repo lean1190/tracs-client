@@ -59,6 +59,7 @@
     "cordova-plugin-inappbrowser",
     "cordova-plugin-x-toast",
     "cordova-plugin-sim",
+    "cordova-plugin-geolocation",
     "https://github.com/Rohfosho/CordovaCallNumberPlugin.git"
   ],
   "cordovaPlatforms": [

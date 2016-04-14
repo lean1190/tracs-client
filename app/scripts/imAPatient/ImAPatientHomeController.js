@@ -25,45 +25,33 @@
         var vm = this;
 
         vm.patient = storage.getPatientUser();
+        vm.patientPosition = {};
 
-        vm.callPhoneNumber = function(phoneNumber) {
-            dialer.callNumber(function() {}, function(error) {
+        vm.callPhoneNumber = function (phoneNumber) {
+            dialer.callNumber(function () {}, function (error) {
                 $log.error("No se pudo realizar la llamada al número " + phoneNumber, error);
                 $cordovaToast.showLongBottom("No se pudo realizar la llamada! Hay señal?");
             }, phoneNumber, false);
         };
 
+        // Importante: Prender el GPS del emulador
+        vm.myPosition = function () {
 
-        //Importante: Prender el GPS del emulador
-        vm.myPosition = function(){
+            var options = {
+                timeout: 80000,
+                enableHighAccuracy: true,
+                maximumAge: 10000
+            };
 
-            console.log("EN myPosition");
-            var options = { timeout: 80000, enableHighAccuracy: true, maximumAge: 10000 };
-            navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
-        };
+            // navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+            $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
+                vm.patientPosition = position.coords;
+                vm.timestamp = position.timestamp;
 
-        //onSuccess del navigator.geolocation.getCurrentPosition
-        var onSuccess = function(position) {
-
-            vm.patientPosition ={};
-
-            //Armo el paquete con la info de la posicion del paciente. Seguramente necesitemos solo latitud, longitud y timestamp, pero despues termino de verlo.
-            vm.patientPosition.latitude =  position.coords.latitude;
-            vm.patientPosition.longitude = position.coords.longitude;
-            vm.patientPosition.altitude = position.coords.altitude;
-            vm.patientPosition.accuracy = position.coords.accuracy;
-            vm.patientPosition.altitudeAccuracy = position.coords.altitudeAccuracy;
-            vm.patientPosition.heading = position.coords.heading;
-            vm.patientPosition.speed = position.coords.speed;
-            vm.patientPosition.timestamp = position.timestamp;
-
-            console.log(vm.patientPosition);
-        };
-
-        // onError del navigator.geolocation.getCurrentPosition
-        var onError = function (error) {
-          alert('code: '    + error.code    + '\n' +
-          'message: ' + error.message + '\n');
+                console.log("### Patient position: ", vm.patientPosition);
+            }, function (error) {
+                $log.error("Ocurrió un error al recuperar la posición del paciente, está habilitado el GPS?", error);
+            });
         };
 
     }

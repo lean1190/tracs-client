@@ -9,9 +9,9 @@
         .module("TracsClient.controllers")
         .controller("PatientCurrentProfilesController", PatientCurrentProfilesController);
 
-    PatientCurrentProfilesController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory", "UserFactory"];
+    PatientCurrentProfilesController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory"];
 
-    function PatientCurrentProfilesController($stateParams, $state, $cordovaToast, storage, PatientFactory, UserFactory) {
+    function PatientCurrentProfilesController($stateParams, $state, $cordovaToast, storage, PatientFactory) {
 
         var vm = this;
 
