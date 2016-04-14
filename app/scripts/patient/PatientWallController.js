@@ -9,31 +9,62 @@
         .module("TracsClient.controllers")
         .controller("PatientWallController", PatientWallController);
 
-    PatientWallController.$inject = ["$stateParams", "$cordovaToast", "PatientFactory"];
+    PatientWallController.$inject = ["$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory"];
 
-    function PatientWallController($stateParams, $cordovaToast, PatientFactory) {
+    function PatientWallController($scope, $stateParams, $interval, $cordovaToast, PatientFactory) {
 
         var vm = this,
-            patientId = $stateParams.id;
+            patientId = $stateParams.id,
+            notificationsInterval = null;
 
         vm.patient = {};
+        vm.notifications = [];
 
-        activate();
+        /**
+         * Recupera las notificaciones para el paciente actual
+         */
+        function getPatientNotifications() {
+            PatientFactory.getNotifications(patientId).then(function (resultNotifications) {
+                vm.notifications = resultNotifications;
+            });
+        }
+
+        /**
+         * Cuando se destruye el controller se asegura
+         * que también se corte el intervalo para actualizar
+         * las notificaciones
+         */
+        $scope.$on("$destroy", function () {
+            // Make sure that the interval is destroyed
+            if (angular.isDefined(notificationsInterval)) {
+                $interval.cancel(notificationsInterval);
+                notificationsInterval = undefined;
+            }
+        });
 
         function activate() {
             // Recupera todos los datos del paciente
             PatientFactory.getPatientDetail(patientId).then(function (resultPatient) {
                 vm.patient = resultPatient;
+                vm.notifications = resultPatient.notifications;
 
                 // Recupera los perfiles para mostrar en el muro
-                PatientFactory.getPatientProfiles(vm.patient._id).then(function(result) {
+                PatientFactory.getPatientProfiles(vm.patient._id).then(function (result) {
                     vm.patient.profiles = result;
                 });
+
+                // Inicializa el intervalo para hacer polling de las notificaciones
+                // y traerse las nuevas. Busca cada 20 segundos
+                $interval(function() {
+                    getPatientNotifications();
+                }, 20000);
 
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la información del paciente, intentalo de nuevo");
             });
         }
+
+        activate();
 
     }
 })();

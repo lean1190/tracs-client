@@ -29,6 +29,7 @@
             getPatientDetail: getPatientDetail,
             getPatientProfiles: getPatientProfiles,
             getSelectableUsers: getSelectableUsers,
+            getNotifications: getNotifications,
             createPatient: createPatient,
             updatePatientDetail: updatePatientDetail,
             updateClosestPeople: updateClosestPeople,
@@ -37,7 +38,6 @@
         };
 
         return service;
-
 
         /**
          * Recupera todos los pacientes de un usuario
@@ -102,6 +102,21 @@
         }
 
         /**
+         * Recupera las notificaciones de un paciente
+         * @param   {number}  patientId el id del paciente
+         * @returns {promise} una promesa con las notificaciones
+         */
+        function getNotifications(patientId) {
+
+            return $http.get(patientEndpoint + "/notifications/" + patientId).then(function (notifications) {
+                return notifications.data;
+            }, function (error) {
+                $log.error("Ocurrió un error al obtener las notificaciones", error);
+            });
+
+        }
+
+        /**
          * Crea un paciente nuevo para un usuario
          * @param   {object}  newPatient un objeto con los datos del nuevo paciente
          * @param   {number}  creatorId  el id del usuario creador
@@ -122,7 +137,6 @@
          * @param   {object}   updatedPatient el paciente con los datos a actualizados
          * @returns {promise} una promesa con el paciente modificado
          */
-
         function updatePatientDetail(updatedPatient) {
 
             return $http.put(patientEndpoint + "/" + updatedPatient._id, updatedPatient).then(function (result) {
@@ -137,7 +151,6 @@
          * @param {array} closestPeople conjunto de usuarios a ser asignados como personas cercanas
          * @returns {promise} una promesa con el paciente modificado
          */
-
         function updateClosestPeople(closestPeople, patientId){
              return $http.put(patientEndpoint + "/updatePatientClosestPeople/"+ patientId, closestPeople).then(function (result) {
                 return result.data;
