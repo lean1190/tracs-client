@@ -16,11 +16,20 @@
         var vm = this;
 
         vm.patient = {};
+        vm.patientOpinions = {};
 
         activate();
 
         function activate() {
+
             vm.patient = localStorageService.get("lastVisitedPatient");
+
+            PatientFactory.getPatientOpinions(vm.patient._id).then(function(result) {
+                vm.patientOpinions = result;
+                console.log(vm.patientOpinions);
+            }, function() {
+                $cordovaToast.showLongBottom("Ocurrió un error al recuperar las opiniones del paciente, intentalo de nuevo");
+            });
         }
 
         vm.updatePatient = function () {
@@ -35,5 +44,21 @@
             });
 
         };
+
+        vm.addPatientOpinion = function (){
+
+            var currentUserId = localStorageService.get("user")._id
+
+            var newPatientOpinion = {};
+            newPatientOpinion.user = currentUserId;
+            newPatientOpinion.description = vm.patientOpinion;
+
+            PatientFactory.addPatientOpinion(newPatientOpinion, vm.patient._id).then(function(){
+                $cordovaToast.showLongBottom("Nueva opinión gurdada correctamente!");
+            }), function () {
+                $cordovaToast.showLongBottom("Ocurrió un error al guardar la opinión del paciente, intentalo de nuevo");
+            };
+
+        }
     }
 })();

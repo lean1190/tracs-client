@@ -37,7 +37,6 @@
         //Importante: Prender el GPS del emulador
         vm.myPosition = function(){
 
-            console.log("EN myPosition");
             var options = { timeout: 80000, enableHighAccuracy: true, maximumAge: 10000 };
             navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
         };

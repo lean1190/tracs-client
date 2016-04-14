@@ -22,6 +22,27 @@
             <button class="button button-positive">Configurar contactos cercanos</button>
         </a>
 
+        <div class="addOpinion">
+
+           <label class="item item-input item-floating-label">
+                <span class="input-label">Cual es su opinion actual de {{vm.patient.name}}</span>
+                <textarea type="text" ng-model="vm.patientOpinion" placeholder="Cual es su opinion actual de " {{vm.patient.name}}></textarea>
+            </label>
+            <button class="button-positive" ng-click ="vm.addPatientOpinion()"> Agregar opinion </button>
+        </div>
+
+        <div class="item item-divider">
+            Opiniones de participantes
+        </div>
+        <br/>
+        <div class="displayOpinion" ng-repeat="opinion in vm.patientOpinions">
+
+            <h4>{{opinion.user.name}}</h4>
+            <p>{{opinion.latestPatientOpinion.description}}</p>
+
+        </div>
+
+
         <button class="button button-energized" ng-click="vm.updatePatient()">Guardar cambios</button>
 
     </ion-content>

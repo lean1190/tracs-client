@@ -29,15 +29,15 @@
             getPatientDetail: getPatientDetail,
             getPatientProfiles: getPatientProfiles,
             getSelectableUsers: getSelectableUsers,
+            getPatientOpinions: getPatientOpinions,
             createPatient: createPatient,
             updatePatientDetail: updatePatientDetail,
             updateClosestPeople: updateClosestPeople,
-            assignProfile: assignProfile
-
+            assignProfile: assignProfile,
+            addPatientOpinion: addPatientOpinion
         };
 
         return service;
-
 
         /**
          * Recupera todos los pacientes de un usuario
@@ -146,8 +146,6 @@
             });
         }
 
-
-
         /**
          * Asigna un nuevo perfil al paciente
          * @param   {object}   newProfile nuevo perfil a asignar
@@ -160,6 +158,28 @@
             }, function (error) {
                 $log.error("Ocurrió un error al agregar un participante al tratamiento del paciente con id " + newProfile.patient, error);
             });
+        }
+
+        /**
+         * Agrega una nueva opinion sobre un paciente
+         * @param   {object}   newOpinion Nueva opinion a ser agregada
+         * @param   {[[Type]]} patientId  Id del paciente al cual se le va a asignar la opinion
+         * @returns {[[Type]]} Una promesa con el paciente modificado
+         */
+        function addPatientOpinion(newOpinion, patientId){
+            return $http.put(patientEndpoint + "/addPatientOpinion/"+ patientId, newOpinion).then(function (result) {
+                return result.data;
+            }, function (error) {
+                $log.error("Ocurrió un error al agregar una opinión sobre el paciente " + newOpinion.patient, error);
+            });
+        }
+
+        function getPatientOpinions(patientId){
+            return $http.get(patientEndpoint + "/patientOpinions/"+ patientId).then(function(result){
+                return result.data;
+            }, function (error) {
+                $log.error("Ocurrió un error al obtener las opiniones del paciente " + patientId, error);
+            })
         }
     }
 })();
