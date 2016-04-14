@@ -18,13 +18,13 @@
         .module("TracsClient.controllers")
         .controller("ImAPatientHomeController", ImAPatientHomeController);
 
-    ImAPatientHomeController.$inject = ["$log", "$state", "$cordovaToast", "localStorageService", "dialer", "$cordovaGeolocation"];
+    ImAPatientHomeController.$inject = ["$log", "$state", "$cordovaToast", "storage", "dialer", "$cordovaGeolocation"];
 
-    function ImAPatientHomeController($log, $state, $cordovaToast, localStorageService, dialer, $cordovaGeolocation) {
+    function ImAPatientHomeController($log, $state, $cordovaToast, storage, dialer, $cordovaGeolocation) {
 
         var vm = this;
 
-        vm.patient = localStorageService.get("patientUser");
+        vm.patient = storage.getPatientUser();
 
         vm.callPhoneNumber = function(phoneNumber) {
             dialer.callNumber(function() {}, function(error) {
@@ -57,13 +57,13 @@
             vm.patientPosition.timestamp = position.timestamp;
 
             console.log(vm.patientPosition);
-        }
+        };
 
         // onError del navigator.geolocation.getCurrentPosition
         var onError = function (error) {
           alert('code: '    + error.code    + '\n' +
           'message: ' + error.message + '\n');
-        }
+        };
 
     }
 })();

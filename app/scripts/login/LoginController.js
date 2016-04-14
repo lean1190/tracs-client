@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("LoginController", LoginController);
 
-    LoginController.$inject = ["$rootScope", "$scope", "$http", "$state", "$log", "$cordovaToast", "$ionicSideMenuDelegate", "$ionicHistory", "localStorageService", "LoginFactory", "EnvironmentConfig"];
+    LoginController.$inject = ["$rootScope", "$scope", "$http", "$state", "$log", "$cordovaToast", "$ionicSideMenuDelegate", "$ionicHistory", "storage", "LoginFactory", "EnvironmentConfig"];
 
-    function LoginController($rootScope, $scope, $http, $state, $log, $cordovaToast, $ionicSideMenuDelegate, $ionicHistory, localStorageService, LoginFactory, EnvironmentConfig) {
+    function LoginController($rootScope, $scope, $http, $state, $log, $cordovaToast, $ionicSideMenuDelegate, $ionicHistory, storage, LoginFactory, EnvironmentConfig) {
 
         var vm = this;
 
@@ -55,7 +55,7 @@
          * @returns {boolean} true si se encontró un usuario
          */
         function isUserLoggedIn() {
-            var logedInUser = localStorageService.get("user");
+            var logedInUser = storage.getUser();
 
             return logedInUser !== null && logedInUser._id !== false;
         }
@@ -65,7 +65,7 @@
          * @returns {boolean} true si el usuario se logueó como paciente
          */
         function isPatientLoggedIn() {
-            var logedInPatient = localStorageService.get("patientUser");
+            var logedInPatient = storage.getPatientUser();
 
             return logedInPatient !== null && logedInPatient._id !== false;
         }

@@ -23,8 +23,9 @@
     "gulp-livereload": "^3.7.0",
     "gulp-load-plugins": "^0.8.0",
     "gulp-ng-annotate": "^0.5.0",
-    "gulp-remember": "^0.3.0",
     "gulp-ng-config": "^1.2.1",
+    "gulp-remember": "^0.3.0",
+    "gulp-replace": "^0.5.4",
     "gulp-rev": "^3.0.0",
     "gulp-sass": "^2.0.1",
     "gulp-shell": "^0.2.11",
@@ -48,11 +49,17 @@
     "gulp": "./node_modules/.bin/gulp"
   },
   "cordovaPlugins": [
+    {
+      "variables": {
+        "SENDER_ID": "1017723616061"
+      },
+      "locator": "phonegap-plugin-push"
+    },
     "cordova-plugin-whitelist",
     "cordova-plugin-inappbrowser",
     "cordova-plugin-x-toast",
     "cordova-plugin-sim",
-    "mx.ferreyra.callnumber"
+    "https://github.com/Rohfosho/CordovaCallNumberPlugin.git"
   ],
   "cordovaPlatforms": [
     "android"

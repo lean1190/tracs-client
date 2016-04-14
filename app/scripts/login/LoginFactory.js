@@ -18,9 +18,9 @@
         .module("TracsClient.factories")
         .factory("LoginFactory", LoginFactory);
 
-    LoginFactory.$inject = ["$http", "$q", "localStorageService", "EnvironmentConfig"];
+    LoginFactory.$inject = ["$http", "$q", "storage", "EnvironmentConfig"];
 
-    function LoginFactory($http, $q, localStorageService, EnvironmentConfig) {
+    function LoginFactory($http, $q, storage, EnvironmentConfig) {
 
         var service = {
             login: login
@@ -148,7 +148,7 @@
                                 // Con los datos de Google busca en el servidor el usuario completo, con sus perfiles etc
                                 getFulfilledUser(googleProfile, tokens).then(function (fulfilledUser) {
                                     // Guarda el usuario en el localStorage
-                                    localStorageService.set("user", fulfilledUser.data);
+                                    storage.setUser(fulfilledUser.data);
 
                                     resolve(fulfilledUser.data);
                                 }, function (error) {

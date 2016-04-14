@@ -9,9 +9,9 @@
         .module("TracsClient.controllers")
         .controller("PatientDetailController", PatientDetailController);
 
-    PatientDetailController.$inject = ["$stateParams", "$state", "$cordovaToast", "$ionicHistory", "localStorageService", "PatientFactory"];
+    PatientDetailController.$inject = ["$stateParams", "$state", "$cordovaToast", "$ionicHistory", "storage", "PatientFactory"];
 
-    function PatientDetailController($stateParams, $state, $cordovaToast, $ionicHistory, localStorageService, PatientFactory) {
+    function PatientDetailController($stateParams, $state, $cordovaToast, $ionicHistory, storage, PatientFactory) {
 
         var vm = this;
 
@@ -22,7 +22,7 @@
 
         function activate() {
 
-            vm.patient = localStorageService.get("lastVisitedPatient");
+            vm.patient = storage.getLastVisitedPatient();
 
             PatientFactory.getPatientOpinions(vm.patient._id).then(function(result) {
                 vm.patientOpinions = result;
@@ -30,6 +30,7 @@
             }, function() {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar las opiniones del paciente, intentalo de nuevo");
             });
+
         }
 
         vm.updatePatient = function () {

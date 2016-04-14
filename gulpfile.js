@@ -3,6 +3,7 @@
 var appName = 'TracsClient';
 
 var gulp = require('gulp');
+var replace = require('gulp-replace');
 var gulpNgConfig = require('gulp-ng-config');
 var plugins = require('gulp-load-plugins')();
 var del = require('del');
@@ -232,6 +233,22 @@ gulp.task('vendor', function () {
     .on('error', errorHandler);
 });
 
+gulp.task('ioconfig', function () {
+    var libClientPath = 'bower_components/ionic-platform-web-client/dist/';
+    var src = libClientPath + 'ionic.io.bundle.js';
+    var ioconfig = fs.readFileSync(".io-config.json", "utf8");
+    var start = '"IONIC_SETTINGS_STRING_START";var settings =';
+    var end =  '; return { get: function(setting) { if (settings[setting]) { return settings[setting]; } return null; } };"IONIC_SETTINGS_STRING_END"';
+    var replaceBy = start + ioconfig + end;
+
+    var dest = 'app/scripts/utils';
+
+    gulp.src(src)
+    .pipe(replace(/"IONIC_SETTINGS_STRING_START.*IONIC_SETTINGS_STRING_END"/, replaceBy))
+    .pipe(gulp.dest(libClientPath))
+    .on('error', errorHandler);
+});
+
 
 // inject the files in index.html
 gulp.task('index', ['jsHint', 'scripts'], function () {
@@ -356,6 +373,7 @@ gulp.task('default', function (done) {
     runSequence(
         'clean',
         'config',
+        'ioconfig',
         'iconfont',
         [
           'fonts',

@@ -16,9 +16,9 @@
         .module("TracsClient.factories")
         .factory("ImAPatientFactory", ImAPatientFactory);
 
-    ImAPatientFactory.$inject = ["$http", "$log", "localStorageService", "utils", "EnvironmentConfig"];
+    ImAPatientFactory.$inject = ["$http", "$log", "storage", "utils", "EnvironmentConfig"];
 
-    function ImAPatientFactory($http, $log, localStorageService, utils, EnvironmentConfig) {
+    function ImAPatientFactory($http, $log, storage, utils, EnvironmentConfig) {
 
         var imAPatientEndpoint = EnvironmentConfig.api + "/imAPatient";
 
@@ -49,7 +49,7 @@
                         closestPeople: resultPatient.closestPeople
                     };
 
-                    localStorageService.set("patientUser", patientUser);
+                    storage.setPatientUser(patientUser);
                 } else {
                     $log.info("No se encontró el paciente con DNI " + patientDni);
                 }

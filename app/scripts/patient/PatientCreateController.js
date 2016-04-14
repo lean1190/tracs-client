@@ -16,15 +16,15 @@
         .module("TracsClient.controllers")
         .controller("PatientCreateController", PatientCreateController);
 
-    PatientCreateController.$inject = ["$stateParams", "$state", "$cordovaToast", "localStorageService", "PatientFactory"];
+    PatientCreateController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory"];
 
-    function PatientCreateController($stateParams, $state, $cordovaToast, localStorageService, PatientFactory) {
+    function PatientCreateController($stateParams, $state, $cordovaToast, storage, PatientFactory) {
 
         var vm = this;
 
         vm.createPatient = function () {
 
-            var creatorId = localStorageService.get("user")._id;
+            var creatorId = storage.getUser()._id;
 
             PatientFactory.createPatient(vm.patient, creatorId).then(function () {
                 $cordovaToast.showLongBottom("Paciente creado!").then(function () {

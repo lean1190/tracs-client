@@ -16,12 +16,12 @@
         .module("TracsClient.controllers")
         .controller("PatientHomeController", PatientHomeController);
 
-    PatientHomeController.$inject = ["$scope", "$log", "$state", "$q", "$cordovaToast", "$ionicPopup", "$ionicHistory", "localStorageService", "utils", "sim", "PatientFactory", "UserFactory"];
+    PatientHomeController.$inject = ["$scope", "$log", "$state", "$q", "$cordovaToast", "$ionicPopup", "$ionicHistory", "storage", "utils", "sim", "PatientFactory", "UserFactory"];
 
-    function PatientHomeController($scope, $log, $state, $q, $cordovaToast, $ionicPopup, $ionicHistory, localStorageService, utils, sim, PatientFactory, UserFactory) {
+    function PatientHomeController($scope, $log, $state, $q, $cordovaToast, $ionicPopup, $ionicHistory, storage, utils, sim, PatientFactory, UserFactory) {
 
         var vm = this,
-            loggedInUser = localStorageService.get("user");
+            loggedInUser = storage.getUser();
 
         vm.patients = [];
 
@@ -31,7 +31,7 @@
          */
         function updateUserPhoneNumber(newPhoneNumber) {
             loggedInUser.phoneNumber = newPhoneNumber;
-            localStorageService.set("user", loggedInUser);
+            storage.setUser(loggedInUser);
 
             var updatedUser = {
                 _id: loggedInUser._id,

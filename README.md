@@ -12,11 +12,9 @@ cordova plugin add cordova-plugin-inappbrowser
 cordova plugin add cordova-plugin-x-toast
 cordova plugin add cordova-plugin-sim
 cordova plugin add https://github.com/Rohfosho/CordovaCallNumberPlugin.git
+cordova plugin add phonegap-plugin-push --variable SENDER_ID="1017723616061"
 
 --- 
-
-# Comando para no subir la configuracion de environment
-git update-index --assume-unchanged app/config.json
 
 # Para correr la aplicacion en el navegador como si fuera "ionic serve"
 gulp
