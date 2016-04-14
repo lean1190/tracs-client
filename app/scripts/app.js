@@ -1,6 +1,6 @@
 /* jshint bitwise: false, camelcase: true, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: true, undef: true, unused: true, strict: true, latedef: nofunc */
 
-/* globals angular, Ionic */
+/* globals angular */
 
 /**
  * @ngdoc overview
@@ -112,21 +112,49 @@
         // Configuración de estados y rutas
         $stateProvider
 
-        .state("app", {
-            url: "/app",
+        /**
+         * ==================================================================
+         * ============ RUTEOS PARA EL SIGNIN (LOGIN Y PACIENTE) ============
+         * ==================================================================
+         */
+
+        .state("signin", {
+            url: "/signin",
             abstract: true,
-            templateUrl: "templates/layout/menu.html",
-            controller: "MenuController as vm"
+            templateUrl: "templates/layout/signIn.html"
         })
 
-        .state("app.login", {
+        .state("signin.login", {
             url: "/login",
             views: {
-                "menuContent": {
+                "signInContent": {
                     templateUrl: "templates/login/login.html",
                     controller: "LoginController as vm"
                 }
             }
+        })
+
+        .state("signin.imAPatientLink", {
+            url: "/imAPatient/link",
+            views: {
+                "signInContent": {
+                    templateUrl: "templates/imAPatient/link.html",
+                    controller: "ImAPatientLinkController as vm"
+                }
+            }
+        })
+
+        /**
+         * ==================================================================
+         * =========== RUTEOS PARA EL USUARIO LOGUEADO CON GMAIL ============
+         * ==================================================================
+         */
+
+        .state("app", {
+            url: "/app",
+            abstract: true,
+            templateUrl: "templates/layout/userView.html",
+            controller: "MenuController as vm"
         })
 
         .state("app.logout", {
@@ -200,19 +228,19 @@
             }
         })
 
-        // ========== Im a patient states
+        /**
+         * =========================================================
+         * =========== RUTEOS PARA LA VISTA DE PACIENTE ============
+         * =========================================================
+         */
 
-        .state("app.imAPatientLink", {
-            url: "/imAPatient/link",
-            views: {
-                "menuContent": {
-                    templateUrl: "templates/imAPatient/link.html",
-                    controller: "ImAPatientLinkController as vm"
-                }
-            }
+        .state("patientView", {
+            url: "/patientView",
+            abstract: true,
+            templateUrl: "templates/layout/patientView.html"
         })
 
-        .state("app.imAPatientHome", {
+        .state("patientView.imAPatientHome", {
             url: "/imAPatient/home",
             views: {
                 "menuContent": {
@@ -222,7 +250,7 @@
             }
         })
 
-        .state("app.patientEditClosestPeople", {
+        .state("patientView.patientEditClosestPeople", {
             url: "/patient/editClosestPeople",
             cache: false,
             views: {
@@ -233,7 +261,7 @@
             }
         })
 
-        .state("app.patientCurrentProfiles", {
+        .state("patientView.patientCurrentProfiles", {
             url: "/patient/currentProfiles",
             cache: false,
             views: {
@@ -244,7 +272,7 @@
             }
         })
 
-        .state("app.patientAssignProfile", {
+        .state("patientView.patientAssignProfile", {
             url: "/patient/assignProfile",
             views: {
                 "menuContent": {
@@ -255,6 +283,6 @@
         });
 
         // Si ninguno de lo states anteriores matchea, usa esta ruta como contingencia
-        $urlRouterProvider.otherwise("/app/login");
+        $urlRouterProvider.otherwise("/signin/login");
     }
 }());

@@ -27,7 +27,7 @@
             storage.setUser(null);
             localStorageService.clearAll();
             // Redirige al login
-            $state.go("app.login");
+            $state.go("signin.login");
         }
     }
 

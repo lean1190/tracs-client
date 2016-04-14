@@ -24,22 +24,6 @@
         var vm = this;
 
         /**
-         * Cuando entra a la vista deshabilita la posibilidad de hacer drag
-         * Sirve para prevenir que se despliegue el side menu
-         */
-        $scope.$on("$ionicView.enter", function () {
-            $ionicSideMenuDelegate.canDragContent(false);
-        });
-
-        /**
-         * Cuando sale de la vista habilita nuevamente el dragging.
-         * Sirve para que las próximas vistas tengan disponible el side menu
-         */
-        $scope.$on("$ionicView.leave", function () {
-            $ionicSideMenuDelegate.canDragContent(true);
-        });
-
-        /**
          * Asocia un número de DNI con un paciente y redirige
          * a la vista de paciente
          */
@@ -52,7 +36,7 @@
                             historyRoot: true
                         });
                         // Redirige a la vista de paciente
-                        $state.go("app.imAPatientHome");
+                        $state.go("patientView.imAPatientHome");
                     });
                 } else {
                     $cordovaToast.showLongBottom("No encontramos al paciente con dni " + vm.dni);
