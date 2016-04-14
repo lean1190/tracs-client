@@ -38,7 +38,8 @@
                     contact.personId = profiles[i].user._id;
                     contact.name = profiles[i].user.name;
                     contact.phoneNumber = profiles[i].user.phoneNumber;
-                    contact.picutre = profiles[i].user.picture;
+                    contact.picture = profiles[i].user.picture
+
                     contact.priority = priority;
 
                     return contact;

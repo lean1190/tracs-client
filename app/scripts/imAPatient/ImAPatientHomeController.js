@@ -43,11 +43,9 @@
                 maximumAge: 10000
             };
 
-            // navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
             $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
                 vm.patientPosition = position.coords;
-                vm.timestamp = position.timestamp;
-
+                vm.patientPosition.timestamp = position.timestamp;
                 console.log("### Patient position: ", vm.patientPosition);
             }, function (error) {
                 $log.error("Ocurrió un error al recuperar la posición del paciente, está habilitado el GPS?", error);
