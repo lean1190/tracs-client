@@ -148,8 +148,8 @@
         }
 
         /**
-         * MOdifica las personas mas cercanas de un paciente
-         * @param {array} closestPeople conjunto de usuarios a ser asignados como personas cercanas
+         * Modifica las personas mas cercanas de un paciente
+         * @param   {array}   closestPeople conjunto de usuarios a ser asignados como personas cercanas
          * @returns {promise} una promesa con el paciente modificado
          */
         function updateClosestPeople(closestPeople, patientId){
@@ -193,7 +193,7 @@
                 return result.data;
             }, function (error) {
                 $log.error("Ocurrió un error al obtener las opiniones del paciente " + patientId, error);
-            })
+            });
         }
     }
 })();
