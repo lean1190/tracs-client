@@ -16,12 +16,13 @@
     angular
         .module("TracsClient", [
                 "ionic",
-                "ionic.service.core",
-                "ionic.service.push",
+                //"ionic.service.core",
+                //"ionic.service.push",
                 "ngResource",
                 "ngCordova",
                 "LocalStorageModule",
                 "xeditable",
+                "btford.socket-io",
                 "TracsClient.controllers",
                 "TracsClient.factories",
                 "TracsClient.directives",
@@ -46,7 +47,7 @@
     // todos los componentes de cordova y el dispositivo está listo.
     // Una vez que está todo cargado, se inicia el proceso de bootstrap
     // de la aplicación, donde se levantan los controllers, factories,
-    // templates, etc.
+    // templates, etc.f
     // La idea de manejar este evento es evitar problemas a la hora de
     // cargar plugins de cordova u otras cosas que levantan de manera asincronica,
     // y que pueden ser requeridas por algún componente de Angular!
@@ -54,7 +55,7 @@
         angular.bootstrap(document, ["TracsClient"]);
     }, false);
 
-    function run($ionicPlatform, $ionicPush, editableOptions) {
+    function run($ionicPlatform, /*$ionicPush,*/ editableOptions) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -255,6 +256,17 @@
                 "menuContent": {
                     templateUrl: "templates/patient/assignProfile.html",
                     controller: "PatientAssignProfileController as vm"
+                }
+            }
+        })
+
+
+        .state('app.patientChatRoom', {
+            url: 'patient/chatRoom',
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/chat/chatRoom.html",
+                    controller: "PatientChatController as vm"
                 }
             }
         })

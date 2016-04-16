@@ -59,6 +59,22 @@
             }
         });
 
+
+         vm.enterPatientChatRoom = function(){
+
+            vm.current_room = "Sala de chat de " + vm.patient.name;
+
+            var room = {
+                'room_name': vm.current_room
+            };
+
+            SocketService.emit('join:room', room);
+
+            $state.go("app.patientChatRoom");
+        };
+
+
+
         function activate() {
             // Recupera todos los datos del paciente
             PatientFactory.getPatientDetail(patientId).then(function (resultPatient) {
@@ -82,6 +98,7 @@
         }
 
         activate();
+
 
     }
 })();

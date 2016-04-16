@@ -1,0 +1,42 @@
+<ion-view title="{{vm.currentRoom}}">
+
+  <header class="bar bar-header bar-positive">
+      <h1 class="title">{{vm.currenRoom}}</h1>
+ <!--     <button class="button button-assertive" ng-click="leaveRoom()">Leave</button>-->
+      <button class="button button-assertive">Salir de la sala</button>
+  </header>
+
+  <ion-content class="has-header padding">
+
+    <div class="list" ng-if="vm.messages.length > 0">
+        <li class="item item-text-wrap no-border {{ vm.isNotCurrentUser(msg.user) }}" ng-repeat="msg in vm.messages">
+            <div class="msg">
+                <div class="details padding">
+                    <p>
+                        <div class="user">{{ msg.user }}</div>
+                        <div class="message">{{ msg.text }}</div>
+                    </p>
+                    <small>{{vm.humanize(msg.time)}}</small>
+                </div>
+            </div>
+        </li>
+    </div>
+
+    <div class="card" ng-if="!vm.messages.length">
+      <div class="item item-text-wrap">
+        No messages yet.
+      </div>
+    </div>
+
+  </ion-content>
+
+
+  <footer class="bar bar-footer bar-positive item-input-inset">
+      <label class="item-input-wrapper">
+        <input type="text" id="message" name="message" ng-model="vm.message" placeholder="Type message">
+      </label>
+  <!--    <a class="button button-icon icon ion-android-send"></a>-->
+      <a class="button button-icon icon ion-android-send" ng-click="vm.sendTextMessage()"></a>
+  </footer>
+
+</ion-view>
