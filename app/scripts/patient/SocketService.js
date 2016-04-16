@@ -12,7 +12,7 @@
 
     function SocketService(socketFactory){
         return socketFactory({
-            ioSocket: io.connect('http://localhost')
+            ioSocket: io.connect('http://192.168.56.1:4000')
         });
     }
 })();

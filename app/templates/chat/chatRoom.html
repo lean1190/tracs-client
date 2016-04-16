@@ -1,7 +1,7 @@
-<ion-view title="{{ room_ctrl.current_room }}">
+<ion-view title="{{vm.currentRoom}}">
 
   <header class="bar bar-header bar-positive">
-      <h1 class="title">{{ vm.currenRoom }}</h1>
+      <h1 class="title">{{vm.currenRoom}}</h1>
  <!--     <button class="button button-assertive" ng-click="leaveRoom()">Leave</button>-->
       <button class="button button-assertive">Salir de la sala</button>
   </header>
@@ -12,10 +12,10 @@
         <li class="item item-text-wrap no-border {{ vm.isNotCurrentUser(msg.user) }}" ng-repeat="msg in vm.messages">
             <div class="msg">
                 <div class="details padding">
-                    <!--<p>
+                    <p>
                         <div class="user">{{ msg.user }}</div>
                         <div class="message">{{ msg.text }}</div>
-                    </p>-->
+                    </p>
                     <small>{{vm.humanize(msg.time)}}</small>
                 </div>
             </div>
@@ -35,8 +35,8 @@
       <label class="item-input-wrapper">
         <input type="text" id="message" name="message" ng-model="vm.message" placeholder="Type message">
       </label>
-      <a class="button button-icon icon ion-android-send"></a>
-      <!--<a class="button button-icon icon ion-android-send" ng-click="sendTextMessage()"></a>-->
+  <!--    <a class="button button-icon icon ion-android-send"></a>-->
+      <a class="button button-icon icon ion-android-send" ng-click="vm.sendTextMessage()"></a>
   </footer>
 
 </ion-view>

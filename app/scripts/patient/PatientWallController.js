@@ -9,9 +9,9 @@
         .module("TracsClient.controllers")
         .controller("PatientWallController", PatientWallController);
 
-    PatientWallController.$inject = ["$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory","SocketService"];
+    PatientWallController.$inject = ["$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory"];
 
-    function PatientWallController($scope, $stateParams, $interval, $cordovaToast, PatientFactory,SockectService) {
+    function PatientWallController($scope, $stateParams, $interval, $cordovaToast, PatientFactory) {
 
         var vm = this,
             patientId = $stateParams.id,
