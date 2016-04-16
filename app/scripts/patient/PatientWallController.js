@@ -88,7 +88,7 @@
 
                 // Inicializa el intervalo para hacer polling de las notificaciones
                 // y traerse las nuevas. Busca cada 20 segundos
-                $interval(function () {
+                notificationsInterval = $interval(function () {
                     getPatientNotifications();
                 }, 20000);
 
