@@ -17,20 +17,20 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item menu-close ui-sref="app.patientHome" class="item-icon-left">
-                    <i class="icon ion-ios-people"></i> Mis pacientes
+                <ion-item menu-close ui-sref="app.patientHome" class="item-icon-left" ng-hide="vm.imAtPatientHome">
+                    <i class="icon ion-android-contact"></i> Mi paciente
                 </ion-item>
-                 <ion-item menu-close ui-sref="app.patientCurrentProfiles" class="item-icon-left">
-                    <i class="icon ion-ios-list"></i> Participantes del paciente
+                <ion-item menu-close ui-sref="app.patientHome" class="item-icon-left" ng-hide="vm.imAtPatientHome">
+                    <i class="icon ion-android-contacts"></i> Mis pacientes
                 </ion-item>
-                <ion-item menu-close href="" class="item-icon-left">
-                    <i class="icon ion-ios-list"></i> Notas
+                <ion-item menu-close ui-sref="app.patientCurrentProfiles" class="item-icon-left" ng-hide="vm.imAtPatientHome">
+                    <i class="icon ion-android-people"></i> Participantes
                 </ion-item>
-                <ion-item menu-close href="" class="item-icon-left">
-                    <i class="icon ion-chatboxes"></i> Feedback
+                <ion-item menu-close ui-sref="app.patientEditClosestPeople" class="item-icon-left" ng-hide="vm.imAtPatientHome">
+                    <i class="icon ion-android-call"></i> Contactos
                 </ion-item>
                 <ion-item menu-close ui-sref="logout" class="item-icon-left">
-                    <i class="icon ion-android-exit"></i> Salir
+                    <i class="icon ion-android-exit"></i> Cerrar sesión
                 </ion-item>
             </ion-list>
         </ion-content>

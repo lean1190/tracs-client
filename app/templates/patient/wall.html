@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="patient-profiles">
+        <div class="patient-profiles" ui-sref="app.patientCurrentProfiles">
             <h4>Participantes</h4>
             <div ng-repeat="profile in vm.patient.profiles" class="image-wrapper">
                 <img ng-src="{{::profile.user.picture}}" alt="{{::profile.user.name}}">

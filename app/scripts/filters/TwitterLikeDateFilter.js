@@ -17,7 +17,7 @@
 
     function TwitterLikeDateFilter(moment) {
         return function (inputDate) {
-            return moment(inputDate).twitter();
+            return moment(inputDate).twitterLong();
         };
     }
 }());

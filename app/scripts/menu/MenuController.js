@@ -21,20 +21,25 @@
     function MenuController($scope, $rootScope, storage) {
 
         var vm = this;
+        vm.user = {};
+        vm.imAtPatientHome = true;
 
         /**
          * Suscripción al evento "user.changed", que se ejecuta cuando
          * cambiaron los datos de usuario en la sesión
          */
-        var userChangedEvent = $rootScope.$on("user.changed", function () {
+        $rootScope.$on("user.changed", function () {
             // Asigna el usuario logueado
             vm.user = storage.getUser();
         });
 
         /**
-         * Dessucbribe el evento para evitar leaks de memoria
+         * Suscripción al evento "state.changed.patientHome", que se ejecuta cuando
+         * entra al patient home con el listado de pacientes
          */
-        $scope.$on("$destroy", userChangedEvent);
+        $rootScope.$on("state.changed.patientHome", function (event, state) {
+            vm.imAtPatientHome = state;
+        });
     }
 
 })();
