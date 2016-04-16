@@ -8,11 +8,11 @@
         .module("TracsClient.controllers")
         .service("SocketService", SocketService);
 
-    SocketService.inject = ["socketFactory"];
+    SocketService.inject = ["socketFactory","EnvironmentConfig"];
 
-    function SocketService(socketFactory){
+    function SocketService(socketFactory,EnvironmentConfig){
         return socketFactory({
-            ioSocket: io.connect('http://192.168.56.1:4000')
+            ioSocket: io.connect(EnvironmentConfig.chatSocket)
         });
     }
 })();

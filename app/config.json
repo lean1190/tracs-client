@@ -1,6 +1,7 @@
 {
     "development": {
         "EnvironmentConfig": {
+            "chatSocket":"http://192.168.56.1:4000",
             "api": "http://192.168.56.1:3000",
             "googleClientId": "1017723616061-btjadg1pe5tug819i8b3sffek1klev6m.apps.googleusercontent.com",
             "googleClientSecret": "McJIjSQt4aRNL_lLO8xSUBOe",
