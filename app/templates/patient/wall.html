@@ -1,5 +1,4 @@
-<!-- FIXME Por alguna razon no se muestra el titulo :S -->
-<ion-view cache-view="false" view-title="{{::vm.patient.name}}">
+<ion-view cache-view="false" view-title="Mi paciente">
     <ion-content>
 
         <div class="card patient-wall-card" ui-sref="app.patientDetail({ id:'{{::vm.patient._id}}' })">
@@ -22,8 +21,9 @@
         </div>
 
         <div class="list card" ng-show="vm.notifications.length">
-            <a href="/#" class="item item-icon-left" ng-repeat="notification in vm.notifications | orderBy: 'timeStamp'">
-                <i class="icon ion-home"></i> {{notification.message}} <span>- {{notification.timestamp | twitterDate}}</span>
+            <a class="item item-icon-left notification" ng-repeat="notification in vm.notifications | orderBy: '-timestamp'" ui-sref="{{notification.link}}">
+                <i class="icon {{notification.icon}}"></i> {{notification.message}}
+                <div class="timestamp">{{notification.timestamp | twitterDate}}</div>
             </a>
         </div>
 
