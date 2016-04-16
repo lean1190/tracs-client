@@ -26,7 +26,8 @@
                 "TracsClient.controllers",
                 "TracsClient.factories",
                 "TracsClient.directives",
-                "TracsClient.environment"
+                "TracsClient.environment",
+                "TracsClient.filters"
         ])
         .run(run)
         .config(config);
@@ -39,6 +40,8 @@
     angular.module("TracsClient.directives", []);
     // Declaración del módulos de constantes de environment
     angular.module("TracsClient.environment", []);
+    // Declaración del módulos de filtros
+    angular.module("TracsClient.filters", []);
 
     // Maneja el evento 'deviceready' para saber cuando se cargaron
     // todos los componentes de cordova y el dispositivo está listo.
@@ -145,6 +148,12 @@
             }
         })
 
+        .state("logout", {
+            cache: false,
+            url: "/logout",
+            controller: "LogoutController as vm"
+        })
+
         /**
          * ==================================================================
          * =========== RUTEOS PARA EL USUARIO LOGUEADO CON GMAIL ============
@@ -156,16 +165,6 @@
             abstract: true,
             templateUrl: "templates/layout/userView.html",
             controller: "MenuController as vm"
-        })
-
-        .state("app.logout", {
-            cache: false,
-            url: "/logout",
-            views: {
-                "menuContent": {
-                    controller: "LogoutController as vm"
-                }
-            }
         })
 
         .state("app.patientCreate", {
@@ -229,6 +228,49 @@
             }
         })
 
+        .state("app.patientEditClosestPeople", {
+            url: "/patient/editClosestPeople",
+            cache: false,
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/editClosestPeople.html",
+                    controller: "PatientEditClosestPeopleController as vm"
+                }
+            }
+        })
+
+        .state("app.patientCurrentProfiles", {
+            url: "/patient/currentProfiles",
+            cache: false,
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/currentProfiles.html",
+                    controller: "PatientCurrentProfilesController as vm"
+                }
+            }
+        })
+
+        .state("app.patientAssignProfile", {
+            url: "/patient/assignProfile",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/assignProfile.html",
+                    controller: "PatientAssignProfileController as vm"
+                }
+            }
+        })
+
+
+        .state('app.patientChatRoom', {
+            url: 'patient/chatRoom',
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/chatRoom.html",
+                    controller: "PatientChatRoomController as vm"
+                }
+            }
+        })
+
         /**
          * =========================================================
          * =========== RUTEOS PARA LA VISTA DE PACIENTE ============
@@ -247,48 +289,6 @@
                 "menuContent": {
                     templateUrl: "templates/imAPatient/home.html",
                     controller: "ImAPatientHomeController as vm"
-                }
-            }
-        })
-
-        .state("patientView.patientEditClosestPeople", {
-            url: "/patient/editClosestPeople",
-            cache: false,
-            views: {
-                "menuContent": {
-                    templateUrl: "templates/patient/editClosestPeople.html",
-                    controller: "PatientEditClosestPeopleController as vm"
-                }
-            }
-        })
-
-        .state("patientView.patientCurrentProfiles", {
-            url: "/patient/currentProfiles",
-            cache: false,
-            views: {
-                "menuContent": {
-                    templateUrl: "templates/patient/currentProfiles.html",
-                    controller: "PatientCurrentProfilesController as vm"
-                }
-            }
-        })
-
-        .state("patientView.patientAssignProfile", {
-            url: "/patient/assignProfile",
-            views: {
-                "menuContent": {
-                    templateUrl: "templates/patient/assignProfile.html",
-                    controller: "PatientAssignProfileController as vm"
-                }
-            }
-        })
-
-        .state('app.patientChatRoom', {
-            url: 'patient/chatRoom',
-            views: {
-                "menuContent": {
-                    templateUrl: "templates/patient/chatRoom.html",
-                    controller: "PatientChatRoomController as vm"
                 }
             }
         });

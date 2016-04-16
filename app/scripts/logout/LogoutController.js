@@ -25,6 +25,7 @@
         function activate() {
             // Borra los datos del localStorage
             storage.setUser(null);
+            storage.setPatientUser(null);
             localStorageService.clearAll();
             // Redirige al login
             $state.go("signin.login");

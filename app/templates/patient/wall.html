@@ -23,7 +23,7 @@
 
         <div class="list card" ng-show="vm.notifications.length">
             <a href="/#" class="item item-icon-left" ng-repeat="notification in vm.notifications | orderBy: 'timeStamp'">
-                <i class="icon ion-home"></i> {{notification.message}}
+                <i class="icon ion-home"></i> {{notification.message}} <span>- {{notification.timestamp | twitterDate}}</span>
             </a>
         </div>
 
