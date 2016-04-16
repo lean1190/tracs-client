@@ -64,5 +64,9 @@
   ],
   "cordovaPlatforms": [
     "android"
-  ]
+  ],
+  "dependencies": {
+    "angular-moment": "^1.0.0-beta.5",
+    "moment": "^2.12.0"
+  }
 }

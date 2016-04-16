@@ -22,6 +22,7 @@
                 "ngCordova",
                 "LocalStorageModule",
                 "xeditable",
+                "btford.socket-io",
                 "TracsClient.controllers",
                 "TracsClient.factories",
                 "TracsClient.directives",
@@ -278,6 +279,16 @@
                 "menuContent": {
                     templateUrl: "templates/patient/assignProfile.html",
                     controller: "PatientAssignProfileController as vm"
+                }
+            }
+        })
+
+        .state('app.patientChatRoom', {
+            url: 'patient/chatRoom',
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/chatRoom.html",
+                    controller: "PatientChatRoomController as vm"
                 }
             }
         });

@@ -9,9 +9,9 @@
         .module("TracsClient.controllers")
         .controller("PatientWallController", PatientWallController);
 
-    PatientWallController.$inject = ["$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory"];
+    PatientWallController.$inject = ["$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory","SocketService"];
 
-    function PatientWallController($scope, $stateParams, $interval, $cordovaToast, PatientFactory) {
+    function PatientWallController($scope, $stateParams, $interval, $cordovaToast, PatientFactory,SockectService) {
 
         var vm = this,
             patientId = $stateParams.id,
@@ -42,6 +42,22 @@
             }
         });
 
+
+         vm.enterPatientChatRoom = function(){
+
+            vm.current_room = "Sala de chat de " + vm.patient.name;
+
+            var room = {
+                'room_name': vm.current_room
+            };
+
+            SocketService.emit('join:room', room);
+
+            $state.go("app.patientChatRoom");
+        };
+
+
+
         function activate() {
             // Recupera todos los datos del paciente
             PatientFactory.getPatientDetail(patientId).then(function (resultPatient) {
@@ -65,6 +81,7 @@
         }
 
         activate();
+
 
     }
 })();
