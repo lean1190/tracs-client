@@ -9,9 +9,9 @@
         .module("TracsClient.controllers")
         .controller("PatientWallController", PatientWallController);
 
-    PatientWallController.$inject = ["$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory", "NotificationsMapper"];
+    PatientWallController.$inject = ["$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory", "NotificationsMapper", "SocketService", "$state"];
 
-    function PatientWallController($scope, $stateParams, $interval, $cordovaToast, PatientFactory, NotificationsMapper) {
+    function PatientWallController($scope, $stateParams, $interval, $cordovaToast, PatientFactory, NotificationsMapper, SocketService, $state ) {
 
         var vm = this,
             patientId = $stateParams.id,
@@ -62,10 +62,10 @@
 
          vm.enterPatientChatRoom = function(){
 
-            vm.current_room = "Sala de chat de " + vm.patient.name;
+            vm.currentRoom = "room_"+vm.patient._id;//"Sala de chat de " + vm.patient.name;
 
             var room = {
-                'room_name': vm.current_room
+                'room_name': vm.currentRoom
             };
 
             SocketService.emit('join:room', room);

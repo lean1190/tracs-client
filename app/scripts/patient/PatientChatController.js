@@ -15,15 +15,14 @@
 
         vm.patient = storage.getLastVisitedPatient();
         vm.user = storage.getUser();
-        console.log(vm.user);
-        console.log(vm.patient);
+
         vm.messages = [];
 
         activate();
 
         function activate(){
 
-            vm.currentRoom = "Sala de chat de" + vm.patient.name;
+            vm.currentRoom = "room_"+vm.patient._id//"Sala de chat de" + vm.patient.name;
             vm.currentUser = vm.user.name;
         };
 
