@@ -23,7 +23,6 @@
 
             PatientFactory.getPatientProfiles(vm.patient._id).then(function(result) {
                 vm.profiles = result;
-                console.log(vm.profiles);
             }, function() {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la lista de usuarios, intentalo de nuevo");
             });

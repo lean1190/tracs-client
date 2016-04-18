@@ -6,27 +6,35 @@
                 <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
                 </button>
             </ion-nav-buttons>
+            <!-- Boton a la derecha, ver como reemplazar comportamiento -->
+            <!--<ion-nav-buttons side="right">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+                </button>
+            </ion-nav-buttons>-->
         </ion-nav-bar>
         <ion-nav-view name="menuContent"></ion-nav-view>
     </ion-side-menu-content>
 
     <ion-side-menu side="left" class="side-menu">
-        <ion-header-bar align-title="center" class="bar-positive">
-            <img ng-src="{{vm.user.picture}}" alt="{{vm.user.name}}" style="width:35px;height:35px;">
-            <h1 class="title">{{vm.user.name}}</h1>
+        <ion-header-bar class="side-menu-header">
+            <img class="profile-picture" ng-src="{{vm.user.picture}}" alt="{{vm.user.name}}">
+            <div class="title">
+                <div class="name">{{vm.user.name}}</div>
+                <div class="email">{{vm.user.email || vm.user.phoneNumber}}</div>
+            </div>
         </ion-header-bar>
-        <ion-content>
+        <ion-content class="side-menu-content">
             <ion-list>
-                <ion-item menu-close ui-sref="app.patientHome" class="item-icon-left" ng-hide="vm.imAtPatientHome">
+                <ion-item ui-sref="app.patientHome" class="item-icon-left" ng-hide="vm.imAtPatientHome">
                     <i class="icon ion-android-contact"></i> Mi paciente
                 </ion-item>
-                <ion-item menu-close ui-sref="app.patientHome" class="item-icon-left" ng-hide="vm.imAtPatientHome">
+                <ion-item ui-sref="app.patientHome" class="item-icon-left" ng-hide="vm.imAtPatientHome">
                     <i class="icon ion-android-contacts"></i> Mis pacientes
                 </ion-item>
-                <ion-item menu-close ui-sref="app.patientCurrentProfiles" class="item-icon-left" ng-hide="vm.imAtPatientHome">
+                <ion-item ui-sref="app.patientCurrentProfiles" class="item-icon-left" ng-click="vm.closeMenu()" ng-hide="vm.imAtPatientHome">
                     <i class="icon ion-android-people"></i> Participantes
                 </ion-item>
-                <ion-item menu-close ui-sref="app.patientEditClosestPeople" class="item-icon-left" ng-hide="vm.imAtPatientHome">
+                <ion-item ui-sref="app.patientEditClosestPeople" class="item-icon-left" ng-click="vm.closeMenu()" ng-hide="vm.imAtPatientHome">
                     <i class="icon ion-android-call"></i> Contactos
                 </ion-item>
                 <ion-item menu-close ui-sref="logout" class="item-icon-left">

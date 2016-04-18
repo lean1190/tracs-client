@@ -44,3 +44,44 @@ body, html {
 .row:first-child .col {
     border-top: none;
 }
+
+.bar-balanced {
+    background-color: $layout-green !important;
+}
+
+.side-menu {
+
+    .side-menu-header {
+        height:100px;
+        background-image: url('../images/menu-background.jpg');
+        background-size: 100% 100%;
+
+        img.profile-picture {
+            width: 60px;
+            height: 60px;
+            border-radius: 100%;
+            margin-top: 13px;
+            margin-left: 5px;
+        }
+
+        .title {
+            margin-top: 10px;
+            overflow:visible;
+        }
+
+        .name {
+            color: white;
+            font-weight: bold;
+        }
+
+        .email {
+            font-size: 11px;
+            margin-top: -20px;
+            color: #F1F1F1;
+        }
+    }
+
+    .side-menu-content {
+        top: 100px;
+    }
+}

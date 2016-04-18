@@ -16,22 +16,15 @@
         .module("TracsClient.controllers")
         .controller("MenuController", MenuController);
 
-    MenuController.$inject = ["$scope", "$rootScope", "storage"];
+    MenuController.$inject = ["$scope", "$rootScope", "$ionicSideMenuDelegate", "storage"];
 
-    function MenuController($scope, $rootScope, storage) {
+    function MenuController($scope, $rootScope, $ionicSideMenuDelegate, storage) {
 
         var vm = this;
-        vm.user = {};
+        vm.user = storage.getUser() || storage.getPatientUser();
         vm.imAtPatientHome = true;
 
-        /**
-         * Suscripción al evento "user.changed", que se ejecuta cuando
-         * cambiaron los datos de usuario en la sesión
-         */
-        $rootScope.$on("user.changed", function () {
-            // Asigna el usuario logueado
-            vm.user = storage.getUser();
-        });
+        console.log("### Menu user", vm.user);
 
         /**
          * Suscripción al evento "state.changed.patientHome", que se ejecuta cuando
@@ -40,6 +33,10 @@
         $rootScope.$on("state.changed.patientHome", function (event, state) {
             vm.imAtPatientHome = state;
         });
+
+        vm.closeMenu = function () {
+            $ionicSideMenuDelegate.toggleLeft();
+        }
     }
 
 })();
