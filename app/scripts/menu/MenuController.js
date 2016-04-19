@@ -21,10 +21,20 @@
     function MenuController($scope, $rootScope, $ionicSideMenuDelegate, storage) {
 
         var vm = this;
+
+        // Usuario para mostrar la foto de perfil en el menu
+        // Puede ser el usuario logueado o un usuario tipo paciente
         vm.user = storage.getUser() || storage.getPatientUser();
+
+        // Variable utilizada para mostrar u ocultar items del menú
+        // según la página
         vm.imAtPatientHome = true;
 
         console.log("### Menu user", vm.user);
+
+        vm.leftButtonAction = function() {
+            console.log("### Accion desde el MenuController");
+        };
 
         /**
          * Suscripción al evento "state.changed.patientHome", que se ejecuta cuando
@@ -34,9 +44,14 @@
             vm.imAtPatientHome = state;
         });
 
+        /**
+         * Cierra el side menu
+         * Sirve para reemplazar la directiva menu-close y asi evitar
+         * que cambie le history root de navegación
+         */
         vm.closeMenu = function () {
             $ionicSideMenuDelegate.toggleLeft();
-        }
+        };
     }
 
 })();

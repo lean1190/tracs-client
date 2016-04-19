@@ -109,7 +109,9 @@
          * @param {number} patientId el id del paciente
          */
         vm.changeStateToPatientWall = function(patientId) {
+            // Emite un evento indicando que salio del listado de usuarios
             $rootScope.$emit("state.changed.patientHome", false);
+
             setNextViewAsHistoryRoot();
             $state.go("app.patientWall", { id: patientId });
         };
