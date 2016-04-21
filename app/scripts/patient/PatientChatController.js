@@ -22,8 +22,20 @@
 
         function activate(){
 
-            vm.currentRoom = "room_"+vm.patient._id//"Sala de chat de" + vm.patient.name;
+            vm.currentRoom = "room_"+vm.patient._id;//"Sala de chat de" + vm.patient.name;
             vm.currentUser = vm.user.name;
+
+            var room = {
+                'room_name': vm.currentRoom,
+                'userInfo':{
+                    "name": vm.user.name,
+                    "id": vm.user._id,
+                    "picture":vm.user.picture
+                }
+            };
+
+            SocketService.emit('join:room', room);
+
         };
 
         //This uses the moment.js library to format the timestamp in a standard way.
@@ -65,15 +77,21 @@
                 'room': vm.currentRoom,
                 'time': moment()
             };
-
+            SocketService.removeAllListeners();
             SocketService.emit('leave:room', msg);
-            $state.go('rooms');
+            //$state.go('app.patientWall');
         };
 
         //This listens for messages sent by other users in the room. When a message is received, we push it to the messages array so that it’s displayed in the view.
         SocketService.on('message', function(msg){
             vm.messages.push(msg);
             $ionicScrollDelegate.scrollBottom();
+
+        });
+
+        SocketService.on('chat:members', function(chatMembers){
+                vm.chatMembers = chatMembers;
+                console.log(vm.chatMembers);
         });
     }
 })();
