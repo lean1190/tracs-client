@@ -77,8 +77,9 @@
                 'room': vm.currentRoom,
                 'time': moment()
             };
-            SocketService.removeAllListeners();
+
             SocketService.emit('leave:room', msg);
+            SocketService.removeAllListeners();
             //$state.go('app.patientWall');
         };
 

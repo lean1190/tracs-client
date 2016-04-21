@@ -9,9 +9,9 @@
         .module("TracsClient.controllers")
         .controller("PatientWallController", PatientWallController);
 
-    PatientWallController.$inject = ["$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory", "SocketService", "$state","storage"];
+    PatientWallController.$inject = ["$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory", "SocketService", "$state","storage","NotificationsMapper"];
 
-    function PatientWallController($scope, $stateParams, $interval, $cordovaToast, PatientFactory, SocketService,$state,storage ) {
+    function PatientWallController($scope, $stateParams, $interval, $cordovaToast, PatientFactory, SocketService,$state,storage,NotificationsMapper ) {
 
         var vm = this,
             patientId = $stateParams.id,
@@ -21,11 +21,28 @@
         vm.notifications = [];
 
         /**
+         * Agrega a las notificaciones un icono y un link a un estado
+         * @param   {Array} notifications las notificaciones
+         * @returns {Array} el arreglo de notificaciones con la información para la vista
+         */
+        function fillNotificationsWithViewInfo(notifications) {
+            for (var i = 0; i < notifications.length; i++) {
+                var currentNotification = notifications[i],
+                    notificationInfo = NotificationsMapper.getNotificationInfoForType(currentNotification.type);
+
+                currentNotification.icon = notificationInfo.icon;
+                currentNotification.link = notificationInfo.link;
+            }
+
+            return notifications;
+        }
+
+        /**
          * Recupera las notificaciones para el paciente actual
          */
         function getPatientNotifications() {
             PatientFactory.getNotifications(patientId).then(function (resultNotifications) {
-                vm.notifications = resultNotifications;
+                vm.notifications = fillNotificationsWithViewInfo(resultNotifications);
             });
         }
 
@@ -46,7 +63,7 @@
             // Recupera todos los datos del paciente
             PatientFactory.getPatientDetail(patientId).then(function (resultPatient) {
                 vm.patient = resultPatient;
-                vm.notifications = resultPatient.notifications;
+                vm.notifications = fillNotificationsWithViewInfo(resultPatient.notifications);
 
                 // Recupera los perfiles para mostrar en el muro
                 PatientFactory.getPatientProfiles(vm.patient._id).then(function (result) {
@@ -55,7 +72,7 @@
 
                 // Inicializa el intervalo para hacer polling de las notificaciones
                 // y traerse las nuevas. Busca cada 20 segundos
-                $interval(function() {
+                notificationsInterval = $interval(function () {
                     getPatientNotifications();
                 }, 20000);
 
