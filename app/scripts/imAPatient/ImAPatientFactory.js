@@ -23,10 +23,22 @@
         var imAPatientEndpoint = EnvironmentConfig.api + "/imAPatient";
 
         var service = {
-            linkPatient: linkPatient
+            linkPatient: linkPatient,
+            sendGeoAlert: sendGeoAlert
         };
 
         return service;
+
+        function sendGeoAlert(geoAlert, patientId){
+
+            return $http.put(imAPatientEndpoint + "/sendGeoAlert/" + patientId, geoAlert).then(function (result) {
+                return result;
+            }, function(error) {
+                $log.error("Ocurrió un error al enviar la alerta, intentalo de nuevo ", error);
+                return error;
+            });
+
+        }
 
         /**
          * Recupera los datos para la vista de paciente a partir de un DNI

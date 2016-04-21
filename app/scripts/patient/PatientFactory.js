@@ -176,9 +176,9 @@
 
         /**
          * Agrega una nueva opinion sobre un paciente
-         * @param   {object}   newOpinion Nueva opinion a ser agregada
-         * @param   {[[Type]]} patientId  Id del paciente al cual se le va a asignar la opinion
-         * @returns {[[Type]]} Una promesa con el paciente modificado
+         * @param   {object}  newOpinion Nueva opinion a ser agregada
+         * @param   {number}  patientId el id del paciente al cual se le va a asignar la opinion
+         * @returns {promise} una promesa con el paciente modificado
          */
         function addPatientOpinion(newOpinion, patientId){
             return $http.put(patientEndpoint + "/addPatientOpinion/"+ patientId, newOpinion).then(function (result) {
@@ -188,6 +188,11 @@
             });
         }
 
+        /**
+         * Recupera las opiniones de un paciente
+         * @param   {number}  patientId el id del paciente
+         * @returns {promise} una promesa con las opiniones
+         */
         function getPatientOpinions(patientId){
             return $http.get(patientEndpoint + "/patientOpinions/"+ patientId).then(function(result){
                 return result.data;

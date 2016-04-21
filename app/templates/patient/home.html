@@ -1,7 +1,7 @@
 <ion-view cache-view="false" view-title="Mis Pacientes">
     <ion-content>
         <ion-list>
-            <ion-item ng-repeat="profile in vm.profiles" ng-click="vm.changeStateToPatientWall(profile.patient._id)" class="item-avatar">
+            <ion-item ng-repeat="profile in vm.profiles | orderBy:'patient.name' " ng-click="vm.changeStateToPatientWall(profile.patient._id)" class="item-avatar">
                 <img ng-src="{{::profile.patient.picture}}" alt="{{::profile.patient.name}}">
                 <h2>{{::profile.patient.name}}</h2>
                 <p>{{::profile.patient.generalDescription}}</p>
@@ -10,8 +10,9 @@
 
         <h3>{{::vm.message}}</h3>
 
-        <a ui-sref="app.patientCreate">
-            <button class="button button-balanced">Crear Nuevo Paciente</button>
+        <a ui-sref="app.patientCreate" class="floating-button">
+            <!--<label for="">Nuevo</label>-->
+            <button class="button button-balanced">+</button>
         </a>
     </ion-content>
 </ion-view>

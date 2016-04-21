@@ -11,14 +11,17 @@
     </ion-side-menu-content>
 
     <ion-side-menu side="left" class="side-menu">
-        <ion-header-bar align-title="center" class="bar-positive">
-            <img ng-src="{{vm.user.picture}}" alt="{{vm.user.name}}" style="width:35px;height:35px;">
-            <h1 class="title">{{vm.user.name}}</h1>
+        <ion-header-bar class="side-menu-header">
+            <img class="profile-picture" ng-src="{{vm.user.picture}}" alt="{{vm.user.name}}">
+            <div class="title">
+                <div class="name">{{vm.user.name}}</div>
+                <div class="email">{{vm.user.email || vm.user.phoneNumber}}</div>
+            </div>
         </ion-header-bar>
-        <ion-content>
+        <ion-content class="side-menu-content">
             <ion-list>
                 <ion-item menu-close ui-sref="logout" class="item-icon-left">
-                    <i class="icon ion-android-exit"></i> Salir
+                    <i class="icon ion-android-exit"></i> Cerrar sesión
                 </ion-item>
             </ion-list>
         </ion-content>

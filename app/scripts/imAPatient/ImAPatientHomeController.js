@@ -18,9 +18,9 @@
         .module("TracsClient.controllers")
         .controller("ImAPatientHomeController", ImAPatientHomeController);
 
-    ImAPatientHomeController.$inject = ["$log", "$state", "$cordovaToast", "storage", "dialer", "$cordovaGeolocation"];
+    ImAPatientHomeController.$inject = ["$log", "$state", "$cordovaToast", "storage", "dialer", "$cordovaGeolocation","ImAPatientFactory"];
 
-    function ImAPatientHomeController($log, $state, $cordovaToast, storage, dialer, $cordovaGeolocation) {
+    function ImAPatientHomeController($log, $state, $cordovaToast, storage, dialer, $cordovaGeolocation,ImAPatientFactory) {
 
         var vm = this;
 
@@ -35,7 +35,7 @@
         };
 
         // Importante: Prender el GPS del emulador
-        vm.myPosition = function () {
+        vm.sendGeoAlert = function () {
 
             var options = {
                 timeout: 80000,
@@ -47,6 +47,17 @@
                 vm.patientPosition = position.coords;
                 vm.patientPosition.timestamp = position.timestamp;
                 console.log("### Patient position: ", vm.patientPosition);
+
+                ImAPatientFactory.sendGeoAlert(vm.patientPosition, vm.patient._id).then(function(result) {
+
+                    $cordovaToast.showLongBottom("Tu alerta fue enviada correctamente, pronto serás contactado");
+
+                }, function() {
+
+                    $cordovaToast.showLongBottom("Ocurrió un error al enviar la alerta, intentalo de nuevo");
+                });
+
+
             }, function (error) {
                 $log.error("Ocurrió un error al recuperar la posición del paciente, está habilitado el GPS?", error);
             });

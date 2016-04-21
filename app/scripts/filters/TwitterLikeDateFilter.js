@@ -1,6 +1,6 @@
 /**
  * @ngdoc filter
- * @name TracsClient.filters:TwitterLikeDateFilter
+ * @name TracsClient.filters:tenden d
  * @external https://github.com/hijonathan/moment.twitter
  * @description
  * Filtro que devuelve la fecha en formato twitter, tipo: 6 days
@@ -17,7 +17,7 @@
 
     function TwitterLikeDateFilter(moment) {
         return function (inputDate) {
-            return moment(inputDate).twitter();
+            return moment(inputDate).twitterLong();
         };
     }
 }());

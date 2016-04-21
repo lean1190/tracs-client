@@ -48,7 +48,7 @@
 
         vm.addPatientOpinion = function (){
 
-            var currentUserId = localStorageService.get("user")._id
+            var currentUserId = storage.getUser()._id;
 
             var newPatientOpinion = {};
             newPatientOpinion.user = currentUserId;
@@ -56,10 +56,10 @@
 
             PatientFactory.addPatientOpinion(newPatientOpinion, vm.patient._id).then(function(){
                 $cordovaToast.showLongBottom("Nueva opinión gurdada correctamente!");
-            }), function () {
+            }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al guardar la opinión del paciente, intentalo de nuevo");
-            };
+            });
 
-        }
+        };
     }
 })();

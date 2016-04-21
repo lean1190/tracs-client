@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("PatientHomeController", PatientHomeController);
 
-    PatientHomeController.$inject = ["$scope", "$log", "$state", "$q", "$cordovaToast", "$ionicPopup", "$ionicHistory", "storage", "utils", "sim", "PatientFactory", "UserFactory"];
+    PatientHomeController.$inject = ["$scope", "$log", "$state", "$q", "$rootScope", "$cordovaToast", "$ionicPopup", "$ionicHistory", "storage", "utils", "sim", "PatientFactory", "UserFactory"];
 
-    function PatientHomeController($scope, $log, $state, $q, $cordovaToast, $ionicPopup, $ionicHistory, storage, utils, sim, PatientFactory, UserFactory) {
+    function PatientHomeController($scope, $log, $state, $q, $rootScope, $cordovaToast, $ionicPopup, $ionicHistory, storage, utils, sim, PatientFactory, UserFactory) {
 
         var vm = this,
             loggedInUser = storage.getUser();
@@ -109,11 +109,18 @@
          * @param {number} patientId el id del paciente
          */
         vm.changeStateToPatientWall = function(patientId) {
+            // Emite un evento indicando que salio del listado de usuarios
+            $rootScope.$emit("state.changed.patientHome", false);
+
             setNextViewAsHistoryRoot();
             $state.go("app.patientWall", { id: patientId });
         };
 
         function activate() {
+
+            // Emite un evento indicando estoy en el home de pacientes
+            // para actualizar el menú
+            $rootScope.$emit("state.changed.patientHome", true);
 
             // Para evitar navegación rara de la aplicación,
             // borra el historial cada vez que entra a esta pantalla

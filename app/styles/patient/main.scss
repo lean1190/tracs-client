@@ -41,3 +41,16 @@
         }
     }
 }
+
+.patient-notifications {
+    margin-bottom: 0;
+
+    .notification {
+        font-size: 16px;
+
+        .timestamp {
+            font-size:13px;
+            color: #818181;
+        }
+    }
+}

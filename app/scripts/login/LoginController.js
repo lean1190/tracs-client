@@ -22,18 +22,6 @@
 
         var vm = this;
 
-        activate();
-
-        function activate() {
-            // Si el usuario ya se logueó en la aplicación, lo redirige al listado de pacientes asignados
-            if (isUserLoggedIn()) {
-                forwardToLoggedInHome();
-            // Si el usuario es un paciente y ya registró su DNI, lo redirige a la vista de paciente
-            } else if (isPatientLoggedIn()) {
-                forwardToPatientView();
-            }
-        }
-
         /**
          * Verifica que haya un usuario logueado
          * @returns {boolean} true si se encontró un usuario
@@ -83,7 +71,7 @@
          */
         function forwardToLoggedInHome() {
             // Emite un evento indicando que el usuario en la sesión cambió
-            $rootScope.$emit("user.changed");
+            $rootScope.$emit("user.changed", {name: "file"});
 
             setNextViewAsHistoryRoot();
             changeStateToLoggedInHome();
@@ -117,6 +105,18 @@
                 $cordovaToast.showLongBottom("No pudimos loguearte! Por favor intentalo de nuevo");
             });
         };
+
+        function activate() {
+            // Si el usuario ya se logueó en la aplicación, lo redirige al listado de pacientes asignados
+            if (isUserLoggedIn()) {
+                forwardToLoggedInHome();
+            // Si el usuario es un paciente y ya registró su DNI, lo redirige a la vista de paciente
+            } else if (isPatientLoggedIn()) {
+                forwardToPatientView();
+            }
+        }
+
+        activate();
     }
 
 })();
