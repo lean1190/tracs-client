@@ -57,7 +57,7 @@
             closestPeople.push(getContactInformation(vm.contactP3Id, 3, vm.profiles));
             closestPeople.push(getContactInformation(vm.contactP4Id, 4, vm.profiles));
 
-            PatientFactory.updateClosestPeople(closestPeople, vm.patient._id).then(function (result) {
+            PatientFactory.updateClosestPeople(closestPeople, vm.patient._id).then(function () {
                 $state.go("app.patientDetail");
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al modificar las personas cercanas del paciente, intentalo de nuevo");
