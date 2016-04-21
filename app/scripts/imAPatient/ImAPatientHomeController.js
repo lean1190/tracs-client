@@ -18,9 +18,10 @@
         .module("TracsClient.controllers")
         .controller("ImAPatientHomeController", ImAPatientHomeController);
 
-    ImAPatientHomeController.$inject = ["$log", "$state", "$cordovaToast", "storage", "dialer", "$cordovaGeolocation","ImAPatientFactory"];
 
-    function ImAPatientHomeController($log, $state, $cordovaToast, storage, dialer, $cordovaGeolocation,ImAPatientFactory) {
+    ImAPatientHomeController.$inject = ["$log", "$state", "$cordovaToast", "$cordovaGeolocation", "storage", "dialer", "sms","ImAPatientFactory"];
+
+    function ImAPatientHomeController($log, $state, $cordovaToast, $cordovaGeolocation, storage, dialer, sms, ImAPatientFactory) {
 
         var vm = this;
 
@@ -32,6 +33,22 @@
                 $log.error("No se pudo realizar la llamada al número " + phoneNumber, error);
                 $cordovaToast.showLongBottom("No se pudo realizar la llamada! Hay señal?");
             }, phoneNumber, false);
+        };
+
+        vm.sendSms = function (phoneNumber) {
+            var options = {
+                android: {
+                    // intent: 'INTENT' // send SMS with the native android SMS messaging
+                    intent: "" // send SMS without open any other app
+                }
+            };
+
+            sms.send(phoneNumber, "Hola qué tal?", options, function () {
+                $cordovaToast.showLongBottom("Mensaje enviado!");
+            }, function (error) {
+                $log.error("No se pudo enviar el sms al número " + phoneNumber, error);
+                $cordovaToast.showLongBottom("No se pudo enviar el mensaje! Hay señal?");
+            });
         };
 
         // Importante: Prender el GPS del emulador
