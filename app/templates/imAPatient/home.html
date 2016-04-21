@@ -1,16 +1,29 @@
 <ion-view cache-view="false" view-title="Hola {{vm.patient.name}}!">
     <ion-content>
 
-        <button class="button button-assertive" ng-click="vm.myPosition()">
-            AYUDA
-        </button>
-
-        <div class="contact-card" ng-repeat="closePerson in vm.patient.closestPeople | orderBy:['priority','name']" ng-click="vm.callPhoneNumber({{::closePerson.phone}})">
-            <div class="contact-img">
-                <img ng-src="{{::closePerson.picture}}" alt="{{::closePerson.name}}">
-            </div>
-            <div class="contact-info">
-                <i class="icon ion-android-call"></i> Llamar a {{::closePerson.name}}
+        <div ng-click="vm.myPosition()" style="background-color: #F50057; color: white; text-align: center; height: 100px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);">
+            <!--<div>
+                <img src="images/siren.png" alt="Alerta" style="width: 50px">
+            </div>-->
+            <h1 style="color: white;">AiUDA</h1>
+        </div>
+        <div class="contacts">
+            <div class="contact-card" ng-repeat="closePerson in vm.patient.closestPeople track by closePerson._id | orderBy:['priority','name']">
+                <div class="contact-img" ng-click="vm.callPhoneNumber({{::closePerson.phone}})">
+                    <img ng-src="{{::closePerson.picture}}" alt="{{::closePerson.name}}">
+                </div>
+                <div class="contact-actions">
+                    <div class="contact-info" ng-click="vm.callPhoneNumber(closePerson.phoneNumber)">
+                        <i class="icon ion-android-call"></i>
+                    </div>
+                    <div class="contact-info" ng-click="vm.sendSms(closePerson.phoneNumber)">
+                        <i class="icon ion-chatbubble-working"></i>
+                        <!--<select ng-model="vm.profile.user" ng-options="user._id as user.name for user in vm.users">
+                             <option value="">Seleccione un participante</option>
+                        </select>-->
+                    </div>
+                </div>
             </div>
         </div>
     </ion-content>

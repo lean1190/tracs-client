@@ -41,7 +41,6 @@
                 } else {
                     $cordovaToast.showLongBottom("No encontramos al paciente con dni " + vm.dni);
                 }
-
             }, function () {
                 $cordovaToast.showLongBottom("No encontramos al paciente con dni " + vm.dni);
             });

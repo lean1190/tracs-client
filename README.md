@@ -11,6 +11,7 @@ cordova plugin add cordova-plugin-whitelist
 cordova plugin add cordova-plugin-inappbrowser
 cordova plugin add cordova-plugin-x-toast
 cordova plugin add cordova-plugin-sim
+cordova plugin add cordova-sms-plugin
 cordova plugin add https://github.com/Rohfosho/CordovaCallNumberPlugin.git
 cordova plugin add phonegap-plugin-push --variable SENDER_ID="1017723616061"
 
