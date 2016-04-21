@@ -18,6 +18,10 @@
         vm.patient = {};
         vm.patientOpinions = {};
 
+        vm.leftButtonAction = function() {
+            console.log("### Redefinido! - Accion desde el PatientDetailController");
+        };
+
         activate();
 
         function activate() {

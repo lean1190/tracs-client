@@ -261,8 +261,8 @@
         })
 
 
-        .state('app.patientChatRoom', {
-            url: 'patient/chatRoom',
+        .state("app.patientChatRoom", {
+            url: "patient/chatRoom",
             views: {
                 "menuContent": {
                     templateUrl: "templates/chat/chatRoom.html",
@@ -280,7 +280,8 @@
         .state("patientView", {
             url: "/patientView",
             abstract: true,
-            templateUrl: "templates/layout/patientView.html"
+            templateUrl: "templates/layout/patientView.html",
+            controller: "MenuController as vm"
         })
 
         .state("patientView.imAPatientHome", {

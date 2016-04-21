@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("MenuController", MenuController);
 
-    MenuController.$inject = ["$scope", "$rootScope", "$ionicSideMenuDelegate", "storage"];
+    MenuController.$inject = ["$rootScope", "$state", "$ionicPopup", "$ionicSideMenuDelegate", "storage"];
 
-    function MenuController($scope, $rootScope, $ionicSideMenuDelegate, storage) {
+    function MenuController($rootScope, $state, $ionicPopup, $ionicSideMenuDelegate, storage) {
 
         var vm = this;
 
@@ -32,17 +32,28 @@
 
         console.log("### Menu user", vm.user);
 
-        vm.leftButtonAction = function() {
+        vm.leftButtonAction = function () {
             console.log("### Accion desde el MenuController");
         };
 
-        /**
-         * Suscripción al evento "state.changed.patientHome", que se ejecuta cuando
-         * entra al patient home con el listado de pacientes
-         */
-        $rootScope.$on("state.changed.patientHome", function (event, state) {
-            vm.imAtPatientHome = state;
-        });
+        vm.logout = function () {
+            $ionicPopup.show({
+                title: "¿Seguro que querés salir?",
+                buttons: [
+                    {
+                        text: "Seguro",
+                        type: "button-assertive",
+                        onTap: function (event) {
+                            $state.go("logout");
+                        }
+                    },
+                    {
+                        text: "Mejor no",
+                        type: "button-balanced"
+                    }
+                ]
+            });
+        };
 
         /**
          * Cierra el side menu
@@ -52,6 +63,14 @@
         vm.closeMenu = function () {
             $ionicSideMenuDelegate.toggleLeft();
         };
+
+        /**
+         * Suscripción al evento "state.changed.patientHome", que se ejecuta cuando
+         * entra al patient home con el listado de pacientes
+         */
+        $rootScope.$on("state.changed.patientHome", function (event, state) {
+            vm.imAtPatientHome = state;
+        });
     }
 
 })();

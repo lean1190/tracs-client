@@ -60,6 +60,7 @@
     "cordova-plugin-x-toast",
     "cordova-plugin-sim",
     "cordova-plugin-geolocation",
+    "cordova-sms-plugin",
     "https://github.com/Rohfosho/CordovaCallNumberPlugin.git"
   ],
   "cordovaPlatforms": [

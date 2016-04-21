@@ -53,7 +53,7 @@
          * Redirige a la vista de paciente
          */
         function changeStateToPatientView() {
-            $state.go("app.imAPatientHome");
+            $state.go("patientView.imAPatientHome");
         }
 
         /**
