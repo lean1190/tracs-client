@@ -22,7 +22,7 @@
 
         function activate(){
 
-            vm.currentRoom = "room_"+vm.patient._id;//"Sala de chat de" + vm.patient.name;
+            vm.currentRoom = "room_"+vm.patient._id;
             vm.currentUser = vm.user.name;
 
             var room = {
@@ -44,7 +44,6 @@
         };
 
         //Attach the isNotCurrentUser function to the current scope that checks if the user supplied as the argument is the same as the current user. It returns a different string based on the result used in the view so that the message container for the current user is styled differently.
-
         vm.isNotCurrentUser = function(user){
 
             if(vm.currentUser != user){
@@ -54,7 +53,6 @@
         };
 
         //It executes when the user clicks on the button for sending the message. This constructs an object containing the name of the current room, current user and the actual message. We then push it to the messages array so that it can be immediately seen by the user. And then call the scrollBottom function in the $ionicScrollDelegate to scroll down the page. Next, we assign an empty string to the message so that the contents of the text field gets deleted. Finally, we send the object.
-
         vm.sendTextMessage = function(){
             var msg = {
                 'room': vm.currentRoom,
@@ -73,6 +71,7 @@
         //The leaveRoom function leaves the room, sending a leave:room message to the server so that the current user is removed from the current room, sending the name of the user leaving the room.
         vm.leaveRoom = function(){
             var msg = {
+                'id': vm.user._id,
                 'user': vm.currentUser,
                 'room': vm.currentRoom,
                 'time': moment()
