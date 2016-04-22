@@ -20,6 +20,10 @@
             </div>
         </div>
 
+        <a ui-sref="app.patientChatRoom">
+            <button class="button button-balanced">Chat del paciente</button>
+        </a>
+
         <div class="list card patient-notifications" ng-show="vm.notifications.length">
             <a class="item item-icon-left notification" ng-repeat="notification in vm.notifications | orderBy: '-timestamp'" ui-sref="{{notification.link}}">
                 <i class="icon {{notification.icon}}"></i> {{notification.message}}
@@ -27,9 +31,7 @@
             </a>
         </div>
 
-        <a ui-sref="app.patientChatRoom">
-            <button class="button button-balanced">Chat del paciente</button>
-        </a>
+
 
     </ion-content>
 </ion-view>

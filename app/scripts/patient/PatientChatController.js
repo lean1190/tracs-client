@@ -89,6 +89,13 @@
 
         });
 
+        //This listens for historical messages that are going to be displayed only for the user that recently logged to the chat room
+        SocketService.on('hist:messages', function(msg){
+            vm.messages.push(msg);
+            $ionicScrollDelegate.scrollBottom();
+        })
+
+        //This listens for the changes of the users that are participating in the chat room
         SocketService.on('chat:members', function(chatMembers){
                 vm.chatMembers = chatMembers;
                 console.log(vm.chatMembers);
