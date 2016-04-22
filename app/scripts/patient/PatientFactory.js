@@ -31,6 +31,7 @@
             getSelectableUsers: getSelectableUsers,
             getNotifications: getNotifications,
             getPatientOpinions: getPatientOpinions,
+            getPersonalNotes: getPersonalNotes,
             createPatient: createPatient,
             updatePatientDetail: updatePatientDetail,
             updateClosestPeople: updateClosestPeople,
@@ -118,6 +119,35 @@
         }
 
         /**
+         * Recupera las opiniones de un paciente
+         * @param   {number}  patientId el id del paciente
+         * @returns {promise} una promesa con las opiniones
+         */
+        function getPatientOpinions(patientId){
+            return $http.get(patientEndpoint + "/patientOpinions/"+ patientId).then(function(result){
+                return result.data;
+            }, function (error) {
+                $log.error("Ocurrió un error al obtener las opiniones del paciente " + patientId, error);
+            });
+        }
+
+        /**
+         * Recupera las notas personales del usuario sobre un paciente
+         * @param   {number} patientId id del paciente del cual se quieren recuperar las notas
+         * @param   {number} userId    id del usuario que quiere recuperar las notas de su paciente
+         * @returns {promise} una promesa con las notas sobre el paciente
+         */
+        function getPersonalNotes(patientId, userId){
+
+            return $http.get(patientEndpoint + "/patientNotes/" + patientId, userId).then(function (result) {
+                return result.data;
+            }, function (error) {
+                $log.error("Ocurrió un error al obtener las notas sobre el paciente", error);
+            });
+
+        }
+
+        /**
          * Crea un paciente nuevo para un usuario
          * @param   {object}  newPatient un objeto con los datos del nuevo paciente
          * @param   {number}  creatorId  el id del usuario creador
@@ -185,19 +215,6 @@
                 return result.data;
             }, function (error) {
                 $log.error("Ocurrió un error al agregar una opinión sobre el paciente " + newOpinion.patient, error);
-            });
-        }
-
-        /**
-         * Recupera las opiniones de un paciente
-         * @param   {number}  patientId el id del paciente
-         * @returns {promise} una promesa con las opiniones
-         */
-        function getPatientOpinions(patientId){
-            return $http.get(patientEndpoint + "/patientOpinions/"+ patientId).then(function(result){
-                return result.data;
-            }, function (error) {
-                $log.error("Ocurrió un error al obtener las opiniones del paciente " + patientId, error);
             });
         }
     }

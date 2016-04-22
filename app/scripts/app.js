@@ -271,6 +271,16 @@
             }
         })
 
+         .state("app.patientPersonalNotes", {
+            url: "patient/personalNotes",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/personalNotes.html",
+                    controller: "PatientPersonalNotesController as vm"
+                }
+            }
+        })
+
         /**
          * =========================================================
          * =========== RUTEOS PARA LA VISTA DE PACIENTE ============
