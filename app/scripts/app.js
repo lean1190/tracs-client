@@ -271,12 +271,23 @@
             }
         })
 
-         .state("app.patientPersonalNotes", {
-            url: "patient/personalNotes",
+         .state("app.patientNotes", {
+            url: "patient/notes",
+            cache: false,
             views: {
                 "menuContent": {
-                    templateUrl: "templates/patient/personalNotes.html",
-                    controller: "PatientPersonalNotesController as vm"
+                    templateUrl: "templates/patient/notes.html",
+                    controller: "PatientNotesController as vm"
+                }
+            }
+        })
+
+        .state("app.patientNotesCreate", {
+            url: "patient/notesCreate",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/notesCreate.html",
+                    controller: "PatientNotesCreateController as vm"
                 }
             }
         })

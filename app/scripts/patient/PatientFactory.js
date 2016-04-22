@@ -31,12 +31,13 @@
             getSelectableUsers: getSelectableUsers,
             getNotifications: getNotifications,
             getPatientOpinions: getPatientOpinions,
-            getPersonalNotes: getPersonalNotes,
+            getPatientNotes: getPatientNotes,
             createPatient: createPatient,
             updatePatientDetail: updatePatientDetail,
             updateClosestPeople: updateClosestPeople,
             assignProfile: assignProfile,
-            addPatientOpinion: addPatientOpinion
+            addPatientOpinion: addPatientOpinion,
+            addPatientNote: addPatientNote
         };
 
         return service;
@@ -137,9 +138,9 @@
          * @param   {number} userId    id del usuario que quiere recuperar las notas de su paciente
          * @returns {promise} una promesa con las notas sobre el paciente
          */
-        function getPersonalNotes(patientId, userId){
+        function getPatientNotes(patientId, userId){
 
-            return $http.get(patientEndpoint + "/patientNotes/" + patientId, userId).then(function (result) {
+            return $http.get(patientEndpoint + "/patientNotes/" + patientId +"/"+userId).then(function (result) {
                 return result.data;
             }, function (error) {
                 $log.error("Ocurrió un error al obtener las notas sobre el paciente", error);
@@ -215,6 +216,14 @@
                 return result.data;
             }, function (error) {
                 $log.error("Ocurrió un error al agregar una opinión sobre el paciente " + newOpinion.patient, error);
+            });
+        }
+
+        function addPatientNote(newNoteData, patientId){
+            return $http.put(patientEndpoint + "/addPatientNote/"+ patientId, newNoteData).then(function (result) {
+                return result.data;
+            }, function (error) {
+                $log.error("Ocurrió un error al agregar una nota sobre el paciente " + patientId, error);
             });
         }
     }

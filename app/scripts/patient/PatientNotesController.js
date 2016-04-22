@@ -4,7 +4,7 @@
 
 /**
  * @ngdoc function
- * @name TracsClient.controllers:PatientPersonalNotes
+ * @name TracsClient.controllers:PatientNotes
  * @description
  * Controlador que maneja la administracion de las notas que tiene el usuario sobre su paciente
  */
@@ -14,17 +14,17 @@
 
     angular
         .module("TracsClient.controllers")
-        .controller("PatientPersonalNotesController", PatientPersonalNotesController);
+        .controller("PatientNotesController", PatientNotesController);
 
-    PatientPersonalNotesController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory"];
+    PatientNotesController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory"];
 
-    function PatientPersonalNotesController($stateParams, $state, $cordovaToast, storage, PatientFactory) {
+    function PatientNotesController($stateParams, $state, $cordovaToast, storage, PatientFactory) {
 
         var vm = this;
 
         vm.patient = {};
         vm.user = {};
-        vm.notes = [];
+        vm.patientNotes = [];
 
         activate();
 
@@ -33,8 +33,9 @@
             vm.patient = storage.getLastVisitedPatient();
             vm.user = storage.getUser();
 
-            PatientFactory.getPersonalNotes(vm.patient._id,vm.user._id).then(function (result) {
-                vm.notes = result;
+            PatientFactory.getPatientNotes(vm.patient._id, vm.user._id).then(function (result) {
+                vm.patientNotes = result;
+                console.log(vm.patientNotes);
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar las notas sobre el paciente, intentalo de nuevo");
             });

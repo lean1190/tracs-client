@@ -1,17 +1,16 @@
-<ion-view cache-view="false" view-title="Mis notas sobre">
+<ion-view cache-view="false" view-title="Mis notas sobre {{vm.patient.name}}">
     <ion-content>
         <ion-list>
-            <ion-item ng-repeat="note in vm.patientNotes | orderBy:'note.date' " ng-click="#" class="item-avatar">
+            <ion-item ng-repeat="note in vm.patientNotes | orderBy:'-date'" ng-click="#" class="item-avatar">
                 <h2>{{::note.title}}</h2>
-                <h3>{{:note.date</h3>
+                <h3>{{::note.date|date:'medium'}}</h3>
                 <p>{{::note.description}}</p>
             </ion-item>
         </ion-list>
 
         <!--<h3>{{::vm.message}}</h3>-->
 
-        <a ui-sref="#" class="floating-button">
-            <!--<label for="">Nuevo</label>-->
+        <a ui-sref="app.patientNotesCreate" class="floating-button">
             <button class="button button-balanced">+</button>
         </a>
     </ion-content>

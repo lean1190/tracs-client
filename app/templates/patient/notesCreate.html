@@ -1,0 +1,29 @@
+<ion-view view-title="Nueva nota sobre {{vm.patient.name}}">
+    <ion-content>
+        <div class="list">
+            <h3 class="title">Nueva nota sobre {{vm.patient.name}}</h3>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Titulo</span>
+                <input type="text" ng-model="vm.note.title" placeholder="Titulo" required>
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Descripción</span>
+                <input type="text" ng-model="vm.note.description" placeholder="Descripción" required>
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Adjuntos (dummy por ahora)</span>
+                <!--<textarea type="text" ng-model="vm.patient.description" placeholder="Diagnóstico general"></textarea>-->
+            </label>
+        </div>
+
+        <a ui-sref="app.patientNotes">
+            <button class="button button-block button-positive" ng-click="vm.createNote()">Listo</button>
+        </a>
+
+        <a ui-sref="app.patientNotes" class="button button-block button-assertive">Cancelar</a>
+
+    </ion-content>
+</ion-view>
