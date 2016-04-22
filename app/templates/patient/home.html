@@ -10,9 +10,6 @@
 
         <h3>{{::vm.message}}</h3>
 
-        <a ui-sref="app.patientCreate" class="floating-button">
-            <!--<label for="">Nuevo</label>-->
-            <button class="button button-balanced">+</button>
-        </a>
+        <floating-button state="'app.patientCreate'" text="'+'"></floating-button>
     </ion-content>
 </ion-view>

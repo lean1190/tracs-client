@@ -30,26 +30,20 @@
         // según la página
         vm.imAtPatientHome = true;
 
-        console.log("### Menu user", vm.user);
-
-        vm.leftButtonAction = function () {
-            console.log("### Accion desde el MenuController");
-        };
-
         vm.logout = function () {
             $ionicPopup.show({
                 title: "¿Seguro que querés salir?",
                 buttons: [
                     {
-                        text: "Seguro",
-                        type: "button-assertive",
-                        onTap: function (event) {
+                        text: "Sí",
+                        type: "button-default",
+                        onTap: function () {
                             $state.go("logout");
                         }
                     },
                     {
-                        text: "Mejor no",
-                        type: "button-balanced"
+                        text: "No",
+                        type: "button-positive"
                     }
                 ]
             });
@@ -71,6 +65,7 @@
         $rootScope.$on("state.changed.patientHome", function (event, state) {
             vm.imAtPatientHome = state;
         });
+
     }
 
 })();

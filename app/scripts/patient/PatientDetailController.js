@@ -9,28 +9,22 @@
         .module("TracsClient.controllers")
         .controller("PatientDetailController", PatientDetailController);
 
-    PatientDetailController.$inject = ["$stateParams", "$state", "$cordovaToast", "$ionicHistory", "storage", "PatientFactory"];
+    PatientDetailController.$inject = ["$state", "$cordovaToast", "$ionicHistory", "storage", "PatientFactory", "MenuFactory"];
 
-    function PatientDetailController($stateParams, $state, $cordovaToast, $ionicHistory, storage, PatientFactory) {
+    function PatientDetailController($state, $cordovaToast, $ionicHistory, storage, PatientFactory, MenuFactory) {
 
         var vm = this;
 
         vm.patient = {};
         vm.patientOpinions = {};
 
-        vm.leftButtonAction = function() {
-            console.log("### Redefinido! - Accion desde el PatientDetailController");
-        };
-
         activate();
 
         function activate() {
-
             vm.patient = storage.getLastVisitedPatient();
 
             PatientFactory.getPatientOpinions(vm.patient._id).then(function(result) {
                 vm.patientOpinions = result;
-                console.log(vm.patientOpinions);
             }, function() {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar las opiniones del paciente, intentalo de nuevo");
             });
