@@ -4,9 +4,9 @@
 
 /**
  * @ngdoc directive
- * @name TracsClient.directives:GoogleLoginButtonDirective
+ * @name TracsClient.directives:FloatingButtonDirective
  * @description
- * Directiva para mostrar y disparar el login con Google
+ * Directiva para mostrar un botón flotante en una vista
  */
 
 (function () {
@@ -14,19 +14,18 @@
 
     angular
         .module("TracsClient.directives")
-        .directive("googleLoginButton", GoogleLoginButtonDirective);
+        .directive("floatingButton", FloatingButtonDirective);
 
-    GoogleLoginButtonDirective.$inject = [];
+    FloatingButtonDirective.$inject = [];
 
-    function GoogleLoginButtonDirective() {
+    function FloatingButtonDirective() {
         return {
             restrict: "E",
             replace: false,
-            templateUrl: "templates/login/googleLoginButton.html",
-            link: function (scope, elem) {
-                elem.bind("click", function () {
-                    scope.vm.login();
-                });
+            templateUrl: "templates/layout/floatingButton.directive.html",
+            scope: {
+                state: "=",
+                text: "="
             }
         };
     }

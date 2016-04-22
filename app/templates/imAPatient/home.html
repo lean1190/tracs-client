@@ -1,12 +1,11 @@
 <ion-view cache-view="false" view-title="Hola {{vm.patient.name}}!">
     <ion-content>
 
-        <div ng-click="vm.sendGeoAlert()" style="background-color: #F50057; color: white; text-align: center; height: 100px;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);">
-            <!--<div>
-                <img src="images/siren.png" alt="Alerta" style="width: 50px">
-            </div>-->
-            <h1 style="color: white;">AiUDA</h1>
+        <div ng-click="vm.sendGeoAlert()" class="geo-alert-button">
+            <div class="img-wrapper">
+                <img src="images/siren.png" alt="Alerta">
+            </div>
+            <h1 class="title">Necesito ayuda!</h1>
         </div>
         <div class="contacts">
             <div class="contact-card" ng-repeat="closePerson in vm.patient.closestPeople track by closePerson._id | orderBy:['priority','name']">
@@ -25,6 +24,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);">
                     </div>
                 </div>
             </div>
+            <div class="clear-fix"></div>
         </div>
     </ion-content>
 </ion-view>
