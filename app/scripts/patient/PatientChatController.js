@@ -22,33 +22,28 @@
 
         function activate(){
 
-            vm.currentRoom = "room_"+vm.patient._id;
+            vm.currentRoom = "room_" + vm.patient._id;
             vm.currentUser = vm.user.name;
 
-            var room = {
-                'room_name': vm.currentRoom,
+            var joinMessage = {
+                'room': vm.currentRoom,
                 'userInfo':{
-                    "name": vm.user.name,
                     "id": vm.user._id,
-                    "picture":vm.user.picture
+                    "name": vm.user.name,
+                    "picture": vm.user.picture
                 }
             };
 
-            SocketService.emit('join:room', room);
-
+            // Se envía el mensaje al socket para entrar al room
+            SocketService.emit('join:room', joinMessage);
         };
 
-        //This uses the moment.js library to format the timestamp in a standard way.
-        vm.humanize = function(timestamp){
-            return moment(timestamp).fromNow();
-        };
-
-        //Attach the isNotCurrentUser function to the current scope that checks if the user supplied as the argument is the same as the current user. It returns a different string based on the result used in the view so that the message container for the current user is styled differently.
+        // Attach the isNotCurrentUser function to the current scope that checks if the user supplied as the argument is the same as the current user. It returns a different string based on the result used in the view so that the message container for the current user is styled differently.
         vm.isNotCurrentUser = function(user){
-
             if(vm.currentUser != user){
                 return 'not-current-user';
             }
+
             return 'current-user';
         };
 
@@ -68,34 +63,35 @@
             SocketService.emit('send:message', msg);
         };
 
-        //The leaveRoom function leaves the room, sending a leave:room message to the server so that the current user is removed from the current room, sending the name of the user leaving the room.
+        // The leaveRoom function leaves the room, sending a leave:room message to the server so that the current user is removed from the current room, sending the name of the user leaving the room.
         vm.leaveRoom = function(){
-            var msg = {
-                'id': vm.user._id,
-                'user': vm.currentUser,
+            var leaveMessage = {
                 'room': vm.currentRoom,
-                'time': moment()
+                'userInfo': {
+                    'id': vm.user._id,
+                    'user': vm.currentUser
+                }
             };
 
-            SocketService.emit('leave:room', msg);
+            SocketService.emit('leave:room', leaveMessage);
             SocketService.removeAllListeners();
             //$state.go('app.patientWall');
         };
 
-        //This listens for messages sent by other users in the room. When a message is received, we push it to the messages array so that it’s displayed in the view.
+        // This listens for messages sent by other users in the room. When a message is received, we push it to the messages array so that it’s displayed in the view.
         SocketService.on('message', function(msg){
             vm.messages.push(msg);
             $ionicScrollDelegate.scrollBottom();
 
         });
 
-        //This listens for historical messages that are going to be displayed only for the user that recently logged to the chat room
+        // This listens for historical messages that are going to be displayed only for the user that recently logged to the chat room
         SocketService.on('hist:messages', function(msg){
             vm.messages.push(msg);
             $ionicScrollDelegate.scrollBottom();
         })
 
-        //This listens for the changes of the users that are participating in the chat room
+        // This listens for the changes of the users that are participating in the chat room
         SocketService.on('chat:members', function(chatMembers){
                 vm.chatMembers = chatMembers;
                 console.log(vm.chatMembers);
