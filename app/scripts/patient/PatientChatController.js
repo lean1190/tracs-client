@@ -51,7 +51,8 @@
         vm.sendTextMessage = function(){
             var msg = {
                 'room': vm.currentRoom,
-                'user': vm.currentUser,
+                'userName': vm.currentUser,
+                'userId': vm.user._id,
                 'text': vm.message,
                 'time': moment()
             };
