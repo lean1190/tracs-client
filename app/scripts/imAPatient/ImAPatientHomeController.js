@@ -30,16 +30,12 @@
 
         vm.callPhoneNumber = function (phoneNumber) {
 
-            //console.log(angular.isUndefined(phoneNumber));
-            console.log(phoneNumber);
             if (phoneNumber!=""){
-                console.log("llamo");
                 dialer.callNumber(function () {}, function (error) {
                     $log.error("No se pudo realizar la llamada al número " + phoneNumber, error);
                     $cordovaToast.showLongBottom("No se pudo realizar la llamada! Hay señal?");
                 }, phoneNumber, false);
             };
-            console.log("no llamo");
         };
 
         vm.sendSms = function (phoneNumber) {
@@ -53,13 +49,14 @@
                     }
                 };
 
-                sms.send(phoneNumber, "Hola qué tal?", options, function () {
+                sms.send(phoneNumber, "Mensaje desde tracs!", options, function () {
                     $cordovaToast.showLongBottom("Mensaje enviado!");
                 }, function (error) {
                     $log.error("No se pudo enviar el sms al número " + phoneNumber, error);
                     $cordovaToast.showLongBottom("No se pudo enviar el mensaje! Hay señal?");
                 });
             };
+
         };
 
         // Importante: Prender el GPS del emulador
@@ -76,16 +73,11 @@
                 vm.patientPosition.timestamp = position.timestamp;
                 console.log("### Patient position: ", vm.patientPosition);
 
-                ImAPatientFactory.sendGeoAlert(vm.patientPosition, vm.patient._id).then(function(result) {
-
+                ImAPatientFactory.sendGeoAlert(vm.patientPosition, vm.patient._id).then(function() {
                     $cordovaToast.showLongBottom("Tu alerta fue enviada correctamente, pronto serás contactado");
-
                 }, function() {
-
                     $cordovaToast.showLongBottom("Ocurrió un error al enviar la alerta, intentalo de nuevo");
                 });
-
-
             }, function (error) {
                 $log.error("Ocurrió un error al recuperar la posición del paciente, está habilitado el GPS?", error);
             });

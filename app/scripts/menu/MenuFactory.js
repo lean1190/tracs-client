@@ -20,6 +20,8 @@
 
     function MenuFactory($rootScope, $ionicPlatform) {
 
+        $rootScope.hasRightButtonAction = false;
+
         var defaultRightButtonAction = function () {},
             defaultBackButtonAction = $rootScope.$ionicGoBack,
             deregisterHardBackButton = function () {};
