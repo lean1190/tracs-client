@@ -9,7 +9,7 @@
         </div>
         <div class="contacts">
             <div class="contact-card" ng-repeat="closePerson in vm.patient.closestPeople track by closePerson._id | orderBy:['priority','name']">
-                <div class="contact-img" ng-click="vm.callPhoneNumber({{::closePerson.phone}})">
+                <div class="contact-img" ng-click="vm.callPhoneNumber(closePerson.phoneNumber)">
                     <img ng-src="{{::closePerson.picture}}" alt="{{::closePerson.name}}">
                 </div>
                 <div class="contact-actions">

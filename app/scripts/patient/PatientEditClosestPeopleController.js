@@ -23,6 +23,7 @@
         function activate() {
             PatientFactory.getPatientProfiles(vm.patient._id).then(function (result) {
                 vm.profiles = result;
+                console.log(vm.profiles);
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la lista de usuarios, intentalo de nuevo");
             });
@@ -45,6 +46,21 @@
                     return contact;
                 }
             }
+
+            //Si no se encontro quiere decir que el usuario seleccionado quedo en blanco, se hace uno dummy sin informacion
+
+            var contact = {};
+
+            contact.personId = "";
+            contact.name = "";
+            contact.phoneNumber = "";
+            contact.picture = "https://image.freepik.com/free-icon/cancel-call--ios-7-interface-symbol_318-34763.png";
+
+            contact.priority = priority;
+
+            return contact;
+            console.log(contact);
+
         }
 
         vm.editClosestPeople = function () {

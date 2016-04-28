@@ -29,26 +29,37 @@
         vm.patientPosition = {};
 
         vm.callPhoneNumber = function (phoneNumber) {
-            dialer.callNumber(function () {}, function (error) {
-                $log.error("No se pudo realizar la llamada al número " + phoneNumber, error);
-                $cordovaToast.showLongBottom("No se pudo realizar la llamada! Hay señal?");
-            }, phoneNumber, false);
+
+            //console.log(angular.isUndefined(phoneNumber));
+            console.log(phoneNumber);
+            if (phoneNumber!=""){
+                console.log("llamo");
+                dialer.callNumber(function () {}, function (error) {
+                    $log.error("No se pudo realizar la llamada al número " + phoneNumber, error);
+                    $cordovaToast.showLongBottom("No se pudo realizar la llamada! Hay señal?");
+                }, phoneNumber, false);
+            };
+            console.log("no llamo");
         };
 
         vm.sendSms = function (phoneNumber) {
-            var options = {
-                android: {
-                    // intent: 'INTENT' // send SMS with the native android SMS messaging
-                    intent: "" // send SMS without open any other app
-                }
-            };
 
-            sms.send(phoneNumber, "Hola qué tal?", options, function () {
-                $cordovaToast.showLongBottom("Mensaje enviado!");
-            }, function (error) {
-                $log.error("No se pudo enviar el sms al número " + phoneNumber, error);
-                $cordovaToast.showLongBottom("No se pudo enviar el mensaje! Hay señal?");
-            });
+            if (phoneNumber!=""){
+
+                var options = {
+                    android: {
+                        // intent: 'INTENT' // send SMS with the native android SMS messaging
+                        intent: "" // send SMS without open any other app
+                    }
+                };
+
+                sms.send(phoneNumber, "Hola qué tal?", options, function () {
+                    $cordovaToast.showLongBottom("Mensaje enviado!");
+                }, function (error) {
+                    $log.error("No se pudo enviar el sms al número " + phoneNumber, error);
+                    $cordovaToast.showLongBottom("No se pudo enviar el mensaje! Hay señal?");
+                });
+            };
         };
 
         // Importante: Prender el GPS del emulador
