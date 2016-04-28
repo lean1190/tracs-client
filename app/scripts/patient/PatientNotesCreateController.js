@@ -26,12 +26,12 @@
 
             vm.note.user = vm.user._id;
 
-            PatientFactory.addPatientNote(vm.note,vm.patient._id).then(function (result) {
+            PatientFactory.addPatientNote(vm.note,vm.patient._id).then(function () {
                 $cordovaToast.showLongBottom("Su nota fue agregada exitosamente!");
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al agregar la nota, intentalo de nuevo");
             });
-        }
+        };
     }
 
 })();
