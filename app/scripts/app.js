@@ -208,26 +208,6 @@
             }
         })
 
-        .state("app.users", {
-            url: "/users",
-            views: {
-                "menuContent": {
-                    templateUrl: "templates/user/users.html",
-                    controller: "UserFindAllController as vm"
-                }
-            }
-        })
-
-        .state("app.user", {
-            url: "/users/:id",
-            views: {
-                "menuContent": {
-                    templateUrl: "templates/user/user.html",
-                    controller: "UserFindByIdController as vm"
-                }
-            }
-        })
-
         .state("app.patientEditClosestPeople", {
             url: "/patient/editClosestPeople",
             cache: false,
@@ -240,7 +220,7 @@
         })
 
         .state("app.patientCurrentProfiles", {
-            url: "/patient/currentProfiles",
+            url: "/patient/currentProfiles/:latitude/:longitude",
             cache: false,
             views: {
                 "menuContent": {

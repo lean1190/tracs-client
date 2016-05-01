@@ -25,7 +25,7 @@
         </a>
 
         <div class="list card patient-notifications" ng-show="vm.notifications.length">
-            <a class="item item-icon-left notification" ng-repeat="notification in vm.notifications | orderBy: '-timestamp'" ui-sref="{{notification.link}}">
+            <a class="item item-icon-left notification" ng-repeat="notification in vm.notifications | orderBy: '-timestamp'" ui-sref="{{notification.link}}({{notification.data}})">
                 <i class="icon {{notification.icon}}"></i> {{notification.message}}
                 <div class="timestamp">{{notification.timestamp | twitterDate}}</div>
             </a>

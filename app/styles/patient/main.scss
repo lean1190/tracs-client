@@ -3,11 +3,22 @@
     .item {
 
         .image-wrapper {
-            width: 65px;
-            height: 65px;
+            width: 85px;
+            height: 85px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 100%;
 
             img {
                 @include img-contained-with-radius(100%);
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                height: 100%;
+                width: auto;
+                -webkit-transform: translate(-50%,-50%);
+                -ms-transform: translate(-50%,-50%);
+                transform: translate(-50%,-50%);
             }
         }
 
