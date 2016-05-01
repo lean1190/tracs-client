@@ -16,6 +16,7 @@
         vm.patient = storage.getLastVisitedPatient();
         vm.user = storage.getUser();
         vm.currentUser = "";
+        vm.message ="";
 
         vm.messages = [];
 
@@ -61,19 +62,24 @@
          * that the contents of the text field gets deleted. Finally, we send the object.
          */
         vm.sendTextMessage = function(){
-            var msg = {
-                "room": vm.currentRoom,
-                "userName": vm.currentUser,
-                "userId": vm.user._id,
-                "text": vm.message,
-                "time": moment()
+
+            if (vm.message != ""){
+
+                var msg = {
+                    "room": vm.currentRoom,
+                    "userName": vm.currentUser,
+                    "userId": vm.user._id,
+                    "text": vm.message,
+                    "time": moment()
+                };
+
+                vm.messages.push(msg);
+                $ionicScrollDelegate.scrollBottom();
+
+                vm.message = "";
+
+                SocketService.emit("send:message", msg);
             };
-            vm.messages.push(msg);
-            $ionicScrollDelegate.scrollBottom();
-
-            vm.message = "";
-
-            SocketService.emit("send:message", msg);
         };
 
         /**
