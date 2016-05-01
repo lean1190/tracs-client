@@ -302,6 +302,26 @@
             }
         })
 
+        .state("app.patientDiagnosis", {
+            url: "patient/diagnosis",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/diagnosis.html",
+                    controller: "PatientDiagnosisController as vm"
+                }
+            }
+        })
+
+         .state("app.patientDiagnosisCreate", {
+            url: "patient/diagnosisCreate",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/diagnosisCreate.html",
+                    controller: "PatientDiagnosisCreateController as vm"
+                }
+            }
+        })
+
 
         /**
          * =========================================================
