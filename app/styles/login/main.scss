@@ -10,7 +10,11 @@
     background-color: $layout-green;
 
     .logo-wrapper {
-        width: 65%;
+        $logo-width: 65%;
+        $logo-height: 52%;
+
+        width: $logo-width;
+        height: $logo-height;
         padding-top: 20%;
         text-align: center;
         margin: 0 auto;

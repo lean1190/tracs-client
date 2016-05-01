@@ -30,6 +30,8 @@
                 var currentNotification = notifications[i],
                     notificationInfo = NotificationsMapper.getNotificationInfoForType(currentNotification.type);
 
+                console.log("### notification", currentNotification);
+
                 currentNotification.icon = notificationInfo.icon;
                 currentNotification.link = notificationInfo.link;
             }

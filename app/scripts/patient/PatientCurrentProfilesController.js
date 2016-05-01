@@ -16,6 +16,7 @@
         var vm = this;
 
         vm.patient = storage.getLastVisitedPatient();
+        console.log("### state params", $stateParams.latitude, $stateParams.longitude);
 
         activate();
 

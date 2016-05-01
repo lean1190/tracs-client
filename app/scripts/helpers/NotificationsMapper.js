@@ -39,8 +39,8 @@
                 link: "app.patientEditClosestPeople"
             },
             "patient.geoAlert.added":{
-                icon:"ion-alert-circled",
-                link:"app.patientWall"
+                icon: "ion-alert-circled",
+                link: "app.patientCurrentProfiles"
             }
         };
 
