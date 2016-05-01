@@ -1,0 +1,9 @@
+<ion-view view-title="Visualizando nota {{vm.note.title}}">
+    <ion-content>
+        <div class="displayPatientNote">
+            <h3>{{vm.patientNote.title}}</h3>
+            <h3>{{vm.patientNote.date|date:'medium'}}</h3>
+            <textarea>{{vm.patientNote.description}}</textarea>
+        </div>
+    </ion-content>
+</ion-view>

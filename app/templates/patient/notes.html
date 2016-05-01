@@ -1,10 +1,10 @@
 <ion-view cache-view="false" view-title="Mis notas sobre {{vm.patient.name}}">
     <ion-content>
         <ion-list>
-            <ion-item ng-repeat="note in vm.patientNotes | orderBy:'-date'" ng-click="#" class="item-avatar">
+            <ion-item ng-repeat="note in vm.patientNotes | orderBy:'-date'" ng-click="vm.displayNote(note._id)" class="item-avatar">
                 <h2>{{::note.title}}</h2>
                 <h3>{{::note.date|date:'medium'}}</h3>
-                <p>{{::note.description}}</p>
+                <p>{{::note.description|limitTo:50}}</p>
             </ion-item>
         </ion-list>
 

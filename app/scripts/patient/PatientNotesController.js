@@ -41,5 +41,10 @@
             });
         }
 
+        vm.displayNote = function(noteId){
+
+            $state.go("app.patientNotesDisplay", { id: noteId });
+        }
+
     }
 })();

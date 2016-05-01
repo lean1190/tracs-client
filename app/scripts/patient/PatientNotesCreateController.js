@@ -1,3 +1,8 @@
+/* jshint bitwise: false, camelcase: false, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: true, undef: true, unused: true, strict: true, latedef: nofunc */
+
+/* globals angular */
+
+
 (function () {
     "use strict";
 

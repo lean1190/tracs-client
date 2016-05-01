@@ -32,6 +32,7 @@
             getNotifications: getNotifications,
             getPatientOpinions: getPatientOpinions,
             getPatientNotes: getPatientNotes,
+            getPatientNote: getPatientNote,
             createPatient: createPatient,
             updatePatientDetail: updatePatientDetail,
             updateClosestPeople: updateClosestPeople,
@@ -145,7 +146,21 @@
             }, function (error) {
                 $log.error("Ocurrió un error al obtener las notas sobre el paciente", error);
             });
+        }
 
+
+        /**
+         * Recupera una nota especifica
+         * @param   {number}  noteId Id de la nota a buscar
+         * @returns {promise} una promesa con la informacion de la nota
+         */
+        function getPatientNote(noteId){
+
+            return $http.get(patientEndpoint + "/patientNote/"+noteId).then(function (result) {
+                return result.data;
+            }, function (error) {
+                $log.error("Ocurrió un error al obtener la nota sobre el paciente", error);
+            });
         }
 
         /**
@@ -219,6 +234,12 @@
             });
         }
 
+        /**
+         * Agrega una nueva nota personal sobre el paciente
+         * @param   {object} newNoteData Informacion sobre la nueva nota
+         * @param   {number} patientId   Id del paciente sobre el cual se realizo la nota
+         * @returns {promise} una promesa con el paciente modificado
+         */
         function addPatientNote(newNoteData, patientId){
             return $http.put(patientEndpoint + "/addPatientNote/"+ patientId, newNoteData).then(function (result) {
                 return result.data;

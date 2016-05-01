@@ -292,6 +292,17 @@
             }
         })
 
+        .state("app.patientNotesDisplay", {
+            url: "patient/notesDisplay/:id",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/notesDisplay.html",
+                    controller: "PatientNotesDisplayController as vm"
+                }
+            }
+        })
+
+
         /**
          * =========================================================
          * =========== RUTEOS PARA LA VISTA DE PACIENTE ============
