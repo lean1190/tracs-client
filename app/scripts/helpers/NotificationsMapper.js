@@ -40,7 +40,7 @@
             },
             "patient.geoAlert.added":{
                 icon: "ion-alert-circled",
-                link: "app.patientCurrentProfiles"
+                link: "app.geoAlertMap"
             }
         };
 
