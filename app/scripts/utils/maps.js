@@ -8,6 +8,7 @@
  * el espacio global de variables ni window
  */
 
+/*
 (function () {
     angular
         .module("TracsClient")
@@ -15,3 +16,4 @@
             return $window.google.maps;
         });
 })();
+*/

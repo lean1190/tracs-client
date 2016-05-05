@@ -33,12 +33,14 @@
             getPatientOpinions: getPatientOpinions,
             getPatientNotes: getPatientNotes,
             getPatientNote: getPatientNote,
+            getPatientDiagnosis: getPatientDiagnosis,
             createPatient: createPatient,
             updatePatientDetail: updatePatientDetail,
             updateClosestPeople: updateClosestPeople,
             assignProfile: assignProfile,
             addPatientOpinion: addPatientOpinion,
-            addPatientNote: addPatientNote
+            addPatientNote: addPatientNote,
+            addPatientDiagnosis: addPatientDiagnosis
         };
 
         return service;
@@ -164,6 +166,20 @@
         }
 
         /**
+         * Recupera el diagnostico del paciente
+         * @param   {number}  patientId id del paciente del cual quiero obtener el diagnostico
+         * @returns {promise} una promesa con la informacion del diagnostico
+         */
+        function getPatientDiagnosis(patientId){
+
+            return $http.get(patientEndpoint + "/patientDiagnosis/"+patientId).then(function (result) {
+                return result.data;
+            }, function (error) {
+                $log.error("Ocurrió un error al obtener el diagnostico del paciente", error);
+            });
+        }
+
+        /**
          * Crea un paciente nuevo para un usuario
          * @param   {object}  newPatient un objeto con los datos del nuevo paciente
          * @param   {number}  creatorId  el id del usuario creador
@@ -176,6 +192,21 @@
                 return result.data;
             }, function (error) {
                 $log.error("Ocurrió un error al crear el paciente", error);
+            });
+        }
+
+        /**
+         * Agrega un diagnostico sobre un paciente
+         * @param   {number} patientId    id del paciente al cual se le esta definiendo un diagnostico
+         * @param   {object} newDiagnosis nuevo diagnostico a asignar
+         * @returns {promise} una promesa con la informacion del paciente modificado
+         */
+        function addPatientDiagnosis(patientId,newDiagnosis) {
+
+            return $http.put(patientEndpoint + "/addPatientDiagnosis/" + patientId, newDiagnosis).then(function (result) {
+                return result.data;
+            }, function (error) {
+                $log.error("Ocurrió un error al crear el diagnostico del paciente", error);
             });
         }
 

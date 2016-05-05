@@ -223,7 +223,7 @@
         })
 
         .state("app.patientCurrentProfiles", {
-            url: "/patient/currentProfiles/:latitude/:longitude",
+            url: "/patient/currentProfiles",
             cache: false,
             views: {
                 "menuContent": {
@@ -281,6 +281,36 @@
                 "menuContent": {
                     templateUrl: "templates/patient/notesDisplay.html",
                     controller: "PatientNotesDisplayController as vm"
+                }
+            }
+        })
+
+        .state("app.patientDiagnosis", {
+            url: "patient/diagnosis",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/diagnosis.html",
+                    controller: "PatientDiagnosisController as vm"
+                }
+            }
+        })
+
+         .state("app.patientDiagnosisCreate", {
+            url: "patient/diagnosisCreate",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/diagnosisCreate.html",
+                    controller: "PatientDiagnosisCreateController as vm"
+                }
+            }
+        })
+
+        .state("app.geoAlertMap", {
+            url: "map/geoAlertMap/:latitude/:longitude)",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/map/geoAlertMap.html",
+                    controller: "GeoAlertMapController as vm"
                 }
             }
         })
