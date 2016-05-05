@@ -28,11 +28,11 @@
 
             vm.patientDiagnosis.patient = vm.patient._id;
 
-            PatientFactory.addPatientDiagnosis(vm.patient._id, vm.patientDiagnosis).then(function(result) {
+            PatientFactory.addPatientDiagnosis(vm.patient._id, vm.patientDiagnosis).then(function() {
                 $cordovaToast.showLongBottom("El diagnóstico de " + vm.patient.name + " fue creado correctamente");
             }, function() {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar el diagnóstico del paciente, intentalo de nuevo");
             });
-        }
+        };
     }
 })();

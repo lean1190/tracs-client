@@ -55,7 +55,7 @@
         angular.bootstrap(document, ["TracsClient"]);
     }, false);
 
-    function run($ionicPlatform, $ionicConfigProvider,/*$ionicPush,*/ editableOptions) {
+    function run($ionicPlatform, /*$ionicPush,*/ editableOptions) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -68,9 +68,6 @@
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
-
-            // Enable native scrolling
-            $ionicConfigProvider.platform.android.scrolling.jsScrolling(false);
 
             // Push configuration
             // Ionic.io();

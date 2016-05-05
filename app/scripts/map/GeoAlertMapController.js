@@ -1,6 +1,6 @@
 /* jshint bitwise: false, camelcase: false, curly: true, eqeqeq: true, globals: false, freeze: true, immed: true, nocomma: true, newcap: true, noempty: true, nonbsp: true, nonew: true, quotmark: true, undef: true, unused: true, strict: true, latedef: nofunc */
 
-/* globals angular */
+/* globals angular, google */
 
 (function () {
     "use strict";
@@ -9,12 +9,12 @@
         .module("TracsClient.controllers")
         .controller("GeoAlertMapController", GeoAlertMapController);
 
-    GeoAlertMapController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory", "$cordovaGeolocation"];
+    GeoAlertMapController.$inject = ["$stateParams", "$q", "$log", "$state", "$cordovaToast", "storage", "PatientFactory", "$cordovaGeolocation"];
 
-    function GeoAlertMapController($stateParams, $state, $cordovaToast, storage, PatientFactory, $cordovaGeolocation) {
+    function GeoAlertMapController($stateParams, $q, $log, $state, $cordovaToast, storage, PatientFactory, $cordovaGeolocation) {
 
         var destination = [$stateParams.latitude, $stateParams.longitude],
-            origin =[],
+            origin = [],
             vm = this;
 
         vm.patient = storage.getLastVisitedPatient();
@@ -23,9 +23,9 @@
 
         function activate() {
 
-            var directionsService = new google.maps.DirectionsService,
-                directionsDisplay = new google.maps.DirectionsRenderer,
-                map = new google.maps.Map(document.getElementById('map'), {
+            var directionsService = new google.maps.DirectionsService(),
+                directionsDisplay = new google.maps.DirectionsRenderer(),
+                map = new google.maps.Map(document.getElementById("map"), {
                     zoom: 7,
                     center: {
                         lat: 41.85,
@@ -36,10 +36,8 @@
             directionsDisplay.setMap(map);
 
             getMyPosition().then(function () {
-
-                 calculateAndDisplayRoute(directionsService, directionsDisplay);
-
-             });
+                calculateAndDisplayRoute(directionsService, directionsDisplay);
+            });
         }
 
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -53,18 +51,15 @@
             }, function (response, status) {
 
                 if (status === google.maps.DirectionsStatus.OK) {
-
                     directionsDisplay.setDirections(response);
-
-                }else {
-
-                    window.alert('Directions request failed due to ' + status);
+                } else {
+                    window.alert("Directions request failed due to " + status);
                 }
             });
         }
 
-        function getMyPosition(){
-            return Q.Promise(function (resolve, reject) {
+        function getMyPosition() {
+            return $q(function (resolve, reject) {
 
                 //Opciones para el metodo getCurrentPosition
                 var options = {
@@ -77,7 +72,7 @@
 
                     //Seta latitud y longitud del origen
                     origin = [position.latitude, position.longitude];
-                    resolve();
+                    resolve(origin);
 
                 }, function (error) {
                     $log.error("Ocurrió un error al recuperar la posición del usuario, está habilitado el GPS?", error);

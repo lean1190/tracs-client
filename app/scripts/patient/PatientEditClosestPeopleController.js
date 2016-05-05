@@ -31,11 +31,12 @@
 
         function getContactInformation(contactId, priority, profiles) {
 
+            var contact = {
+
+            };
+
             for (var i = 0; i < profiles.length; i++) {
                 if (contactId === profiles[i].user._id) {
-
-                    var contact = {};
-
                     contact.personId = profiles[i].user._id;
                     contact.name = profiles[i].user.name;
                     contact.phoneNumber = profiles[i].user.phoneNumber;
@@ -47,9 +48,7 @@
                 }
             }
 
-            //Si no se encontro quiere decir que el usuario seleccionado quedo en blanco, se hace uno dummy sin informacion
-
-            var contact = {};
+            // Si no se encontro quiere decir que el usuario seleccionado quedo en blanco, se hace uno dummy sin informacion
 
             contact.personId = "";
             contact.name = "";
@@ -58,9 +57,8 @@
 
             contact.priority = priority;
 
-            return contact;
             console.log(contact);
-
+            return contact;
         }
 
         vm.editClosestPeople = function () {
