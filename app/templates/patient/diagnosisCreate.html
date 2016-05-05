@@ -1,0 +1,25 @@
+<ion-view view-title="Nuevo diagnóstico de {{vm.patient.name}}">
+    <ion-content>
+        <div class="list">
+
+            <h3 class="title">Nuevo diagnóstico de {{vm.patient.name}}</h3>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Diagnóstico</span>
+                <input type="text" ng-model="vm.patientDiagnosis.description" placeholder="Diagnóstico" required>
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Que hacer en caso de crisis?</span>
+                <input type="text" ng-model="vm.patientDiagnosis.inCaseOfCrisis" placeholder="¿Qué hacer en caso de crisis?" required>
+            </label>
+        </div>
+
+        <a ui-sref="app.patientDiagnosis">
+            <button class="button button-block button-positive" ng-click="vm.createDiagnosis()">Listo</button>
+        </a>
+
+        <a ui-sref="app.patientDiagnosis" class="button button-block button-assertive">Cancelar</a>
+
+    </ion-content>
+</ion-view>
