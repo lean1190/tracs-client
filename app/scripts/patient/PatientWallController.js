@@ -9,9 +9,9 @@
         .module("TracsClient.controllers")
         .controller("PatientWallController", PatientWallController);
 
-    PatientWallController.$inject = ["$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory", "SocketService", "$state","storage","NotificationsMapper"];
+    PatientWallController.$inject = ["$rootScope", "$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory", "SocketService", "$state", "storage", "NotificationsMapper"];
 
-    function PatientWallController($scope, $stateParams, $interval, $cordovaToast, PatientFactory, SocketService,$state,storage,NotificationsMapper ) {
+    function PatientWallController($rootScope, $scope, $stateParams, $interval, $cordovaToast, PatientFactory, SocketService, $state, storage, NotificationsMapper) {
 
         var vm = this,
             patientId = $stateParams.id,
@@ -30,8 +30,6 @@
                 var currentNotification = notifications[i],
                     notificationInfo = NotificationsMapper.getNotificationInfoForType(currentNotification.type);
 
-                console.log("### notification", currentNotification);
-
                 currentNotification.icon = notificationInfo.icon;
                 currentNotification.link = notificationInfo.link;
             }
@@ -48,12 +46,17 @@
             });
         }
 
+        function showChatButton() {
+            $rootScope.showChatButton = true;
+        }
+
         /**
          * Cuando se destruye el controller se asegura
          * que también se corte el intervalo para actualizar
          * las notificaciones
          */
         $scope.$on("$destroy", function () {
+            $rootScope.showChatButton = false;
             // Make sure that the interval is destroyed
             if (angular.isDefined(notificationsInterval)) {
                 $interval.cancel(notificationsInterval);
@@ -77,6 +80,8 @@
                 notificationsInterval = $interval(function () {
                     getPatientNotifications();
                 }, 20000);
+
+                showChatButton();
 
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la información del paciente, intentalo de nuevo");

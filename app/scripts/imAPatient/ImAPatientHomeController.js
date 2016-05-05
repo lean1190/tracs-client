@@ -30,17 +30,17 @@
 
         vm.callPhoneNumber = function (phoneNumber) {
 
-            if (phoneNumber!=""){
+            if (phoneNumber !== ""){
                 dialer.callNumber(function () {}, function (error) {
                     $log.error("No se pudo realizar la llamada al número " + phoneNumber, error);
                     $cordovaToast.showLongBottom("No se pudo realizar la llamada! Hay señal?");
                 }, phoneNumber, false);
-            };
+            }
         };
 
         vm.sendSms = function (phoneNumber) {
 
-            if (phoneNumber!=""){
+            if (phoneNumber !== ""){
 
                 var options = {
                     android: {
@@ -55,7 +55,7 @@
                     $log.error("No se pudo enviar el sms al número " + phoneNumber, error);
                     $cordovaToast.showLongBottom("No se pudo enviar el mensaje! Hay señal?");
                 });
-            };
+            }
 
         };
 

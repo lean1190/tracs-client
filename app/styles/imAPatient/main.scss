@@ -5,7 +5,7 @@
 .contact-card {
     width: 44%;
     margin: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: $card-shadow;
     border-radius: 2px;
     cursor: pointer;
     float: left;

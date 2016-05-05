@@ -11,8 +11,8 @@
                     Las acciones de este botón y la variable que lo muestra están declarados en el $rootScope
                      que maneja el MenuFactory
                  -->
-                <button class="button button-icon button-clear ion-android-done" ng-click="rightButtonAction()" ng-show="hasRightButtonAction" ng-cloack>
-                <button ui-sref="app.patientChatRoom" ng-show="showChatButton" ng-cloack class="button button-icon button-clear ion-chatboxes">
+                <button ng-click="rightButtonAction()" ng-show="hasRightButtonAction" ng-cloack class="ng-cloack button button-icon button-clear ion-android-done">
+                <button ui-sref="app.patientChatRoom" ng-show="showChatButton" ng-cloack class="ng-cloack button button-icon button-clear ion-chatboxes">
                 </button>
             </ion-nav-buttons>
         </ion-nav-bar>

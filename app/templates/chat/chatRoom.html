@@ -1,17 +1,11 @@
-<ion-view title="Chat grupal">
-
-    <header class="bar bar-header bar-positive">
-        <h1 class="title">Sala de chat de {{vm.patient.name}}</h1>
-    </header>
+<ion-view title="Sala de chat de {{vm.patient.name}}">
 
     <ion-content class="has-header padding">
 
         <div class="patient-profiles">
-            <h4>Participantes del chat</h4>
             <div ng-repeat="chatMember in vm.chatMembers" class="image-wrapper">
                 <img ng-src="{{::chatMember.picture}}" alt="{{::chatMember.name}}">
             </div>
-            <button class="button button-assertive" ng-click="vm.leaveRoom()">Dejar Sala</button>
         </div>
 
         <div class="list" ng-if="vm.messages.length > 0">

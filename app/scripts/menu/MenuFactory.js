@@ -21,6 +21,7 @@
     function MenuFactory($rootScope, $ionicPlatform) {
 
         $rootScope.hasRightButtonAction = false;
+        $rootScope.showChatButton = false;
 
         var defaultRightButtonAction = function () {},
             defaultBackButtonAction = $rootScope.$ionicGoBack,

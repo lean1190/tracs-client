@@ -1,7 +1,7 @@
 <ion-view cache-view="false" view-title="Mi paciente">
     <ion-content>
 
-        <div class="card patient-wall-card" ui-sref="app.patientDetail({ id:'{{::vm.patient._id}}' })">
+        <div class="patient-wall-card" ui-sref="app.patientDetail({ id:'{{::vm.patient._id}}' })">
             <div class="item">
                 <div class="image-wrapper pull-left">
                     <img ng-src="{{::vm.patient.picture}}" alt="{{::vm.patient.name }}">
@@ -10,7 +10,14 @@
                     <div class="name">{{::vm.patient.name}}</div>
                     <div class="description">{{::vm.patient.generalDescription}}</div>
                 </div>
+                <div class="clear-fix"></div>
             </div>
+            <!--<div class="item item-text-wrap item-avatar">
+                <img ng-src="{{::vm.patient.picture}}" alt="{{::vm.patient.name }}">
+                <h2>{{::vm.patient.name}}</h2>
+                <p>{{::vm.patient.generalDescription}}</p>
+            </div> overflow: visible;
+white-space: normal;-->
         </div>
 
         <div class="patient-profiles" ui-sref="app.patientCurrentProfiles">
@@ -19,10 +26,6 @@
                 <img ng-src="{{::profile.user.picture}}" alt="{{::profile.user.name}}">
             </div>
         </div>
-
-        <a ui-sref="app.patientChatRoom">
-            <button class="button button-balanced">Chat del paciente</button>
-        </a>
 
         <div class="list card patient-notifications" ng-show="vm.notifications.length">
             <a class="item item-icon-left notification" ng-repeat="notification in vm.notifications | orderBy: '-timestamp'" ui-sref="{{notification.link}}({{notification.data}})">

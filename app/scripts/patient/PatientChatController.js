@@ -7,48 +7,28 @@
         .module("TracsClient.controllers")
         .controller("PatientChatController", PatientChatController);
 
-    PatientChatController.$inject = ["$stateParams", "$state", "$cordovaToast", "$ionicHistory", "storage", "PatientFactory","SocketService", "moment", "$ionicScrollDelegate" ];
+    PatientChatController.$inject = ["$stateParams", "$state", "$cordovaToast", "$ionicHistory", "storage", "PatientFactory", "SocketService", "moment", "$ionicScrollDelegate", "MenuFactory"];
 
-    function PatientChatController($stateParams, $state, $cordovaToast, $ionicHistory, storage, PatientFactory, SocketService, moment, $ionicScrollDelegate) {
+    function PatientChatController($stateParams, $state, $cordovaToast, $ionicHistory, storage, PatientFactory, SocketService, moment, $ionicScrollDelegate, MenuFactory) {
 
         var vm = this;
 
         vm.patient = storage.getLastVisitedPatient();
         vm.user = storage.getUser();
-        vm.currentUser = "";
-        vm.message ="";
+        vm.currentUser = vm.user.name;
+        vm.message = "";
 
         vm.messages = [];
 
-        activate();
-
-        function activate(){
-
-            vm.currentRoom = "room_" + vm.patient._id;
-            vm.currentUser = vm.user.name;
-
-            var joinMessage = {
-                "room": vm.currentRoom,
-                "userInfo":{
-                    "id": vm.user._id,
-                    "name": vm.user.name,
-                    "picture": vm.user.picture
-                }
-            };
-
-            // Se envía el mensaje al socket para entrar al room
-            SocketService.emit("join:room", joinMessage);
-        }
-
         /**
-         * Attach the isNotCurrentUser function to the current scope that checks if the user supplied as the argument is the same as the current
-         * user. It returns a different string based on the result used in the view so that the message container for the current user is styled
-         * differently.
+         * Attach the isNotCurrentUser function to the current scope that checks if the user supplied as the argument is the same as the
+         * current user. It returns a different string based on the result used in the view so that the message container
+         * for the current user is styled differently.
          * @param   {String} userName the user name from the message
          * @returns {string}   [[Description]]
          */
-        vm.isNotCurrentUser = function(userName){
-            if(vm.currentUser !== userName){
+        vm.isNotCurrentUser = function (userName) {
+            if (vm.currentUser !== userName) {
                 return "not-current-user";
             }
 
@@ -61,9 +41,9 @@
          * call the scrollBottom function in the $ionicScrollDelegate to scroll down the page. Next, we assign an empty string to the message so
          * that the contents of the text field gets deleted. Finally, we send the object.
          */
-        vm.sendTextMessage = function(){
+        vm.sendTextMessage = function () {
 
-            if (vm.message != ""){
+            if (vm.message !== "") {
 
                 var msg = {
                     "room": vm.currentRoom,
@@ -79,32 +59,31 @@
                 vm.message = "";
 
                 SocketService.emit("send:message", msg);
-            };
+            }
         };
 
         /**
          * The leaveRoom function leaves the room, sending a leave:room message to the server so that the current user is removed from
          * the current room, sending the name of the user leaving the room.
          */
-        vm.leaveRoom = function(){
+        vm.leaveRoom = function () {
             var leaveMessage = {
                 "room": vm.currentRoom,
                 "userInfo": {
                     "id": vm.user._id,
-                    "user": vm.currentUser
+                    "name": vm.currentUser
                 }
             };
 
             SocketService.emit("leave:room", leaveMessage);
             SocketService.removeAllListeners();
-            //$state.go("app.patientWall");
         };
 
         /**
-         * This listens for messages sent by other users in the room. When a message is received, we push it to the messages array so that it’s
-         * displayed in the view.
+         * This listens for messages sent by other users in the room. When a message is received, we push it to the messages array so
+         * that it’s displayed in the view.
          */
-        SocketService.on("message", function(msg){
+        SocketService.on("message", function (msg) {
             vm.messages.push(msg);
             $ionicScrollDelegate.scrollBottom();
 
@@ -113,7 +92,7 @@
         /**
          * This listens for historical messages that are going to be displayed only for the user that recently logged to the chat room
          */
-        SocketService.on("hist:messages", function(msg){
+        SocketService.on("hist:messages", function (msg) {
             vm.messages.push(msg);
             $ionicScrollDelegate.scrollBottom();
         });
@@ -121,9 +100,31 @@
         /**
          * This listens for the changes of the users that are participating in the chat room
          */
-        SocketService.on("chat:members", function(chatMembers){
-                vm.chatMembers = chatMembers;
-                console.log(vm.chatMembers);
+        SocketService.on("chat:members", function (chatMembers) {
+            vm.chatMembers = chatMembers;
         });
+
+        function activate() {
+
+            // Agrega funcionalidad al botón de back de la vista para que
+            // también ejecute el leaveRoom
+            MenuFactory.setBackButtonAction(vm.leaveRoom);
+
+            vm.currentRoom = "room_" + vm.patient._id;
+
+            var joinMessage = {
+                "room": vm.currentRoom,
+                "userInfo": {
+                    "id": vm.user._id,
+                    "name": vm.user.name,
+                    "picture": vm.user.picture
+                }
+            };
+
+            // Se envía el mensaje al socket para entrar al room
+            SocketService.emit("join:room", joinMessage);
+        }
+
+        activate();
     }
 })();

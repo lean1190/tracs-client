@@ -1,4 +1,6 @@
 .patient-wall-card {
+    box-shadow: $card-shadow;
+    margin: $default-margin;
 
     .item {
 
@@ -24,6 +26,7 @@
 
         .content-wrapper {
             margin-left: 10px;
+            width: 69%;
 
             .name {
                 font-size: 19px;
@@ -33,6 +36,10 @@
             .description {
                 font-size: 13px;
                 color: $lower-text-color;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: normal;
+                height: 40px;
             }
         }
     }
