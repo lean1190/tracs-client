@@ -1,9 +1,9 @@
 <ion-view title="Sala de chat de {{vm.patient.name}}">
 
-    <ion-content class="has-header padding">
+    <ion-content class="patient-chat">
 
-        <div class="patient-profiles">
-            <div ng-repeat="chatMember in vm.chatMembers" class="image-wrapper">
+        <div class="chat-members">
+            <div ng-repeat="chatMember in vm.chatMembers" class="member">
                 <img ng-src="{{::chatMember.picture}}" alt="{{::chatMember.name}}">
             </div>
         </div>

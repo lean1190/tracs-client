@@ -13,8 +13,11 @@
 
     function GeoAlertMapController($stateParams, $q, $log, $state, $cordovaToast, storage, PatientFactory, $cordovaGeolocation) {
 
-        var destination = [$stateParams.latitude, $stateParams.longitude],
-            origin = [],
+        var destination = {
+                lat: $stateParams.latitude,
+                lng: $stateParams.longitude
+            },
+            origin = {},
             vm = this;
 
         vm.patient = storage.getLastVisitedPatient();
@@ -23,33 +26,42 @@
 
         function activate() {
 
-            var directionsService = new google.maps.DirectionsService(),
-                directionsDisplay = new google.maps.DirectionsRenderer(),
+            var markerArray = [],
+                // Instantiate a directions service.
+                directionsService = new google.maps.DirectionsService,
+                // Create a map and center it on Manhattan.
                 map = new google.maps.Map(document.getElementById("map"), {
                     zoom: 7,
                     center: {
                         lat: 41.85,
                         lng: -87.65
                     }
+                }),
+                // Create a renderer for directions and bind it to the map.
+                directionsDisplay = new google.maps.DirectionsRenderer({
+                    map: map
                 });
 
-            directionsDisplay.setMap(map);
-
-            getMyPosition().then(function () {
-                calculateAndDisplayRoute(directionsService, directionsDisplay);
-            });
+            /*getMyPosition().then(function () {
+                calculateAndDisplayRoute(directionsDisplay, directionsService, markerArray, map);
+            });*/
         }
 
-        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        function calculateAndDisplayRoute(directionsDisplay, directionsService, markerArray, map) {
+
+            var originLatLng = new google.maps.LatLng(origin.lat, origin.lng),
+                destinationLatLng = new google.maps.LatLng(destination.lat, destination.lng);
+
+            // First, remove any existing markers from the map.
+            for (var i = 0; i < markerArray.length; i++) {
+                markerArray[i].setMap(null);
+            }
 
             directionsService.route({
-
-                origin: origin,
-                destination: destination,
+                origin: originLatLng,
+                destination: destinationLatLng,
                 travelMode: google.maps.TravelMode.DRIVING
-
             }, function (response, status) {
-
                 if (status === google.maps.DirectionsStatus.OK) {
                     directionsDisplay.setDirections(response);
                 } else {
@@ -70,8 +82,12 @@
 
                 $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
 
-                    //Seta latitud y longitud del origen
-                    origin = [position.latitude, position.longitude];
+                    // Setea latitud y longitud del origen
+                    origin = {
+                        lat: position.latitude,
+                        lng: position.longitude
+                    };
+
                     resolve(origin);
 
                 }, function (error) {
