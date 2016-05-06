@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("MenuController", MenuController);
 
-    MenuController.$inject = ["$rootScope", "$state", "$ionicPopup", "$ionicSideMenuDelegate", "storage"];
+    MenuController.$inject = ["$scope","$rootScope", "$state", "$ionicPopup", "$ionicSideMenuDelegate", "storage"];
 
-    function MenuController($rootScope, $state, $ionicPopup, $ionicSideMenuDelegate, storage) {
+    function MenuController($scope, $rootScope, $state, $ionicPopup, $ionicSideMenuDelegate, storage) {
 
         var vm = this;
 
@@ -62,9 +62,11 @@
          * Suscripción al evento "state.changed.patientHome", que se ejecuta cuando
          * entra al patient home con el listado de pacientes
          */
-        $rootScope.$on("state.changed.patientHome", function (event, state) {
+        var unregisterEvent = $rootScope.$on("state.changed.patientHome", function (event, state) {
             vm.imAtPatientHome = state;
         });
+
+        $scope.$on("$destroy", unregisterEvent);
 
     }
 

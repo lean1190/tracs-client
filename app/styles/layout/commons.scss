@@ -16,6 +16,14 @@
     clear:both;
 }
 
+.required-field {
+    &:after {
+        color: $required-red;
+        margin-left: 5px;
+        content: "*";
+    }
+}
+
 input.popup-input {
     padding: 5px;
 

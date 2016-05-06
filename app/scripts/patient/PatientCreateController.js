@@ -16,24 +16,67 @@
         .module("TracsClient.controllers")
         .controller("PatientCreateController", PatientCreateController);
 
-    PatientCreateController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory"];
+    PatientCreateController.$inject = ["$scope", "$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory", "MenuFactory"];
 
-    function PatientCreateController($stateParams, $state, $cordovaToast, storage, PatientFactory) {
+    function PatientCreateController($scope, $stateParams, $state, $cordovaToast, storage, PatientFactory, MenuFactory) {
 
         var vm = this;
+        vm.patient = {
+            name: "",
+            dni: "",
+            birthDate: "",
+            phoneNr: "",
+            description: ""
+        };
+
+        /**
+         * Valida que los campos obligatorios hayan sido completados
+         * @returns {boolean} true if the validation passes
+         */
+        function validate() {
+            if (vm.patient.name === "") {
+                $cordovaToast.showLongBottom("El nombre es obligatorio");
+                return false;
+            }
+            if (vm.patient.dni === "") {
+                $cordovaToast.showLongBottom("El DNI es obligatorio");
+                return false;
+            }
+            if (vm.patient.birthDate === "") {
+                $cordovaToast.showLongBottom("La fecha de nacimiento es obligatoria");
+                return false;
+            }
+
+            return true;
+        }
 
         vm.createPatient = function () {
+            if (validate()) {
+                var creatorId = storage.getUser()._id;
 
-            var creatorId = storage.getUser()._id;
-
-            PatientFactory.createPatient(vm.patient, creatorId).then(function () {
-                $cordovaToast.showLongBottom("Paciente creado!").then(function () {
-                   $state.go("app.patientHome");
+                PatientFactory.createPatient(vm.patient, creatorId).then(function () {
+                    $cordovaToast.showLongBottom("Paciente creado!").then(function () {
+                        MenuFactory.clearRightButtonAction();
+                        $state.go("app.patientHome");
+                    });
+                }, function () {
+                    $cordovaToast.showLongBottom("Ocurrió un error al guardar el paciente, intentalo de nuevo");
                 });
-            }, function () {
-                $cordovaToast.showLongBottom("Ocurrió un error al guardar el paciente, intentalo de nuevo");
+            }
+        };
+
+        function activate() {
+            // Muestra el check para guardar al paciente
+            MenuFactory.activateRightButtonAction(function () {
+                vm.createPatient();
             });
 
-        };
+            // Cuando apretamos atrás se borra el check y su funcionalidad
+            MenuFactory.setBackButtonAction(function () {
+                MenuFactory.clearRightButtonAction();
+            });
+        }
+
+        activate();
     }
 })();
