@@ -1,21 +1,19 @@
 <ion-view view-title="Nuevo paciente">
     <ion-content>
         <div class="list">
-            <h3 class="title">Informacion del Paciente</h3>
-
             <label class="item item-input item-floating-label">
-                <span class="input-label">Nombre</span>
-                <input type="text" ng-model="vm.patient.name" placeholder="Nombre" required>
+                <span class="input-label required-field">Nombre</span>
+                <input type="text" ng-model="vm.patient.name" placeholder="Nombre *">
             </label>
 
             <label class="item item-input item-floating-label">
-                <span class="input-label">DNI</span>
-                <input type="text" ng-model="vm.patient.dni" placeholder="DNI" required>
+                <span class="input-label required-field">DNI</span>
+                <input type="text" ng-model="vm.patient.dni" placeholder="DNI *">
             </label>
 
             <label class="item item-input item-floating-label">
-                <span class="input-label">Fecha de nacimiento</span>
-                <input type="date" ng-model="vm.patient.birthDate" placeholder="Fecha de nacimiento" required>
+                <span class="input-label required-field">Fecha de nacimiento</span>
+                <input type="text" ng-model="vm.patient.birthDate" placeholder="Fecha de nacimiento *" onfocus="(this.type='date')" onblur="(this.type='text')">
             </label>
 
             <label class="item item-input item-floating-label">
@@ -28,9 +26,5 @@
                 <textarea type="text" ng-model="vm.patient.description" placeholder="Diagnóstico general"></textarea>
             </label>
         </div>
-
-        <button class="button button-block button-positive" ng-click="vm.createPatient()">Listo</button>
-
-        <a ui-sref="app.patientHome" class="button button-block button-assertive">Cancelar</a>
     </ion-content>
 </ion-view>

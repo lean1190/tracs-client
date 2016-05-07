@@ -8,18 +8,12 @@
             </div>
         </div>
 
-        <div class="list" ng-if="vm.messages.length > 0">
-            <li class="item item-text-wrap no-border {{ vm.isNotCurrentUser(msg.user) }}" ng-repeat="msg in vm.messages">
-                <div class="msg">
-                    <div class="details padding">
-                        <p>
-                            <div class="user">{{ msg.user }}</div>
-                            <div class="message">{{ msg.text }}</div>
-                        </p>
-                        <small>{{msg.time | twitterDate}}</small>
-                    </div>
-                </div>
-            </li>
+        <div class="list chat-messages" ng-if="vm.messages.length > 0">
+            <a class="item item-text-wrap item-avatar {{ vm.isNotCurrentUser(msg.userName) }}" href="#" ng-repeat="msg in vm.messages">
+                <img ng-src="{{ msg.picture }}">
+                <h2>{{ msg.userName }} <span>- {{msg.time | twitterDate}}</span></h2>
+                <p>{{ msg.text }}</p>
+            </a>
         </div>
 
         <div class="card" ng-if="!vm.messages.length">
@@ -31,7 +25,7 @@
     </ion-content>
 
 
-    <footer class="bar bar-footer bar-positive item-input-inset">
+    <footer class="bar bar-footer bar-positive item-input-inset patient-chat-input">
         <label class="item-input-wrapper">
             <input type="text" id="message" name="message" ng-model="vm.message" placeholder="Escribir mensaje">
         </label>

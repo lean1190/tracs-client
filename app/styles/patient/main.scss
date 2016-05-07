@@ -42,6 +42,22 @@
                 height: 40px;
             }
         }
+
+        .actions-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: right;
+            padding: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            color: $layout-violet;
+
+            span {
+                text-transform: uppercase;
+            }
+        }
     }
 }
 
@@ -76,11 +92,11 @@
 .patient-chat {
 
     .chat-members {
-
+        padding: 10px;
 
         .member {
-            width: 25px;
-            height: 25px;
+            width: 35px;
+            height: 35px;
             display: inline-block;
             margin-right: 5px;
 
@@ -88,5 +104,85 @@
                 @include img-contained-with-radius(100%);
             }
         }
+    }
+
+    .chat-messages {
+
+        .not-current-user {
+            padding: 5px 60px;
+            padding-right: 10px;
+            min-height: 0;
+            border-color: #F3F3F3;
+
+            .activated {
+                background-color: white;
+            }
+
+            h2 {
+                font-size: 13px;
+                font-weight: bold;
+                margin-bottom: 3px;
+                color: $layout-violet;
+
+                span {
+                    font-size: 12px;
+                    font-weight: normal;
+                    color: $lower-text-color;
+                }
+            }
+
+            p {
+                font-size: 15px;
+                color: $text-color;
+            }
+
+            img {
+                top: 5px;
+                left: 10px;
+            }
+        }
+
+        .current-user {
+            padding: 5px 60px;
+            padding-left: 10px;
+            min-height: 0;
+            border-color: #F3F3F3;
+            background-color: #F8F8F8;
+
+            .activated {
+                background-color: white;
+            }
+
+            h2 {
+                font-size: 13px;
+                font-weight: bold;
+                margin-bottom: 3px;
+                color: $layout-violet;
+
+                span {
+                    font-size: 12px;
+                    font-weight: normal;
+                    color: $lower-text-color;
+                }
+            }
+
+            p {
+                font-size: 15px;
+                color: $text-color;
+            }
+
+            img {
+                top: 5px;
+                right: 10px;
+                left: auto;
+            }
+        }
+    }
+}
+
+.patient-chat-input {
+
+    label {
+        background-color: white;
     }
 }

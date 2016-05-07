@@ -61,10 +61,7 @@
          * @param {function} action la acción que debe ejecutar el botón
          */
         function setRightButtonAction(action) {
-            $rootScope.rightButtonAction = function () {
-                action();
-                clearRightButtonAction();
-            };
+            $rootScope.rightButtonAction = action;
         }
 
         /**

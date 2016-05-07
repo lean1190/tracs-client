@@ -10,6 +10,9 @@
                     <div class="name">{{::vm.patient.name}}</div>
                     <div class="description">{{::vm.patient.generalDescription}}</div>
                 </div>
+                <div class="actions-footer">
+                    <span ui-sref="app.patientDiagnosis" ng-click="$event.stopPropagation()">diagnóstico</span>
+                </div>
                 <div class="clear-fix"></div>
             </div>
             <!--<div class="item item-text-wrap item-avatar">

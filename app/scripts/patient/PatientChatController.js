@@ -50,6 +50,7 @@
                     "userName": vm.currentUser,
                     "userId": vm.user._id,
                     "text": vm.message,
+                    "picture": vm.user.picture,
                     "time": moment()
                 };
 
