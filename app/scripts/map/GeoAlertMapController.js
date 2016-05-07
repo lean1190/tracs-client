@@ -14,9 +14,15 @@
     function GeoAlertMapController($stateParams, $q, $log, $state, $cordovaToast, storage, PatientFactory, $cordovaGeolocation) {
 
         var destination = {
-                lat: $stateParams.latitude,
-                lng: $stateParams.longitude
+
+            //Hardcodeado por el momento porque sino las direcciones de destino y origen son las mismas
+            /*lat: parseFloat($stateParams.latitude),
+                lng: parseFloat($stateParams.longitude)*/
+
+                lat: 41.850869,
+                lng: -87.646417
             },
+
             origin = {},
             vm = this;
 
@@ -31,27 +37,36 @@
                 directionsService = new google.maps.DirectionsService,
                 // Create a map and center it on Manhattan.
                 map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 7,
+                    zoom: 10,
                     center: {
-                        lat: 41.85,
-                        lng: -87.65
+                        lat: destination.lat,
+                        lng: destination.lng
                     }
                 }),
+
                 // Create a renderer for directions and bind it to the map.
                 directionsDisplay = new google.maps.DirectionsRenderer({
                     map: map
                 });
 
-            /*getMyPosition().then(function () {
+            getMyPosition().then(function (result) {
+
+
+                //origin = result;
+                console.log(origin);
                 calculateAndDisplayRoute(directionsDisplay, directionsService, markerArray, map);
-            });*/
-        }
+            }, function (error) {
+
+                console.log(error);
+            });
+        };
 
         function calculateAndDisplayRoute(directionsDisplay, directionsService, markerArray, map) {
 
             var originLatLng = new google.maps.LatLng(origin.lat, origin.lng),
                 destinationLatLng = new google.maps.LatLng(destination.lat, destination.lng);
 
+            console.log(originLatLng, destinationLatLng);
             // First, remove any existing markers from the map.
             for (var i = 0; i < markerArray.length; i++) {
                 markerArray[i].setMap(null);
@@ -62,6 +77,7 @@
                 destination: destinationLatLng,
                 travelMode: google.maps.TravelMode.DRIVING
             }, function (response, status) {
+                console.log(response);
                 if (status === google.maps.DirectionsStatus.OK) {
                     directionsDisplay.setDirections(response);
                 } else {
@@ -84,8 +100,12 @@
 
                     // Setea latitud y longitud del origen
                     origin = {
-                        lat: position.latitude,
-                        lng: position.longitude
+
+                        //Hardcodeado por el momento porque sino las direcciones de destino y origen son las mismas
+                        /*lat: position.coords.latitude,
+                        lng: position.coords.longitude*/
+                        lat: 41.859669,
+                        lng: -87.646691
                     };
 
                     resolve(origin);
