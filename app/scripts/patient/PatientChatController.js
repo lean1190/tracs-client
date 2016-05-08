@@ -27,8 +27,8 @@
          * @param   {String} userName the user name from the message
          * @returns {string}   [[Description]]
          */
-        vm.isNotCurrentUser = function (userName) {
-            if (vm.currentUser !== userName) {
+        vm.isNotCurrentUser = function (userId) {
+            if (vm.user._id !== userId) {
                 return "not-current-user";
             }
 
