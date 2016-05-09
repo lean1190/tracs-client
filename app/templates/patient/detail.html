@@ -28,10 +28,11 @@
             Opiniones de participantes
         </div>
         <br/>
-        <div class="displayOpinion" ng-repeat="opinion in vm.patientOpinions">
+        <div class="displayOpinion" ng-repeat="opinion in vm.patientOpinions" ng-show="opinion.latestPatientOpinion">
 
             <h4>{{opinion.user.name}}</h4>
             <p>{{opinion.latestPatientOpinion.description}}</p>
+            <h4>{{opinion.latestPatientOpinion.date|date:"dd/MM/yyyy"}}</h4>
 
         </div>
 

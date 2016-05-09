@@ -302,6 +302,16 @@
             }
         })
 
+        .state("app.patientMedicationCreate", {
+            url: "patient/medicationCreate/:id",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/medicationCreate.html",
+                    controller: "PatientMedicationCreateController as vm"
+                }
+            }
+        })
+
         .state("app.geoAlertMap", {
             url: "map/geoAlertMap/:latitude/:longitude)",
             views: {

@@ -40,7 +40,8 @@
             assignProfile: assignProfile,
             addPatientOpinion: addPatientOpinion,
             addPatientNote: addPatientNote,
-            addPatientDiagnosis: addPatientDiagnosis
+            addPatientDiagnosis: addPatientDiagnosis,
+
         };
 
         return service;

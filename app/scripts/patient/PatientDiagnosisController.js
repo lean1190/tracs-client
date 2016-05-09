@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("PatientDiagnosisController", PatientDiagnosisController);
 
-    PatientDiagnosisController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory"];
+    PatientDiagnosisController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory","DiagnosisFactory"];
 
-    function PatientDiagnosisController($stateParams, $state, $cordovaToast, storage, PatientFactory) {
+    function PatientDiagnosisController($stateParams, $state, $cordovaToast, storage, PatientFactory, DiagnosisFactory) {
 
         var vm = this;
 
@@ -39,6 +39,12 @@
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar el diagnóstico del paciente, intentalo de nuevo");
             });
         }
+
+        vm.medicationCreate = function(){
+
+            $state.go("app.patientMedicationCreate", { id: vm.patientDiagnosis._id })
+
+        };
 
 
     }
