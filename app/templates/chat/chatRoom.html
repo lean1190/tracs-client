@@ -8,26 +8,22 @@
             </div>
         </div>
 
-        <div class="list chat-messages" ng-if="vm.messages.length > 0">
-            <a class="item item-text-wrap item-avatar {{ vm.isNotCurrentUser(msg.userName) }}" href="#" ng-repeat="msg in vm.messages">
-                <img ng-src="{{ msg.picture }}">
+        <div class="list chat-messages" ng-if="vm.messages.length">
+            <a class="item item-text-wrap item-avatar {{ vm.isNotCurrentUser(msg.userId) }}" href="#" ng-repeat="msg in vm.messages">
+                <img ng-src="{{ msg.picture }}" ng-show="msg.picture">
                 <h2>{{ msg.userName }} <span>- {{msg.time | twitterDate}}</span></h2>
                 <p>{{ msg.text }}</p>
             </a>
         </div>
 
-        <div class="card" ng-if="!vm.messages.length">
-            <div class="item item-text-wrap">
-                Todavia no hay mensajes
-            </div>
-        </div>
+        <h4 ng-if="!vm.messages.length" class="length-0">Aún no hay mensajes</h4>
 
     </ion-content>
 
 
     <footer class="bar bar-footer bar-positive item-input-inset patient-chat-input">
         <label class="item-input-wrapper">
-            <input type="text" id="message" name="message" ng-model="vm.message" placeholder="Escribir mensaje">
+            <input type="text" id="message" name="message" ng-model="vm.message" placeholder="Mensaje nuevo...">
         </label>
         <a class="button button-icon icon ion-android-send" ng-click="vm.sendTextMessage()"></a>
     </footer>
