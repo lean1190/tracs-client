@@ -23,6 +23,16 @@
         function activate() {
             vm.patient = storage.getLastVisitedPatient();
 
+            // Muestra el check para guardar al paciente
+            MenuFactory.activateRightButtonAction(function () {
+                vm.updatePatient();
+            });
+
+            // Cuando apretamos atrás se borra el check y su funcionalidad
+            MenuFactory.setBackButtonAction(function () {
+                MenuFactory.clearRightButtonAction();
+            });
+
             PatientFactory.getPatientOpinions(vm.patient._id).then(function(result) {
                 vm.patientOpinions = result;
             }, function() {
@@ -36,7 +46,8 @@
 
             PatientFactory.updatePatientDetail(updatedPatient).then(function () {
                 $cordovaToast.showLongBottom("Paciente actualizado correctamente!").then(function () {
-                    $state.go("app.patientHome");
+                    MenuFactory.clearRightButtonAction();
+                    $state.go("app.patientWall", { id: vm.patient._id });
                 });
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al editar al paciente, intentalo de nuevo");

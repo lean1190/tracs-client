@@ -31,9 +31,17 @@
 
             vm.patient = storage.getLastVisitedPatient();
 
-            PatientFactory.getPatientDiagnosis(vm.patient._id).then(function(result) {
+            PatientFactory.getPatientDiagnosis(vm.patient._id).then(function(diagnosis) {
 
-                vm.patientDiagnosis = result;
+                vm.patientDiagnosis = diagnosis;
+
+                DiagnosisFactory.getDiagnosisMedication(vm.patientDiagnosis._id).then(function(result){
+
+                    vm.patientMedications = result.medications;
+
+                },function() {
+                    $cordovaToast.showLongBottom("Ocurrió un error al recuperar la medicación del paciente, intentalo de nuevo");
+                });
 
             }, function() {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar el diagnóstico del paciente, intentalo de nuevo");
@@ -41,8 +49,8 @@
         }
 
         vm.medicationCreate = function(){
-
-            $state.go("app.patientMedicationCreate", { id: vm.patientDiagnosis._id })
+            console.log(vm.patientDiagnosis._id);
+            $state.go("app.patientMedicationCreate", { id: vm.patientDiagnosis._id });
 
         };
 

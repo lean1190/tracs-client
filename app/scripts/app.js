@@ -208,13 +208,13 @@
             }
         })
 
-        .state("app.patientEditClosestPeople", {
-            url: "/patient/editClosestPeople",
+        .state("app.patientClosestPeople", {
+            url: "/patient/closestPeople",
             cache: false,
             views: {
                 "menuContent": {
-                    templateUrl: "templates/patient/editClosestPeople.html",
-                    controller: "PatientEditClosestPeopleController as vm"
+                    templateUrl: "templates/patient/closestPeople.html",
+                    controller: "PatientClosestPeopleController as vm"
                 }
             }
         })
@@ -284,6 +284,7 @@
 
         .state("app.patientDiagnosis", {
             url: "patient/diagnosis",
+            cache: false,
             views: {
                 "menuContent": {
                     templateUrl: "templates/patient/diagnosis.html",

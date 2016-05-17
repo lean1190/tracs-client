@@ -33,6 +33,9 @@
             activateRightButtonAction: activateRightButtonAction,
             clearRightButtonAction: clearRightButtonAction,
 
+            activateRightEditButtonAction: activateRightEditButtonAction,
+            showRightEditButtonAction: showRightEditButtonAction,
+
             setBackButtonAction: setBackButtonAction,
             clearBackButtonAction: clearBackButtonAction
         };
@@ -46,6 +49,7 @@
         function clearRightButtonAction() {
             $rootScope.rightButtonAction = defaultRightButtonAction;
             $rootScope.hasRightButtonAction = false;
+            $rootScope.hasRightEditButtonAction = false;
         }
 
         /**
@@ -54,6 +58,10 @@
          */
         function showRightButtonAction() {
             $rootScope.hasRightButtonAction = true;
+        }
+
+         function showRightEditButtonAction() {
+            $rootScope.hasRightEditButtonAction = true;
         }
 
         /**
@@ -71,6 +79,11 @@
         function activateRightButtonAction(action) {
             setRightButtonAction(action);
             showRightButtonAction();
+        }
+
+        function activateRightEditButtonAction(action) {
+            setRightButtonAction(action);
+            showRightEditButtonAction();
         }
 
         /**

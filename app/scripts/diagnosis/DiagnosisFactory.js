@@ -32,7 +32,7 @@
          */
         function getDiagnosisMedication(diagnosisId) {
 
-            return $http.get(diagnosisEndpoint + "/" + diagnosisId).then(function (result) {
+            return $http.get(DiagnosisEndpoint + "/" + diagnosisId).then(function (result) {
                 return result.data;
             }, function (error) {
                 $log.error("Ocurrió un error al recuperar los medicamentos para el diagnositoc " + diagnosisId, error);
@@ -41,6 +41,7 @@
         }
 
         function addDiagnosisMedication(newMedication, diagnosisId) {
+            console.log(diagnosisId);
 
             return $http.put(DiagnosisEndpoint + "/addDiagnosisMedication/" + diagnosisId, newMedication).then(function (result) {
 

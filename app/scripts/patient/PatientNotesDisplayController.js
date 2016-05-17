@@ -10,9 +10,9 @@
         .module("TracsClient.controllers")
         .controller("PatientNotesDisplayController", PatientNotesDisplayController);
 
-    PatientNotesDisplayController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory"];
+    PatientNotesDisplayController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory","MenuFactory", "PatientNoteFactory"];
 
-    function PatientNotesDisplayController($stateParams, $state, $cordovaToast, storage, PatientFactory) {
+    function PatientNotesDisplayController($stateParams, $state, $cordovaToast, storage, PatientFactory, MenuFactory, PatientNoteFactory) {
 
         var noteId = $stateParams.id,
             vm = this;
@@ -28,6 +28,21 @@
             vm.patient = storage.getLastVisitedPatient();
             vm.user = storage.getUser();
 
+            vm.editOn = false;
+
+            // Muestra el lapiz para editar la nota del paciente
+            MenuFactory.activateRightEditButtonAction(function () {
+
+                vm.editFields();
+
+            });
+
+            // Cuando apretamos atrás se borra el boton y su funcionalidad
+            MenuFactory.setBackButtonAction(function () {
+                MenuFactory.clearRightButtonAction();
+            });
+
+
             PatientFactory.getPatientNote(noteId).then(function (result) {
                 vm.patientNote = result;
                 console.log(vm.patientNote);
@@ -36,5 +51,32 @@
             });
         }
 
+        vm.editFields = function(){
+
+            vm.editOn = true;
+
+            MenuFactory.clearRightButtonAction();
+
+            MenuFactory.activateRightButtonAction(function () {
+                vm.updatePatientNote();
+            });
+        }
+
+        vm.updatePatientNote = function(){
+
+            console.log("edito los campos");
+
+            PatientNoteFactory.updatePatientNote(vm.patientNote, noteId).then(function (result) {
+
+                $cordovaToast.showLongBottom("Nota Actualizada!").then(function () {
+                    MenuFactory.clearRightButtonAction();
+                    $state.go("app.patientNotes");
+                });
+
+
+            }, function () {
+                $cordovaToast.showLongBottom("Ocurrió un error al actualizar la nota sobre el paciente, intentalo de nuevo");
+            });
+        }
     }
 })();

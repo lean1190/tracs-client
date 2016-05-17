@@ -6,20 +6,30 @@
 
             <label class="item item-input item-floating-label">
                 <span class="input-label">Diagnóstico</span>
-                <input type="text" ng-model="vm.patientDiagnosis.description" placeholder="Diagnóstico" required>
+                <input type="text" ng-model="vm.patientDiagnosis.name" placeholder="Diagnóstico" required>
             </label>
-
             <label class="item item-input item-floating-label">
-                <span class="input-label">Que hacer en caso de crisis?</span>
-                <input type="text" ng-model="vm.patientDiagnosis.inCaseOfCrisis" placeholder="¿Qué hacer en caso de crisis?" required>
+                <span class="input-label">Descripción</span>
+                <input type="text" ng-model="vm.patientDiagnosis.description" placeholder="Descripción" required>
             </label>
+
+          <!--  <div class="item item-divider">
+                Historia Vital-->
+           <!-- </div>
+               <label class="item item-input item-floating-label">
+                <span class="input-label">Descripción tratamiento previo</span>
+                <input type="text" ng-model="vm.patientDiagnosis.vitalHistory.description" placeholder="Descripción tratamiento previo">
+            </label>-->
+
+          <!--  <label class="item item-input item-floating-label">
+               <span class="input-label">Establecimiento del tratamiento anterior</span>
+               <input type="text" ng-model="vm.patientDiagnosis.vitalHistory.prevTherapyPlace" placeholder="Establecimiento del tratamiento anterior">
+            </label>-->
+
+           <!-- <label class="item item-input item-floating-label">
+                <span class="input-label">Duración tratamiento previo</span>
+                <input type="text" ng-model="vm.patientDiagnosis.vitalHistory.prevTherapyDuration" placeholder="Duración tratamiento previo">
+            </label>-->
         </div>
-
-        <a ui-sref="app.patientDiagnosis">
-            <button class="button button-block button-positive" ng-click="vm.createDiagnosis()">Listo</button>
-        </a>
-
-        <a ui-sref="app.patientDiagnosis" class="button button-block button-assertive">Cancelar</a>
-
     </ion-content>
 </ion-view>

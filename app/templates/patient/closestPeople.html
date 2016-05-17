@@ -1,0 +1,55 @@
+<ion-view view-title="Contactos de {{vm.patient.name}}">
+    <ion-content>
+
+        <div class="displayClosestContacts" ng-show="vm.editOn === false " >
+            <ion-list>
+                <ion-item ng-repeat="closePerson in vm.patient.closestPeople" class="item-avatar">
+                    <img ng-src="{{::closePerson.picture}}" alt="{{::profile.user.name}}">
+                    <h2>{{::closePerson.name}}</h2>
+                </ion-item>
+            </ion-list>
+        </div>
+
+        <div class="editClosestContacts" ng-show="vm.editOn === true" >
+            <h4 class="title">Configure los contactos cercanos de {{vm.patient.name}}</h4>
+
+            <div class="list">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Primer Contacto
+                    </div>
+                    <select ng-model="vm.contactP1Id" ng-options="profile.user._id as profile.user.name for profile in vm.profiles">
+                        <option value="">Seleccione un participante</option>
+                    </select>
+                </label>
+
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Segundo Contacto
+                    </div>
+                        <select ng-model="vm.contactP2Id" ng-options="profile.user._id as profile.user.name for profile in vm.profiles">
+                        <option value="">Seleccione un participante</option>
+                    </select>
+                </label>
+
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Tercer Contacto
+                    </div>
+                    <select ng-model="vm.contactP3Id" ng-options="profile.user._id as profile.user.name for profile in vm.profiles">
+                        <option value="">Seleccione un participante</option>
+                    </select>
+                </label>
+
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Cuarto Contacto
+                    </div>
+                    <select ng-model="vm.contactP4Id" ng-options="profile.user._id as profile.user.name for profile in vm.profiles">
+                        <option value="">Seleccione un participante</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

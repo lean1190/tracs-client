@@ -1,9 +1,26 @@
 <ion-view view-title="Visualizando nota {{vm.note.title}}">
     <ion-content>
-        <div class="displayPatientNote">
-            <h3>{{vm.patientNote.title}}</h3>
-            <h3>{{vm.patientNote.date|date:'medium'}}</h3>
-            <p>{{vm.patientNote.description}}</p>
+
+        <div class="displayPatientNote" ng-show="vm.editOn === false " >
+            <h3>Título: {{vm.patientNote.title}}</h3>
+            <p> Descripción: {{vm.patientNote.description}}</p>
+            <h4>Fecha: {{vm.patientNote.date|date:'medium'}}</h4>
+        </div>
+
+        <div class="editPatientNote" ng-show="vm.editOn === true" >
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Titulo</span>
+                <input type="text" ng-model="vm.patientNote.title" placeholder="Titulo" required>
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Descripción</span>
+                <textarea type="text" ng-model="vm.patientNote.description" placeholder="Descripción" required></textarea>
+            </label>
+
         </div>
     </ion-content>
 </ion-view>
+
+
+<!--ng-show="{{vm.editOn}}"-->

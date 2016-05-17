@@ -10,11 +10,23 @@
         <div class="first-diagnosis" ng-show="!vm.patientDiagnosis">
             <h3>El paciente aun no tiene un diagnóstico asignado. Empieza creando uno</h3>
         </div>
+        <a ng-click="vm.medicationCreate()">Agregar Medicacion</a>
 
+        <div class="medication-list">
+
+            <h3>Medicaciones</h3>
+            <ion-item ng-repeat="medication in vm.patientMedications">
+                <h3>Nombre Medicamento: {{::medication.drug}}</h3>
+                <h3>Dosis: {{::medication.dosis}}</h3>
+                <h4>Frecuencia: {{::medication.frequence}}</h4>
+                <h4>Fecha de prescripción: {{::medication.date}}</h4>
+            </ion-item>
+
+        </div>
         <a ui-sref="app.patientDiagnosisCreate" class="floating-button">
             <button class="button button-balanced">+</button>
         </a>
-        <a ng-click="vm.medicationCreate()">Agregar Medicacion</a>
+
 
     </ion-content>
 </ion-view>

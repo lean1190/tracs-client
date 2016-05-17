@@ -9,9 +9,9 @@
         .module("TracsClient.controllers")
         .controller("PatientAssignProfileController", PatientAssignProfileController);
 
-    PatientAssignProfileController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory", "utils"];
+    PatientAssignProfileController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory", "utils","MenuFactory"];
 
-    function PatientAssignProfileController($stateParams, $state, $cordovaToast, storage, PatientFactory, utils) {
+    function PatientAssignProfileController($stateParams, $state, $cordovaToast, storage, PatientFactory, utils, MenuFactory) {
 
         var vm = this;
 
@@ -22,9 +22,19 @@
         activate();
 
         function activate() {
+
+            // Muestra el check para guardar al paciente
+            MenuFactory.activateRightButtonAction(function () {
+                vm.assignProfile();
+            });
+
+            // Cuando apretamos atrás se borra el check y su funcionalidad
+            MenuFactory.setBackButtonAction(function () {
+                MenuFactory.clearRightButtonAction();
+            });
+
             PatientFactory.getSelectableUsers(vm.patient._id).then(function (result) {
                 vm.users = result;
-                console.log(vm.users);
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la lista de usuarios, intentalo de nuevo");
             });
@@ -34,13 +44,19 @@
 
             if (!(utils.isEmpty(vm.profile.user))) {
                 PatientFactory.assignProfile(vm.profile).then(function () {
-                    $state.go("app.patientCurrentProfiles");
+
+                    $cordovaToast.showLongBottom("Perfil asignado correctamente!").then(function () {
+                        MenuFactory.clearRightButtonAction();
+                        $state.go("app.patientCurrentProfiles");
+                    });
+
                 }, function () {
                     $cordovaToast.showLongBottom("Ocurrió un error al asignar un participante al paciente, intentalo de nuevo");
                 });
             } else {
                 $cordovaToast.showLongBottom("Por favor, elija un participante valido");
             }
+
         };
     }
 })();

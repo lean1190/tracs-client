@@ -12,8 +12,14 @@
                      que maneja el MenuFactory
                  -->
                 <button ng-click="rightButtonAction()" ng-show="hasRightButtonAction" ng-cloack class="ng-cloack button button-icon button-clear ion-android-done">
+
+                <button ng-click="rightButtonAction()" ng-show="hasRightEditButtonAction" ng-cloack class="ng-cloack button button-icon button-clear ion-edit">
+
+
+
                 <button ui-sref="app.patientChatRoom" ng-show="showChatButton" ng-cloack class="ng-cloack button button-icon button-clear ion-chatboxes">
                 </button>
+
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view name="menuContent"></ion-nav-view>
@@ -35,7 +41,7 @@
                 <ion-item ui-sref="app.patientCurrentProfiles" class="item-icon-left" ng-click="vm.closeMenu()" ng-hide="vm.imAtPatientHome">
                     <i class="icon ion-android-person-add"></i> Participantes
                 </ion-item>
-                <ion-item ui-sref="app.patientEditClosestPeople" class="item-icon-left" ng-click="vm.closeMenu()" ng-hide="vm.imAtPatientHome">
+                <ion-item ui-sref="app.patientClosestPeople" class="item-icon-left" ng-click="vm.closeMenu()" ng-hide="vm.imAtPatientHome">
                     <i class="icon ion-android-call"></i> Contactos
                 </ion-item>
                 <ion-item menu-close ui-sref="app.patientHome" class="item-icon-left" ng-hide="vm.imAtPatientHome">
