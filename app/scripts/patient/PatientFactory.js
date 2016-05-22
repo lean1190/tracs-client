@@ -33,7 +33,6 @@
             getPatientOpinions: getPatientOpinions,
             getPatientNotes: getPatientNotes,
             getPatientNote: getPatientNote,
-            getPatientDiagnosis: getPatientDiagnosis,
             createPatient: createPatient,
             updatePatientDetail: updatePatientDetail,
             updateClosestPeople: updateClosestPeople,
@@ -163,20 +162,6 @@
                 return result.data;
             }, function (error) {
                 $log.error("Ocurrió un error al obtener la nota sobre el paciente", error);
-            });
-        }
-
-        /**
-         * Recupera el diagnostico del paciente
-         * @param   {number}  patientId id del paciente del cual quiero obtener el diagnostico
-         * @returns {promise} una promesa con la informacion del diagnostico
-         */
-        function getPatientDiagnosis(patientId){
-
-            return $http.get(patientEndpoint + "/patientDiagnosis/"+patientId).then(function (result) {
-                return result.data;
-            }, function (error) {
-                $log.error("Ocurrió un error al obtener el diagnostico del paciente", error);
             });
         }
 

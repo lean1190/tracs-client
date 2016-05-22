@@ -31,25 +31,27 @@
 
             vm.patient = storage.getLastVisitedPatient();
 
-            PatientFactory.getPatientDiagnosis(vm.patient._id).then(function(diagnosis) {
+            if(vm.patient.latestDiagnosis){
 
-                vm.patientDiagnosis = diagnosis;
+                DiagnosisFactory.getDiagnosis(vm.patient.latestDiagnosis).then(function(diagnosis) {
 
-                DiagnosisFactory.getDiagnosisMedication(vm.patientDiagnosis._id).then(function(result){
+                    vm.patientDiagnosis = diagnosis;
 
-                    vm.patientMedications = result.medications;
+                    DiagnosisFactory.getDiagnosisMedication(vm.patientDiagnosis._id).then(function(result){
 
-                },function() {
-                    $cordovaToast.showLongBottom("Ocurrió un error al recuperar la medicación del paciente, intentalo de nuevo");
+                        vm.patientMedications = result.medications;
+
+                    },function() {
+                        $cordovaToast.showLongBottom("Ocurrió un error al recuperar la medicación del paciente, intentalo de nuevo");
+                    });
+
+                }, function() {
+                    $cordovaToast.showLongBottom("Ocurrió un error al recuperar el diagnóstico del paciente, intentalo de nuevo");
                 });
-
-            }, function() {
-                $cordovaToast.showLongBottom("Ocurrió un error al recuperar el diagnóstico del paciente, intentalo de nuevo");
-            });
+            }
         }
 
         vm.medicationCreate = function(){
-            console.log(vm.patientDiagnosis._id);
             $state.go("app.patientMedicationCreate", { id: vm.patientDiagnosis._id });
 
         };

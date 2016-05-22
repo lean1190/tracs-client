@@ -1,18 +1,19 @@
 <ion-view cache-view="false" view-title="Diagnóstico de {{vm.patient.name}}">
     <ion-content>
-        <div class="diagnosis-detail" ng-show="vm.patientDiagnosis">
+        <div class="diagnosis-detail" ng-show="vm.patient.latestDiagnosis">
             <h3>Diagnóstico:{{::vm.patientDiagnosis.description}}</h3>
             <p>En caso de crisis:{{::vm.patientDiagnosis.inCaseOfCrisis}} </p>
+            <h4>Diagnosticado por: {{::vm.patientDiagnosis.madeBy.name}}</h4>
             <h4>Diagnosticado el día {{::vm.patientDiagnosis.date|date:'medium'}}</h4>
         </div>
         <!--<h3>{{::vm.message}}</h3>-->
 
-        <div class="first-diagnosis" ng-show="!vm.patientDiagnosis">
+        <div class="first-diagnosis" ng-show="!vm.patient.latestDiagnosis">
             <h3>El paciente aun no tiene un diagnóstico asignado. Empieza creando uno</h3>
         </div>
         <a ng-click="vm.medicationCreate()">Agregar Medicacion</a>
 
-        <div class="medication-list">
+        <div class="medication-list" ng-show="vm.patientDiagnosis">
 
             <h3>Medicaciones</h3>
             <ion-item ng-repeat="medication in vm.patientMedications">

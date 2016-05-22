@@ -18,6 +18,7 @@
 
         var service = {
 
+            getDiagnosis: getDiagnosis,
             addDiagnosisMedication: addDiagnosisMedication,
             getDiagnosisMedication: getDiagnosisMedication
 
@@ -25,11 +26,24 @@
 
         return service;
 
+
+        function getDiagnosis(diagnosisId) {
+
+            return $http.get(DiagnosisEndpoint + "/" + diagnosisId).then(function (result) {
+                return result.data;
+            }, function (error) {
+                $log.error("Ocurrió un error al recuperar el diagnóstico con id " + diagnosisId, error);
+                return error;
+            });
+        }
+
+
         /**
          * Recupera los medicamentos de un diagnostico
          * @param   {number}  userId el id del usuario
          * @returns {promise} una promesa con todos los pacientes del usuario
          */
+
         function getDiagnosisMedication(diagnosisId) {
 
             return $http.get(DiagnosisEndpoint + "/" + diagnosisId).then(function (result) {
@@ -41,7 +55,6 @@
         }
 
         function addDiagnosisMedication(newMedication, diagnosisId) {
-            console.log(diagnosisId);
 
             return $http.put(DiagnosisEndpoint + "/addDiagnosisMedication/" + diagnosisId, newMedication).then(function (result) {
 
