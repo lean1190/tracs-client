@@ -26,7 +26,11 @@
 
         return service;
 
-
+        /**
+         * Recupera la informacion de un diagnostico
+         * @param   {number} diagnosisId id del diagnostico a buscar
+         * @returns {promise} una promesa con la informacion del diagnostico
+         */
         function getDiagnosis(diagnosisId) {
 
             return $http.get(DiagnosisEndpoint + "/" + diagnosisId).then(function (result) {
@@ -37,16 +41,15 @@
             });
         }
 
-
         /**
          * Recupera los medicamentos de un diagnostico
          * @param   {number}  userId el id del usuario
-         * @returns {promise} una promesa con todos los pacientes del usuario
+         * @returns {promise} una promesa con todos los medicamentos del diagnostico
          */
 
         function getDiagnosisMedication(diagnosisId) {
 
-            return $http.get(DiagnosisEndpoint + "/" + diagnosisId).then(function (result) {
+            return $http.get(DiagnosisEndpoint + "/diagnosisMedication/" + diagnosisId).then(function (result) {
                 return result.data;
             }, function (error) {
                 $log.error("Ocurrió un error al recuperar los medicamentos para el diagnositoc " + diagnosisId, error);
@@ -54,19 +57,22 @@
             });
         }
 
+        /**
+         * Agrega una medicacion al diagnostico
+         * @param   {object}   newMedication medicacion a agregar
+         * @param   {number}   diagnosisId   id del diagnostico a modificar
+         * @returns {[[Type]]} [[Description]]
+         */
         function addDiagnosisMedication(newMedication, diagnosisId) {
 
             return $http.put(DiagnosisEndpoint + "/addDiagnosisMedication/" + diagnosisId, newMedication).then(function (result) {
 
-                console.log(result);
                 return result.data;
             }, function (error) {
                 $log.error("Ocurrió un error al agregar un nuevo medicamento al diagnostico" + diagnosisId, error);
                 return error;
             });
         }
-
-
     }
 })();
 

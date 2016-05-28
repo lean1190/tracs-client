@@ -18,7 +18,10 @@
                 <span class="input-label">Frecuencia</span>
                 <input type="text" ng-model="vm.medication.frequence" placeholder="Frecuencia" required>
             </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label required-field">Fecha de prescripción</span>
+                <input type="text" ng-model="vm.medication.date" placeholder="Fecha de prescripción *" onfocus="(this.type='date')" onblur="(this.type='text')">
+            </label>
         </div>
-s
     </ion-content>
 </ion-view>

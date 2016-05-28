@@ -43,6 +43,7 @@
         vm.assignProfile = function () {
 
             if (!(utils.isEmpty(vm.profile.user))) {
+
                 PatientFactory.assignProfile(vm.profile).then(function () {
 
                     $cordovaToast.showLongBottom("Perfil asignado correctamente!").then(function () {
