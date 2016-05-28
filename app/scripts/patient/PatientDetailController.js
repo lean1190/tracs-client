@@ -22,6 +22,7 @@
 
         function activate() {
             vm.patient = storage.getLastVisitedPatient();
+            vm.profile = storage.getCurrentProfile();
 
             // Muestra el check para guardar al paciente
             MenuFactory.activateRightButtonAction(function () {
