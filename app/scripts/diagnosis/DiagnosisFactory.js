@@ -19,8 +19,9 @@
         var service = {
 
             getDiagnosis: getDiagnosis,
+            getDiagnosisMedication: getDiagnosisMedication,
             addDiagnosisMedication: addDiagnosisMedication,
-            getDiagnosisMedication: getDiagnosisMedication
+            updateDiagnosis: updateDiagnosis
 
         };
 
@@ -71,6 +72,20 @@
             }, function (error) {
                 $log.error("Ocurrió un error al agregar un nuevo medicamento al diagnostico" + diagnosisId, error);
                 return error;
+            });
+        }
+
+        /**
+         * Modifica el nombre y descripcion de un diagnóstico
+         * @param   {object}  updatedDiagnosis diagnostico modificado
+         * @param   {number}  diagnosisId      id del diagnostico a modificar
+         * @returns {promise} una promesa con el diagnostico modificado
+         */
+        function updateDiagnosis(updatedDiagnosis, diagnosisId){
+             return $http.put(DiagnosisEndpoint + "/updateDiagnosis/"+ diagnosisId, updatedDiagnosis).then(function (result) {
+                return result.data;
+            }, function(error) {
+                $log.error("Ocurrió un error al modificar el diagnostico del paciente " + diagnosisId, error);
             });
         }
     }
