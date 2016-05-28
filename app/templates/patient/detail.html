@@ -1,9 +1,38 @@
 <ion-view cache-view="false" view-title="Perfil de {{vm.patient.name}}">
     <ion-content>
+        <!--<div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+            <div class="tabs">
+                <a class="tab-item active" href="#">
+                    Test
+                </a>
+                <a class="tab-item" href="#">
+                    Favorites
+                </a>
+                <a class="tab-item" href="#">
+                    Settings
+                </a>
+            </div>
+        </div>-->
 
+        <ion-tabs class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
 
+            <ion-tab title="Home">
+                <!-- Tab 1 content -->
+                tab1
+            </ion-tab>
+
+            <ion-tab title="About" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+                <!-- Tab 2 content -->
+                tab2
+            </ion-tab>
+
+            <ion-tab title="Settings" icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline">
+                <!-- Tab 3 content -->
+                tab3
+            </ion-tab>
+        </ion-tabs>
+            <!--
         <div class="contentInfo">
-
             <h2>Nombre:<a editable-text="vm.patient.name">{{ vm.patient.name || "Sin información..." }}</a></h2>
             <h3>Número Documento:<a editable-text="vm.patient.DNI">{{ vm.patient.DNI || "Sin información..." }}</a></h3>
             <h3>Número de Teléfono:<a editable-text="vm.patient.phoneNumber">{{ vm.patient.phoneNumber || "Sin información..." }}</a>                 </h3>
@@ -17,11 +46,11 @@
 
         <div class="addOpinion">
 
-           <label class="item item-input item-floating-label">
+            <label class="item item-input item-floating-label">
                 <span class="input-label">Cual es su opinion actual de {{vm.patient.name}}</span>
                 <textarea type="text" ng-model="vm.patientOpinion" placeholder="Cual es su opinion actual de " {{vm.patient.name}}></textarea>
             </label>
-            <button class="button-positive" ng-click ="vm.addPatientOpinion()"> Agregar opinion </button>
+            <button class="button-positive" ng-click="vm.addPatientOpinion()"> Agregar opinion </button>
         </div>
 
         <div class="item item-divider">
@@ -36,8 +65,7 @@
 
         </div>
 
-
         <button class="button button-energized" ng-click="vm.updatePatient()">Guardar cambios</button>
-
+    -->
     </ion-content>
 </ion-view>
