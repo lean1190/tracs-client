@@ -9,9 +9,9 @@
         .module("TracsClient.controllers")
         .controller("PatientWallController", PatientWallController);
 
-    PatientWallController.$inject = ["$rootScope", "$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory", "SocketService", "$state", "storage", "NotificationsMapper"];
+    PatientWallController.$inject = ["$rootScope", "$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory", "SocketService", "$state", "storage", "NotificationsMapper", "ProfileFactory"];
 
-    function PatientWallController($rootScope, $scope, $stateParams, $interval, $cordovaToast, PatientFactory, SocketService, $state, storage, NotificationsMapper) {
+    function PatientWallController($rootScope, $scope, $stateParams, $interval, $cordovaToast, PatientFactory, SocketService, $state, storage, NotificationsMapper, ProfileFactory) {
 
         var vm = this,
             patientId = $stateParams.id,
@@ -65,6 +65,9 @@
         });
 
         function activate() {
+
+            vm.user = storage.getUser();
+
             // Recupera todos los datos del paciente
             PatientFactory.getPatientDetail(patientId).then(function (resultPatient) {
                 vm.patient = resultPatient;
@@ -73,6 +76,12 @@
                 // Recupera los perfiles para mostrar en el muro
                 PatientFactory.getPatientProfiles(vm.patient._id).then(function (result) {
                     vm.patient.profiles = result;
+                });
+
+                //Recupera la informacion del perfil
+                ProfileFactory.getProfile(patientId,vm.user._id).then(function(profile){
+                    storage.setCurrentProfile(profile);
+                    console.log(storage.getCurrentProfile());
                 });
 
                 // Inicializa el intervalo para hacer polling de las notificaciones

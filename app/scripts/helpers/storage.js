@@ -25,11 +25,14 @@
         // Constantes para acceder a las propiedades
         var USER_KEY = "user",
             PATIENT_USER_KEY = "patientUser",
+            PROFILE_KEY= "profile",
             LAST_VISITED_PATIENT_KEY = "lastVisitedPatient";
 
         var service = {
             getUser: getUser,
             setUser: setUser,
+            setCurrentProfile: setCurrentProfile,
+            getCurrentProfile: getCurrentProfile,
             getPatientUser: getPatientUser,
             setPatientUser: setPatientUser,
             getLastVisitedPatient: getLastVisitedPatient,
@@ -48,6 +51,14 @@
 
         function getLastVisitedPatient() {
             return localStorageService.get(LAST_VISITED_PATIENT_KEY);
+        }
+
+        function setCurrentProfile(profile) {
+            return localStorageService.set(PROFILE_KEY, profile);
+        }
+
+        function getCurrentProfile() {
+            return localStorageService.get(PROFILE_KEY);
         }
 
         function setLastVisitedPatient(lastVisitedPatient) {
