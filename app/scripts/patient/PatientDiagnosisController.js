@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("PatientDiagnosisController", PatientDiagnosisController);
 
-    PatientDiagnosisController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory","DiagnosisFactory"];
+    PatientDiagnosisController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory","DiagnosisFactory","MenuFactory"];
 
-    function PatientDiagnosisController($stateParams, $state, $cordovaToast, storage, PatientFactory, DiagnosisFactory) {
+    function PatientDiagnosisController($stateParams, $state, $cordovaToast, storage, PatientFactory, DiagnosisFactory, MenuFactory) {
 
         var vm = this;
 
@@ -31,7 +31,19 @@
 
             vm.patient = storage.getLastVisitedPatient();
 
+            vm.editOn = false;
+
             if(vm.patient.latestDiagnosis){
+
+                // Muestra el lapiz para editar la nota del paciente
+                MenuFactory.activateRightEditButtonAction(function () {
+                    vm.editFields();
+                });
+
+                // Cuando apretamos atrás se borra el boton y su funcionalidad
+                MenuFactory.setBackButtonAction(function () {
+                    MenuFactory.clearRightButtonAction();
+                });
 
                 DiagnosisFactory.getDiagnosis(vm.patient.latestDiagnosis).then(function(diagnosis) {
 
@@ -56,7 +68,32 @@
 
         };
 
+        vm.editFields = function(){
 
+            vm.editOn = true;
+
+            MenuFactory.clearRightButtonAction();
+
+            MenuFactory.activateRightButtonAction(function () {
+                vm.updateDiagnosis();
+            });
+        }
+
+        vm.updateDiagnosis = function(){
+
+            DiagnosisFactory.updateDiagnosis(vm.patientDiagnosis, vm.patient.latestDiagnosis).then(function (result) {
+
+                $cordovaToast.showLongBottom("Diagnóstico Actualizado!").then(function () {
+                    MenuFactory.clearRightButtonAction();
+
+                    $state.go("app.patientDiagnosis");
+                });
+
+
+            }, function () {
+                $cordovaToast.showLongBottom("Ocurrió un error al actualizar el diagnóstico del paciente, intentalo de nuevo");
+            });
+        }
     }
 
 })();

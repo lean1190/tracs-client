@@ -30,7 +30,7 @@
         };
 
         return service;
-        ///updatePatientNote/:id
+
         function updatePatientNote(updatedNote, noteId){
              return $http.put(patientNoteEndpoint + "/updatePatientNote/"+ noteId, updatedNote).then(function (result) {
                 return result.data;
