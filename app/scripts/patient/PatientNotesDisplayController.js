@@ -60,13 +60,13 @@
             MenuFactory.activateRightButtonAction(function () {
                 vm.updatePatientNote();
             });
-        }
+        };
 
         vm.updatePatientNote = function(){
 
             console.log("edito los campos");
 
-            PatientNoteFactory.updatePatientNote(vm.patientNote, noteId).then(function (result) {
+            PatientNoteFactory.updatePatientNote(vm.patientNote, noteId).then(function () {
 
                 $cordovaToast.showLongBottom("Nota Actualizada!").then(function () {
                     MenuFactory.clearRightButtonAction();
@@ -77,6 +77,6 @@
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al actualizar la nota sobre el paciente, intentalo de nuevo");
             });
-        }
+        };
     }
 })();

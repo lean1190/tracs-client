@@ -1,67 +1,63 @@
 <ion-view cache-view="false" view-title="Perfil de {{vm.patient.name}}">
     <ion-content>
-        <!--<div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
-            <div class="tabs">
-                <a class="tab-item active" href="#">
-                    Test
-                </a>
-                <a class="tab-item" href="#">
-                    Favorites
-                </a>
-                <a class="tab-item" href="#">
-                    Settings
-                </a>
-            </div>
-        </div>-->
+        <ion-tabs class="tabs-striped tabs-top patient-tabs">
 
-        <ion-tabs class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
-
-            <ion-tab title="Home">
-                <!-- Tab 1 content -->
-                tab1
+            <ion-tab title="GENERAL" on-select="vm.changeToGeneralTab()">
+                <div class="general-tab">
+                    <div class="image-name-wrapper">
+                        <div class="image">
+                            <img ng-src="{{vm.patient.picture}}" alt="{{vm.patient.name}}">
+                        </div>
+                        <div class="name">
+                            <span editable-text="vm.patient.name">
+                            {{ vm.patient.name }}
+                        </span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <div><strong>DNI</strong>
+                            <a editable-text="vm.patient.DNI">{{ vm.patient.DNI }}</a>
+                        </div>
+                        <div><strong>Teléfono</strong>
+                            <a editable-text="vm.patient.phoneNumber">{{ vm.patient.phoneNumber || "Aún no tiene teléfono" }}</a>
+                        </div>
+                        <div><strong>Nacido el</strong>
+                            <a editable-text="vm.patient.birthDate">{{ vm.patient.birthDate | date:"dd/MM/yyyy" }}</a>
+                        </div>
+                        <div>
+                            <a editable-text="vm.patient.generalDescription">{{ vm.patient.generalDescription || "Aún no hay descripción" }}</a>
+                        </div>
+                    </div>
+                </div>
             </ion-tab>
 
-            <ion-tab title="About" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
-                <!-- Tab 2 content -->
-                tab2
+            <ion-tab title="OPINIONES" on-select="vm.changeToOpinionsTab()" hidden="!vm.profile.isParent">
+                <div class="opinions-tab">
+                    <div class="add-opinion list">
+                        <textarea ng-model="vm.patientOpinion" placeholder="Mi opinión"></textarea>
+                        <!--<label class="item item-input item-floating-label">
+                            <span class="input-label">Mi opinión</span>
+                            <input type="text" ng-model="vm.patientOpinion" placeholder="Mi opinión" />
+                        </label>-->
+                    </div>
+
+                    <h4>Lo que opinan otros</h4>
+
+                    <div class="others-opinion list" ng-repeat="opinion in vm.patientOpinions" ng-show="opinion.latestPatientOpinion">
+                        <a class="item item-avatar" href="#">
+                            <img ng-src="{{opinion.user.picture}}">
+                            <h2>{{ opinion.user.name }} <span class="date">dijo el {{ opinion.latestPatientOpinion.date | date:"dd/MM/yyyy" }}</h2>
+                            <p>{{ opinion.latestPatientOpinion.description }}</p>
+                        </a>
+                    </div>
+                </div>
             </ion-tab>
 
-            <ion-tab title="Settings" icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline">
-                <!-- Tab 3 content -->
-                tab3
+            <ion-tab title="CONTACTO">
+                <div>INFO DE CONTACTO!</div>
             </ion-tab>
+
         </ion-tabs>
-            <!--
-        <div class="contentInfo">
-            <h2>Nombre:<a editable-text="vm.patient.name">{{ vm.patient.name || "Sin información..." }}</a></h2>
-            <h3>Número Documento:<a editable-text="vm.patient.DNI">{{ vm.patient.DNI || "Sin información..." }}</a></h3>
-            <h3>Número de Teléfono:<a editable-text="vm.patient.phoneNumber">{{ vm.patient.phoneNumber || "Sin información..." }}</a>                 </h3>
-            <h3>Fecha de Nacimiento:<a editable-text="vm.patient.birthDate">{{ vm.patient.birthDate || "Sin información..."                           |date:"dd/MM/yyyy"}}</a></h3>
-            <p>Descripción General<a editable-text="vm.patient.generalDescription">{{ vm.patient.generalDescription || "Sin                         información..." }}</a></p>
-
-            <div class="contentImage">
-                <img ng-src="{{vm.patient.picture}}" alt="{{vm.patient.name}}">
-            </div>
-        </div>
-
-        <div class="patientOpinion" ng-show="vm.profile.isParent">
-
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Cual es su opinion actual de {{vm.patient.name}}</span>
-                <textarea type="text" ng-model="vm.patientOpinion" placeholder="Cual es su opinion actual de " {{vm.patient.name}}></textarea>
-            </label>
-            <button class="button-positive" ng-click="vm.addPatientOpinion()"> Agregar opinion </button>
-        </div>
-            <div class="item item-divider">
-                Opiniones de participantes
-            </div>
-            <br/>
-            <div class="displayOpinion" ng-repeat="opinion in vm.patientOpinions" ng-show="opinion.latestPatientOpinion">
-
-                <h4>{{opinion.user.name}}</h4>
-                <p>{{opinion.latestPatientOpinion.description}}</p>
-                <h4>{{opinion.latestPatientOpinion.date|date:"dd/MM/yyyy"}}</h4>
-            </div>
-       </div>
     </ion-content>
+
 </ion-view>

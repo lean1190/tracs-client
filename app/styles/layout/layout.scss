@@ -47,7 +47,6 @@ body, html {
 
 .bar-balanced {
     background-color: $layout-green !important;
-    box-shadow: $default-shadow;
 }
 
 .button-balanced {
@@ -117,4 +116,21 @@ body, html {
         color: #212121;
         font-size: 15px;
     }
+}
+
+/* x-editable customization */
+.editable-click {
+    border-bottom: none !important;
+}
+
+.editable-buttons {
+    display: none !important;
+}
+
+.editable-wrap {
+    width: 100% !important;
+}
+
+.editable-input {
+    width: 100% !important;
 }

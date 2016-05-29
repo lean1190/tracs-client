@@ -78,10 +78,9 @@
                     vm.patient.profiles = result;
                 });
 
-                //Recupera la informacion del perfil
-                ProfileFactory.getProfile(patientId,vm.user._id).then(function(profile){
+                // Recupera la informacion del perfil
+                ProfileFactory.getProfile(patientId, vm.user._id).then(function(profile){
                     storage.setCurrentProfile(profile);
-                    console.log(storage.getCurrentProfile());
                 });
 
                 // Inicializa el intervalo para hacer polling de las notificaciones
