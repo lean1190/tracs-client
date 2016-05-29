@@ -64,6 +64,8 @@
         }
 
         vm.medicationCreate = function(){
+
+            MenuFactory.clearRightButtonAction();
             $state.go("app.patientMedicationCreate", { id: vm.patientDiagnosis._id });
 
         };
@@ -85,8 +87,7 @@
 
                 $cordovaToast.showLongBottom("Diagnóstico Actualizado!").then(function () {
                     MenuFactory.clearRightButtonAction();
-
-                    $state.go("app.patientDiagnosis");
+                    $state.reload();
                 });
 
 

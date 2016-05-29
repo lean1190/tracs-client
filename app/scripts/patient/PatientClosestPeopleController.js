@@ -79,7 +79,8 @@
 
                 $cordovaToast.showLongBottom("Los contactos cercanos del paciente fueron modificados con exito!").then(function () {
                         MenuFactory.clearRightButtonAction();
-                        $state.go("app.patientWall", { id: vm.patient._id })
+                        //$state.go("app.patientWall", { id: vm.patient._id });
+                        $state.reload();
                 });
 
             }, function () {

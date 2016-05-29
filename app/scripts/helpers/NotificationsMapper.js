@@ -36,11 +36,19 @@
             },
             "patient.contacts.updated": {
                 icon: "ion-android-call",
-                link: "app.patientEditClosestPeople"
+                link: "app.patientClosestPeople"
             },
             "patient.geoAlert.added":{
                 icon: "ion-alert-circled",
                 link: "app.geoAlertMap"
+            },
+            "patient.diagnosis.updated":{
+                icon: "ion-heart",
+                link: "app.patientDiagnosis"
+            },
+            "patient.medication.updated":{
+                icon: "ion-medkit",
+                link: "app.patientDiagnosis"
             }
         };
 

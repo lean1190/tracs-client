@@ -48,6 +48,8 @@
             vm.patient = storage.getLastVisitedPatient();
             vm.user = storage.getUser();
 
+            MenuFactory.clearRightButtonAction();
+
             // Muestra el check para guardar al paciente
             MenuFactory.activateRightButtonAction(function () {
                 vm.createDiagnosis();
