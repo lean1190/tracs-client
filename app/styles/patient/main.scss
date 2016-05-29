@@ -1,16 +1,13 @@
 .patient-wall-card {
     box-shadow: $card-shadow;
     margin: $default-margin;
-
     .item {
-
         .image-wrapper {
             width: 85px;
             height: 85px;
             position: relative;
             overflow: hidden;
             border-radius: 100%;
-
             img {
                 @include img-contained-with-radius(100%);
                 position: absolute;
@@ -18,21 +15,18 @@
                 top: 50%;
                 height: 100%;
                 width: auto;
-                -webkit-transform: translate(-50%,-50%);
-                -ms-transform: translate(-50%,-50%);
-                transform: translate(-50%,-50%);
+                -webkit-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
             }
         }
-
         .content-wrapper {
             margin-left: 10px;
             width: 69%;
-
             .name {
                 font-size: 19px;
                 margin-bottom: 5px;
             }
-
             .description {
                 font-size: 13px;
                 color: $lower-text-color;
@@ -42,7 +36,6 @@
                 height: 40px;
             }
         }
-
         .actions-footer {
             position: absolute;
             bottom: 0;
@@ -53,7 +46,6 @@
             font-size: 12px;
             font-weight: bold;
             color: $layout-violet;
-
             span {
                 text-transform: uppercase;
                 padding: 5px 10px;
@@ -65,13 +57,11 @@
 
 .patient-profiles {
     margin: $default-margin;
-
     .image-wrapper {
         width: 45px;
         height: 45px;
         display: inline-block;
         margin-right: 5px;
-
         img {
             @include img-contained-with-radius(100%);
         }
@@ -80,36 +70,29 @@
 
 .patient-notifications {
     margin-bottom: 10px !important;
-
     .notification {
         font-size: 16px;
-
         .timestamp {
-            font-size:13px;
+            font-size: 13px;
             color: #818181;
         }
     }
 }
 
 .patient-chat {
-
     .chat-members {
         padding: 10px;
-
         .member {
             width: 35px;
             height: 35px;
             display: inline-block;
             margin-right: 5px;
-
             img {
                 @include img-contained-with-radius(100%);
             }
         }
     }
-
     .chat-messages {
-
         .not-current-user {
             padding: 5px 60px;
             padding-right: 10px;
@@ -117,35 +100,29 @@
             border-color: #F3F3F3;
             text-align: left;
             margin-bottom: 5px;
-
             .activated {
                 background-color: white;
             }
-
             h2 {
                 font-size: 13px;
                 font-weight: bold;
                 margin-bottom: 3px;
                 color: $layout-violet;
-
                 span {
                     font-size: 12px;
                     font-weight: normal;
                     color: $lower-text-color;
                 }
             }
-
             p {
                 font-size: 15px;
                 color: $text-color;
             }
-
             img {
                 top: 5px;
                 left: 10px;
             }
         }
-
         .current-user {
             padding: 5px 60px;
             padding-left: 10px;
@@ -154,29 +131,24 @@
             background-color: #F8F8F8;
             text-align: right;
             margin-bottom: 5px;
-
             .activated {
                 background-color: white;
             }
-
             h2 {
                 font-size: 13px;
                 font-weight: bold;
                 margin-bottom: 3px;
                 color: $layout-violet;
-
                 span {
                     font-size: 12px;
                     font-weight: normal;
                     color: $lower-text-color;
                 }
             }
-
             p {
                 font-size: 15px;
                 color: $text-color;
             }
-
             img {
                 top: 5px;
                 right: 10px;
@@ -187,8 +159,68 @@
 }
 
 .patient-chat-input {
-
     label {
         background-color: white;
+    }
+}
+
+.patient-tabs {
+    .tab-nav {
+        background-color: #fff;
+        color: $text-color;
+        top: 0;
+    }
+    .tab-item-active {
+        border-color: $layout-green !important;
+    }
+    .tab-item.activated {
+        border-color: $layout-green !important;
+    }
+    .tab-content {
+        color: $text-color;
+        top: 55px;
+    }
+    .general-tab {
+        .image-name-wrapper {
+            width: 100%;
+            height: 50%;
+            box-shadow: $default-shadow;
+            .image {
+                width: 100%;
+                height: 100%;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .name {
+                position: relative;
+                bottom: 40px;
+                left: 10px;
+                font-weight: bold;
+                font-size: 30px;
+                span {
+                    color: #fff !important;
+                }
+            }
+        }
+        .info {
+            div {
+                padding: 5px 10px;
+                font-size: 18px;
+            }
+        }
+    }
+    .opinions-tab {
+        padding: 5px 15px;
+        .others-opinion {
+            h2 {
+                color: $text-color;
+                .date {
+                    font-size: 13px;
+                    color: $lower-text-color;
+                }
+            }
+        }
     }
 }

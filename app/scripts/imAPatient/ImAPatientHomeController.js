@@ -19,33 +19,66 @@
         .controller("ImAPatientHomeController", ImAPatientHomeController);
 
 
-    ImAPatientHomeController.$inject = ["$log", "$state", "$cordovaToast", "$cordovaGeolocation", "storage", "dialer", "sms","ImAPatientFactory"];
+    ImAPatientHomeController.$inject = ["$scope", "$q", "$log", "$state", "$cordovaToast", "$cordovaGeolocation", "$ionicPopup", "storage", "dialer", "sms", "ImAPatientFactory"];
 
-    function ImAPatientHomeController($log, $state, $cordovaToast, $cordovaGeolocation, storage, dialer, sms, ImAPatientFactory) {
+    function ImAPatientHomeController($scope, $q, $log, $state, $cordovaToast, $cordovaGeolocation, $ionicPopup, storage, dialer, sms, ImAPatientFactory) {
 
         var vm = this;
 
         vm.patient = storage.getPatientUser();
         vm.patientPosition = {};
 
+        function chooseSmsTemplate() {
+            $scope.templates = [
+                { label: "Necesito ayuda", message: "Necesito ayuda, por favor vení" },
+                { label: "Me siento bien", message: "Me siento bien :)" }
+            ];
+            $scope.message = {};
+
+            return $ionicPopup.show({
+                template:
+                '<select ng-model="message" ng-options="template.message as template.label for template in templates" style="width: 100%;">' +
+                    '<option value="">- Cómo te sentís? -</option>' +
+                '</select>',
+
+                title: "Elegí un texto para el mensaje",
+                scope: $scope,
+                buttons: [
+                    {
+                        text: "Enviar mensaje",
+                        type: "button-positive",
+                        onTap: function () {
+                            console.log("### scope message", $scope.message);
+                            return $scope.message;
+                        }
+                    }
+                ]
+            });
+        }
+
         vm.callPhoneNumber = function (phoneNumber) {
 
-            if (phoneNumber !== ""){
+            if (phoneNumber !== "") {
                 dialer.callNumber(function () {}, function (error) {
                     $log.error("No se pudo realizar la llamada al número " + phoneNumber, error);
                     $cordovaToast.showLongBottom("No se pudo realizar la llamada! Hay señal?");
                 }, phoneNumber, false);
+            } else {
+                $cordovaToast.showLongBottom("Esta persona no tiene teléfono");
             }
         };
 
         vm.sendSms = function (phoneNumber) {
 
-            if (phoneNumber !== ""){
+            if (phoneNumber !== "") {
 
-                var options = {
+                chooseSmsTemplate().then(function(smsTemplate) {
+                    console.log("### SMS template", smsTemplate);
+                });
+
+                /*var options = {
                     android: {
-                        // intent: 'INTENT' // send SMS with the native android SMS messaging
-                        intent: "" // send SMS without open any other app
+                        intent: "" // send SMS without open any other app || 'INTENT' send SMS with the native android SMS messaging
                     }
                 };
 
@@ -54,7 +87,9 @@
                 }, function (error) {
                     $log.error("No se pudo enviar el sms al número " + phoneNumber, error);
                     $cordovaToast.showLongBottom("No se pudo enviar el mensaje! Hay señal?");
-                });
+                });*/
+            } else {
+                $cordovaToast.showLongBottom("Esta persona no tiene teléfono");
             }
 
         };
@@ -71,15 +106,15 @@
             $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
                 vm.patientPosition = position.coords;
                 vm.patientPosition.timestamp = position.timestamp;
-                console.log("### Patient position: ", vm.patientPosition);
 
-                ImAPatientFactory.sendGeoAlert(vm.patientPosition, vm.patient._id).then(function() {
+                ImAPatientFactory.sendGeoAlert(vm.patientPosition, vm.patient._id).then(function () {
                     $cordovaToast.showLongBottom("Tu alerta fue enviada correctamente, pronto serás contactado");
-                }, function() {
+                }, function () {
                     $cordovaToast.showLongBottom("Ocurrió un error al enviar la alerta, intentalo de nuevo");
                 });
             }, function (error) {
-                $log.error("Ocurrió un error al recuperar la posición del paciente, está habilitado el GPS?", error);
+                $cordovaToast.showLongBottom("No pudimos localizarte, está activado el GPS?");
+                $log.error("Ocurrió un error al recuperar la posición del paciente", error);
             });
         };
 

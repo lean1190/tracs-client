@@ -4,6 +4,8 @@
 npm install
 bower install
 ionic state restore
+
+// Solo si hay quilombos de versión!!
 cordova platform update android@5.0.0
 
 ## Plugins de cordova (se deberian instalar con el ionic state restore)

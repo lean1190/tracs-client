@@ -49,7 +49,7 @@
                     map: map
                 });
 
-            getMyPosition().then(function (result) {
+            getMyPosition().then(function () {
 
 
                 //origin = result;
@@ -59,9 +59,9 @@
 
                 console.log(error);
             });
-        };
+        }
 
-        function calculateAndDisplayRoute(directionsDisplay, directionsService, markerArray, map) {
+        function calculateAndDisplayRoute(directionsDisplay, directionsService, markerArray) {
 
             var originLatLng = new google.maps.LatLng(origin.lat, origin.lng),
                 destinationLatLng = new google.maps.LatLng(destination.lat, destination.lng);

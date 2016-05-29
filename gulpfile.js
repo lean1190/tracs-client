@@ -373,7 +373,7 @@ gulp.task('default', function (done) {
     runSequence(
         'clean',
         'config',
-        'ioconfig',
+        // 'ioconfig',
         'iconfont',
         [
           'fonts',
