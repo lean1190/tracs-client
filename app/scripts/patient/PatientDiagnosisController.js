@@ -79,11 +79,11 @@
             MenuFactory.activateRightButtonAction(function () {
                 vm.updateDiagnosis();
             });
-        }
+        };
 
         vm.updateDiagnosis = function(){
 
-            DiagnosisFactory.updateDiagnosis(vm.patientDiagnosis, vm.patient.latestDiagnosis).then(function (result) {
+            DiagnosisFactory.updateDiagnosis(vm.patientDiagnosis, vm.patient.latestDiagnosis).then(function () {
 
                 $cordovaToast.showLongBottom("Diagnóstico Actualizado!").then(function () {
                     MenuFactory.clearRightButtonAction();
@@ -94,7 +94,7 @@
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al actualizar el diagnóstico del paciente, intentalo de nuevo");
             });
-        }
+        };
     }
 
 })();

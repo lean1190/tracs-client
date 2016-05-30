@@ -26,20 +26,24 @@
         var vm = this;
 
         vm.patient = storage.getPatientUser();
-        vm.patientPosition = {};
 
         function chooseSmsTemplate() {
             $scope.templates = [
-                { label: "Necesito ayuda", message: "Necesito ayuda, por favor vení" },
-                { label: "Me siento bien", message: "Me siento bien :)" }
+                {
+                    label: "Necesito ayuda",
+                    message: "Necesito ayuda, por favor vení"
+                },
+                {
+                    label: "Me siento bien",
+                    message: "Me siento bien :)"
+                }
             ];
             $scope.message = {};
 
             return $ionicPopup.show({
-                template:
-                '<select ng-model="message" ng-options="template.message as template.label for template in templates" style="width: 100%;">' +
-                    '<option value="">- Cómo te sentís? -</option>' +
-                '</select>',
+                template: "<select ng-model='message' ng-options='template.message as template.label for template in templates' style='width: 100%;'>" +
+                    "<option value=''>- Cómo te sentís? -</option>" +
+                    "</select>",
 
                 title: "Elegí un texto para el mensaje",
                 scope: $scope,
@@ -72,7 +76,7 @@
 
             if (phoneNumber !== "") {
 
-                chooseSmsTemplate().then(function(smsTemplate) {
+                chooseSmsTemplate().then(function (smsTemplate) {
                     console.log("### SMS template", smsTemplate);
                 });
 
@@ -96,25 +100,10 @@
 
         // Importante: Prender el GPS del emulador
         vm.sendGeoAlert = function () {
-
-            var options = {
-                timeout: 80000,
-                enableHighAccuracy: true,
-                maximumAge: 10000
-            };
-
-            $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
-                vm.patientPosition = position.coords;
-                vm.patientPosition.timestamp = position.timestamp;
-
-                ImAPatientFactory.sendGeoAlert(vm.patientPosition, vm.patient._id).then(function () {
-                    $cordovaToast.showLongBottom("Tu alerta fue enviada correctamente, pronto serás contactado");
-                }, function () {
-                    $cordovaToast.showLongBottom("Ocurrió un error al enviar la alerta, intentalo de nuevo");
-                });
-            }, function (error) {
+            ImAPatientFactory.sendGeoAlertAtMyPosition(vm.patient._id).then(function () {
+                $cordovaToast.showLongBottom("Ya está! Pronto recibirás ayuda");
+            }, function () {
                 $cordovaToast.showLongBottom("No pudimos localizarte, está activado el GPS?");
-                $log.error("Ocurrió un error al recuperar la posición del paciente", error);
             });
         };
 

@@ -41,7 +41,8 @@
                         </label>-->
                     </div>
 
-                    <h4>Lo que opinan otros</h4>
+                    <h4 ng-if="vm.patientOpinions.length">Lo que opinan los participantes</h4>
+                    <h4 ng-if="!vm.patientOpinions.length">Aún no hay opiniones</h4>
 
                     <div class="others-opinion list" ng-repeat="opinion in vm.patientOpinions" ng-show="opinion.latestPatientOpinion">
                         <a class="item item-avatar" href="#">

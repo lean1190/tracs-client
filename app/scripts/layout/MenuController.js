@@ -16,15 +16,14 @@
         .module("TracsClient.controllers")
         .controller("MenuController", MenuController);
 
-    MenuController.$inject = ["$scope","$rootScope", "$state", "$ionicPopup", "$ionicSideMenuDelegate", "storage"];
+    MenuController.$inject = ["$scope", "$rootScope", "$state", "$ionicPopup", "$ionicSideMenuDelegate", "$cordovaToast", "storage", "ImAPatientFactory"];
 
-    function MenuController($scope, $rootScope, $state, $ionicPopup, $ionicSideMenuDelegate, storage) {
+    function MenuController($scope, $rootScope, $state, $ionicPopup, $ionicSideMenuDelegate, $cordovaToast, storage, ImAPatientFactory) {
 
         var vm = this;
 
         // Usuario para mostrar la foto de perfil en el menu
-        // Puede ser el usuario logueado o un usuario tipo paciente
-        vm.user = storage.getUser() || storage.getPatientUser();
+        vm.user = storage.getUser();
 
         // Variable utilizada para mostrar u ocultar items del menú
         // según la página
@@ -56,6 +55,43 @@
          */
         vm.closeMenu = function () {
             $ionicSideMenuDelegate.toggleLeft();
+        };
+
+        /**
+         * Envía un alerta georreferenciada que será vista
+         * por todos los participantes del tratamiento
+         */
+        vm.sendGeoAlert = function () {
+            var confirmAlert = $ionicPopup.show({
+                template: "<div style='text-align: center'>¿Enviar alerta?</div>",
+                title: "Confirmar",
+                scope: $scope,
+                buttons: [
+                    {
+                        text: "Sí",
+                        type: "button-positive",
+                        onTap: function () {
+                            return true;
+                        }
+                    },
+                    {
+                        text: "No",
+                        type: "button-default"
+                    }
+                ]
+            });
+
+            confirmAlert.then(function(confirmed) {
+                if(confirmed) {
+                    // Paciente que se está visualizando actualmente
+                    var patient = storage.getLastVisitedPatient();
+                    ImAPatientFactory.sendGeoAlertAtMyPosition(patient._id).then(function () {
+                        $cordovaToast.showLongBottom("Ya enviamos el alerta, pronto recibirás ayuda");
+                    }, function () {
+                        $cordovaToast.showLongBottom("No pudimos localizarte, está activado el GPS?");
+                    });
+                }
+            });
         };
 
         /**

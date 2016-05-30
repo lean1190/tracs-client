@@ -46,8 +46,9 @@
             });
         }
 
-        function showChatButton() {
+        function showActionButtons() {
             $rootScope.showChatButton = true;
+            $rootScope.showAlertButton = true;
         }
 
         /**
@@ -57,6 +58,7 @@
          */
         $scope.$on("$destroy", function () {
             $rootScope.showChatButton = false;
+            $rootScope.showAlertButton = false;
             // Make sure that the interval is destroyed
             if (angular.isDefined(notificationsInterval)) {
                 $interval.cancel(notificationsInterval);
@@ -89,7 +91,8 @@
                     getPatientNotifications();
                 }, 20000);
 
-                showChatButton();
+                // Muestra los botones de enviar alerta y chat
+                showActionButtons();
 
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la información del paciente, intentalo de nuevo");

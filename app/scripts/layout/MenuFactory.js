@@ -22,6 +22,7 @@
 
         $rootScope.hasRightButtonAction = false;
         $rootScope.showChatButton = false;
+        $rootScope.showAlertButton = false;
 
         var defaultRightButtonAction = function () {},
             defaultBackButtonAction = $rootScope.$ionicGoBack,

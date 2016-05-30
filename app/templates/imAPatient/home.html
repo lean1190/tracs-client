@@ -8,7 +8,7 @@
             <h1 class="title">Necesito ayuda!</h1>
         </div>
         <div class="contacts">
-            <div class="contact-card" ng-repeat="closePerson in vm.patient.closestPeople track by closePerson._id | orderBy:['priority','name']">
+            <div class="contact-card" ng-repeat="closePerson in vm.patient.closestPeople track by $index | orderBy:['priority','name']" ng-show="closePerson._id">
                 <div class="contact-img" ng-click="vm.callPhoneNumber(closePerson.phoneNumber)">
                     <img ng-src="{{::closePerson.picture}}" alt="{{::closePerson.name}}">
                 </div>
@@ -18,9 +18,6 @@
                     </div>
                     <div class="contact-info" ng-click="vm.sendSms(closePerson.phoneNumber)">
                         <i class="icon ion-chatbubble-working"></i>
-                        <!--<select ng-model="vm.profile.user" ng-options="user._id as user.name for user in vm.users">
-                             <option value="">Seleccione un participante</option>
-                        </select>-->
                     </div>
                 </div>
             </div>

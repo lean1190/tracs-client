@@ -48,14 +48,12 @@
         };
 
         vm.changeToGeneralTab = function() {
-            console.log("### Changing to general tab...");
             MenuFactory.activateRightButtonAction(function () {
                 vm.updatePatient();
             });
         };
 
         vm.changeToOpinionsTab = function() {
-            console.log("### Changing to opinions tab...");
             MenuFactory.activateRightButtonAction(function () {
                 vm.addPatientOpinion();
             });
@@ -66,7 +64,6 @@
             vm.profile = storage.getCurrentProfile();
 
             console.log("### Patient", vm.patient);
-            console.log("### Profile", vm.profile);
 
             // Muestra el check para guardar al paciente
             vm.changeToGeneralTab();
