@@ -1,35 +1,36 @@
-<ion-view view-title="Nuevo diagnóstico de {{vm.patient.name}}">
+<ion-view view-title="Nuevo diagnóstico">
     <ion-content>
         <div class="list">
 
-            <h3 class="title">Nuevo diagnóstico de {{vm.patient.name}}</h3>
-
             <label class="item item-input item-floating-label">
-                <span class="input-label">Diagnóstico</span>
-                <input type="text" ng-model="vm.patientDiagnosis.name" placeholder="Diagnóstico" required>
+                <span class="input-label required-field">Diagnóstico</span>
+                <input type="text" ng-model="vm.patientDiagnosis.name" placeholder="Diagnóstico *">
             </label>
             <label class="item item-input item-floating-label">
-                <span class="input-label">Descripción</span>
-                <input type="text" ng-model="vm.patientDiagnosis.description" placeholder="Descripción" required>
+                <span class="input-label required-field">Descripción</span>
+                <input type="text" ng-model="vm.patientDiagnosis.description" placeholder="Descripción *">
             </label>
 
-          <!--  <div class="item item-divider">
-                Historia Vital-->
-           <!-- </div>
-               <label class="item item-input item-floating-label">
+            <!--
+            <div class="item item-divider">
+                Historia Vital
+            </div>
+            <label class="item item-input item-floating-label">
                 <span class="input-label">Descripción tratamiento previo</span>
                 <input type="text" ng-model="vm.patientDiagnosis.vitalHistory.description" placeholder="Descripción tratamiento previo">
-            </label>-->
+            </label>
 
-          <!--  <label class="item item-input item-floating-label">
-               <span class="input-label">Establecimiento del tratamiento anterior</span>
-               <input type="text" ng-model="vm.patientDiagnosis.vitalHistory.prevTherapyPlace" placeholder="Establecimiento del tratamiento anterior">
-            </label>-->
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Establecimiento del tratamiento anterior</span>
+                <input type="text" ng-model="vm.patientDiagnosis.vitalHistory.prevTherapyPlace" placeholder="Establecimiento del tratamiento anterior">
+            </label>
 
-           <!-- <label class="item item-input item-floating-label">
+            <label class="item item-input item-floating-label">
                 <span class="input-label">Duración tratamiento previo</span>
                 <input type="text" ng-model="vm.patientDiagnosis.vitalHistory.prevTherapyDuration" placeholder="Duración tratamiento previo">
-            </label>-->
+            </label>
+            -->
+
         </div>
     </ion-content>
 </ion-view>

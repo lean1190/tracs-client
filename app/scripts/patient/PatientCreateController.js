@@ -31,9 +31,9 @@
 
         /**
          * Valida que los campos obligatorios hayan sido completados
-         * @returns {boolean} true if the validation passes
+         * @returns {boolean} true si la validación pasa
          */
-        function validate() {
+        function isValid() {
             if (vm.patient.name === "") {
                 $cordovaToast.showLongBottom("El nombre es obligatorio");
                 return false;
@@ -51,7 +51,7 @@
         }
 
         vm.createPatient = function () {
-            if (validate()) {
+            if (isValid()) {
                 var creatorId = storage.getUser()._id;
 
                 PatientFactory.createPatient(vm.patient, creatorId).then(function () {

@@ -1,23 +1,21 @@
-<ion-view view-title="Nueva medicacón de {{vm.patient.name}}">
+<ion-view view-title="Nueva medicacón">
     <ion-content>
         <div class="list">
-
-            <h3 class="title">Nueva medicación de {{vm.patient.name}}</h3>
-
             <label class="item item-input item-floating-label">
-                <span class="input-label">Nombre Medicamento</span>
-                <input type="text" ng-model="vm.medication.drug" placeholder="Nombre Medicamento" required>
+                <span class="input-label required-field">Nombre medicamento</span>
+                <input type="text" ng-model="vm.medication.drug" placeholder="Nombre Medicamento *">
             </label>
 
             <label class="item item-input item-floating-label">
-                <span class="input-label">Dosis</span>
-                <input type="text" ng-model="vm.medication.dosis" placeholder="Dosis" required>
+                <span class="input-label required-field">Dosis</span>
+                <input type="text" ng-model="vm.medication.dosis" placeholder="Dosis *">
             </label>
 
             <label class="item item-input item-floating-label">
-                <span class="input-label">Frecuencia</span>
-                <input type="text" ng-model="vm.medication.frequence" placeholder="Frecuencia" required>
+                <span class="input-label required-field">Frecuencia</span>
+                <input type="text" ng-model="vm.medication.frequence" placeholder="Frecuencia *">
             </label>
+
             <label class="item item-input item-floating-label">
                 <span class="input-label required-field">Fecha de prescripción</span>
                 <input type="text" ng-model="vm.medication.date" placeholder="Fecha de prescripción *" onfocus="(this.type='date')" onblur="(this.type='text')">

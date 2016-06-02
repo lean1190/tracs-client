@@ -33,12 +33,12 @@
 
             <ion-tab title="OPINIONES" on-select="vm.changeToOpinionsTab()" hidden="!vm.profile.isParent">
                 <div class="opinions-tab">
-                    <div class="add-opinion list">
-                        <textarea ng-model="vm.patientOpinion" placeholder="Mi opinión"></textarea>
-                        <!--<label class="item item-input item-floating-label">
+                    <div class="list">
+                        <!--<input ng-model="vm.patientOpinion" placeholder="Mi opinión"></input>-->
+                        <label class="item item-input item-floating-label">
                             <span class="input-label">Mi opinión</span>
-                            <input type="text" ng-model="vm.patientOpinion" placeholder="Mi opinión" />
-                        </label>-->
+                            <input type="text" ng-model="vm.patientOpinion" placeholder="Escribir mi opinión" />
+                        </label>
                     </div>
 
                     <h4 ng-if="vm.patientOpinions.length">Lo que opinan los participantes</h4>

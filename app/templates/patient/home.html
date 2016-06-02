@@ -8,7 +8,7 @@
             </ion-item>
         </ion-list>
 
-        <h3>{{::vm.message}}</h3>
+        <h4 ng-if="!vm.profiles.length" class="length-0">Aún no tienes pacientes. Comienza agregando uno</h4>
 
         <floating-button state="'app.patientCreate'" text="'+'"></floating-button>
     </ion-content>
