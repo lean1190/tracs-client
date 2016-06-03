@@ -133,11 +133,6 @@
             // Recupera todos los pacientes asociados al usuario
             PatientFactory.getPatients(userId).then(function (result) {
                 vm.profiles = result;
-                vm.message = "";
-
-                if (vm.profiles.length === 0) {
-                    vm.message = "Aun no tienes pacientes. Comienza agregando uno!!";
-                }
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la lista de pacientes, intentalo de nuevo");
             });

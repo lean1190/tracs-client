@@ -1,16 +1,18 @@
 <ion-view view-title="Soy paciente">
     <ion-content scroll="false">
-        <div class="list">
-            <h3 class="title">Por favor ingresá tu DNI para entrar!</h3>
-
-            <label class="item item-input item-floating-label">
-                <span class="input-label">DNI</span>
-                <input type="text" ng-model="vm.dni" placeholder="DNI" required>
-            </label>
-
+        <div class="link-top-actions">
+            <i class="ion-arrow-left-c" ng-click="vm.goBack()"></i>
+            <i class="ion-android-done" ng-click="vm.linkPatient()" ng-show="vm.isValid()"></i>
         </div>
 
-        <button class="button button-block button-positive" ng-click="vm.linkPatient()">Listo</button>
+        <h4 class="length-0">Por favor ingresá tu DNI</h4>
+
+        <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label required-field">DNI</span>
+                <input type="number" ng-model="vm.dni" placeholder="DNI *">
+            </label>
+        </div>
 
     </ion-content>
 </ion-view>

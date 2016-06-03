@@ -23,27 +23,41 @@
 
         var vm = this;
 
+        vm.dni = "";
+
+        vm.isValid = function () {
+            return vm.dni !== "";
+        };
+
         /**
          * Asocia un número de DNI con un paciente y redirige
          * a la vista de paciente
          */
         vm.linkPatient = function () {
-            ImAPatientFactory.linkPatient(vm.dni).then(function (patientInfo) {
-                if (!utils.isEmpty(patientInfo)) {
-                    $cordovaToast.showLongBottom("Paciente encontrado!").then(function () {
-                        // Setea la próxima vista como root del history de navegación
-                        $ionicHistory.nextViewOptions({
-                            historyRoot: true
+            if (vm.isValid()) {
+                ImAPatientFactory.linkPatient(vm.dni).then(function (patientInfo) {
+                    if (!utils.isEmpty(patientInfo)) {
+                        $cordovaToast.showLongBottom("Paciente encontrado!").then(function () {
+                            // Setea la próxima vista como root del history de navegación
+                            $ionicHistory.nextViewOptions({
+                                historyRoot: true
+                            });
+                            // Redirige a la vista de paciente
+                            $state.go("patientView.imAPatientHome");
                         });
-                        // Redirige a la vista de paciente
-                        $state.go("patientView.imAPatientHome");
-                    });
-                } else {
+                    } else {
+                        $cordovaToast.showLongBottom("No encontramos al paciente con dni " + vm.dni);
+                    }
+                }, function () {
                     $cordovaToast.showLongBottom("No encontramos al paciente con dni " + vm.dni);
-                }
-            }, function () {
-                $cordovaToast.showLongBottom("No encontramos al paciente con dni " + vm.dni);
-            });
+                });
+            } else {
+                $cordovaToast.showLongBottom("Debés ingresar un DNI");
+            }
+        };
+
+        vm.goBack = function () {
+            $ionicHistory.goBack();
         };
     }
 })();

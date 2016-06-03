@@ -10,7 +10,7 @@
         .module("TracsClient.controllers")
         .controller("PatientNotesCreateController", PatientNotesCreateController);
 
-    PatientNotesCreateController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory","MenuFactory"];
+    PatientNotesCreateController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory", "MenuFactory"];
 
     function PatientNotesCreateController($stateParams, $state, $cordovaToast, storage, PatientFactory, MenuFactory) {
 
@@ -18,16 +18,45 @@
 
         vm.patient = {};
         vm.user = {};
-        vm.note = {};
+        vm.note = {
+            title: "",
+            description: ""
+        };
 
-        activate();
+        function isValid() {
+            if (vm.note.title === "") {
+                $cordovaToast.showLongBottom("El título es obligatorio");
+                return false;
+            }
+            if (vm.note.description === "") {
+                $cordovaToast.showLongBottom("La descripción es obligatoria");
+                return false;
+            }
 
-        function activate(){
+            return true;
+        }
+
+        vm.createNote = function () {
+            if (isValid()) {
+                vm.note.user = vm.user._id;
+
+                PatientFactory.addPatientNote(vm.note, vm.patient._id).then(function () {
+                    $cordovaToast.showLongBottom("Su nota fue agregada exitosamente!").then(function () {
+                        MenuFactory.clearRightButtonAction();
+                        $state.go("app.patientNotes");
+                    });
+                }, function () {
+                    $cordovaToast.showLongBottom("Ocurrió un error al agregar la nota, intentalo de nuevo");
+                });
+            }
+        };
+
+        function activate() {
 
             vm.patient = storage.getLastVisitedPatient();
             vm.user = storage.getUser();
 
-             // Muestra el check para guardar al paciente
+            // Muestra el check para guardar al paciente
             MenuFactory.activateRightButtonAction(function () {
                 vm.createNote();
             });
@@ -36,22 +65,9 @@
             MenuFactory.setBackButtonAction(function () {
                 MenuFactory.clearRightButtonAction();
             });
-
         }
 
-        vm.createNote = function(){
-
-            vm.note.user = vm.user._id;
-
-            PatientFactory.addPatientNote(vm.note,vm.patient._id).then(function () {
-                $cordovaToast.showLongBottom("Su nota fue agregada exitosamente!").then(function () {
-                        MenuFactory.clearRightButtonAction();
-                        $state.go("app.patientNotes");
-                    });
-            }, function () {
-                $cordovaToast.showLongBottom("Ocurrió un error al agregar la nota, intentalo de nuevo");
-            });
-        };
+        activate();
     }
 
 })();

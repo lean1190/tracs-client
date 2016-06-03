@@ -165,6 +165,7 @@
 }
 
 .patient-tabs {
+    $tab-content-padding: 5px 15px;
     .tab-nav {
         background-color: #fff;
         color: $text-color;
@@ -212,8 +213,11 @@
         }
     }
     .opinions-tab {
-        padding: 5px 15px;
+        padding: $tab-content-padding;
         .others-opinion {
+            a.item {
+                background-color: #f5f5f5;
+            }
             h2 {
                 color: $text-color;
                 .date {
@@ -221,6 +225,34 @@
                     color: $lower-text-color;
                 }
             }
+        }
+    }
+    .diagnosis-tab {
+        padding: $tab-content-padding;
+        .display {
+            .date {
+                font-size: 12px;
+                color: $lower-text-color;
+            }
+        }
+    }
+    .medication-tab {
+        padding: $tab-content-padding;
+    }
+    .history-tab {
+        padding: $tab-content-padding;
+    }
+    .floating-button {
+        bottom: 65px !important;
+    }
+}
+
+.patient-notes {
+    h2 {
+        font-size: 18px;
+        .date {
+            font-size: 13px;
+            color: $lower-text-color;
         }
     }
 }
