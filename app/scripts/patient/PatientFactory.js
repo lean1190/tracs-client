@@ -34,12 +34,13 @@
             getPatientNotes: getPatientNotes,
             getPatientNote: getPatientNote,
             createPatient: createPatient,
-            updatePatientDetail: updatePatientDetail,
+            updatePatientGeneralInfo: updatePatientGeneralInfo,
+            updatePatientContactInfo: updatePatientContactInfo,
             updateClosestPeople: updateClosestPeople,
             assignProfile: assignProfile,
             addPatientOpinion: addPatientOpinion,
             addPatientNote: addPatientNote,
-            addPatientDiagnosis: addPatientDiagnosis,
+            addPatientDiagnosis: addPatientDiagnosis
 
         };
 
@@ -201,13 +202,30 @@
          * @param   {object}   updatedPatient el paciente con los datos a actualizados
          * @returns {promise} una promesa con el paciente modificado
          */
-        function updatePatientDetail(updatedPatient) {
+        function updatePatientGeneralInfo(updatedPatient) {
 
-            return $http.put(patientEndpoint + "/" + updatedPatient._id, updatedPatient).then(function (result) {
+            return $http.put(patientEndpoint + "/updatePatientGeneralInfo/" + updatedPatient._id, updatedPatient).then(function (result) {
                 return result.data;
             }, function (error) {
-                $log.error("Ocurrió un error al modificar los pacientes del usuario con id " + updatedPatient.id, error);
+                $log.error("Ocurrió un error al modificar la información general del paciente " + updatedPatient.id, error);
             });
+        }
+
+
+        /**
+         * Actualiza la informacion de contacto del paciente
+         * @param   {object}  updatedContractInfo informacion de contacto actualizada
+         * @param   {number}  patientId           id del paciente al que se le modifica la informacion de contacto
+         * @returns {promise} una promesa con el paciente actualizado
+         */
+        function updatePatientContactInfo(updatedContractInfo,patientId) {
+
+            return $http.put(patientEndpoint + "/updatePatientContactInfo/"+ patientId, updatedContractInfo).then(function (result) {
+                return result.data;
+            }, function (error) {
+                $log.error("Ocurrió un error al agregar la información de contacto para" + patientId, error);
+            });
+
         }
 
         /**

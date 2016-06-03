@@ -4,31 +4,60 @@
 
             <ion-tab title="GENERAL" on-select="vm.changeToGeneralTab()">
                 <div class="general-tab">
-                    <div class="image-name-wrapper">
+                    <div class="image-name-wrapper" ng-show="vm.editOn === false">
                         <div class="image">
                             <img ng-src="{{vm.patient.picture}}" alt="{{vm.patient.name}}">
                         </div>
                         <div class="name">
-                            <span editable-text="vm.patient.name">
-                            {{ vm.patient.name }}
-                        </span>
+
+                            <h4>{{ vm.patient.name }}</h4>
+
                         </div>
                     </div>
-                    <div class="info">
+                    <div class="info" ng-show="vm.editOn === false">
                         <div><strong>DNI</strong>
-                            <a editable-text="vm.patient.DNI">{{ vm.patient.DNI }}</a>
+                            <h4>{{vm.patient.DNI}}</h4>
                         </div>
                         <div><strong>Teléfono</strong>
-                            <a editable-text="vm.patient.phoneNumber">{{ vm.patient.phoneNumber || "Aún no tiene teléfono" }}</a>
+                            <h4> {{ vm.patient.phoneNumber || "Aún no tiene teléfono" }} </h4>
                         </div>
                         <div><strong>Nacido el</strong>
-                            <a editable-text="vm.patient.birthDate">{{ vm.patient.birthDate | date:"dd/MM/yyyy" }}</a>
+                            <h4>{{ vm.patient.birthDate | date:"dd/MM/yyyy" }}</h4>
                         </div>
-                        <div>
-                            <a editable-text="vm.patient.generalDescription">{{ vm.patient.generalDescription || "Aún no hay descripción" }}</a>
+                        <div><strong>Descripción General</strong>
+                            <h4>{{ vm.patient.generalDescription || "Aún no hay descripción" }}</h4>
                         </div>
                     </div>
+
+                    <div class="info-edit" ng-show="vm.editOn === true " >
+
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label required-field">Nombre</span>
+                            <input type="text" ng-model="vm.patient.name" placeholder="Nombre *" required>
+                        </label>
+
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label required-field">DNI</span>
+                            <input type="text" ng-model="vm.patient.DNI" placeholder="DNI *" required>
+                        </label>
+
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label">Teléfono</span>
+                            <input type="text" ng-model="vm.patient.phoneNumber" placeholder="Télefono" required>
+                        </label>
+
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label required-field">Fecha de nacimiento</span>
+                            <input type="text" ng-model="vm.patient.birthDate" placeholder="Fecha de Nacimiento *" onfocus="(this.type='date')" onblur="(this.type='text')">
+                        </label>
+
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label">Descripción General</span>
+                            <input type="text" ng-model="vm.patient.generalDescription" placeholder="Descripción General" required>
+                        </label>
+                    </div>
                 </div>
+
             </ion-tab>
 
             <ion-tab title="OPINIONES" on-select="vm.changeToOpinionsTab()" hidden="!vm.profile.isParent">
@@ -54,8 +83,47 @@
                 </div>
             </ion-tab>
 
-            <ion-tab title="CONTACTO">
-                <div>INFO DE CONTACTO!</div>
+            <ion-tab title="CONTACTO" on-select="vm.changeToContactInfoTab()">
+
+                <div class="contactInfo-tab" ng-show="vm.patient.contactInfo">
+                    <div class="contactInfo" ng-show="vm.editOn === false">
+                            <div><strong>Nombre</strong>
+                                <h4>{{vm.patient.contactInfo.name}}</h4>
+                            </div>
+                            <div><strong>Dirección</strong>
+                                <h4> {{ vm.patient.contactInfo.address }} </h4>
+                            </div>
+                            <div><strong>Ciudad</strong>
+                                <h4>{{ vm.patient.contactInfo.city}} </h4>
+                            </div>
+                    </div>
+                    <div class="contactInfo-edit" ng-show="vm.editOn === true">
+
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label required-field">Nombre</span>
+                            <input type="text" ng-model="vm.patient.contactInfo.name" placeholder="Nombre *" required>
+                        </label>
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label required-field">Dirección</span>
+                            <input type="text" ng-model="vm.patient.contactInfo.address" placeholder="DIrección *" required>
+                        </label>
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label required-field">Ciudad</span>
+                            <input type="text" ng-model="vm.patient.contactInfo.city" placeholder="Ciudad *" required>
+                        </label>
+
+                    </div>
+                </div>
+
+                <div class="contactInfoEmpty-tab" ng-show="!vm.patient.contactInfo">
+
+                    <h3>El paciente aun no tiene definida su información de contacto.</h3>
+                    <a ui-sref="app.patientContactInfoCreate" class="floating-button">
+                        <button class="button button-balanced">+</button>
+                    </a>
+
+                </div>
+
             </ion-tab>
 
         </ion-tabs>

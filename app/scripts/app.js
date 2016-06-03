@@ -215,6 +215,16 @@
             }
         })
 
+        .state("app.patientContactInfoCreate", {
+            url: "patient/contactInfoCreate",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/contactInfoCreate.html",
+                    controller: "PatientContactInfoCreateController as vm"
+                }
+            }
+        })
+
         .state("app.patientNotes", {
             url: "patient/notes",
             cache: false,
