@@ -1,17 +1,16 @@
 <ion-view cache-view="false" view-title="Mis notas sobre {{vm.patient.name}}">
     <ion-content>
-        <ion-list>
-            <ion-item ng-repeat="note in vm.patientNotes | orderBy:'-date'" ng-click="vm.displayNote(note._id)" class="item-avatar">
-                <h2>{{::note.title}}</h2>
-                <h3>{{::note.date|date:'medium'}}</h3>
-                <p>{{::note.description|limitTo:50}}</p>
+
+        <ion-list class="patient-notes">
+            <ion-item ng-repeat="note in vm.patientNotes | orderBy:'-date'" ng-click="vm.displayNote(note._id)">
+                <h2>{{::note.title}}<span class="date"> - {{:: note.date | date:"dd/MM/yyyy"}}</span></h2>
+                <p>{{::note.description | limitTo:50}}</p>
             </ion-item>
         </ion-list>
 
-        <!--<h3>{{::vm.message}}</h3>-->
+        <h4 ng-if="!vm.patientNotes.length" class="length-0">Aún no hay notas. Comienza agregando una</h4>
 
-        <a ui-sref="app.patientNotesCreate" class="floating-button">
-            <button class="button button-balanced">+</button>
-        </a>
+        <floating-button state="'app.patientNotesCreate'" text="'+'"></floating-button>
+
     </ion-content>
 </ion-view>

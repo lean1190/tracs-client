@@ -1,7 +1,9 @@
 <ion-view view-title="Contactos de {{vm.patient.name}}">
     <ion-content>
 
-        <div class="displayClosestContacts" ng-show="vm.editOn === false " >
+        <h4 ng-if="!vm.patient.closestPeople.length" class="length-0">Aún no hay contactos configurados</h4>
+
+        <div class="displayClosestContacts" ng-show="!vm.editOn">
             <ion-list>
                 <ion-item ng-repeat="closePerson in vm.patient.closestPeople" class="item-avatar">
                     <img ng-src="{{::closePerson.picture}}" alt="{{::profile.user.name}}">
@@ -10,8 +12,8 @@
             </ion-list>
         </div>
 
-        <div class="editClosestContacts" ng-show="vm.editOn === true" >
-            <h4 class="title">Configure los contactos cercanos de {{vm.patient.name}}</h4>
+        <div class="editClosestContacts" ng-show="vm.editOn">
+            <h4 class="title">Configure los contactos cercanos</h4>
 
             <div class="list">
                 <label class="item item-input item-select">
@@ -27,7 +29,7 @@
                     <div class="input-label">
                         Segundo Contacto
                     </div>
-                        <select ng-model="vm.contactP2Id" ng-options="profile.user._id as profile.user.name for profile in vm.profiles">
+                    <select ng-model="vm.contactP2Id" ng-options="profile.user._id as profile.user.name for profile in vm.profiles">
                         <option value="">Seleccione un participante</option>
                     </select>
                 </label>

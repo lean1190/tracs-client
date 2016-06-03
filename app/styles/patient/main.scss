@@ -166,7 +166,6 @@
 
 .patient-tabs {
     $tab-content-padding: 5px 15px;
-
     .tab-nav {
         background-color: #fff;
         color: $text-color;
@@ -242,5 +241,18 @@
     }
     .history-tab {
         padding: $tab-content-padding;
+    }
+    .floating-button {
+        bottom: 65px !important;
+    }
+}
+
+.patient-notes {
+    h2 {
+        font-size: 18px;
+        .date {
+            font-size: 13px;
+            color: $lower-text-color;
+        }
     }
 }

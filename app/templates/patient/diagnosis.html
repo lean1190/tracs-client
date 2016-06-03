@@ -1,4 +1,4 @@
-<ion-view cache-view="false" view-title="Diagnóstico de {{vm.patient.name}}">
+<ion-view cache-view="false" view-title="Diagnóstico">
     <ion-content>
 
         <ion-tabs class="tabs-striped tabs-top patient-tabs">
@@ -7,7 +7,7 @@
                 <div class="diagnosis-tab">
                     <h4 ng-if="!vm.patient.latestDiagnosis">El paciente aún no tiene un diagnóstico asignado. Empieza creando uno</h4>
 
-                    <floating-button state="'app.patientDiagnosisCreate'" text="'+'" ng-show="!vm.editOn"></floating-button>
+                    <floating-button state="'app.patientDiagnosisCreate'" text="'+'" ng-show="!vm.editOn" class="tab-fix"></floating-button>
 
                     <div class="display" ng-show="vm.patient.latestDiagnosis && !vm.editOn">
                         <div>Diagnosticado por {{::vm.patientDiagnosis.madeBy.name}} <span class="date" style="font-size:11px; color: light-grey">el {{::vm.patientDiagnosis.date | date:"dd/MM/yyyy"}}</span></div>
