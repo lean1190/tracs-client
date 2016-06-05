@@ -8,7 +8,7 @@
                 </div>
                 <div class="content-wrapper pull-left">
                     <div class="name">{{::vm.patient.name}}</div>
-                    <div class="description">{{::vm.patient.generalDescription}}</div>
+                    <div class="description">{{vm.patientDiagnosis.name}}</div>
                 </div>
                 <div class="actions-footer">
                     <span ui-sref="app.patientDiagnosis" ng-click="$event.stopPropagation()">diagnóstico</span>

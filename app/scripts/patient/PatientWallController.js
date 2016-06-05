@@ -9,15 +9,16 @@
         .module("TracsClient.controllers")
         .controller("PatientWallController", PatientWallController);
 
-    PatientWallController.$inject = ["$rootScope", "$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory", "SocketService", "$state", "storage", "NotificationsMapper", "ProfileFactory"];
+    PatientWallController.$inject = ["$rootScope", "$scope", "$stateParams", "$interval", "$cordovaToast", "PatientFactory", "SocketService", "$state", "storage", "NotificationsMapper", "ProfileFactory", "DiagnosisFactory"];
 
-    function PatientWallController($rootScope, $scope, $stateParams, $interval, $cordovaToast, PatientFactory, SocketService, $state, storage, NotificationsMapper, ProfileFactory) {
+    function PatientWallController($rootScope, $scope, $stateParams, $interval, $cordovaToast, PatientFactory, SocketService, $state, storage, NotificationsMapper, ProfileFactory, DiagnosisFactory) {
 
         var vm = this,
             patientId = $stateParams.id,
             notificationsInterval = null;
 
         vm.patient = {};
+        vm.patientDiagnosis = {};
         vm.notifications = [];
 
         /**
@@ -74,6 +75,11 @@
             PatientFactory.getPatientDetail(patientId).then(function (resultPatient) {
                 vm.patient = resultPatient;
                 vm.notifications = fillNotificationsWithViewInfo(resultPatient.notifications);
+
+                // Recupero el diagnóstico del paciente
+                DiagnosisFactory.getDiagnosis(vm.patient.latestDiagnosis).then(function (diagnosis) {
+                    vm.patientDiagnosis = diagnosis;
+                });
 
                 // Recupera los perfiles para mostrar en el muro
                 PatientFactory.getPatientProfiles(vm.patient._id).then(function (result) {
