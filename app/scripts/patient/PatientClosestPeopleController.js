@@ -19,7 +19,7 @@
         vm.contactP3Id = "";
         vm.contactP4Id = "";
 
-        activate();
+
 
         function activate() {
 
@@ -119,6 +119,8 @@
 
             return contact;
         }
+
+        activate();
     }
 
 })();

@@ -287,6 +287,16 @@
             }
         })
 
+        .state("app.patientHistoryCreate", {
+            url: "patient/historyCreate",
+            views: {
+                "menuContent": {
+                    templateUrl: "templates/patient/historyCreate.html",
+                    controller: "PatientHistoryCreateController as vm"
+                }
+            }
+        })
+
         .state("app.geoAlertMap", {
             url: "map/geoAlertMap/:latitude/:longitude)",
             views: {

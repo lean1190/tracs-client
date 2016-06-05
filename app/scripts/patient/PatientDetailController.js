@@ -129,7 +129,7 @@
 
             console.log("### Patient", vm.patient);
 
-            // Muestra el check para guardar al paciente
+
             vm.changeToGeneralTab();
 
             // Cuando apretamos atrás se borra el check y su funcionalidad
