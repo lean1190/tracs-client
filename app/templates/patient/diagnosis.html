@@ -3,7 +3,7 @@
 
         <ion-tabs class="tabs-striped tabs-top patient-tabs">
 
-            <ion-tab title="DIAGNÓSTICO" on-select="">
+            <ion-tab title="DIAGNÓSTICO" on-select="vm.changeToDiagnosisTab()">
                 <div class="diagnosis-tab">
                     <h4 ng-if="!vm.patient.latestDiagnosis">El paciente aún no tiene un diagnóstico asignado. Empieza creando uno</h4>
 
@@ -29,19 +29,13 @@
                 </div>
             </ion-tab>
 
-            <ion-tab title="MEDICACIÓN" on-select="">
+            <ion-tab title="MEDICACIÓN" on-select="vm.changeToMedicationTab()">
                 <div class="medication-tab">
                     <h4 ng-if="!vm.patient.latestDiagnosis">Para agregar medicaciones primero debe haber un diagnóstico</h4>
-                    <h4 ng-if="vm.patient.latestDiagnosis && !vm.patientMedications.length">Aún no se agregaron medicaciones. Empieza agregando una</h4>
+                    <h4 ng-if="vm.patient.latestDiagnosis && !vm.patientMedications.length">Aún no hay medicaciones. Empieza agregando una</h4>
 
                     <floating-button state="vm.createMedicationLink" text="'+'" class="tab-fix" ng-if="vm.patient.latestDiagnosis"></floating-button>
-                    <!--<ion-item ng-repeat="medication in vm.patientMedications">
-                        <h3>Nombre Medicamento: {{::medication.drug}}</h3>
-                        <h3>Dosis: {{::medication.dosis}}</h3>
-                        <h4>Frecuencia: {{::medication.frequence}}</h4>
-                        <h4>Fecha de prescripción: {{::medication.date}}</h4>
-                        </ion-item>
-                    -->
+
                     <div class="card" ng-repeat="medication in vm.patientMedications">
                         <div class="item item-divider">
                             {{::medication.drug}}
@@ -51,14 +45,40 @@
                             <div>{{::medication.dosis}} cada {{::medication.frequence}}</div>
                         </div>
                     </div>
-
-                    <!--<a ng-click="vm.medicationCreate()" ng-if="vm.patient.latestDiagnosis">Agregar Medicacion</a>-->
                 </div>
             </ion-tab>
 
-            <ion-tab title="HISTORIA" on-select="">
+            <ion-tab title="HISTORIA" on-select="vm.changeToHistoryTab()">
                 <div class="history-tab">
-                    NOTHING HERE YET
+
+                    <h4 ng-if="!vm.patient.history">El paciente aún no tiene su Historia Vital creada. Empieza a escribirla</h4>
+
+                    <floating-button ng-if="!vm.patient.history" state="'app.patientHistoryCreate'" text="'+'" ng-show="!vm.editOn" class="tab-fix"></floating-button>
+
+                    <div class="display" ng-show="vm.patient.history && !vm.editOn">
+                         <div><strong>Historia Vital</strong>
+                            <p> {{::vm.patient.history.description}} </p>
+                        </div>
+                        <div>Terapia realizada en {{::vm.patient.history.prevTherapyPlace}}</div>
+                        <h4>Durante {{::vm.patient.history.prevTherapyDuration}}</h4>
+                    </div>
+
+                    <div class="editHistory" ng-show="vm.patient.history && vm.editOn">
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label">Descripción Historia del Paciente</span>
+                            <input type="text" ng-model="vm.patient.history.description" placeholder="Descripción Historia del Paciente *" required>
+                        </label>
+
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label">Establecimiento tratamiento anterior</span>
+                            <textarea type="text" ng-model="vm.patient.history.prevTherapyPlace" placeholder="Establecimiento terápia anterior *" required></textarea>
+                        </label>
+
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label">Duración terápia anterior</span>
+                            <textarea type="text" ng-model="vm.patient.history.prevTherapyDuration" placeholder="Duración tratamiento anterior *" required></textarea>
+                        </label>
+                    </div>
                 </div>
             </ion-tab>
         </ion-tabs>

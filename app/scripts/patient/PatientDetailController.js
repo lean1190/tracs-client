@@ -24,7 +24,6 @@
             PatientFactory.updatePatientGeneralInfo(updatedPatient).then(function () {
                 $cordovaToast.showLongBottom("Información general del paciente actualizada correctamente!").then(function () {
                     MenuFactory.clearRightButtonAction();
-                    //$state.go("app.patientWall", { id: vm.patient._id });
                     $state.reload();
                 });
             }, function () {
@@ -33,14 +32,14 @@
 
         };
 
-        vm.addPatientOpinion = function (){
+        vm.addPatientOpinion = function () {
             var currentUserId = storage.getUser()._id,
                 newPatientOpinion = {};
 
             newPatientOpinion.user = currentUserId;
             newPatientOpinion.description = vm.patientOpinion;
 
-            PatientFactory.addPatientOpinion(newPatientOpinion, vm.patient._id).then(function(){
+            PatientFactory.addPatientOpinion(newPatientOpinion, vm.patient._id).then(function () {
                 $cordovaToast.showLongBottom("Nueva opinión gurdada correctamente!");
                 $state.reload();
             }, function () {
@@ -48,7 +47,7 @@
             });
         };
 
-        vm.updatePatientContactInfo = function(){
+        vm.updatePatientContactInfo = function () {
 
             PatientFactory.updatePatientContactInfo(vm.patient.contactInfo, vm.patient._id).then(function () {
                 $cordovaToast.showLongBottom("Información general del paciente actualizada correctamente!").then(function () {
@@ -61,19 +60,19 @@
             });
         };
 
-        vm.changeToGeneralTab = function() {
+        vm.changeToGeneralTab = function () {
 
             vm.editOn = false;
 
             MenuFactory.clearRightButtonAction();
 
             MenuFactory.activateRightEditButtonAction(function () {
-                    vm.editGeneralTab();
+                vm.editGeneralTab();
             });
 
         };
 
-        vm.changeToContactInfoTab = function() {
+        vm.changeToContactInfoTab = function () {
 
             vm.editOn = false;
 
@@ -88,7 +87,7 @@
 
         };
 
-        vm.changeToOpinionsTab = function() {
+        vm.changeToOpinionsTab = function () {
 
             MenuFactory.clearRightButtonAction();
 
@@ -97,7 +96,7 @@
             });
         };
 
-        vm.editGeneralTab = function(){
+        vm.editGeneralTab = function () {
 
             vm.editOn = true;
 
@@ -108,7 +107,7 @@
             });
         };
 
-        vm.editContactInfoTab = function(){
+        vm.editContactInfoTab = function () {
 
             vm.editOn = true;
 
@@ -126,7 +125,6 @@
             vm.patient = storage.getLastVisitedPatient();
             vm.profile = storage.getCurrentProfile();
 
-            // Muestra el check para guardar al paciente
             vm.changeToGeneralTab();
 
             // Cuando apretamos atrás se borra el check y su funcionalidad
@@ -140,9 +138,9 @@
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la información del paciente, intentalo de nuevo");
             });
 
-            PatientFactory.getPatientOpinions(vm.patient._id).then(function(result) {
+            PatientFactory.getPatientOpinions(vm.patient._id).then(function (result) {
                 vm.patientOpinions = result;
-            }, function() {
+            }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar las opiniones del paciente, intentalo de nuevo");
             });
         }

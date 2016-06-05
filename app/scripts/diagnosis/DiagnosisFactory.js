@@ -88,6 +88,7 @@
                 $log.error("Ocurrió un error al modificar el diagnostico del paciente " + diagnosisId, error);
             });
         }
+
     }
 })();
 

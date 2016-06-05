@@ -1,0 +1,23 @@
+<ion-view view-title="Nueva Historia">
+    <ion-content>
+        <div class="list">
+            <div class="item item-divider">
+                Historia Vital
+            </div>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Descripción tratamiento previo</span>
+                <input type="text" ng-model="vm.patientHistory.description" placeholder="Descripción tratamiento previo *">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Establecimiento del tratamiento anterior</span>
+                <input type="text" ng-model="vm.patientHistory.prevTherapyPlace" placeholder="Establecimiento del tratamiento anterior *">
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Duración tratamiento previo</span>
+                <input type="text" ng-model="vm.patientHistory.prevTherapyDuration" placeholder="Duración tratamiento previo *">
+            </label>
+        </div>
+    </ion-content>
+</ion-view>

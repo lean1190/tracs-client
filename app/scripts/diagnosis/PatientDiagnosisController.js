@@ -26,30 +26,100 @@
         vm.patientDiagnosis = {};
         vm.createMedicationLink = "";
 
-        activate();
+        vm.changeToDiagnosisTab = function () {
 
-        function activate() {
-
-            vm.patient = storage.getLastVisitedPatient();
+            MenuFactory.clearRightButtonAction();
 
             vm.editOn = false;
 
             if (vm.patient.latestDiagnosis) {
+                // Muestra el lapiz para editar la nota del paciente
+                MenuFactory.activateRightEditButtonAction(function () {
+                    vm.editDiagnosisTab();
+                });
+            }
+        };
+
+        vm.changeToMedicationTab = function () {
+            vm.editOn = false;
+            MenuFactory.clearRightButtonAction();
+        };
+
+        vm.changeToHistoryTab = function () {
+            vm.editOn = false;
+
+            MenuFactory.clearRightButtonAction();
+
+            if (vm.patient.history) {
 
                 // Muestra el lapiz para editar la nota del paciente
                 MenuFactory.activateRightEditButtonAction(function () {
-                    vm.editFields();
+                    vm.editHistoryTab();
                 });
+            }
+        };
 
-                // Cuando apretamos atrás se borra el boton y su funcionalidad
-                MenuFactory.setBackButtonAction(function () {
+        vm.editDiagnosisTab = function () {
+            vm.editOn = true;
+
+            MenuFactory.clearRightButtonAction();
+
+            MenuFactory.activateRightButtonAction(function () {
+                vm.updateDiagnosis();
+            });
+        };
+
+        vm.editHistoryTab = function () {
+
+            vm.editOn = true;
+
+            MenuFactory.clearRightButtonAction();
+
+            MenuFactory.activateRightButtonAction(function () {
+                vm.updateHistory();
+            });
+        };
+
+
+        vm.updateDiagnosis = function () {
+            DiagnosisFactory.updateDiagnosis(vm.patientDiagnosis, vm.patient.latestDiagnosis).then(function () {
+                $cordovaToast.showLongBottom("Diagnóstico Actualizado!").then(function () {
                     MenuFactory.clearRightButtonAction();
+                    $state.reload();
                 });
+            }, function () {
+                $cordovaToast.showLongBottom("Ocurrió un error al actualizar el diagnóstico del paciente, intentalo de nuevo");
+            });
+        };
+
+        vm.updateHistory = function () {
+
+            PatientFactory.updatePatientHistory(vm.patientHistory, vm.patient._id).then(function () {
+
+                $cordovaToast.showLongBottom("Historia del paciente Actualizada!").then(function () {
+                    MenuFactory.clearRightButtonAction();
+                    $state.reload();
+                });
+            }, function () {
+                $cordovaToast.showLongBottom("Ocurrió un error al actualizar la historia del paciente, intentalo de nuevo");
+            });
+        };
+
+        function activate() {
+
+            vm.patient = storage.getLastVisitedPatient();
+            vm.changeToDiagnosisTab();
+
+            // Cuando apretamos atrás se borra el boton y su funcionalidad
+            MenuFactory.setBackButtonAction(function () {
+                MenuFactory.clearRightButtonAction();
+            });
+
+            if (vm.patient.latestDiagnosis) {
 
                 DiagnosisFactory.getDiagnosis(vm.patient.latestDiagnosis).then(function (diagnosis) {
 
                     vm.patientDiagnosis = diagnosis;
-                    vm.createMedicationLink = "app.patientMedicationCreate({ id:'" + vm.patientDiagnosis._id + "' })";
 
                     DiagnosisFactory.getDiagnosisMedication(vm.patientDiagnosis._id).then(function (result) {
 
@@ -65,40 +135,8 @@
             }
         }
 
-        vm.medicationCreate = function () {
+        activate();
 
-            MenuFactory.clearRightButtonAction();
-            $state.go("app.patientMedicationCreate", {
-                id: vm.patientDiagnosis._id
-            });
-
-        };
-
-        vm.editFields = function () {
-
-            vm.editOn = true;
-
-            MenuFactory.clearRightButtonAction();
-
-            MenuFactory.activateRightButtonAction(function () {
-                vm.updateDiagnosis();
-            });
-        };
-
-        vm.updateDiagnosis = function () {
-
-            DiagnosisFactory.updateDiagnosis(vm.patientDiagnosis, vm.patient.latestDiagnosis).then(function () {
-
-                $cordovaToast.showLongBottom("Diagnóstico Actualizado!").then(function () {
-                    MenuFactory.clearRightButtonAction();
-                    $state.reload();
-                });
-
-
-            }, function () {
-                $cordovaToast.showLongBottom("Ocurrió un error al actualizar el diagnóstico del paciente, intentalo de nuevo");
-            });
-        };
     }
 
 })();

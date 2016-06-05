@@ -37,6 +37,7 @@
             updatePatientGeneralInfo: updatePatientGeneralInfo,
             updatePatientContactInfo: updatePatientContactInfo,
             updateClosestPeople: updateClosestPeople,
+            updatePatientHistory: updatePatientHistory,
             assignProfile: assignProfile,
             addPatientOpinion: addPatientOpinion,
             addPatientNote: addPatientNote,
@@ -238,6 +239,14 @@
                 return result.data;
             }, function(error) {
                 $log.error("Ocurrió un error al modificar las personas cercanas del paciente con id " + patientId, error);
+            });
+        }
+
+        function updatePatientHistory(updatedHistory, patientId){
+             return $http.put(patientEndpoint + "/updatePatientHistory/"+ patientId, updatedHistory).then(function (result) {
+                return result.data;
+            }, function(error) {
+                $log.error("Ocurrió un error al modificar la historia del paciente con id " + patientId, error);
             });
         }
 
