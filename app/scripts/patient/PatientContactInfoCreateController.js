@@ -46,13 +46,13 @@
             }
 
             return true;
-        };
+        }
 
         vm.createContactInfo = function () {
             if (validate()) {
 
                 PatientFactory.updatePatientContactInfo(vm.contactInfo, vm.patient._id).then(function () {
-                    $cordovaToast.showLongBottom("Información de contacto del paciente agregada con exito!")
+                    $cordovaToast.showLongBottom("Información de contacto del paciente agregada con exito!");
                     MenuFactory.clearRightButtonAction();
                     $state.go("app.patientDetail", { id: vm.patient._id });
 

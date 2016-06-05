@@ -16,7 +16,7 @@
         .module("TracsClient.controllers")
         .controller("PatientDiagnosisController", PatientDiagnosisController);
 
-    PatientDiagnosisController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory","DiagnosisFactory","MenuFactory"];
+    PatientDiagnosisController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory", "DiagnosisFactory", "MenuFactory"];
 
     function PatientDiagnosisController($stateParams, $state, $cordovaToast, storage, PatientFactory, DiagnosisFactory, MenuFactory) {
 
@@ -24,6 +24,7 @@
 
         vm.patient = {};
         vm.patientDiagnosis = {};
+        vm.createMedicationLink = "";
 
         activate();
 
@@ -33,7 +34,7 @@
 
             vm.editOn = false;
 
-            if(vm.patient.latestDiagnosis){
+            if (vm.patient.latestDiagnosis) {
 
                 // Muestra el lapiz para editar la nota del paciente
                 MenuFactory.activateRightEditButtonAction(function () {
@@ -45,32 +46,35 @@
                     MenuFactory.clearRightButtonAction();
                 });
 
-                DiagnosisFactory.getDiagnosis(vm.patient.latestDiagnosis).then(function(diagnosis) {
+                DiagnosisFactory.getDiagnosis(vm.patient.latestDiagnosis).then(function (diagnosis) {
 
                     vm.patientDiagnosis = diagnosis;
+                    vm.createMedicationLink = "app.patientMedicationCreate({ id:'" + vm.patientDiagnosis._id + "' })";
 
-                    DiagnosisFactory.getDiagnosisMedication(vm.patientDiagnosis._id).then(function(result){
+                    DiagnosisFactory.getDiagnosisMedication(vm.patientDiagnosis._id).then(function (result) {
 
                         vm.patientMedications = result.medications;
 
-                    },function() {
+                    }, function () {
                         $cordovaToast.showLongBottom("Ocurrió un error al recuperar la medicación del paciente, intentalo de nuevo");
                     });
 
-                }, function() {
+                }, function () {
                     $cordovaToast.showLongBottom("Ocurrió un error al recuperar el diagnóstico del paciente, intentalo de nuevo");
                 });
             }
         }
 
-        vm.medicationCreate = function(){
+        vm.medicationCreate = function () {
 
             MenuFactory.clearRightButtonAction();
-            $state.go("app.patientMedicationCreate", { id: vm.patientDiagnosis._id });
+            $state.go("app.patientMedicationCreate", {
+                id: vm.patientDiagnosis._id
+            });
 
         };
 
-        vm.editFields = function(){
+        vm.editFields = function () {
 
             vm.editOn = true;
 
@@ -81,7 +85,7 @@
             });
         };
 
-        vm.updateDiagnosis = function(){
+        vm.updateDiagnosis = function () {
 
             DiagnosisFactory.updateDiagnosis(vm.patientDiagnosis, vm.patient.latestDiagnosis).then(function () {
 

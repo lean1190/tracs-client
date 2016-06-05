@@ -20,7 +20,6 @@
 
         vm.updatePatientGeneralInfo = function () {
             var updatedPatient = vm.patient;
-            console.log("### Updated patient", vm.patient);
 
             PatientFactory.updatePatientGeneralInfo(updatedPatient).then(function () {
                 $cordovaToast.showLongBottom("Información general del paciente actualizada correctamente!").then(function () {
@@ -127,8 +126,6 @@
             vm.patient = storage.getLastVisitedPatient();
             vm.profile = storage.getCurrentProfile();
 
-            console.log("### Patient", vm.patient);
-
             // Muestra el check para guardar al paciente
             vm.changeToGeneralTab();
 
@@ -145,7 +142,6 @@
 
             PatientFactory.getPatientOpinions(vm.patient._id).then(function(result) {
                 vm.patientOpinions = result;
-                console.log("### Opinions", result);
             }, function() {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar las opiniones del paciente, intentalo de nuevo");
             });

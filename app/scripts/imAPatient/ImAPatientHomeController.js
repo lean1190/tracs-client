@@ -27,39 +27,6 @@
 
         vm.patient = storage.getPatientUser();
 
-        function chooseSmsTemplate() {
-            $scope.templates = [
-                {
-                    label: "Necesito ayuda",
-                    message: "Necesito ayuda, por favor vení"
-                },
-                {
-                    label: "Me siento bien",
-                    message: "Me siento bien :)"
-                }
-            ];
-            $scope.message = {};
-
-            return $ionicPopup.show({
-                template: "<select ng-model='message' ng-options='template.message as template.label for template in templates' style='width: 100%;'>" +
-                    "<option value=''>- Cómo te sentís? -</option>" +
-                    "</select>",
-
-                title: "Elegí un texto para el mensaje",
-                scope: $scope,
-                buttons: [
-                    {
-                        text: "Enviar mensaje",
-                        type: "button-positive",
-                        onTap: function () {
-                            console.log("### scope message", $scope.message);
-                            return $scope.message;
-                        }
-                    }
-                ]
-            });
-        }
-
         vm.callPhoneNumber = function (phoneNumber) {
 
             if (phoneNumber !== "") {
@@ -75,23 +42,18 @@
         vm.sendSms = function (phoneNumber) {
 
             if (phoneNumber !== "") {
-
-                chooseSmsTemplate().then(function (smsTemplate) {
-                    console.log("### SMS template", smsTemplate);
-                });
-
-                /*var options = {
+                var options = {
                     android: {
                         intent: "" // send SMS without open any other app || 'INTENT' send SMS with the native android SMS messaging
                     }
                 };
 
-                sms.send(phoneNumber, "Mensaje desde tracs!", options, function () {
+                sms.send(phoneNumber, "No me siento bien, por favor comunicate conmigo", options, function () {
                     $cordovaToast.showLongBottom("Mensaje enviado!");
                 }, function (error) {
                     $log.error("No se pudo enviar el sms al número " + phoneNumber, error);
                     $cordovaToast.showLongBottom("No se pudo enviar el mensaje! Hay señal?");
-                });*/
+                });
             } else {
                 $cordovaToast.showLongBottom("Esta persona no tiene teléfono");
             }

@@ -31,9 +31,10 @@
 
             <ion-tab title="MEDICACIÓN" on-select="">
                 <div class="medication-tab">
-                    <h4 ng-if="!vm.patientMedications.length">El paciente aún no tiene un diagnóstico asignado. Empieza creando uno</h4>
+                    <h4 ng-if="!vm.patient.latestDiagnosis">Para agregar medicaciones primero debe haber un diagnóstico</h4>
+                    <h4 ng-if="vm.patient.latestDiagnosis && !vm.patientMedications.length">Aún no se agregaron medicaciones. Empieza agregando una</h4>
 
-                    <!--<floating-button state="'app.patientDiagnosisCreate'" text="'+'" ng-show="!vm.editOn"></floating-button>-->
+                    <floating-button state="vm.createMedicationLink" text="'+'" class="tab-fix" ng-if="vm.patient.latestDiagnosis"></floating-button>
                     <!--<ion-item ng-repeat="medication in vm.patientMedications">
                         <h3>Nombre Medicamento: {{::medication.drug}}</h3>
                         <h3>Dosis: {{::medication.dosis}}</h3>
@@ -51,7 +52,7 @@
                         </div>
                     </div>
 
-                    <a ng-click="vm.medicationCreate()">Agregar Medicacion</a>
+                    <!--<a ng-click="vm.medicationCreate()" ng-if="vm.patient.latestDiagnosis">Agregar Medicacion</a>-->
                 </div>
             </ion-tab>
 
