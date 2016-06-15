@@ -24,7 +24,14 @@
 
         vm.patient = {};
         vm.patientDiagnosis = {};
-        vm.createMedicationLink = "";
+        vm.createMedicationLink =
+
+
+        vm.createMedicationLink = function(){
+
+            $state.go("app.patientMedicationCreate", { id: vm.patientDiagnosis._id});
+
+        }
 
         vm.changeToDiagnosisTab = function () {
 
@@ -104,6 +111,22 @@
                 $cordovaToast.showLongBottom("Ocurrió un error al actualizar la historia del paciente, intentalo de nuevo");
             });
         };
+
+     /*   vm.deleteMedication = function(){
+            //Esta tiene que ser el id que venga desde el template, todavia no esta definido el icono asi que queda hardcodeado
+            var medicationId = "";
+
+            DiagnosisFactory.deleteDiagnosisMedication(vm.patientDiagnosis._id, medicationId).then(function(){
+
+                $cordovaToast.showLongBottom("La medicación fue eliminada!").then(function () {
+                    MenuFactory.clearRightButtonAction();
+                    $state.reload();
+                });
+            }, function () {
+                $cordovaToast.showLongBottom("Ocurrió un error al borrar la medicación, intentalo de nuevo");
+            });
+
+        };*/
 
         function activate() {
 
