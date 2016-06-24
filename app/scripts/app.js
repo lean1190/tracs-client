@@ -16,6 +16,7 @@
     angular
         .module("TracsClient", [
                 "ionic",
+                "ionic.service.core",
                 "ngResource",
                 "ngCordova",
                 "LocalStorageModule",
@@ -66,6 +67,16 @@
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+
+            // PUSH code
+            var push = new Ionic.Push({
+                  "debug": true
+                });
+
+            push.register(function(token) {
+              console.log("Device token:",token.token);
+              push.saveToken(token);  // persist the token in the Ionic Platform
+            });
         });
 
         // Estilo para xeditable
