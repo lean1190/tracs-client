@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("LoginController", LoginController);
 
-    LoginController.$inject = ["$rootScope", "$scope", "$http", "$state", "$log", "$cordovaToast", "$ionicSideMenuDelegate", "$ionicHistory", "storage", "LoginFactory", "EnvironmentConfig"];
+    LoginController.$inject = ["$rootScope", "$scope", "$http", "$state", "$log", "$cordovaToast", "$ionicSideMenuDelegate", "$ionicHistory", "storage", "LoginFactory", "PushHelper", "EnvironmentConfig"];
 
-    function LoginController($rootScope, $scope, $http, $state, $log, $cordovaToast, $ionicSideMenuDelegate, $ionicHistory, storage, LoginFactory, EnvironmentConfig) {
+    function LoginController($rootScope, $scope, $http, $state, $log, $cordovaToast, $ionicSideMenuDelegate, $ionicHistory, storage, LoginFactory, PushHelper, EnvironmentConfig) {
 
         var vm = this;
 
@@ -70,9 +70,6 @@
          * Setea el history root en la próxima vista y redirecciona
          */
         function forwardToLoggedInHome() {
-            // Emite un evento indicando que el usuario en la sesión cambió
-            $rootScope.$emit("user.changed", {name: "file"});
-
             setNextViewAsHistoryRoot();
             changeStateToLoggedInHome();
         }
@@ -99,6 +96,7 @@
                 redirectUri: EnvironmentConfig.googleRedirectUri,
                 scopes: "https://www.googleapis.com/auth/plus.login+https://www.googleapis.com/auth/plus.me+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile"
             }).then(function () {
+                PushHelper.registerForPushNotifications();
                 forwardToLoggedInHome();
             }, function (error) {
                 $log.error(error.message, error.raw);
