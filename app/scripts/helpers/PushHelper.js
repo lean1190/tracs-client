@@ -17,27 +17,36 @@
         .module("TracsClient.factories")
         .factory("PushHelper", PushHelper);
 
-    PushHelper.$inject = ["$http", "$ionicPush", "$log", "EnvironmentConfig", "storage"];
+    PushHelper.$inject = ["$http", "$state", "$ionicPush", "$log", "EnvironmentConfig", "storage"];
 
-    function PushHelper($http, $ionicPush, $log, EnvironmentConfig, storage) {
+    function PushHelper($http, $state, $ionicPush, $log, EnvironmentConfig, storage) {
 
         var userEndpoint = EnvironmentConfig.api + "/user";
 
+        /**
+         * Guarda en el servidor el token de ionic push
+         * asociado con el usuario logueado
+         * @param  {string}  pushToken el token generado por la plataforma push de ionic
+         * @return {promise} una promesa con el resultado de guardar el token en el servidor
+         */
         function savePushToken(pushToken) {
             var updateData = {
                 userId: storage.getUser()._id,
                 pushToken: pushToken
             };
 
-            return $http.put(userEndpoint + "/save/push", updateData).then(function (result) {
-                return result.data;
-            }, function (error) {
-                $log.error("Ocurrió un error al guardar el token para notificaciones push", error);
-            });
+            return $http.put(userEndpoint + "/save/push", updateData);
         }
 
-        function showPatientAlert() {
-            // TODO redirigir a pantalla de alerta!
+        /**
+         * Redirige al estado que muestra el alerta georreferenciada de ayuda
+         * @param  {object} payload la información recuperada de la notificación
+         */
+        function showPatientAlert(payload) {
+            $state.go("pushGeoAlert", {
+                patient: payload.patient,
+                coordinates: payload.coordinates
+            });
         }
 
         /**
@@ -47,9 +56,8 @@
             $ionicPush.init({
                 "debug": true,
                 "onNotification": function(notification) {
-                    var payload = notification.payload;
-                    console.log("### notification", notification);
-                    showPatientAlert();
+                    console.log("### Notification", notification);
+                    showPatientAlert(notification.payload);
                 },
                 "onRegister": function(data) {
                     savePushToken(data.token);

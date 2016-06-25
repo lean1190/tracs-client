@@ -107,6 +107,7 @@
         function activate() {
             // Si el usuario ya se logueó en la aplicación, lo redirige al listado de pacientes asignados
             if (isUserLoggedIn()) {
+                PushHelper.registerForPushNotifications();
                 forwardToLoggedInHome();
             // Si el usuario es un paciente y ya registró su DNI, lo redirige a la vista de paciente
             } else if (isPatientLoggedIn()) {
