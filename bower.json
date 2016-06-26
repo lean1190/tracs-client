@@ -2,7 +2,9 @@
   "name": "TracsClient",
   "author": "Martin Trejo y Leandro Vilas <trejomartin90@gmail.com, leandro.vilas90@gmail.com>",
   "private": "true",
-  "devDependencies": {},
+  "devDependencies": {
+    "ionic-platform-web-client": "^0.7.1"
+  },
   "dependencies": {
     "ionic": "~1.2.0",
     "angular": "~1.4.3",

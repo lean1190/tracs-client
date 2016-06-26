@@ -9,10 +9,14 @@
 }
 
 .pull-left {
-    float: left;
+    float: left !important;
 }
 
-.clear-fix {
+.pull-right {
+    float: right !important;
+}
+
+.clearfix {
     clear:both;
 }
 

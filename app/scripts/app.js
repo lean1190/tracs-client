@@ -16,6 +16,8 @@
     angular
         .module("TracsClient", [
                 "ionic",
+                "ionic.service.core",
+                "ionic.service.push",
                 "ngResource",
                 "ngCordova",
                 "LocalStorageModule",
@@ -153,6 +155,7 @@
         })
 
         .state("app.patientWall", {
+            cache: false,
             url: "/patient/wall/:id",
             views: {
                 "menuContent": {
@@ -327,6 +330,21 @@
                     templateUrl: "templates/imAPatient/home.html",
                     controller: "ImAPatientHomeController as vm"
                 }
+            }
+        })
+
+        /**
+         * =====================================================
+         * =========== RUTEOS PARA LAS ALERTAS PUSH ============
+         * =====================================================
+         */
+        .state("pushGeoAlert", {
+            url: "push/geoAlert",
+            templateUrl: "templates/alerts/geo.html",
+            controller: "PushGeoAlertController as vm",
+            params: {
+                patient: {},
+                coordinates: {}
             }
         });
 

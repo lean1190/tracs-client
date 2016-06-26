@@ -49,19 +49,20 @@
     "gulp": "./node_modules/.bin/gulp"
   },
   "cordovaPlugins": [
-    {
-      "variables": {
-        "SENDER_ID": "1017723616061"
-      },
-      "locator": "phonegap-plugin-push"
-    },
     "cordova-plugin-whitelist",
     "cordova-plugin-inappbrowser",
     "cordova-plugin-x-toast",
     "cordova-plugin-sim",
     "cordova-plugin-geolocation",
     "cordova-sms-plugin",
-    "https://github.com/Rohfosho/CordovaCallNumberPlugin.git"
+    "https://github.com/Rohfosho/CordovaCallNumberPlugin.git",
+    {
+      "variables": {
+        "SENDER_ID": "1017723616061"
+      },
+      "locator": "phonegap-plugin-push",
+      "id": "phonegap-plugin-push"
+    }
   ],
   "cordovaPlatforms": [
     "android"
