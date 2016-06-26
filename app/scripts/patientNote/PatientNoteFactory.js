@@ -25,7 +25,8 @@
 
         var service = {
 
-            updatePatientNote: updatePatientNote
+            updatePatientNote: updatePatientNote,
+            deletePatientNote: deletePatientNote
 
         };
 
@@ -38,5 +39,15 @@
                 $log.error("Ocurrió un error al modificar la nota del paciente " + noteId, error);
             });
         }
+
+        function deletePatientNote(noteId){
+             return $http.delete(patientNoteEndpoint + "/"+ noteId).then(function (result) {
+                return result.data;
+            }, function(error) {
+                $log.error("Ocurrió un error al eliminar la nota del paciente " + noteId, error);
+            });
+        }
+
+
     }
 })();

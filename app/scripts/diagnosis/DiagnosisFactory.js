@@ -21,6 +21,7 @@
             getDiagnosis: getDiagnosis,
             getDiagnosisMedication: getDiagnosisMedication,
             addDiagnosisMedication: addDiagnosisMedication,
+            deleteDiagnosisMedication: deleteDiagnosisMedication,
             updateDiagnosis: updateDiagnosis
 
         };
@@ -87,6 +88,16 @@
             }, function(error) {
                 $log.error("Ocurrió un error al modificar el diagnostico del paciente " + diagnosisId, error);
             });
+        }
+
+        function deleteDiagnosisMedication(diagnosisId, medicationId){
+
+            return $http.delete(DiagnosisEndpoint + "/deleteDiagnosisMedication/"+ diagnosisId + "/" +medicationId).then(function (result) {
+                return result.data;
+            }, function(error) {
+                $log.error("Ocurrió un error al eliminar la medicación " + diagnosisId, error);
+            });
+
         }
 
     }

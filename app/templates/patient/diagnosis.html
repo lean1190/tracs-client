@@ -34,7 +34,7 @@
                     <h4 ng-if="!vm.patient.latestDiagnosis">Para agregar medicaciones primero debe haber un diagnóstico</h4>
                     <h4 ng-if="vm.patient.latestDiagnosis && !vm.patientMedications.length">Aún no hay medicaciones. Empieza agregando una</h4>
 
-                    <floating-button state="vm.createMedicationLink" text="'+'" class="tab-fix" ng-if="vm.patient.latestDiagnosis"></floating-button>
+                    <floating-button ng-click="vm.createMedicationLink()" text="'+'" class="tab-fix" ng-if="vm.patient.latestDiagnosis"></floating-button>
 
                     <div class="card" ng-repeat="medication in vm.patientMedications">
                         <div class="item item-divider">

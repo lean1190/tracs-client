@@ -31,7 +31,7 @@
 
             $state.go("app.patientMedicationCreate", { id: vm.patientDiagnosis._id});
 
-        }
+        };
 
         vm.changeToDiagnosisTab = function () {
 
