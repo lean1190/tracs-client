@@ -49,8 +49,9 @@
                 vm.patientDiagnosis.patient = storage.getLastVisitedPatient()._id;
                 vm.patientDiagnosis.madeBy = storage.getUser()._id;
 
-                PatientFactory.addPatientDiagnosis(vm.patientDiagnosis.patient, vm.patientDiagnosis).then(function () {
+                PatientFactory.addPatientDiagnosis(vm.patientDiagnosis.patient, vm.patientDiagnosis).then(function (updatedPatient) {
                     $cordovaToast.showLongBottom("El diagnóstico fue creado correctamente").then(function () {
+                        storage.setLastVisitedPatient(updatedPatient);
                         MenuFactory.clearRightButtonAction();
                         $state.go("app.patientDiagnosis");
                     });

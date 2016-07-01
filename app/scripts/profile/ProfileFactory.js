@@ -25,7 +25,8 @@
 
         var service = {
 
-            getProfile: getProfile
+            getProfile: getProfile,
+            deleteProfile: deleteProfile
         };
 
         return service;
@@ -40,6 +41,15 @@
             });
         }
 
+        function deleteProfile(userId, patientId){
+            return $http.delete(profileEndpoint + "/" + userId + "/" + patientId).then(function (result) {
+                return result.data;
+            }, function (error) {
+                $log.error("Ocurrió un error al borrar el perfil ");
+                return error;
+            });
         }
+
+    }
 
 })();

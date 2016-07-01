@@ -23,6 +23,7 @@
 
         function activate() {
 
+            MenuFactory.clearRightButtonAction();
             // Muestra el check para guardar al paciente
             MenuFactory.activateRightButtonAction(function () {
                 vm.assignProfile();

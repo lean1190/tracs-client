@@ -9,15 +9,15 @@
         .module("TracsClient.controllers")
         .controller("PatientCurrentProfilesController", PatientCurrentProfilesController);
 
-    PatientCurrentProfilesController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory","MenuFactory"];
+    PatientCurrentProfilesController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory","MenuFactory","ProfileFactory"];
 
-    function PatientCurrentProfilesController($stateParams, $state, $cordovaToast, storage, PatientFactory, MenuFactory) {
+    function PatientCurrentProfilesController($stateParams, $state, $cordovaToast, storage, PatientFactory, MenuFactory,ProfileFactory) {
 
         var vm = this;
 
         vm.patient = storage.getLastVisitedPatient();
         vm.currentProfile = storage.getCurrentProfile();
-        activate();
+
 
         function activate() {
 
@@ -46,14 +46,22 @@
         }
 
         vm.editProfiles = function(){
-
-          /*  vm.editOn = true;
-
+            vm.editOn = true;
             MenuFactory.clearRightButtonAction();
-
-            MenuFactory.activateRightButtonAction(function () {
-                vm.updatePatientProfiles();
-            });*/
         }
+
+        vm.deleteProfile = function(profileUser){
+            console.log(profileUser);
+            ProfileFactory.deleteProfile(profileUser,vm.patient._id).then(function(){
+                $cordovaToast.showLongBottom("Ocurrió un error al recuperar la lista de usuarios, intentalo de nuevo");
+                $state.reload();
+            },function(){
+                $cordovaToast.showLongBottom("Ocurrió un error al borrar al participante, intentalo de nuevo");
+            });
+        };
+
+        activate();
+
+
      }
 })();

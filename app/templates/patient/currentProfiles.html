@@ -5,9 +5,12 @@
                 <img ng-src="{{::profile.user.picture}}" alt="{{::profile.user.name}}">
                 <h2>{{::profile.user.name}}</h2>
                 <p>{{::profile.description}}</p>
+                <button class="button button-assertive" ng-show="vm.editOn" ng-click="vm.deleteProfile(profile.user._id)">
+                  X
+                </button>
             </ion-item>
         </ion-list>
 
-        <floating-button state="'app.patientAssignProfile'" text="'+'"></floating-button>
+        <floating-button state="'app.patientAssignProfile'" text="'+'" ng-show="!vm.editOn"></floating-button>
     </ion-content>
 </ion-view>
