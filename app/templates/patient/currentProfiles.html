@@ -5,12 +5,12 @@
                 <img ng-src="{{::profile.user.picture}}" alt="{{::profile.user.name}}">
                 <h2>{{::profile.user.name}}</h2>
                 <p>{{::profile.description}}</p>
-                <button class="button button-assertive" ng-show="vm.editOn && !(profile.user._id === vm.currentProfile.user)" ng-click="vm.deleteProfile(profile.user._id)">
-                  X
+                <button class="button button-assertive item-right-button" ng-show="vm.currentProfile.isAdmin && !(profile.user._id === vm.currentProfile.user)" ng-click="vm.deleteProfile(profile.user._id)">
+                    <i class="icon ion-android-close"></i>
                 </button>
             </ion-item>
         </ion-list>
 
-        <floating-button state="'app.patientAssignProfile'" text="'+'" ng-show="!vm.editOn"></floating-button>
+        <floating-button state="'app.patientAssignProfile'" text="'+'"></floating-button>
     </ion-content>
 </ion-view>
