@@ -1,53 +1,130 @@
-.contacts {
-    margin-top: 20px;
-}
-
-.contact-card {
-    width: 44%;
-    margin: 10px;
-    box-shadow: $card-shadow;
-    border-radius: 2px;
-    cursor: pointer;
-    float: left;
-
-    &:active {
-        background-color: #F7F7F7;
-    }
-
-    .contact-img {
-        width: 100%;
-        position: relative;
-        height: 100px;
-        overflow: hidden;
-
-        img {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            height: 100%;
-            width: auto;
-            -webkit-transform: translate(-50%,-50%);
-            -ms-transform: translate(-50%,-50%);
-            transform: translate(-50%,-50%);
+.contacts-grid {
+    margin-top: 10px;
+    .contact-card {
+        width: 44%;
+        margin: 10px;
+        box-shadow: $card-shadow;
+        border-radius: 2px;
+        cursor: pointer;
+        float: left;
+        &:active {
+            background-color: #F7F7F7;
+        }
+        .contact-img {
+            width: 100%;
+            position: relative;
+            height: 100px;
+            overflow: hidden;
+            img {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                height: 100%;
+                width: auto;
+                -webkit-transform: translate(-50%,-50%);
+                -ms-transform: translate(-50%,-50%);
+                transform: translate(-50%,-50%);
+            }
+        }
+        .contact-actions {
+            display: table;
+            width: 100%;
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        .contact-info {
+            font-size: 15px;
+            padding: 10px;
+            display: table-cell;
+            border-right: 1px solid #eee;
+            &:last-child {
+                border-right: 0;
+            }
         }
     }
+}
 
-    .contact-actions {
-        display: table;
+.contacts-list {
+    $card-height: 85px;
+    padding: 10px;
+    .contact-card {
+        height: $card-height;
+        box-shadow: $card-shadow;
+        border-radius: 2px;
+        cursor: pointer;
         width: 100%;
-        text-align: center;
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
+        margin-bottom: 20px;
 
-    .contact-info {
-        font-size: 15px;
-        padding: 10px;
-        display: table-cell;
-        border-right: 1px solid #eee;
+        &:active {
+            background-color: #F7F7F7;
+        }
+        .contact-img {
+            position: relative;
+            height: $card-height;
+            overflow: hidden;
+            width: 24%;
+            float: left;
+            img {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                height: 100%;
+                width: auto;
+                -webkit-transform: translate(-50%,-50%);
+                -ms-transform: translate(-50%,-50%);
+                transform: translate(-50%,-50%);
+            }
+        }
+        .contact-info {
+            font-size: 15px;
+            border-right: 1px solid #eee;
+            float:left;
+            width: 46%;
+            height: $card-height;
 
-        &:last-child {
-            border-right: 0;
+            .phone {
+                font-size: 13px;
+                color: $lower-text-color;
+            }
+
+            .contact-data {
+                padding: 10px;
+            }
+
+            .sms-templates {
+                ul {
+                    li {
+                        padding: 10px;
+                        border-bottom: 1px solid #eee;
+
+                        &:last-child {
+                            border-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+        .contact-actions {
+            float: right;
+            width: 30%;
+            text-align: center;
+            height: 100%;
+
+            .contact-action {
+                font-size: 20px;
+                padding: 11px;
+                border-bottom: 1px solid #eee;
+
+                &:last-child {
+                    border-bottom: 0;
+                }
+
+                &.phone {
+                    background: #43DA53;
+                    color: white;
+                }
+            }
         }
     }
 }
@@ -55,45 +132,37 @@
 .geo-alert-button {
     background-color: $button-red;
     text-align: center;
-    height: 100px;
     box-shadow: $default-shadow;
-
+    width: 100%;
     .img-wrapper {
         display: inline-block;
-        position: relative;
-        bottom: 5px;
-        left: 25px;
-        width: 85px;
-
+        max-width: 75px;
+        margin-top: 7px;
         img {
             width: 100%;
             height: 100%;
         }
     }
-
-    .title {
+    .alert-title {
         display: inline-block;
         color: white;
         font-weight: bold;
         position: relative;
-        bottom: 12px;
-        font-size: 35px;
+        font-size: 30px;
+        bottom: 15px;
     }
 }
-
 .link-top-actions {
     padding: 5px;
     width: 100%;
     height: 44px;
     background-color: white;
-
     i {
         float: right;
         font-size: 32px;
         padding: 0 8px;
         min-width: initial;
         min-height: 31px;
-
         &:first-child {
             float: left;
         }

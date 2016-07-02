@@ -26,6 +26,11 @@
         var vm = this;
 
         vm.patient = storage.getPatientUser();
+        vm.choosingSmsTemplate = false;
+        vm.smsTemplates = [
+            "Estoy bien :)",
+            "Me siento mal :("
+        ];
 
         vm.callPhoneNumber = function (phoneNumber) {
 
@@ -39,7 +44,7 @@
             }
         };
 
-        vm.sendSms = function (phoneNumber) {
+        vm.sendSms = function (smsText, phoneNumber) {
 
             if (phoneNumber !== "") {
                 var options = {
@@ -48,7 +53,8 @@
                     }
                 };
 
-                sms.send(phoneNumber, "No me siento bien, por favor comunicate conmigo", options, function () {
+                sms.send(phoneNumber, smsText, options, function () {
+                    vm.choosingSmsTemplate = false;
                     $cordovaToast.showLongBottom("Mensaje enviado!");
                 }, function (error) {
                     $log.error("No se pudo enviar el sms al número " + phoneNumber, error);

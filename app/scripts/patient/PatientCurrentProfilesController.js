@@ -48,7 +48,7 @@
         vm.editProfiles = function(){
             vm.editOn = true;
             MenuFactory.clearRightButtonAction();
-        }
+        };
 
         vm.deleteProfile = function(profileUser){
             console.log(profileUser);

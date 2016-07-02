@@ -84,7 +84,7 @@
                 });
             }, function () {
                 $cordovaToast.showLongBottom("Ocurrió un error al borrar la nota sobre el paciente, intentalo de nuevo");
-            })
-        }
+            });
+        };
     }
 })();
