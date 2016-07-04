@@ -26,22 +26,6 @@
         vm.user = {};
         vm.patientNotes = [];
 
-        vm.deletePatientNote = function(){
-
-            //Esta tiene que ser el id que venga desde el template, todavia no esta definido el icono asi que queda hardcodeado
-            var patientNoteId = "";
-
-            PatientNoteFactory.deletePatientNote(patientNoteId).then(function(){
-
-                $cordovaToast.showLongBottom("La nota sobre el paciente fue eliminada!").then(function () {
-                    $state.reload();
-                });
-            }, function () {
-                $cordovaToast.showLongBottom("Ocurrió un error al borrar la nota del paciente, intentalo de nuevo");
-            });
-
-        };
-
         activate();
 
         function activate(){
