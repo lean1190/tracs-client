@@ -90,6 +90,12 @@
             });
         }
 
+        /**
+         * Elimina una medicacion asignada al diagnostico del paciente
+         * @param   {number}   diagnosisId  id del diagnostico al que pertenece la medicacion
+         * @param   {number}   medicationId id de la medicacion a borrar
+         * @returns {promise} una promesa con la confirmacion del borrado de la medicacion
+         */
         function deleteDiagnosisMedication(diagnosisId, medicationId){
 
             return $http.delete(DiagnosisEndpoint + "/deleteDiagnosisMedication/"+ diagnosisId + "/" +medicationId).then(function (result) {

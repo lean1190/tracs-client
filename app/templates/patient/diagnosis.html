@@ -36,11 +36,13 @@
 
                     <floating-button ng-click="vm.createMedicationLink()" text="'+'" class="tab-fix" ng-if="vm.patient.latestDiagnosis"></floating-button>
 
-                    <div class="card" ng-repeat="medication in vm.patientMedications">
+                    <div class="card" ng-repeat="medication in vm.patientMedications | orderBy:'-date'">
                         <div class="item item-divider">
                             {{::medication.drug}}
+                             <button class="button button-assertive" ng-click="vm.deleteDiagnosisMedication(medication._id)">X</button>
                         </div>
                         <div class="item item-text-wrap">
+                            <div>Prescripto por {{::medication.prescribedBy.name}}</div>
                             <div>Prescripto el {{::medication.date | date:"dd/MM/yyyy"}}</div>
                             <div>{{::medication.dosis}} cada {{::medication.frequence}}</div>
                         </div>

@@ -112,9 +112,7 @@
             });
         };
 
-     /*   vm.deleteMedication = function(){
-            //Esta tiene que ser el id que venga desde el template, todavia no esta definido el icono asi que queda hardcodeado
-            var medicationId = "";
+        vm.deleteDiagnosisMedication = function(medicationId){
 
             DiagnosisFactory.deleteDiagnosisMedication(vm.patientDiagnosis._id, medicationId).then(function(){
 
@@ -126,7 +124,7 @@
                 $cordovaToast.showLongBottom("Ocurrió un error al borrar la medicación, intentalo de nuevo");
             });
 
-        };*/
+        };
 
         function activate() {
 
@@ -146,7 +144,7 @@
 
                     DiagnosisFactory.getDiagnosisMedication(vm.patientDiagnosis._id).then(function (result) {
 
-                        vm.patientMedications = result.medications;
+                        vm.patientMedications = result;
 
                     }, function () {
                         $cordovaToast.showLongBottom("Ocurrió un error al recuperar la medicación del paciente, intentalo de nuevo");

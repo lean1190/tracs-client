@@ -13,6 +13,7 @@
 
         vm.diagnosisId = $stateParams.id;
         vm.patient = storage.getLastVisitedPatient();
+        vm.user = storage.getUser();
 
         vm.medication = {
             drug: "",
@@ -47,11 +48,16 @@
 
         vm.createMedication = function () {
             if (isValid()) {
+
+                vm.medication.prescribedBy = vm.user._id;
+                vm.medication.diagnosis = vm.diagnosisId;
+
                 DiagnosisFactory.addDiagnosisMedication(vm.medication, vm.diagnosisId).then(function () {
                     $cordovaToast.showLongBottom("La medicación fue agregada exitosamente!").then(function () {
                         MenuFactory.clearRightButtonAction();
                         $state.go("app.patientDiagnosis");
                     });
+
                 }, function () {
                     $cordovaToast.showLongBottom("Ocurrió un error al agregar la medicación, intentalo de nuevo");
                 });

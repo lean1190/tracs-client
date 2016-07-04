@@ -5,9 +5,7 @@
                 <img ng-src="{{::profile.user.picture}}" alt="{{::profile.user.name}}">
                 <h2>{{::profile.user.name}}</h2>
                 <p>{{::profile.description}}</p>
-                <button class="button button-assertive" ng-show="vm.editOn && !(profile.user._id === vm.currentProfile.user)" ng-click="vm.deleteProfile(profile.user._id)">
-                  X
-                </button>
+                <button class="button button-assertive" ng-show="!(profile.user._id === vm.currentProfile.user)" ng-click="vm.deleteProfile(profile.user._id)">X</button>
             </ion-item>
         </ion-list>
 

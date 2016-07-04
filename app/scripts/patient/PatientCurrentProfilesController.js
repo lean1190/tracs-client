@@ -21,21 +21,15 @@
 
         function activate() {
 
+             MenuFactory.clearRightButtonAction();
             //Si el perfil es administrador, va a poder borrar perfiles asignados usando la accion de editar
-            if (vm.currentProfile.isAdmin){
-
-                vm.editOn = false;
-
-                // Muestra el lapiz para editar la nota del paciente
-                MenuFactory.activateRightEditButtonAction(function () {
-                    vm.editProfiles();
-                });
+            /*if (vm.currentProfile.isAdmin){
 
                 // Cuando apretamos atrás se borra el boton y su funcionalidad
                 MenuFactory.setBackButtonAction(function () {
                     MenuFactory.clearRightButtonAction();
                 });
-            }
+            }*/
 
             PatientFactory.getPatientProfiles(vm.patient._id).then(function(result) {
                 vm.profiles = result;
@@ -45,15 +39,10 @@
 
         }
 
-        vm.editProfiles = function(){
-            vm.editOn = true;
-            MenuFactory.clearRightButtonAction();
-        }
-
         vm.deleteProfile = function(profileUser){
             console.log(profileUser);
             ProfileFactory.deleteProfile(profileUser,vm.patient._id).then(function(){
-                $cordovaToast.showLongBottom("Ocurrió un error al recuperar la lista de usuarios, intentalo de nuevo");
+                $cordovaToast.showLongBottom("Participante borrado correctamente");
                 $state.reload();
             },function(){
                 $cordovaToast.showLongBottom("Ocurrió un error al borrar al participante, intentalo de nuevo");
