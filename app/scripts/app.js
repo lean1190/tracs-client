@@ -23,6 +23,7 @@
                 "LocalStorageModule",
                 "xeditable",
                 "btford.socket-io",
+                "ng.httpLoader",
                 "TracsClient.controllers",
                 "TracsClient.factories",
                 "TracsClient.directives",
@@ -74,10 +75,15 @@
         editableOptions.theme = "bs3"; // bootstrap3 theme. Can be also 'bs2', 'default'
     }
 
-    function config($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
+    function config($stateProvider, $urlRouterProvider, localStorageServiceProvider, httpMethodInterceptorProvider) {
 
         // Configuración del prefijo para el localStorage
         localStorageServiceProvider.setPrefix("tracs");
+
+        // Configuración del interceptor para mostrar la pantalla de carga en un request
+        httpMethodInterceptorProvider.whitelistLocalRequests();
+        //httpMethodInterceptorProvider.whitelistDomain('192.168.56.1:3000');
+        //httpMethodInterceptorProvider.whitelistDomain('google.com');
 
         // Configuración de estados y rutas
         $stateProvider

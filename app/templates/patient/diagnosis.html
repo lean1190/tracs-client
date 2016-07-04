@@ -39,7 +39,9 @@
                     <div class="card" ng-repeat="medication in vm.patientMedications | orderBy:'-date'">
                         <div class="item item-divider">
                             {{::medication.drug}}
-                             <button class="button button-assertive" ng-click="vm.deleteDiagnosisMedication(medication._id)">X</button>
+                             <button class="button button-assertive item-right-button" ng-click="vm.deleteDiagnosisMedication(medication._id)">
+                                <i class="icon ion-android-close"></i>
+                            </button>
                         </div>
                         <div class="item item-text-wrap">
                             <div>Prescripto por {{::medication.prescribedBy.name}}</div>

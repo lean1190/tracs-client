@@ -5,7 +5,9 @@
             <h3>Título: {{vm.patientNote.title}}</h3>
             <p> Descripción: {{vm.patientNote.description}}</p>
             <h4>Fecha: {{vm.patientNote.date|date:'medium'}}</h4>
-            <button class="button button-assertive" ng-click="vm.deletePatientNote()">X</button>
+            <button class="button button-assertive item-right-button" ng-click="vm.deletePatientNote()">
+                    <i class="icon ion-android-close"></i>
+            </button>
         </div>
 
         <div class="editPatientNote" ng-show="vm.editOn === true" >

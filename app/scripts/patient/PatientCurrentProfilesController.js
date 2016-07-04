@@ -18,18 +18,9 @@
         vm.patient = storage.getLastVisitedPatient();
         vm.currentProfile = storage.getCurrentProfile();
 
-
         function activate() {
 
-             MenuFactory.clearRightButtonAction();
-            //Si el perfil es administrador, va a poder borrar perfiles asignados usando la accion de editar
-            /*if (vm.currentProfile.isAdmin){
-
-                // Cuando apretamos atrás se borra el boton y su funcionalidad
-                MenuFactory.setBackButtonAction(function () {
-                    MenuFactory.clearRightButtonAction();
-                });
-            }*/
+            MenuFactory.clearRightButtonAction();
 
             PatientFactory.getPatientProfiles(vm.patient._id).then(function(result) {
                 vm.profiles = result;
@@ -40,7 +31,6 @@
         }
 
         vm.deleteProfile = function(profileUser){
-            console.log(profileUser);
             ProfileFactory.deleteProfile(profileUser,vm.patient._id).then(function(){
                 $cordovaToast.showLongBottom("Participante borrado correctamente");
                 $state.reload();
@@ -50,7 +40,5 @@
         };
 
         activate();
-
-
      }
 })();

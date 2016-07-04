@@ -53,6 +53,18 @@ body, html {
     background-color: $layout-green !important;
 }
 
+.button.button-positive {
+    background-color: $layout-violet !important;
+}
+
+.item-avatar .item-right-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    border-radius: 0;
+}
+
 .side-menu {
 
     .side-menu-header {
