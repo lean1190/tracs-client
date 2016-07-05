@@ -11,7 +11,7 @@
  * de enviar un alerta georreferenciada
  */
 
-(function () {
+(function() {
     "use strict";
 
     angular
@@ -19,9 +19,9 @@
         .controller("ImAPatientHomeController", ImAPatientHomeController);
 
 
-    ImAPatientHomeController.$inject = ["$scope", "$q", "$log", "$state", "$cordovaToast", "$cordovaGeolocation", "$ionicPopup", "storage", "dialer", "sms", "ImAPatientFactory"];
+    ImAPatientHomeController.$inject = ["$scope", "$q", "$log", "$state", "$cordovaToast", "$cordovaGeolocation", "$ionicModal", "storage", "dialer", "sms", "ImAPatientFactory"];
 
-    function ImAPatientHomeController($scope, $q, $log, $state, $cordovaToast, $cordovaGeolocation, $ionicPopup, storage, dialer, sms, ImAPatientFactory) {
+    function ImAPatientHomeController($scope, $q, $log, $state, $cordovaToast, $cordovaGeolocation, $ionicModal, storage, dialer, sms, ImAPatientFactory) {
 
         var vm = this;
 
@@ -32,19 +32,27 @@
             "Me siento mal :("
         ];
 
-        vm.callPhoneNumber = function (phoneNumber) {
+        vm.showFeedbackMessage = false;
+        vm.feedbackMessage = "";
+
+        function showConfirmationModal(message) {
+            vm.feedbackMessage = message;
+            vm.showFeedbackMessage = true;
+        }
+
+        vm.callPhoneNumber = function(phoneNumber) {
 
             if (phoneNumber !== "") {
-                dialer.callNumber(function () {}, function (error) {
+                dialer.callNumber(function() {}, function(error) {
                     $log.error("No se pudo realizar la llamada al número " + phoneNumber, error);
-                    $cordovaToast.showLongBottom("No se pudo realizar la llamada! Hay señal?");
+                    $cordovaToast.showLongBottom("No se pudo realizar la llamada. Hay señal?");
                 }, phoneNumber, false);
             } else {
                 $cordovaToast.showLongBottom("Esta persona no tiene teléfono");
             }
         };
 
-        vm.sendSms = function (smsText, phoneNumber) {
+        vm.sendSms = function(smsText, phoneNumber) {
 
             if (phoneNumber !== "") {
                 var options = {
@@ -53,12 +61,12 @@
                     }
                 };
 
-                sms.send(phoneNumber, smsText, options, function () {
+                sms.send(phoneNumber, smsText, options, function() {
                     vm.choosingSmsTemplate = false;
-                    $cordovaToast.showLongBottom("Mensaje enviado!");
-                }, function (error) {
+                    showConfirmationModal("Alguien se comunicará pronto con vos");
+                }, function(error) {
                     $log.error("No se pudo enviar el sms al número " + phoneNumber, error);
-                    $cordovaToast.showLongBottom("No se pudo enviar el mensaje! Hay señal?");
+                    $cordovaToast.showLongBottom("No se pudo enviar el mensaje. Hay señal?");
                 });
             } else {
                 $cordovaToast.showLongBottom("Esta persona no tiene teléfono");
@@ -67,10 +75,10 @@
         };
 
         // Importante: Prender el GPS del emulador
-        vm.sendGeoAlert = function () {
-            ImAPatientFactory.sendGeoAlertAtMyPosition(vm.patient._id).then(function () {
-                $cordovaToast.showLongBottom("Ya está! Pronto recibirás ayuda");
-            }, function () {
+        vm.sendGeoAlert = function() {
+            ImAPatientFactory.sendGeoAlertAtMyPosition(vm.patient._id).then(function() {
+                showConfirmationModal("Pronto recibirás ayuda");
+            }, function() {
                 $cordovaToast.showLongBottom("No pudimos localizarte, está activado el GPS?");
             });
         };

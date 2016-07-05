@@ -1,5 +1,9 @@
 <ion-view hide-nav-bar="true">
-    <div class="geo-alert">
+    <div class="alert geo-alert">
+
+        <div class="close-button" ui-sref="app.patientWall({ id: vm.patient._id})">
+            <i class="icon ion-ios-close-outline"></i>
+        </div>
 
         <div class="image-wrapper">
             <img ng-src="{{vm.patient.picture}}" alt="{{vm.patient.name}}">

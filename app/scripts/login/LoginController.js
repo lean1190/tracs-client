@@ -70,6 +70,7 @@
          * Setea el history root en la próxima vista y redirecciona
          */
         function forwardToLoggedInHome() {
+            PushHelper.registerForPushNotifications();
             setNextViewAsHistoryRoot();
             changeStateToLoggedInHome();
         }
@@ -96,7 +97,6 @@
                 redirectUri: EnvironmentConfig.googleRedirectUri,
                 scopes: "https://www.googleapis.com/auth/plus.login+https://www.googleapis.com/auth/plus.me+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile"
             }).then(function () {
-                PushHelper.registerForPushNotifications();
                 forwardToLoggedInHome();
             }, function (error) {
                 $log.error(error.message, error.raw);
@@ -107,7 +107,6 @@
         function activate() {
             // Si el usuario ya se logueó en la aplicación, lo redirige al listado de pacientes asignados
             if (isUserLoggedIn()) {
-                PushHelper.registerForPushNotifications();
                 forwardToLoggedInHome();
             // Si el usuario es un paciente y ya registró su DNI, lo redirige a la vista de paciente
             } else if (isPatientLoggedIn()) {

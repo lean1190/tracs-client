@@ -1,29 +1,19 @@
 <ion-view cache-view="false" view-title="Hola {{vm.patient.name}}!">
     <ion-content>
-
-        <!-- <div class="contacts-grid">
-            <div class="contact-card" ng-repeat="closePerson in vm.patient.closestPeople track by $index | orderBy:['priority','name']" ng-show="closePerson.name && closePerson.phoneNumber">
-                <div class="contact-img" ng-click="vm.callPhoneNumber(closePerson.phoneNumber)">
-                    <img ng-src="{{::closePerson.picture}}" alt="{{::closePerson.name}}">
-                </div>
-                <div class="contact-actions">
-                    <div class="contact-info" ng-click="vm.callPhoneNumber(closePerson.phoneNumber)">
-                        <i class="icon ion-android-call"></i>
-                    </div>
-                    <div class="contact-info" ng-click="vm.sendSms(closePerson.phoneNumber)">
-                        <i class="icon ion-chatbubble-working"></i>
-                    </div>
-                </div>
+        <div class="feedback-modal" ng-show="vm.showFeedbackMessage">
+            <div class="content">
+                <h3>{{vm.feedbackMessage}}</h3>
+                <button class="button button-positive close-button" type="button" ng-click="vm.showFeedbackMessage = false">Okey</button>
             </div>
-            <div class="clear-fix"></div>
-        </div> -->
+        </div>
+
         <div class="contacts-list">
             <div class="contact-card" ng-repeat="closePerson in vm.patient.closestPeople track by $index | orderBy:['-priority','name']" ng-show="closePerson.name && closePerson.phoneNumber">
                 <div class="contact-img" ng-click="vm.callPhoneNumber(closePerson.phoneNumber)">
                     <img ng-src="{{::closePerson.picture}}" alt="{{::closePerson.name}}">
                 </div>
                 <div class="contact-info">
-                    <div class="contact-data" ng-hide="vm.choosingSmsTemplate">
+                    <div class="contact-data" ng-show="!vm.choosingSmsTemplate">
                         <div>{{::closePerson.name}}</div>
                         <div class="phone">{{::closePerson.phoneNumber}}</div>
                     </div>
@@ -46,6 +36,23 @@
                 <div class="clearfix"></div>
             </div>
         </div>
+
+        <!-- <div class="contacts-grid">
+            <div class="contact-card" ng-repeat="closePerson in vm.patient.closestPeople track by $index | orderBy:['priority','name']" ng-show="closePerson.name && closePerson.phoneNumber">
+                <div class="contact-img" ng-click="vm.callPhoneNumber(closePerson.phoneNumber)">
+                    <img ng-src="{{::closePerson.picture}}" alt="{{::closePerson.name}}">
+                </div>
+                <div class="contact-actions">
+                    <div class="contact-info" ng-click="vm.callPhoneNumber(closePerson.phoneNumber)">
+                        <i class="icon ion-android-call"></i>
+                    </div>
+                    <div class="contact-info" ng-click="vm.sendSms(closePerson.phoneNumber)">
+                        <i class="icon ion-chatbubble-working"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="clear-fix"></div>
+        </div> -->
     </ion-content>
 
     <ion-footer-bar style="padding:0; height:90px;">

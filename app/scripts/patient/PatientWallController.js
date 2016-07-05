@@ -61,10 +61,8 @@
             $rootScope.showChatButton = false;
             $rootScope.showAlertButton = false;
             // Make sure that the interval is destroyed
-            if (angular.isDefined(notificationsInterval)) {
-                $interval.cancel(notificationsInterval);
-                notificationsInterval = undefined;
-            }
+            $interval.cancel(notificationsInterval);
+            notificationsInterval = undefined;
         });
 
         function activate() {

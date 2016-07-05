@@ -44,7 +44,6 @@
         }
     }
 }
-
 .contacts-list {
     $card-height: 85px;
     padding: 10px;
@@ -55,7 +54,6 @@
         cursor: pointer;
         width: 100%;
         margin-bottom: 20px;
-
         &:active {
             background-color: #F7F7F7;
         }
@@ -79,25 +77,21 @@
         .contact-info {
             font-size: 15px;
             border-right: 1px solid #eee;
-            float:left;
+            float: left;
             width: 46%;
             height: $card-height;
-
             .phone {
                 font-size: 13px;
                 color: $lower-text-color;
             }
-
             .contact-data {
                 padding: 10px;
             }
-
             .sms-templates {
                 ul {
                     li {
                         padding: 10px;
                         border-bottom: 1px solid #eee;
-
                         &:last-child {
                             border-bottom: 0;
                         }
@@ -110,16 +104,13 @@
             width: 30%;
             text-align: center;
             height: 100%;
-
             .contact-action {
                 font-size: 20px;
                 padding: 11px;
                 border-bottom: 1px solid #eee;
-
                 &:last-child {
                     border-bottom: 0;
                 }
-
                 &.phone {
                     background: #43DA53;
                     color: white;
@@ -128,7 +119,6 @@
         }
     }
 }
-
 .geo-alert-button {
     // background-color: $button-red;
     background-color: $layout-violet;
@@ -167,5 +157,29 @@
         &:first-child {
             float: left;
         }
+    }
+}
+.feedback-modal {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 11;
+    .content {
+        width: 90%;
+        height: 60%;
+        background-color: rgb(250, 250, 250);
+        position: absolute;
+        z-index: 12;
+        left: 5%;
+        top: 15%;
+        padding: 15px;
+        text-align: center;
+    }
+    .close-button {
+        margin-top: 50%;
+        width: 100%;
     }
 }

@@ -56,7 +56,6 @@
             $ionicPush.init({
                 "debug": true,
                 "onNotification": function(notification) {
-                    console.log("### Notification", notification);
                     showPatientAlert(notification.payload);
                 },
                 "onRegister": function(data) {
@@ -67,8 +66,14 @@
             $ionicPush.register();
         }
 
+        function clearPushNotifications() {
+            $ionicPush.setNotificationCallback(function(){});
+            $ionicPush.unregister();
+        }
+
         var service = {
-            registerForPushNotifications: registerForPushNotifications
+            registerForPushNotifications: registerForPushNotifications,
+            clearPushNotifications: clearPushNotifications
         };
 
         return service;

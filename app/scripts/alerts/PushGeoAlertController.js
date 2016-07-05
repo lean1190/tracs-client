@@ -17,9 +17,9 @@
         .module("TracsClient.controllers")
         .controller("PushGeoAlertController", PushGeoAlertController);
 
-    PushGeoAlertController.$inject = ["$stateParams", "$state", "$log", "$cordovaToast", "dialer"];
+    PushGeoAlertController.$inject = ["$scope", "$stateParams", "$state", "$log", "$cordovaToast", "$ionicPlatform", "dialer"];
 
-    function PushGeoAlertController($stateParams, $state, $log, $cordovaToast, dialer) {
+    function PushGeoAlertController($scope, $stateParams, $state, $log, $cordovaToast, $ionicPlatform, dialer) {
 
         var vm = this;
         vm.patient = $stateParams.patient;
@@ -39,6 +39,7 @@
                 longitude: vm.coordinates.longitude
             });
         };
+
     }
 
 })();

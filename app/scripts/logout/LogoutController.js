@@ -16,9 +16,9 @@
         .module("TracsClient.controllers")
         .controller("LogoutController", LogoutController);
 
-    LogoutController.$inject = ["$state", "localStorageService", "storage"];
+    LogoutController.$inject = ["$state", "localStorageService", "storage", "PushHelper"];
 
-    function LogoutController($state, localStorageService, storage) {
+    function LogoutController($state, localStorageService, storage, PushHelper) {
 
         activate();
 
@@ -27,6 +27,7 @@
             storage.setUser(null);
             storage.setPatientUser(null);
             localStorageService.clearAll();
+            PushHelper.clearPushNotifications();
             // Redirige al login
             $state.go("signin.login");
         }
