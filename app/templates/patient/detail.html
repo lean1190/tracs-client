@@ -1,5 +1,5 @@
 <ion-view cache-view="false" view-title="Perfil de {{vm.patient.name}}">
-    <ion-content>
+    <ion-content class="fix-content">
         <ion-tabs class="tabs-striped tabs-top patient-tabs">
 
             <ion-tab title="GENERAL" on-select="vm.changeToGeneralTab()">
@@ -29,7 +29,7 @@
                         </div>
                     </div>
 
-                    <div class="info-edit" ng-show="vm.editOn === true " >
+                    <div class="info-edit" ng-show="vm.editOn === true ">
 
                         <label class="item item-input item-floating-label">
                             <span class="input-label required-field">Nombre</span>
@@ -87,18 +87,17 @@
 
                 <div class="contactInfo-tab" ng-show="vm.patient.contactInfo">
                     <div class="contactInfo" ng-show="vm.editOn === false">
-                            <div><strong>Nombre</strong>
-                                <h4>{{vm.patient.contactInfo.name}}</h4>
-                            </div>
-                            <div><strong>Dirección</strong>
-                                <h4> {{ vm.patient.contactInfo.address }} </h4>
-                            </div>
-                            <div><strong>Ciudad</strong>
-                                <h4>{{ vm.patient.contactInfo.city}} </h4>
-                            </div>
+                        <div><strong>Nombre</strong>
+                            <h4>{{vm.patient.contactInfo.name}}</h4>
+                        </div>
+                        <div><strong>Dirección</strong>
+                            <h4> {{ vm.patient.contactInfo.address }} </h4>
+                        </div>
+                        <div><strong>Ciudad</strong>
+                            <h4>{{ vm.patient.contactInfo.city}} </h4>
+                        </div>
                     </div>
                     <div class="contactInfo-edit" ng-show="vm.editOn === true">
-
                         <label class="item item-input item-floating-label">
                             <span class="input-label required-field">Nombre</span>
                             <input type="text" ng-model="vm.patient.contactInfo.name" placeholder="Nombre *" required>
@@ -116,17 +115,16 @@
                 </div>
 
                 <div class="contactInfoEmpty-tab" ng-show="!vm.patient.contactInfo">
-
                     <h3>El paciente aun no tiene definida su información de contacto.</h3>
-                    <a ui-sref="app.patientContactInfoCreate" class="floating-button">
-                        <button class="button button-balanced">+</button>
-                    </a>
-
                 </div>
 
             </ion-tab>
 
         </ion-tabs>
     </ion-content>
+
+    <ion-footer-bar class="fix-footer">
+        <floating-button state="'app.patientContactInfoCreate'" text="'+'" ng-show="!vm.patient.contactInfo"></floating-button>
+    </ion-footer-bar>
 
 </ion-view>

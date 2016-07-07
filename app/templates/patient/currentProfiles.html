@@ -1,5 +1,5 @@
 <ion-view cache-view="false" view-title="Participantes">
-    <ion-content>
+    <ion-content class="fix-content">
         <ion-list>
             <ion-item ng-repeat="profile in vm.profiles" class="item-avatar">
                 <img ng-src="{{::profile.user.picture}}" alt="{{::profile.user.name}}">
@@ -8,10 +8,11 @@
                 <button class="button button-assertive item-right-button" ng-show="vm.currentProfile.isAdmin && !(profile.user._id === vm.currentProfile.user)" ng-click="vm.deleteProfile(profile.user._id)">
                     <i class="icon ion-android-close"></i>
                 </button>
-
             </ion-item>
         </ion-list>
-
-        <floating-button state="'app.patientAssignProfile'" text="'+'"></floating-button>
     </ion-content>
+
+    <ion-footer-bar class="fix-footer">
+        <floating-button state="'app.patientAssignProfile'" text="'+'"></floating-button>
+    </ion-footer-bar>
 </ion-view>

@@ -74,17 +74,5 @@
                 $cordovaToast.showLongBottom("Ocurrió un error al actualizar la nota sobre el paciente, intentalo de nuevo");
             });
         };
-
-        vm.deletePatientNote = function(){
-            console.log(noteId,vm.patientNote._Id);
-            PatientNoteFactory.deletePatientNote(noteId).then(function(){
-                $cordovaToast.showLongBottom("Nota borrada correctamente!").then(function () {
-                    MenuFactory.clearRightButtonAction();
-                    $state.go("app.patientNotes");
-                });
-            }, function () {
-                $cordovaToast.showLongBottom("Ocurrió un error al borrar la nota sobre el paciente, intentalo de nuevo");
-            });
-        };
     }
 })();

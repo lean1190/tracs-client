@@ -20,6 +20,7 @@
                 "ionic.service.push",
                 "ngResource",
                 "ngCordova",
+                "ngAria",
                 "LocalStorageModule",
                 "xeditable",
                 "btford.socket-io",

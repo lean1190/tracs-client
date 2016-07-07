@@ -1,5 +1,5 @@
 .patient-wall-card {
-    box-shadow: $card-shadow;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);;
     margin: $default-margin;
     .item {
         .image-wrapper {
@@ -23,7 +23,9 @@
         .content-wrapper {
             margin-left: 10px;
             width: 69%;
+            font-weight: bold;
             .name {
+                color: $layout-violet;
                 font-size: 19px;
                 margin-bottom: 5px;
             }

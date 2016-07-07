@@ -9,7 +9,7 @@
  * Controlador que maneja la administracion de las notas que tiene el usuario sobre su paciente
  */
 
-(function () {
+(function() {
     "use strict";
 
     angular
@@ -28,22 +28,33 @@
 
         activate();
 
-        function activate(){
+        function activate() {
 
             vm.patient = storage.getLastVisitedPatient();
             vm.user = storage.getUser();
 
-            PatientFactory.getPatientNotes(vm.patient._id, vm.user._id).then(function (result) {
+            PatientFactory.getPatientNotes(vm.patient._id, vm.user._id).then(function(result) {
                 vm.patientNotes = result;
                 console.log(vm.patientNotes);
-            }, function () {
+            }, function() {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar las notas sobre el paciente, intentalo de nuevo");
             });
         }
 
-        vm.displayNote = function(noteId){
-            $state.go("app.patientNotesDisplay", { id: noteId });
+        vm.displayNote = function(noteId) {
+            $state.go("app.patientNotesDisplay", {
+                id: noteId
+            });
         };
-      }
+
+        vm.deletePatientNote = function(noteId) {
+            PatientNoteFactory.deletePatientNote(noteId).then(function() {
+                $cordovaToast.showLongBottom("Nota eliminada").then(function() {
+                    $state.go("app.patientNotes");
+                });
+            }, function() {
+                $cordovaToast.showLongBottom("Ocurrió un error al borrar la nota sobre el paciente, intentalo de nuevo");
+            });
+        };
     }
-)();
+})();

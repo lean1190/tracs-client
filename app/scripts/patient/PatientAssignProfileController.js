@@ -16,13 +16,40 @@
         var vm = this;
 
         vm.patient = storage.getLastVisitedPatient();
-        vm.profile = {};
-        vm.profile.patient = vm.patient._id;
+        vm.profile = {
+            patient: vm.patient._id,
+            isParent: false,
+            description: ""
+        };
 
-        activate();
+        function isValid() {
+            if(utils.isEmpty(vm.profile.user)) {
+                $cordovaToast.showLongBottom("Debe elegir una persona");
+                return false;
+            }
+            if(vm.profile.description === "") {
+                $cordovaToast.showLongBottom("Debe ingresar una descripción");
+                return false;
+            }
+
+            return true;
+        }
+
+        vm.assignProfile = function () {
+            if (isValid()) {
+                PatientFactory.assignProfile(vm.profile).then(function () {
+                    $cordovaToast.showLongBottom("Participante agregado").then(function () {
+                        MenuFactory.clearRightButtonAction();
+                        $state.go("app.patientCurrentProfiles");
+                    });
+                }, function () {
+                    $cordovaToast.showLongBottom("Ocurrió un error al asignar un participante al paciente, intentalo de nuevo");
+                });
+            }
+
+        };
 
         function activate() {
-
             MenuFactory.clearRightButtonAction();
             // Muestra el check para guardar al paciente
             MenuFactory.activateRightButtonAction(function () {
@@ -41,24 +68,6 @@
             });
         }
 
-        vm.assignProfile = function () {
-
-            if (!(utils.isEmpty(vm.profile.user))) {
-
-                PatientFactory.assignProfile(vm.profile).then(function () {
-
-                    $cordovaToast.showLongBottom("Perfil asignado correctamente!").then(function () {
-                        MenuFactory.clearRightButtonAction();
-                        $state.go("app.patientCurrentProfiles");
-                    });
-
-                }, function () {
-                    $cordovaToast.showLongBottom("Ocurrió un error al asignar un participante al paciente, intentalo de nuevo");
-                });
-            } else {
-                $cordovaToast.showLongBottom("Por favor, elija un participante valido");
-            }
-
-        };
+        activate();
     }
 })();

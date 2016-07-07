@@ -67,8 +67,7 @@
         }
 
         function clearPushNotifications() {
-            $ionicPush.setNotificationCallback(function(){});
-            $ionicPush.unregister();
+            $ionicPush.setNotificationCallback(function(){});            
         }
 
         var service = {

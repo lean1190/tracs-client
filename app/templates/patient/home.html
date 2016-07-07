@@ -1,5 +1,5 @@
 <ion-view cache-view="false" view-title="Mis Pacientes">
-    <ion-content>
+    <ion-content class="fix-content">
         <ion-list>
             <ion-item ng-repeat="profile in vm.profiles | orderBy:'patient.name' " ng-click="vm.changeStateToPatientWall(profile.patient._id)" class="item-avatar">
                 <img ng-src="{{::profile.patient.picture}}" alt="{{::profile.patient.name}}">
@@ -8,8 +8,10 @@
             </ion-item>
         </ion-list>
 
-        <h4 ng-if="!vm.profiles.length" class="length-0">Aún no tienes pacientes. Comienza agregando uno</h4>
-
-        <floating-button state="'app.patientCreate'" text="'+'"></floating-button>
+        <h4 ng-if="!vm.profiles.length" class="length-0">Aún no tienes pacientes</h4>
     </ion-content>
+
+    <ion-footer-bar class="fix-footer">
+        <floating-button state="'app.patientCreate'" text="'+'"></floating-button>
+    </ion-footer-bar>
 </ion-view>

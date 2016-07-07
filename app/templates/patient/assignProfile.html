@@ -1,27 +1,23 @@
 <ion-view view-title="Agregar participante">
     <ion-content>
-        <h4 class="title">Asigne un nuevo profesional al tratamiento de {{vm.patient.name}}</h4>
 
         <div class="list">
             <label class="item item-input item-select">
-
                 <div class="input-label">
-                    Participante:
+                    Persona *
                 </div>
-
                 <select ng-model="vm.profile.user" ng-options="user._id as user.name for user in vm.users">
-                     <option value="">Seleccione un participante</option>
+                    <option value="">Seleccione una persona</option>
                 </select>
+            </label>
 
+            <ion-toggle ng-model="vm.profile.isParent" ng-checked="false">Es pariente?</ion-toggle>
+
+            <label class="item item-input item-floating-label">
+                <span class="input-label required-field">Descripción del perfil</span>
+                <textarea type="text" ng-model="vm.profile.description" placeholder="Descripción del perfil *"></textarea>
             </label>
         </div>
-
-        <label class="item item-input item-floating-label">
-                <span class="input-label">Descripción del perfil</span>
-                <textarea type="text" ng-model="vm.profile.description" placeholder="Descripcion del perfil"></textarea>
-        </label>
-
-        <ion-toggle ng-model="vm.profile.isParent" ng-checked="false">Es pariente?</ion-toggle>
 
     </ion-content>
 </ion-view>

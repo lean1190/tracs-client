@@ -57,12 +57,22 @@ body, html {
     background-color: $layout-violet !important;
 }
 
-.item-avatar .item-right-button {
+ion-item .item-right-button {
     position: absolute;
     right: 0;
     top: 0;
     height: 100%;
     border-radius: 0;
+}
+
+ion-content.fix-content {
+    bottom: 0 !important;
+}
+
+ion-footer-bar.fix-footer {
+    border-top: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
 }
 
 .side-menu {
@@ -120,8 +130,8 @@ body, html {
         height: 60px;
         border-radius: 100%;
         background-color: $floating-button-color !important;
-        color: $floating-button-text-color;
-        font-size: 30px;
+        color: $floating-button-text-color !important;
+        font-size: 30px !important;
         text-align: center;
         box-shadow: $default-shadow;
     }
