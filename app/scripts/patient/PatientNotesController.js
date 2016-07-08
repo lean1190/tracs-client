@@ -35,7 +35,6 @@
 
             PatientFactory.getPatientNotes(vm.patient._id, vm.user._id).then(function(result) {
                 vm.patientNotes = result;
-                console.log(vm.patientNotes);
             }, function() {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar las notas sobre el paciente, intentalo de nuevo");
             });

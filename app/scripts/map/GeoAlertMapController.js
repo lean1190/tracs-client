@@ -28,39 +28,6 @@
 
         vm.patient = storage.getLastVisitedPatient();
 
-        activate();
-
-        function activate() {
-
-            var markerArray = [],
-                // Instantiate a directions service.
-                directionsService = new google.maps.DirectionsService,
-                // Create a map and center it on Manhattan.
-                map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 10,
-                    center: {
-                        lat: destination.lat,
-                        lng: destination.lng
-                    }
-                }),
-
-                // Create a renderer for directions and bind it to the map.
-                directionsDisplay = new google.maps.DirectionsRenderer({
-                    map: map
-                });
-
-            getMyPosition().then(function () {
-
-
-                //origin = result;
-                console.log(origin);
-                calculateAndDisplayRoute(directionsDisplay, directionsService, markerArray, map);
-            }, function (error) {
-
-                console.log(error);
-            });
-        }
-
         function calculateAndDisplayRoute(directionsDisplay, directionsService, markerArray) {
 
             var originLatLng = new google.maps.LatLng(origin.lat, origin.lng),
@@ -114,6 +81,39 @@
                     $log.error("Ocurrió un error al recuperar la posición del usuario, está habilitado el GPS?", error);
                     reject(error);
                 });
+            });
+        }
+
+        activate();
+
+        function activate() {
+
+            var markerArray = [],
+                // Instantiate a directions service.
+                directionsService = new google.maps.DirectionsService,
+                // Create a map and center it on Manhattan.
+                map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 10,
+                    center: {
+                        lat: destination.lat,
+                        lng: destination.lng
+                    }
+                }),
+
+                // Create a renderer for directions and bind it to the map.
+                directionsDisplay = new google.maps.DirectionsRenderer({
+                    map: map
+                });
+
+            getMyPosition().then(function() {
+
+
+                //origin = result;
+                console.log(origin);
+                calculateAndDisplayRoute(directionsDisplay, directionsService, markerArray, map);
+            }, function (error) {
+
+                console.log(error);
             });
         }
     }

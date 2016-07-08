@@ -1,11 +1,11 @@
-(function () {
+(function() {
     "use strict";
 
     angular
         .module("TracsClient.controllers")
         .controller("PatientClosestPeopleController", PatientClosestPeopleController);
 
-    PatientClosestPeopleController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory","MenuFactory"];
+    PatientClosestPeopleController.$inject = ["$stateParams", "$state", "$cordovaToast", "storage", "PatientFactory", "MenuFactory"];
 
     function PatientClosestPeopleController($stateParams, $state, $cordovaToast, storage, PatientFactory, MenuFactory) {
 
@@ -19,53 +19,41 @@
         vm.contactP3Id = "";
         vm.contactP4Id = "";
 
-
-
         function activate() {
-
-            console.log(vm.patient);
             vm.editOn = false;
 
             vm.patient = storage.getLastVisitedPatient();
             vm.user = storage.getUser();
 
             // Muestra el check para guardar al paciente
-            MenuFactory.activateRightEditButtonAction(function () {
-                 vm.editClosestPeople();
+            MenuFactory.activateRightEditButtonAction(function() {
+                vm.editClosestPeople();
             });
 
             // Cuando apretamos atrás se borra el check y su funcionalidad
-            MenuFactory.setBackButtonAction(function () {
+            MenuFactory.setBackButtonAction(function() {
                 MenuFactory.clearRightButtonAction();
             });
-
-         /* PatientFactory.getPatientProfiles(vm.patient._id).then(function (result) {
-                vm.profiles = result;
-                console.log(vm.profiles);
-            }, function () {
-                $cordovaToast.showLongBottom("Ocurrió un error al recuperar la lista de usuarios, intentalo de nuevo");
-            });*/
         }
 
-        vm.editClosestPeople = function(){
+        vm.editClosestPeople = function() {
 
             vm.editOn = true;
 
             MenuFactory.clearRightButtonAction();
 
-            MenuFactory.activateRightButtonAction(function () {
+            MenuFactory.activateRightButtonAction(function() {
                 vm.updateClosestPeople();
             });
 
-            PatientFactory.getPatientProfiles(vm.patient._id).then(function (result) {
+            PatientFactory.getPatientProfiles(vm.patient._id).then(function(result) {
                 vm.profiles = result;
-                console.log(vm.profiles);
-            }, function () {
+            }, function() {
                 $cordovaToast.showLongBottom("Ocurrió un error al recuperar la lista de usuarios, intentalo de nuevo");
             });
         };
 
-        vm.updateClosestPeople = function () {
+        vm.updateClosestPeople = function() {
 
             //Se arma el arreglo a añadirse como patient.closestPeople
             var closestPeople = [];
@@ -75,26 +63,18 @@
             closestPeople.push(getContactInformation(vm.contactP3Id, 3, vm.profiles));
             closestPeople.push(getContactInformation(vm.contactP4Id, 4, vm.profiles));
 
-            PatientFactory.updateClosestPeople(closestPeople, vm.patient._id).then(function () {
-
-                $cordovaToast.showLongBottom("Los contactos cercanos del paciente fueron modificados con exito!").then(function () {
-
-                        MenuFactory.clearRightButtonAction();
-                        $state.reload();
-
+            PatientFactory.updateClosestPeople(closestPeople, vm.patient._id).then(function() {
+                $cordovaToast.showLongBottom("Los contactos cercanos del paciente fueron modificados con exito!").then(function() {
+                    MenuFactory.clearRightButtonAction();
+                    $state.reload();
                 });
-
-            }, function () {
+            }, function() {
                 $cordovaToast.showLongBottom("Ocurrió un error al modificar las personas cercanas del paciente, intentalo de nuevo");
             });
-
         };
 
         function getContactInformation(contactId, priority, profiles) {
-
-            var contact = {
-
-            };
+            var contact = {};
 
             for (var i = 0; i < profiles.length; i++) {
                 if (contactId === profiles[i].user._id) {

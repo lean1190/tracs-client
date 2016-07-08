@@ -258,3 +258,22 @@
         }
     }
 }
+
+.notes-footer {
+    background-color: #3498db;
+    height: 70px;
+    padding-top: 18px;
+
+    i {
+        font-size: 35px;
+        margin-left: 10px;
+    }
+
+    span {
+        width: 100%;
+        font-size: 17px;
+        margin-left: 15px;
+        position: relative;
+        bottom: 3px;
+    }
+}
