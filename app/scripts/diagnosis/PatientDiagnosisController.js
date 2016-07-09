@@ -101,10 +101,12 @@
 
         vm.updateHistory = function () {
 
-            PatientFactory.updatePatientHistory(vm.patientHistory, vm.patient._id).then(function () {
+            PatientFactory.updatePatientHistory(vm.patient.history, vm.patient._id).then(function (updatedPatient) {
 
                 $cordovaToast.showLongBottom("Historia del paciente Actualizada!").then(function () {
                     MenuFactory.clearRightButtonAction();
+                    vm.patient.history = updatedPatient.history;
+                    storage.setLastVisitedPatient(vm.patient);
                     $state.reload();
                 });
             }, function () {

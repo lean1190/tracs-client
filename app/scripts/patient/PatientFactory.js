@@ -244,6 +244,7 @@
 
         function updatePatientHistory(updatedHistory, patientId){
              return $http.put(patientEndpoint + "/updatePatientHistory/"+ patientId, updatedHistory).then(function (result) {
+                console.log(result.data);
                 return result.data;
             }, function(error) {
                 $log.error("Ocurrió un error al modificar la historia del paciente con id " + patientId, error);

@@ -40,12 +40,17 @@
             newPatientOpinion.user = currentUserId;
             newPatientOpinion.description = vm.patientOpinion;
 
-            PatientFactory.addPatientOpinion(newPatientOpinion, vm.patient._id).then(function () {
-                $cordovaToast.showLongBottom("Nueva opinión gurdada correctamente!");
-                $state.reload();
-            }, function () {
-                $cordovaToast.showLongBottom("Ocurrió un error al guardar la opinión del paciente, intentalo de nuevo");
-            });
+            if (newPatientOpinion.description) {
+
+                PatientFactory.addPatientOpinion(newPatientOpinion, vm.patient._id).then(function () {
+                    $cordovaToast.showLongBottom("Nueva opinión gurdada correctamente!");
+                    $state.reload();
+                }, function () {
+                    $cordovaToast.showLongBottom("Ocurrió un error al guardar la opinión del paciente, intentalo de nuevo");
+                });
+            } else{
+                $cordovaToast.showLongBottom("Complete su opinion antes de submitir");
+            }
         };
 
         vm.updatePatientContactInfo = function () {
@@ -87,6 +92,7 @@
 
         vm.changeToOpinionsTab = function () {
 
+            console.log(vm.profile.isParent);
             MenuFactory.clearRightButtonAction();
 
             MenuFactory.activateRightButtonAction(function () {
@@ -106,13 +112,17 @@
 
         vm.editContactInfoTab = function () {
             vm.editOn = true;
-
+            v
             MenuFactory.clearRightButtonAction();
 
             MenuFactory.activateRightButtonAction(function () {
                 vm.updatePatientContactInfo();
             });
         };
+
+        vm.isParent = function(){
+            return vm.profile.isParent;
+        }
 
 
         function activate() {
@@ -121,6 +131,7 @@
             vm.profile = storage.getCurrentProfile();
 
             vm.changeToGeneralTab();
+            console.log(vm.profile.isParent);
 
             // Cuando apretamos atrás se borra el check y su funcionalidad
             MenuFactory.setBackButtonAction(function () {
