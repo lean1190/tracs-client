@@ -3,23 +3,18 @@
  * y que podrían ser utilizadas en distintas views, y no solo
  * en una específica
  */
-
 .margin-autocenter {
     margin: 0 auto;
 }
-
 .pull-left {
     float: left !important;
 }
-
 .pull-right {
     float: right !important;
 }
-
 .clearfix {
-    clear:both;
+    clear: both;
 }
-
 .required-field {
     &:after {
         color: $required-red;
@@ -27,15 +22,28 @@
         content: "*";
     }
 }
-
 h4.length-0 {
     margin: $default-margin;
 }
-
 input.popup-input {
     padding: 5px;
-
     &:focus {
         border: 1px solid #eee;
+    }
+}
+/* SCROLL HACKS */
+ion-content.scroll-125 {
+    .scroll {
+        height: 125%;
+    }
+}
+ion-content.scroll-150 {
+    .scroll {
+        height: 150%;
+    }
+}
+ion-content.scroll-200 {
+    .scroll {
+        height: 200%;
     }
 }
