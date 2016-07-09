@@ -17,6 +17,7 @@
 
         vm.patient = {};
         vm.patientOpinions = {};
+        vm.isInfoTab = false;
 
         vm.updatePatientGeneralInfo = function () {
             var updatedPatient = vm.patient;
@@ -48,7 +49,6 @@
         };
 
         vm.updatePatientContactInfo = function () {
-
             PatientFactory.updatePatientContactInfo(vm.patient.contactInfo, vm.patient._id).then(function () {
                 $cordovaToast.showLongBottom("Información general del paciente actualizada correctamente!").then(function () {
                     MenuFactory.clearRightButtonAction();
@@ -61,7 +61,6 @@
         };
 
         vm.changeToGeneralTab = function () {
-
             vm.editOn = false;
 
             MenuFactory.clearRightButtonAction();
@@ -69,17 +68,16 @@
             MenuFactory.activateRightEditButtonAction(function () {
                 vm.editGeneralTab();
             });
-
         };
 
         vm.changeToContactInfoTab = function () {
 
             vm.editOn = false;
+            vm.isInfoTab = true;
 
             MenuFactory.clearRightButtonAction();
 
             if (vm.patient.contactInfo) {
-
                 MenuFactory.activateRightEditButtonAction(function () {
                     vm.editContactInfoTab();
                 });
@@ -97,7 +95,6 @@
         };
 
         vm.editGeneralTab = function () {
-
             vm.editOn = true;
 
             MenuFactory.clearRightButtonAction();
@@ -108,7 +105,6 @@
         };
 
         vm.editContactInfoTab = function () {
-
             vm.editOn = true;
 
             MenuFactory.clearRightButtonAction();
@@ -116,7 +112,6 @@
             MenuFactory.activateRightButtonAction(function () {
                 vm.updatePatientContactInfo();
             });
-
         };
 
 

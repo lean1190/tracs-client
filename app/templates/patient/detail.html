@@ -1,5 +1,5 @@
 <ion-view cache-view="false" view-title="Perfil de {{vm.patient.name}}">
-    <ion-content class="fix-content">
+    <ion-content class="fix-content scroll-125">
         <ion-tabs class="tabs-striped tabs-top patient-tabs">
 
             <ion-tab title="GENERAL" on-select="vm.changeToGeneralTab()">
@@ -8,24 +8,27 @@
                         <div class="image">
                             <img ng-src="{{vm.patient.picture}}" alt="{{vm.patient.name}}">
                         </div>
-                        <div class="name">
-
-                            <h4>{{ vm.patient.name }}</h4>
-
-                        </div>
                     </div>
-                    <div class="info" ng-show="vm.editOn === false">
-                        <div><strong>DNI</strong>
-                            <h4>{{vm.patient.DNI}}</h4>
+                    <div class="tab-card" ng-show="vm.editOn === false">
+                        <div>
+                            <i class="icon ion-android-person"></i>
+                            {{ vm.patient.name }}
                         </div>
-                        <div><strong>Teléfono</strong>
-                            <h4> {{ vm.patient.phoneNumber || "Aún no tiene teléfono" }} </h4>
+                        <div>
+                            <i class="icon ion-android-list"></i>
+                            {{ vm.patient.DNI }}
                         </div>
-                        <div><strong>Nacido el</strong>
-                            <h4>{{ vm.patient.birthDate | date:"dd/MM/yyyy" }}</h4>
+                        <div>
+                            <i class="icon ion-android-call"></i>
+                            {{ vm.patient.phoneNumber || "Aún no tiene teléfono" }}
                         </div>
-                        <div><strong>Descripción General</strong>
-                            <h4>{{ vm.patient.generalDescription || "Aún no hay descripción" }}</h4>
+                        <div>
+                            <i class="icon ion-heart"></i>
+                            {{ vm.patient.birthDate | date:"dd/MM/yyyy" }}
+                        </div>
+                        <div>
+                            <i class="icon ion-information-circled"></i>
+                            {{ vm.patient.generalDescription || "Aún no hay descripción" }}
                         </div>
                     </div>
 
@@ -86,15 +89,18 @@
             <ion-tab title="CONTACTO" on-select="vm.changeToContactInfoTab()">
 
                 <div class="contactInfo-tab" ng-show="vm.patient.contactInfo">
-                    <div class="contactInfo" ng-show="vm.editOn === false">
-                        <div><strong>Nombre</strong>
-                            <h4>{{vm.patient.contactInfo.name}}</h4>
+                    <div class="tab-card no-shadow" ng-show="vm.editOn === false">
+                        <div>
+                            <i class="icon ion-android-person"></i>
+                            {{vm.patient.contactInfo.name}}
                         </div>
-                        <div><strong>Dirección</strong>
-                            <h4> {{ vm.patient.contactInfo.address }} </h4>
+                        <div>
+                            <i class="icon ion-android-call"></i>
+                            {{ vm.patient.contactInfo.city}}
                         </div>
-                        <div><strong>Ciudad</strong>
-                            <h4>{{ vm.patient.contactInfo.city}} </h4>
+                        <div>
+                            <i class="icon ion-ios-location"></i>
+                            {{vm.patient.contactInfo.address}}, {{ vm.patient.contactInfo.city}}
                         </div>
                     </div>
                     <div class="contactInfo-edit" ng-show="vm.editOn === true">
@@ -124,7 +130,7 @@
     </ion-content>
 
     <ion-footer-bar class="fix-footer">
-        <floating-button state="'app.patientContactInfoCreate'" text="'+'" ng-show="!vm.patient.contactInfo"></floating-button>
+        <floating-button state="'app.patientContactInfoCreate'" text="'+'" ng-show="vm.isInfoTab && !vm.patient.contactInfo"></floating-button>
     </ion-footer-bar>
 
 </ion-view>

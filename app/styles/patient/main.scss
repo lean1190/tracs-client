@@ -1,5 +1,5 @@
 .patient-wall-card {
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
     margin: $default-margin;
     .item {
         .image-wrapper {
@@ -183,10 +183,36 @@
         color: $text-color;
         top: 55px;
     }
+    .tab-card {
+        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+        margin: 10px;
+        padding: 10px;
+        background-color: white;
+
+        &.no-shadow {
+            box-shadow: none;
+        }
+
+        div {
+            font-size: 16px;
+            padding: 15px 10px;
+            border-bottom: 1px solid #eee;
+
+            &:last-child {
+                border-bottom: 0;
+            }
+
+            i {
+                font-size: 20px;
+                margin-right: 10px;
+            }
+        }
+    }
     .general-tab {
+        background-color: #F7F7F7;
         .image-name-wrapper {
             width: 100%;
-            height: 50%;
+            height: 245px;
             box-shadow: $default-shadow;
             .image {
                 width: 100%;
@@ -207,12 +233,6 @@
                 }
             }
         }
-        .info {
-            div {
-                padding: 5px 10px;
-                font-size: 18px;
-            }
-        }
     }
     .opinions-tab {
         padding: $tab-content-padding;
@@ -228,6 +248,9 @@
                 }
             }
         }
+    }
+    .contactInfo-tab {
+
     }
     .diagnosis-tab {
         padding: $tab-content-padding;
@@ -253,6 +276,19 @@
     h2 {
         font-size: 18px;
         .date {
+            font-size: 13px;
+            color: $lower-text-color;
+        }
+    }
+}
+
+.patient-notes-display {
+    .display {
+        margin: 10px;
+        h3 {
+            margin-bottom: 0;
+        }
+        p.date {
             font-size: 13px;
             color: $lower-text-color;
         }

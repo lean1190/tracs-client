@@ -34,15 +34,15 @@
                 title: "¿Seguro que querés salir?",
                 buttons: [
                     {
+                        text: "No",
+                        type: "button-positive"
+                    },
+                    {
                         text: "Sí",
                         type: "button-default",
                         onTap: function () {
                             $state.go("logout");
                         }
-                    },
-                    {
-                        text: "No",
-                        type: "button-positive"
                     }
                 ]
             });
