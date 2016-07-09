@@ -22,7 +22,12 @@
         function activate() {
             vm.editOn = false;
 
-            vm.patient = storage.getLastVisitedPatient();
+            vm.patientId = storage.getLastVisitedPatient()._id;
+
+            PatientFactory.getPatientDetail(vm.patientId).then(function(result) {
+                vm.patient = result;
+            }, function() {});
+
             vm.user = storage.getUser();
 
             // Muestra el check para guardar al paciente
