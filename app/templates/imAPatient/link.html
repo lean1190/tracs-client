@@ -2,7 +2,6 @@
     <ion-content scroll="false">
         <div class="link-top-actions">
             <i class="ion-arrow-left-c" ng-click="vm.goBack()"></i>
-            <i class="ion-android-done" ng-click="vm.linkPatient()" ng-show="vm.isValid()"></i>
         </div>
 
         <h4 class="length-0">Por favor ingresá tu DNI</h4>
@@ -12,6 +11,12 @@
                 <span class="input-label required-field">DNI</span>
                 <input type="number" ng-model="vm.dni" placeholder="DNI *">
             </label>
+        </div>
+
+        <div class="im-a-patient-link-wrapper" style="padding: 0 10px">
+            <button type="button" class="button button-royal" ng-click="vm.linkPatient()" ng-show="vm.isValid()" style="width: 100%;">
+                Ingresar
+            </button>
         </div>
 
     </ion-content>
