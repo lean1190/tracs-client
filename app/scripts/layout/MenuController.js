@@ -102,7 +102,14 @@
             vm.imAtPatientHome = state;
         });
 
-        $scope.$on("$destroy", unregisterEvent);
+        var unregisterUserChangedEvent = $rootScope.$on("state.changed.logged.user", function() {
+            vm.user = storage.getUser();
+        });
+
+        $scope.$on("$destroy", function() {
+            unregisterEvent();
+            unregisterUserChangedEvent();
+        });
 
     }
 

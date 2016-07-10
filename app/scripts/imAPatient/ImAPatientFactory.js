@@ -37,7 +37,8 @@
          * @param   {string}  patientId el id del paciente para el alerta
          * @returns {promise} una promesa con el resultado del envío del alerta
          */
-        function sendGeoAlert(geoAlert, patientId){
+        function sendGeoAlert(geoAlert, patientId) {
+            console.log("### geoAlert", geoAlert);
             return $http.put(imAPatientEndpoint + "/sendGeoAlert/" + patientId, geoAlert).then(function (result) {
                 return result;
             }, function(error) {

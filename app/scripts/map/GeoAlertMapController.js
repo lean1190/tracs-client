@@ -22,8 +22,6 @@
                /* lat: 41.850869,
                 lng: -87.646417*/
             };
-            console.log(destination);
-
             var origin = {},
             vm = this;
 
@@ -34,7 +32,6 @@
             var originLatLng = new google.maps.LatLng(origin.lat, origin.lng),
                 destinationLatLng = new google.maps.LatLng(destination.lat, destination.lng);
 
-            console.log(originLatLng, destinationLatLng);
             // First, remove any existing markers from the map.
             for (var i = 0; i < markerArray.length; i++) {
                 markerArray[i].setMap(null);
@@ -45,11 +42,10 @@
                 destination: destinationLatLng,
                 travelMode: google.maps.TravelMode.DRIVING
             }, function (response, status) {
-                console.log(response);
                 if (status === google.maps.DirectionsStatus.OK) {
                     directionsDisplay.setDirections(response);
                 } else {
-                    window.alert("Directions request failed due to " + status);
+                    $cordovaToast.showLongBottom("No pudimos recuperar tu ubicación. Está activado el GPS?");
                 }
             });
         }
@@ -107,13 +103,10 @@
                 });
 
             getMyPosition().then(function(myPosition) {
-
                 origin = myPosition;
-                console.log(origin);
                 calculateAndDisplayRoute(directionsDisplay, directionsService, markerArray, map);
             }, function (error) {
-
-                console.log(error);
+                $log.error(error);
             });
         }
     }

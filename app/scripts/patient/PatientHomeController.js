@@ -109,9 +109,6 @@
          * @param {number} patientId el id del paciente
          */
         vm.changeStateToPatientWall = function(patientId) {
-            // Emite un evento indicando que salio del listado de usuarios
-            $rootScope.$emit("state.changed.patientHome", false);
-
             setNextViewAsHistoryRoot();
             $state.go("app.patientWall", { id: patientId });
         };
@@ -121,6 +118,7 @@
             // Emite un evento indicando estoy en el home de pacientes
             // para actualizar el menú
             $rootScope.$emit("state.changed.patientHome", true);
+            $rootScope.$emit("state.changed.logged.user");
 
             // Para evitar navegación rara de la aplicación,
             // borra el historial cada vez que entra a esta pantalla

@@ -68,6 +68,8 @@
         function activate() {
 
             vm.user = storage.getUser();
+            // Emite un evento indicando que salio del listado de usuarios
+            $rootScope.$emit("state.changed.patientHome", false);            
 
             // Recupera todos los datos del paciente
             PatientFactory.getPatientDetail(patientId).then(function (resultPatient) {
