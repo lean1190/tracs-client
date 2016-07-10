@@ -112,7 +112,7 @@
 
         vm.editContactInfoTab = function () {
             vm.editOn = true;
-            v
+
             MenuFactory.clearRightButtonAction();
 
             MenuFactory.activateRightButtonAction(function () {
@@ -122,7 +122,7 @@
 
         vm.isParent = function(){
             return vm.profile.isParent;
-        }
+        };
 
 
         function activate() {

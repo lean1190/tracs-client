@@ -9,23 +9,34 @@
  * Directiva para mostrar un botón flotante en una vista
  */
 
-(function () {
+(function() {
     "use strict";
 
     angular
         .module("TracsClient.directives")
         .directive("floatingButton", FloatingButtonDirective);
 
-    FloatingButtonDirective.$inject = [];
+    FloatingButtonDirective.$inject = ["$state"];
 
-    function FloatingButtonDirective() {
+    function FloatingButtonDirective($state) {
         return {
             restrict: "E",
             replace: false,
             templateUrl: "templates/layout/floatingButton.directive.html",
             scope: {
                 state: "=",
-                text: "="
+                text: "=",
+                click: "="
+            },
+            link: function(scope) {
+                scope.execute = function() {
+                    // Si tiene un click y es una funcion
+                    if(scope.click && typeof scope.click === "function") {
+                        scope.click();
+                    } else {
+                        $state.go(scope.state);
+                    }
+                };
             }
         };
     }
