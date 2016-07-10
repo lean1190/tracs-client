@@ -16,14 +16,15 @@
         var destination = {
 
             //Hardcodeado por el momento porque sino las direcciones de destino y origen son las mismas
-            /*lat: parseFloat($stateParams.latitude),
-                lng: parseFloat($stateParams.longitude)*/
+                lat: parseFloat($stateParams.latitude),
+                lng: parseFloat($stateParams.longitude),
 
-                lat: 41.850869,
-                lng: -87.646417
-            },
+               /* lat: 41.850869,
+                lng: -87.646417*/
+            };
+            console.log(destination);
 
-            origin = {},
+            var origin = {},
             vm = this;
 
         vm.patient = storage.getLastVisitedPatient();
@@ -69,10 +70,10 @@
                     origin = {
 
                         //Hardcodeado por el momento porque sino las direcciones de destino y origen son las mismas
-                        /*lat: position.coords.latitude,
-                        lng: position.coords.longitude*/
-                        lat: 41.859669,
-                        lng: -87.646691
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+/*                        lat: 41.859669,
+                        lng: -87.646691*/
                     };
 
                     resolve(origin);
@@ -105,10 +106,9 @@
                     map: map
                 });
 
-            getMyPosition().then(function() {
+            getMyPosition().then(function(myPosition) {
 
-
-                //origin = result;
+                origin = myPosition;
                 console.log(origin);
                 calculateAndDisplayRoute(directionsDisplay, directionsService, markerArray, map);
             }, function (error) {
