@@ -5,9 +5,7 @@
 
             <ion-tab title="DIAGNÓSTICO" on-select="vm.changeToDiagnosisTab()">
                 <div class="diagnosis-tab">
-                    <h4 ng-if="!vm.patient.latestDiagnosis">El paciente aún no tiene un diagnóstico asignado. Empieza creando uno</h4>
-
-                    <floating-button state="'app.patientDiagnosisCreate'" text="'+'" ng-show="!vm.editOn" class="tab-fix"></floating-button>
+                    <h4 ng-if="!vm.patient.latestDiagnosis">El paciente aún no tiene un diagnóstico. Empieza creando uno</h4>
 
                     <div class="display" ng-show="vm.patient.latestDiagnosis && !vm.editOn">
                         <div>Diagnosticado por {{::vm.patientDiagnosis.madeBy.name}} <span class="date" style="font-size:11px; color: light-grey">el {{::vm.patientDiagnosis.date | date:"dd/MM/yyyy"}}</span></div>
@@ -34,8 +32,6 @@
                     <h4 ng-if="!vm.patient.latestDiagnosis">Para agregar medicaciones primero debe haber un diagnóstico</h4>
                     <h4 ng-if="vm.patient.latestDiagnosis && !vm.patientMedications.length">Aún no hay medicaciones. Empieza agregando una</h4>
 
-                    <floating-button ng-click="vm.createMedicationLink()" text="'+'" class="tab-fix" ng-if="vm.patient.latestDiagnosis"></floating-button>
-
                     <div class="card" ng-repeat="medication in vm.patientMedications | orderBy:'-date'">
                         <div class="item item-divider">
                             {{::medication.drug}}
@@ -56,8 +52,6 @@
                 <div class="history-tab">
 
                     <h4 ng-if="!vm.patient.history">El paciente aún no tiene su Historia Vital creada. Empieza a escribirla</h4>
-
-                    <floating-button ng-if="!vm.patient.history" state="'app.patientHistoryCreate'" text="'+'" ng-show="!vm.editOn" class="tab-fix"></floating-button>
 
                     <div class="display" ng-show="vm.patient.history && !vm.editOn">
                          <div><strong>Historia Vital</strong>
@@ -87,4 +81,11 @@
             </ion-tab>
         </ion-tabs>
     </ion-content>
+
+    <ion-footer-bar class="fix-footer">
+        <floating-button state="'app.patientDiagnosisCreate'" text="'+'" ng-show="vm.currentTab === 'diagnosis' && !vm.editOn"></floating-button>
+        <floating-button click="vm.createMedicationLink" text="'+'" ng-show="vm.currentTab === 'medication' && vm.patient.latestDiagnosis"></floating-button>
+        <floating-button state="'app.patientHistoryCreate'" text="'+'" ng-show="vm.currentTab === 'history' && !vm.patient.history && !vm.editOn"></floating-button>
+    </ion-footer-bar>
+
 </ion-view>

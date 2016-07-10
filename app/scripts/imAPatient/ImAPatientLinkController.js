@@ -26,7 +26,7 @@
         vm.dni = "";
 
         vm.isValid = function () {
-            return vm.dni !== "";
+            return vm.dni && vm.dni !== "";
         };
 
         /**

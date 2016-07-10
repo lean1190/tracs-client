@@ -24,17 +24,14 @@
 
         vm.patient = {};
         vm.patientDiagnosis = {};
-        vm.createMedicationLink =
-
+        vm.currentTab = "diagnosis";
 
         vm.createMedicationLink = function(){
-
             $state.go("app.patientMedicationCreate", { id: vm.patientDiagnosis._id});
-
         };
 
         vm.changeToDiagnosisTab = function () {
-
+            vm.currentTab = "diagnosis";
             MenuFactory.clearRightButtonAction();
 
             vm.editOn = false;
@@ -48,11 +45,13 @@
         };
 
         vm.changeToMedicationTab = function () {
+            vm.currentTab = "medication";
             vm.editOn = false;
             MenuFactory.clearRightButtonAction();
         };
 
         vm.changeToHistoryTab = function () {
+            vm.currentTab = "history";
             vm.editOn = false;
 
             MenuFactory.clearRightButtonAction();
@@ -117,7 +116,6 @@
         vm.deleteDiagnosisMedication = function(medicationId){
 
             DiagnosisFactory.deleteDiagnosisMedication(vm.patientDiagnosis._id, medicationId).then(function(){
-
                 $cordovaToast.showLongBottom("La medicación fue eliminada!").then(function () {
                     MenuFactory.clearRightButtonAction();
                     $state.reload();
@@ -139,19 +137,14 @@
             });
 
             if (vm.patient.latestDiagnosis) {
-
                 DiagnosisFactory.getDiagnosis(vm.patient.latestDiagnosis).then(function (diagnosis) {
-
                     vm.patientDiagnosis = diagnosis;
 
                     DiagnosisFactory.getDiagnosisMedication(vm.patientDiagnosis._id).then(function (result) {
-
                         vm.patientMedications = result;
-
                     }, function () {
                         $cordovaToast.showLongBottom("Ocurrió un error al recuperar la medicación del paciente, intentalo de nuevo");
                     });
-
                 }, function () {
                     $cordovaToast.showLongBottom("Ocurrió un error al recuperar el diagnóstico del paciente, intentalo de nuevo");
                 });
