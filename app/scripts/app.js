@@ -135,6 +135,7 @@
 
         .state("app", {
             url: "/app",
+            cache: false,
             abstract: true,
             templateUrl: "templates/layout/userView.html",
             controller: "MenuController as vm"
