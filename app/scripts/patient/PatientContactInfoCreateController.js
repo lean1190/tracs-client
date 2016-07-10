@@ -24,7 +24,7 @@
         vm.contactInfo = {
             name: "",
             address: "",
-            city: "",
+            phoneNumber: "",
         };
 
         /**
@@ -40,7 +40,7 @@
                 $cordovaToast.showLongBottom("La dirección es obligatoria");
                 return false;
             }
-            if (vm.contactInfo.city === "") {
+            if (vm.contactInfo.phoneNumber === "") {
                 $cordovaToast.showLongBottom("La ciudad es obligatoria");
                 return false;
             }

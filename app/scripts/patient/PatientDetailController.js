@@ -9,9 +9,9 @@
         .module("TracsClient.controllers")
         .controller("PatientDetailController", PatientDetailController);
 
-    PatientDetailController.$inject = ["$state", "$cordovaToast", "$ionicHistory", "storage", "PatientFactory", "MenuFactory"];
+    PatientDetailController.$inject = ["$state", "$cordovaToast", "$ionicHistory", "storage", "PatientFactory", "MenuFactory","dialer"];
 
-    function PatientDetailController($state, $cordovaToast, $ionicHistory, storage, PatientFactory, MenuFactory) {
+    function PatientDetailController($state, $cordovaToast, $ionicHistory, storage, PatientFactory, MenuFactory, dialer) {
 
         var vm = this;
 
@@ -65,6 +65,18 @@
             });
         };
 
+        vm.callPhoneNumber = function(phoneNumber) {
+
+            if (phoneNumber !== "") {
+                dialer.callNumber(function() {}, function(error) {
+                    $log.error("No se pudo realizar la llamada al número " + phoneNumber, error);
+                    $cordovaToast.showLongBottom("No se pudo realizar la llamada. Hay señal?");
+                }, phoneNumber, false);
+            } else {
+                $cordovaToast.showLongBottom("Esta persona no tiene teléfono");
+            }
+        };
+
         vm.changeToGeneralTab = function () {
             vm.editOn = false;
 
@@ -112,7 +124,6 @@
 
         vm.editContactInfoTab = function () {
             vm.editOn = true;
-            v
             MenuFactory.clearRightButtonAction();
 
             MenuFactory.activateRightButtonAction(function () {

@@ -96,13 +96,13 @@
                             <i class="icon ion-android-person"></i>
                             {{vm.patient.contactInfo.name}}
                         </div>
-                        <div>
+                        <div ng-click="vm.callPhoneNumber(vm.patient.contactInfo.phoneNumber)">
                             <i class="icon ion-android-call"></i>
-                            {{ vm.patient.contactInfo.city}}
+                            {{ vm.patient.contactInfo.phoneNumber}}
                         </div>
                         <div>
                             <i class="icon ion-ios-location"></i>
-                            {{vm.patient.contactInfo.address}}, {{ vm.patient.contactInfo.city}}
+                            {{vm.patient.contactInfo.address}}
                         </div>
                     </div>
                     <div class="contactInfo-edit" ng-show="vm.editOn === true">
@@ -112,11 +112,11 @@
                         </label>
                         <label class="item item-input item-floating-label">
                             <span class="input-label required-field">Dirección</span>
-                            <input type="text" ng-model="vm.patient.contactInfo.address" placeholder="DIrección *" required>
+                            <input type="text" ng-model="vm.patient.contactInfo.address" placeholder="Dirección *" required>
                         </label>
                         <label class="item item-input item-floating-label">
-                            <span class="input-label required-field">Ciudad</span>
-                            <input type="text" ng-model="vm.patient.contactInfo.city" placeholder="Ciudad *" required>
+                            <span class="input-label required-field">Teléfono</span>
+                            <input type="text" ng-model="vm.patient.contactInfo.phoneNumber" placeholder="Teléfono *" required>
                         </label>
 
                     </div>
