@@ -79,12 +79,20 @@
     function config($stateProvider, $urlRouterProvider, localStorageServiceProvider, httpMethodInterceptorProvider) {
 
         // Configuración del prefijo para el localStorage
-        localStorageServiceProvider.setPrefix("tracs");
+        localStorageServiceProvider.setPrefix("tracs-");
 
         // Configuración del interceptor para mostrar la pantalla de carga en un request
         httpMethodInterceptorProvider.whitelistLocalRequests();
-        //httpMethodInterceptorProvider.whitelistDomain('192.168.56.1:3000');
-        //httpMethodInterceptorProvider.whitelistDomain('google.com');
+        // Llamadas a la API de Google
+        httpMethodInterceptorProvider.whitelistDomain("google.com");
+        httpMethodInterceptorProvider.whitelistDomain("googleapis.com");
+        // Llamadas al server específicas, no todas
+        // Login
+        httpMethodInterceptorProvider.whitelistDomain("/session/login");
+        // Listado de pacientes
+        httpMethodInterceptorProvider.whitelistDomain("/patient/user");
+        // Muro de un paciente
+        // httpMethodInterceptorProvider.whitelistDomain("/patient/detail");
 
         // Configuración de estados y rutas
         $stateProvider
