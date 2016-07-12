@@ -8,9 +8,9 @@
                     <h4 ng-if="!vm.patient.latestDiagnosis">El paciente aún no tiene un diagnóstico. Empieza creando uno</h4>
 
                     <div class="display" ng-show="vm.patient.latestDiagnosis && !vm.editOn">
+                        <h3>{{::vm.patientDiagnosis.name}}</h3>
                         <div>Diagnosticado por {{::vm.patientDiagnosis.madeBy.name}} <span class="date" style="font-size:11px; color: light-grey">el {{::vm.patientDiagnosis.date | date:"dd/MM/yyyy"}}</span></div>
-                        <h4>{{::vm.patientDiagnosis.name}}</h4>
-                        <p>{{::vm.patientDiagnosis.description}}</p>
+                        <h4>{{::vm.patientDiagnosis.description}}</h4>
                     </div>
 
                     <div class="editDiagnosis" ng-show="vm.patient.latestDiagnosis && vm.editOn">
@@ -32,17 +32,19 @@
                     <h4 ng-if="!vm.patient.latestDiagnosis">Para agregar medicaciones primero debe haber un diagnóstico</h4>
                     <h4 ng-if="vm.patient.latestDiagnosis && !vm.patientMedications.length">Aún no hay medicaciones. Empieza agregando una</h4>
 
-                    <div class="card" ng-repeat="medication in vm.patientMedications | orderBy:'-date'">
-                        <div class="item item-divider">
-                            {{::medication.drug}}
-                             <button class="button button-assertive item-right-button" ng-click="vm.deleteDiagnosisMedication(medication._id)">
+                    <div class="med-item" ng-repeat="medication in vm.patientMedications | orderBy:'-date'">
+                        <div class="med-header">
+                            <span>
+                                {{::medication.drug}}
+                            </span>
+                            <button class="pull-right" ng-click="vm.deleteDiagnosisMedication(medication._id)">
                                 <i class="icon ion-android-close"></i>
                             </button>
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="item item-text-wrap">
-                            <div>Prescripto por {{::medication.prescribedBy.name}}</div>
-                            <div>Prescripto el {{::medication.date | date:"dd/MM/yyyy"}}</div>
-                            <div>{{::medication.dosis}} cada {{::medication.frequence}}</div>
+                        <div class="med-body">
+                            <div class="dosis">{{::medication.dosis}} cada {{::medication.frequence}}</div>
+                            <div class="prescription">Prescripto por {{::medication.prescribedBy.name}} el {{::medication.date | date:"dd/MM/yyyy"}}</div>
                         </div>
                     </div>
                 </div>
@@ -54,11 +56,8 @@
                     <h4 ng-if="!vm.patient.history">El paciente aún no tiene su Historia Vital creada. Empieza a escribirla</h4>
 
                     <div class="display" ng-show="vm.patient.history && !vm.editOn">
-                         <div><strong>Historia Vital</strong>
-                            <p> {{::vm.patient.history.description}} </p>
-                        </div>
-                        <div>Terapia realizada en {{::vm.patient.history.prevTherapyPlace}}</div>
-                        <h4>Durante {{::vm.patient.history.prevTherapyDuration}}</h4>
+                        <div>Terapia realizada en {{::vm.patient.history.prevTherapyPlace}} durante {{::vm.patient.history.prevTherapyDuration}}</div>
+                        <div style="margin-top: 15px;font-size: 22px;">{{::vm.patient.history.description}}</div>
                     </div>
 
                     <div class="editHistory" ng-show="vm.patient.history && vm.editOn">
