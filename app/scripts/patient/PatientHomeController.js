@@ -50,7 +50,7 @@
             return $q(function (resolve) {
                 $scope.data = {};
                 $ionicPopup.show({
-                    template: "<input type='text' placeholder='Ej: 2215238491' class='popup-input' ng-model='data.inputPhoneNumber'>",
+                    template: "<input type='number' placeholder='Ej: 2215238491' class='popup-input' ng-model='data.inputPhoneNumber'>",
                     title: "Ingresá tu teléfono",
                     subTitle: "Así se podrán comunicar con vos",
                     scope: $scope,
@@ -80,16 +80,16 @@
         function checkUserPhoneNumber() {
             if (utils.isEmpty(loggedInUser.phoneNumber)) {
                 sim.getSimInfo(function (simInfo) {
-                    $log.info("Se recupero el telefono desde la SIM!", simInfo.phoneNumber);
-                    updateUserPhoneNumber(simInfo.phoneNumber);
-                }, function (error) {
-                    // El prompt al usuario no estoy seguro que tenga que ir en el error,
-                    // tal vez si no lo pudo recuperar va por success y lo devuelve vacio o null
-                    // Hay que probarlo o abordar ambos escenarios
-                    $log.error("No se pudo recuperar el número de teléfono desde la SIM, se le pedirá al usuario que lo ingrese", error);
-                    promptUserPhoneNumber().then(function(newPhoneNumber) {
-                        updateUserPhoneNumber(newPhoneNumber);
-                    });
+                    // A veces no se puede recuperar el teléfono desde la sim
+                    if(!simInfo.phoneNumber) {
+                        $log.error("No se pudo recuperar el número de teléfono desde la SIM, se le pedirá al usuario que lo ingrese");
+                        promptUserPhoneNumber().then(function(newPhoneNumber) {
+                            updateUserPhoneNumber(newPhoneNumber);
+                        });
+                    } else {
+                        $log.info("Se recupero el telefono desde la SIM!", simInfo.phoneNumber);
+                        updateUserPhoneNumber(simInfo.phoneNumber);
+                    }
                 });
             }
         }
