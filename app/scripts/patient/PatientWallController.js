@@ -69,17 +69,19 @@
 
             vm.user = storage.getUser();
             // Emite un evento indicando que salio del listado de usuarios
-            $rootScope.$emit("state.changed.patientHome", false);            
+            $rootScope.$emit("state.changed.patientHome", false);
 
             // Recupera todos los datos del paciente
             PatientFactory.getPatientDetail(patientId).then(function (resultPatient) {
                 vm.patient = resultPatient;
                 vm.notifications = fillNotificationsWithViewInfo(resultPatient.notifications);
 
-                // Recupero el diagnóstico del paciente
-                DiagnosisFactory.getDiagnosis(vm.patient.latestDiagnosis).then(function (diagnosis) {
-                    vm.patientDiagnosis = diagnosis;
-                });
+                // Recupero el diagnóstico del paciente si es que tiene uno creado
+                if(vm.patient.latestDiagnosis) {
+                    DiagnosisFactory.getDiagnosis(vm.patient.latestDiagnosis).then(function (diagnosis) {
+                        vm.patientDiagnosis = diagnosis;
+                    });
+                }
 
                 // Recupera los perfiles para mostrar en el muro
                 PatientFactory.getPatientProfiles(vm.patient._id).then(function (result) {
