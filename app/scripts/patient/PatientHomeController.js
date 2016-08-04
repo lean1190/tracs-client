@@ -22,7 +22,6 @@
 
         var vm = this,
             loggedInUser = storage.getUser();
-        console.log("### Activate", loggedInUser);
 
         vm.patients = [];
 
@@ -31,11 +30,8 @@
          * @param {string} newPhoneNumber el número de teléfono del usuario
          */
         function updateUserPhoneNumber(newPhoneNumber) {
-            console.log("### Nuevo teléfono", newPhoneNumber);
-            console.log("### Antes del update", loggedInUser);
             loggedInUser.phoneNumber = newPhoneNumber;
             storage.setUser(loggedInUser);
-            console.log("### Después del update", loggedInUser);
 
             var updatedUser = {
                 _id: loggedInUser._id,

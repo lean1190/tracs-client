@@ -316,7 +316,7 @@
         })
 
         .state("app.geoAlertMap", {
-            url: "map/geoAlertMap/:latitude/:longitude)",
+            url: "map/geoAlertMap/:latitude/:longitude",
             views: {
                 "menuContent": {
                     templateUrl: "templates/map/geoAlertMap.html",

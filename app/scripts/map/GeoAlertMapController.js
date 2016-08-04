@@ -14,15 +14,10 @@
     function GeoAlertMapController($stateParams, $q, $log, $state, $cordovaToast, storage, PatientFactory, $cordovaGeolocation) {
 
         var destination = {
-
-            //Hardcodeado por el momento porque sino las direcciones de destino y origen son las mismas
                 lat: parseFloat($stateParams.latitude),
                 lng: parseFloat($stateParams.longitude),
-
-               /* lat: 41.850869,
-                lng: -87.646417*/
-            };
-            var origin = {},
+            },
+            origin = {},
             vm = this;
 
         vm.patient = storage.getLastVisitedPatient();
@@ -45,7 +40,7 @@
                 if (status === google.maps.DirectionsStatus.OK) {
                     directionsDisplay.setDirections(response);
                 } else {
-                    $cordovaToast.showLongBottom("No pudimos recuperar tu ubicación. Está activado el GPS?");
+                    $cordovaToast.showLongBottom("No pudimos trazar el camino hasta el paciente. Está activado el GPS?");
                 }
             });
         }
@@ -64,12 +59,8 @@
 
                     // Setea latitud y longitud del origen
                     origin = {
-
-                        //Hardcodeado por el momento porque sino las direcciones de destino y origen son las mismas
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
-/*                        lat: 41.859669,
-                        lng: -87.646691*/
                     };
 
                     resolve(origin);
