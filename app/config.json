@@ -1,8 +1,7 @@
 {
     "local": {
         "EnvironmentConfig": {
-            "chatSocket":"http://192.168.0.3:4000",
-            "api": "http://192.168.0.3:3000",
+            "api": "http://192.168.0.5:3000",
             "googleClientId": "1017723616061-btjadg1pe5tug819i8b3sffek1klev6m.apps.googleusercontent.com",
             "googleClientSecret": "McJIjSQt4aRNL_lLO8xSUBOe",
             "googleRedirectUri": "http://localhost"
@@ -11,7 +10,6 @@
 
     "development": {
         "EnvironmentConfig": {
-            "chatSocket":"http://192.168.56.1:4000",
             "api": "http://192.168.56.1:3000",
             "googleClientId": "1017723616061-btjadg1pe5tug819i8b3sffek1klev6m.apps.googleusercontent.com",
             "googleClientSecret": "McJIjSQt4aRNL_lLO8xSUBOe",
@@ -21,7 +19,6 @@
 
     "production": {
         "EnvironmentConfig": {
-            "chatSocket":"https://gentle-tor-20108.herokuapp.com:4000",
             "api": "https://gentle-tor-20108.herokuapp.com",
             "googleClientId": "1017723616061-btjadg1pe5tug819i8b3sffek1klev6m.apps.googleusercontent.com",
             "googleClientSecret": "McJIjSQt4aRNL_lLO8xSUBOe",

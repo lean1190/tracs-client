@@ -38,8 +38,15 @@
          * @returns {promise} una promesa con el resultado del envío del alerta
          */
         function sendGeoAlert(geoAlert, patientId) {
-            console.log("### geoAlert", geoAlert);
-            return $http.put(imAPatientEndpoint + "/sendGeoAlert/" + patientId, geoAlert).then(function (result) {
+            // Transformación para evitar bugs de datos que no llegan al servidor (rarísimo)
+            var alertObject = {
+                coords: {
+                    latitude: geoAlert.coords.latitude,
+                    longitude: geoAlert.coords.longitude
+                },
+                timestamp: geoAlert.timestamp
+            };
+            return $http.put(imAPatientEndpoint + "/sendGeoAlert/" + patientId, alertObject).then(function (result) {
                 return result;
             }, function(error) {
                 $log.error("Ocurrió un error al enviar la alerta, intentalo de nuevo ", error);

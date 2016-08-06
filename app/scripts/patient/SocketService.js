@@ -12,7 +12,7 @@
 
     function SocketService(socketFactory,EnvironmentConfig){
         return socketFactory({
-            ioSocket: io.connect(EnvironmentConfig.chatSocket)
+            ioSocket: io.connect(EnvironmentConfig.api)
         });
     }
 })();
