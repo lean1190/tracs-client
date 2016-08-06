@@ -64,7 +64,12 @@
             </ion-tab>
 
             <ion-tab title="OPINIONES" on-select="vm.changeToOpinionsTab()">
-                <div class="opinions-tab">
+
+               <div class="contactInfoEmpty-tab" ng-show="vm.profile.isParent">
+                    <h3>La información de esta sección se encuentra reservada para los profesionales dentro del tratamiento</h3>
+                </div>
+
+                <div class="opinions-tab" ng-show="vm.profile.isParent === false ">
                     <div class="list">
                         <!--<input ng-model="vm.patientOpinion" placeholder="Mi opinión"></input>-->
                         <label class="item item-input item-floating-label">
