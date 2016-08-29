@@ -79,6 +79,7 @@
 
         vm.changeToGeneralTab = function() {
             vm.editOn = false;
+            vm.isInfoTab = false;
 
             MenuFactory.clearRightButtonAction();
 
@@ -103,11 +104,15 @@
         };
 
         vm.changeToOpinionsTab = function() {
+
+            vm.isInfoTab = false;
             MenuFactory.clearRightButtonAction();
 
-            MenuFactory.activateRightButtonAction(function() {
-                vm.addPatientOpinion();
-            });
+            if (!(vm.profile.isParent)){
+                MenuFactory.activateRightButtonAction(function() {
+                    vm.addPatientOpinion();
+                });
+            };
         };
 
         vm.editGeneralTab = function() {
